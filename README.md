@@ -5,10 +5,15 @@ Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 ## Was die App kann
 - Multiple-Choice Fragen loesen
 - Lernmodi: `Gemischt`, `Schwachstellen zuerst`, `Neue Fragen zuerst`
+- Filter nach `Modul` und `Section`
 - Tag-Filter fuer Themengebiete
 - Eigene Fragen direkt in der App anlegen
 - Fragen per JSON importieren und exportieren
+- Antwort-Feedback als kleines Popup mit Zusatzinfo (richtig/falsch)
 - Lernfortschritt lokal im Browser speichern
+- Lernfortschritt in Browser-Datenbank (IndexedDB) + localStorage-Fallback
+- Seed-Updates ohne Fortschrittverlust (`Seed aktualisieren`)
+- Bereichsstatistik pro `Modul/Section`
 - Wissenssammlung in `wissensbasis_einfach.md`
 
 ## Projektstruktur
@@ -54,6 +59,10 @@ Die App erwartet ein JSON-Array aus Frageobjekten:
     "options": ["A", "B", "C", "D"],
     "correctIndex": 2,
     "explanation": "Warum C richtig ist",
+    "extraInfo": "Kurzer Zusatzkontext fuer Popup/Verstaendnis",
+    "tip": "Hinweis, der vor allem bei falscher Antwort hilft",
+    "module": "Modul 1",
+    "section": "Section 2",
     "tags": ["Kapitel 1", "Definition"],
     "source": "Folie 42"
   }
@@ -68,6 +77,10 @@ Pflichtfelder:
 Empfohlen:
 - `id`
 - `explanation`
+- `extraInfo`
+- `tip`
+- `module`
+- `section`
 - `tags`
 - `source`
 

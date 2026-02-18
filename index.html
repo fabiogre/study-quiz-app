@@ -23,6 +23,18 @@
         <div id="tab-learn" class="tab-content active">
           <div class="toolbar">
             <label>
+              Modul
+              <select id="moduleSelect">
+                <option value="">Alle Module</option>
+              </select>
+            </label>
+            <label>
+              Section
+              <select id="sectionSelect">
+                <option value="">Alle Sections</option>
+              </select>
+            </label>
+            <label>
               Tag-Filter
               <input id="tagFilterInput" type="text" placeholder="z.B. Kapitel 1, Definition" />
             </label>
@@ -97,6 +109,14 @@
               Quelle (optional)
               <input id="qSource" type="text" placeholder="z.B. Folie 42" />
             </label>
+            <label>
+              Modul (optional)
+              <input id="qModule" type="text" placeholder="z.B. Modul 1" />
+            </label>
+            <label>
+              Section (optional)
+              <input id="qSection" type="text" placeholder="z.B. Section 2" />
+            </label>
 
             <div class="actions">
               <button type="submit">Frage speichern</button>
@@ -126,6 +146,7 @@
             </div>
 
             <div class="actions danger-row">
+              <button id="syncSeedBtn" type="button" class="secondary">Seed aktualisieren (Fortschritt behalten)</button>
               <button id="resetProgressBtn" type="button" class="danger">Lernfortschritt reset</button>
               <button id="resetAllBtn" type="button" class="danger">Alle Fragen + Fortschritt reset</button>
             </div>
@@ -141,9 +162,16 @@
           <li><span>Richtig</span><strong id="statCorrect">0</strong></li>
           <li><span>Trefferquote</span><strong id="statAccuracy">0%</strong></li>
         </ul>
+        <h3>Bereichsstatistik</h3>
+        <ul id="areaStats" class="area-stats"></ul>
         <p id="statusMsg" class="status"></p>
       </aside>
     </main>
+
+    <div id="factPopup" class="fact-popup hidden" role="status" aria-live="polite">
+      <strong id="factPopupTitle"></strong>
+      <p id="factPopupBody"></p>
+    </div>
 
     <script src="./app.js"></script>
   </body>
