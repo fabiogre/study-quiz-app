@@ -1,32 +1,51 @@
 # Study Quiz App
 
-Kleine lokale Webapp zum Auswendiglernen mit Multiple-Choice.
+Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 
-## Features
-- Fragen beantworten (MCQ)
-- Modi:
-  - `Gemischt`
-  - `Schwachstellen zuerst`
-  - `Neue Fragen zuerst`
-- Tag-Filter
-- Eigene Fragen ueber Formular bauen
-- JSON Import/Export
-- Lernfortschritt (lokal im Browser)
-- Zentrale Wissenssammlung:
-  - `wissensbasis_einfach.md`
+## Was die App kann
+- Multiple-Choice Fragen loesen
+- Lernmodi: `Gemischt`, `Schwachstellen zuerst`, `Neue Fragen zuerst`
+- Tag-Filter fuer Themengebiete
+- Eigene Fragen direkt in der App anlegen
+- Fragen per JSON importieren und exportieren
+- Lernfortschritt lokal im Browser speichern
+- Wissenssammlung in `wissensbasis_einfach.md`
 
-## Start
-Option A (einfach):
-1. In `apps/study-quiz/` wechseln
-2. Datei `index.html` im Browser oeffnen
+## Projektstruktur
+- `index.html` - App-Oberflaeche
+- `styles.css` - Layout und Design
+- `app.js` - Logik (Quiz, Modi, Speicher, Import/Export)
+- `questions.seed.json` - Start-Fragen
+- `wissensbasis_einfach.md` - geordnete, einfache Zusammenfassung des Lernstoffs
 
-Option B (stabiler, empfohlen):
-1. In `apps/study-quiz/` wechseln
-2. Lokalen Server starten, z. B.:
-   - `python -m http.server 8080`
-3. Browser: `http://localhost:8080`
+## Schnellstart (empfohlen)
+1. In den Projektordner wechseln:
+```powershell
+cd C:\Users\Fabio\.codex\apps\study-quiz
+```
+2. Lokalen Webserver starten:
+```powershell
+python -m http.server 8080
+```
+3. Im Browser oeffnen:
+```text
+http://localhost:8080
+```
 
-## Frage-Format (JSON)
+## Alternative ohne Server
+1. `C:\Users\Fabio\.codex\apps\study-quiz\index.html` direkt im Browser oeffnen.
+2. Hinweis: Je nach Browser koennen lokale Sicherheitsregeln einzelne Features einschraenken. Daher ist der Server-Modus stabiler.
+
+## Bedienung
+1. Lernmodus auswaehlen.
+2. Optional Tags setzen, um ein Thema zu trainieren.
+3. Antworten und Erklaerung lesen.
+4. Schwachstellen-Modus nutzen, um falsch beantwortete Fragen gezielt zu wiederholen.
+5. Eigene Fragen per Formular erfassen oder per JSON importieren.
+
+## Fragenformat (JSON)
+Die App erwartet ein JSON-Array aus Frageobjekten:
+
 ```json
 [
   {
@@ -41,38 +60,50 @@ Option B (stabiler, empfohlen):
 ]
 ```
 
-## Workflow fuer unseren Kurs
-1. Du gibst mir Folieninhalt in kleinen Bloecken.
-2. Ich baue daraus MCQ-Fragen.
-3. Ich pflege parallel die Wissenszusammenfassung in:
-   - `wissensbasis_einfach.md`
-4. Wir importieren die Fragen gesammelt als JSON in die App.
+Pflichtfelder:
+- `question`
+- `options` (mindestens 2 Eintraege)
+- `correctIndex` (0-basiert, passend zu `options`)
 
-## Als GitHub-Projekt veroeffentlichen
-Projektordner:
-- `apps/study-quiz`
+Empfohlen:
+- `id`
+- `explanation`
+- `tags`
+- `source`
 
-### 1) Lokal initialisieren
+## Lern-Workflow fuer den 500-Folien-Kurs
+1. Du lieferst Inhalte in kleinen Bloecken.
+2. Wir erstellen daraus MC-Fragen.
+3. Parallel wird `wissensbasis_einfach.md` strukturiert gepflegt.
+4. Regelmaessig Fragen importieren und Schwachstellen trainieren.
+
+## GitHub und Deployment
+Repository:
+- `https://github.com/fabiogre/study-quiz-app`
+
+Push von lokalen Aenderungen:
 ```powershell
 cd C:\Users\Fabio\.codex\apps\study-quiz
-git init
 git add .
-git commit -m "Initial release: Study Quiz App"
+git commit -m "Update quiz content"
+git push
 ```
 
-### 2) Neues Repo auf GitHub erstellen
-- Repo Name z. B.: `study-quiz-app`
-- Danach Remote setzen:
+Optional GitHub Pages:
+1. Repository `Settings` -> `Pages`
+2. Source: `Deploy from a branch`
+3. Branch: `main`, Folder: `/ (root)`
 
+## Troubleshooting
+- `python` nicht gefunden:
+  - Nutze den Python-Launcher:
 ```powershell
-git branch -M main
-git remote add origin https://github.com/<dein-user>/study-quiz-app.git
-git push -u origin main
+py -m http.server 8080
 ```
-
-### 3) Optional: GitHub Pages aktivieren
-- Repo Settings -> Pages
-- Source: `Deploy from a branch`
-- Branch: `main`, Folder: `/ (root)`
-
-Dann ist die App direkt im Browser nutzbar.
+- Port `8080` belegt:
+```powershell
+python -m http.server 8090
+```
+  - Dann im Browser `http://localhost:8090` oeffnen.
+- App zeigt alte Daten:
+  - Seite hart neu laden (`Ctrl + F5`) oder Browser-Cache leeren.
