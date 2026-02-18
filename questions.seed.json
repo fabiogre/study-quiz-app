@@ -1,0 +1,44 @@
+[
+  {
+    "id": "q-demo-1",
+    "question": "Was ist der wichtigste Zweck der ATP in der Zelle?",
+    "options": [
+      "Speicherung genetischer Information",
+      "Kurzfristiger Energietraeger",
+      "Bestandteil der Zellwand",
+      "Transport von Sauerstoff"
+    ],
+    "correctIndex": 1,
+    "explanation": "ATP dient als universeller kurzfristiger Energietraeger fuer viele zellulaere Prozesse.",
+    "tags": ["Biologie", "Grundlagen"],
+    "source": "Demo"
+  },
+  {
+    "id": "q-demo-2",
+    "question": "Welche Aussage zur Fotosynthese ist korrekt?",
+    "options": [
+      "Sie produziert nur nachts Sauerstoff.",
+      "Sie findet hauptsaechlich in den Mitochondrien statt.",
+      "Sie wandelt Lichtenergie in chemische Energie um.",
+      "Sie verbraucht CO2 nur in Tierzellen."
+    ],
+    "correctIndex": 2,
+    "explanation": "Fotosynthese nutzt Lichtenergie zur Bildung energiereicher organischer Stoffe.",
+    "tags": ["Biologie", "Fotosynthese"],
+    "source": "Demo"
+  },
+  {
+    "id": "q-demo-3",
+    "question": "Welche Einheit wird fuer elektrischen Widerstand verwendet?",
+    "options": [
+      "Volt",
+      "Ampere",
+      "Watt",
+      "Ohm"
+    ],
+    "correctIndex": 3,
+    "explanation": "Elektrischer Widerstand wird in Ohm gemessen.",
+    "tags": ["Physik", "Elektrizitaet"],
+    "source": "Demo"
+  }
+]

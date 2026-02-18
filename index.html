@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study Quiz App</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Study Quiz</h1>
+      <p class="muted">Multiple-Choice Trainer fuer grosse Lerninhalte</p>
+    </header>
+
+    <main class="layout">
+      <section class="panel panel-quiz">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="learn">Lernen</button>
+          <button class="tab-btn" data-tab="build">Fragen bauen</button>
+          <button class="tab-btn" data-tab="data">Daten</button>
+        </div>
+
+        <div id="tab-learn" class="tab-content active">
+          <div class="toolbar">
+            <label>
+              Tag-Filter
+              <input id="tagFilterInput" type="text" placeholder="z.B. Kapitel 1, Definition" />
+            </label>
+            <label>
+              Modus
+              <select id="modeSelect">
+                <option value="mixed">Gemischt</option>
+                <option value="weak">Schwachstellen zuerst</option>
+                <option value="new">Neue Fragen zuerst</option>
+              </select>
+            </label>
+            <button id="nextQuestionBtn" type="button">Naechste Frage</button>
+          </div>
+
+          <article id="questionCard" class="question-card">
+            <h2 id="questionTitle">Bereit?</h2>
+            <p id="questionMeta" class="muted">Klicke auf "Naechste Frage".</p>
+            <div id="optionsWrap" class="options"></div>
+            <div id="answerWrap" class="answer hidden">
+              <p id="answerResult"></p>
+              <p id="answerExplanation" class="muted"></p>
+              <button id="continueBtn" type="button">Weiter</button>
+            </div>
+          </article>
+        </div>
+
+        <div id="tab-build" class="tab-content">
+          <form id="questionForm" class="form-grid">
+            <label>
+              Frage
+              <textarea id="qQuestion" required placeholder="Was ist ...?"></textarea>
+            </label>
+
+            <label>
+              Antwort A
+              <input id="qOpt0" type="text" required />
+            </label>
+            <label>
+              Antwort B
+              <input id="qOpt1" type="text" required />
+            </label>
+            <label>
+              Antwort C
+              <input id="qOpt2" type="text" required />
+            </label>
+            <label>
+              Antwort D
+              <input id="qOpt3" type="text" required />
+            </label>
+
+            <label>
+              Richtige Antwort
+              <select id="qCorrect" required>
+                <option value="0">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+                <option value="3">D</option>
+              </select>
+            </label>
+
+            <label>
+              Erklaerung (optional)
+              <textarea id="qExplanation" placeholder="Kurz warum die Antwort stimmt"></textarea>
+            </label>
+
+            <label>
+              Tags (optional)
+              <input id="qTags" type="text" placeholder="z.B. Kapitel 1, Definition" />
+            </label>
+
+            <label>
+              Quelle (optional)
+              <input id="qSource" type="text" placeholder="z.B. Folie 42" />
+            </label>
+
+            <div class="actions">
+              <button type="submit">Frage speichern</button>
+              <button id="clearBuildFormBtn" type="button" class="secondary">Leeren</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="tab-data" class="tab-content">
+          <div class="stack">
+            <label>
+              JSON Import (Array von Fragen)
+              <textarea id="importJson" class="code"></textarea>
+            </label>
+            <div class="actions">
+              <button id="mergeImportBtn" type="button">Import zusammenfuehren</button>
+              <button id="replaceImportBtn" type="button" class="secondary">Import ersetzen</button>
+            </div>
+
+            <label>
+              JSON Export
+              <textarea id="exportJson" class="code" readonly></textarea>
+            </label>
+            <div class="actions">
+              <button id="refreshExportBtn" type="button">Export aktualisieren</button>
+              <button id="copyExportBtn" type="button" class="secondary">Export kopieren</button>
+            </div>
+
+            <div class="actions danger-row">
+              <button id="resetProgressBtn" type="button" class="danger">Lernfortschritt reset</button>
+              <button id="resetAllBtn" type="button" class="danger">Alle Fragen + Fortschritt reset</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel panel-side">
+        <h2>Uebersicht</h2>
+        <ul class="stats">
+          <li><span>Fragen gesamt</span><strong id="statTotal">0</strong></li>
+          <li><span>Beantwortet</span><strong id="statAnswered">0</strong></li>
+          <li><span>Richtig</span><strong id="statCorrect">0</strong></li>
+          <li><span>Trefferquote</span><strong id="statAccuracy">0%</strong></li>
+        </ul>
+        <p id="statusMsg" class="status"></p>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

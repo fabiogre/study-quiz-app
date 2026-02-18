@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Local/dev
+.env
+.env.*
+
+# Logs
+*.log
+
+# Python local server cache
+__pycache__/
