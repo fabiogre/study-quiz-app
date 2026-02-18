@@ -251,16 +251,27 @@ async function loadData(forceSeed = false) {
   questions = Array.isArray(savedQuestions) ? savedQuestions : [];
 
   if (!Array.isArray(questions) || questions.length === 0) {
-    const resp = await fetch("./questions.seed.json");
-    if (!resp.ok) {
-      throw new Error("Seed-Datei konnte nicht geladen werden.");
+    const bundledSeed = getBundledSeedQuestions();
+    if (bundledSeed.length > 0) {
+      questions = bundledSeed;
+    } else {
+      const resp = await fetch("./questions.seed.json");
+      if (!resp.ok) {
+        throw new Error("Seed-Datei konnte nicht geladen werden.");
+      }
+      questions = await resp.json();
     }
-    questions = await resp.json();
   }
   questions = normalizeQuestions(questions);
   saveQuestions();
 
   progress = savedProgress && typeof savedProgress === "object" ? savedProgress : {};
+}
+
+function getBundledSeedQuestions() {
+  const seed = globalThis.STUDY_QUIZ_SEED;
+  if (!Array.isArray(seed)) return [];
+  return seed.map((q) => ({ ...q }));
 }
 
 function saveQuestions() {
@@ -553,11 +564,21 @@ function importJson(replace) {
 
 async function syncSeedKeepProgress() {
   try {
-    const resp = await fetch("./questions.seed.json", { cache: "no-store" });
-    if (!resp.ok) {
+    let seedQuestions = [];
+    try {
+      const resp = await fetch("./questions.seed.json", { cache: "no-store" });
+      if (resp.ok) {
+        seedQuestions = normalizeQuestions(await resp.json());
+      }
+    } catch {
+      seedQuestions = [];
+    }
+    if (seedQuestions.length === 0) {
+      seedQuestions = normalizeQuestions(getBundledSeedQuestions());
+    }
+    if (seedQuestions.length === 0) {
       throw new Error("Seed-Datei konnte nicht geladen werden.");
     }
-    const seedQuestions = normalizeQuestions(await resp.json());
 
     const mergedById = new Map();
     questions.forEach((q) => mergedById.set(q.id, q));
