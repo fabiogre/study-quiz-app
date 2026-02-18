@@ -26,7 +26,7 @@ Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 ## Schnellstart (empfohlen)
 1. In den Projektordner wechseln:
 ```powershell
-cd C:\Users\Fabio\.codex\apps\study-quiz
+cd <project-folder>/study-quiz
 ```
 2. Lokalen Webserver starten:
 ```powershell
@@ -38,8 +38,9 @@ http://localhost:8080
 ```
 
 ## Alternative ohne Server
-1. `C:\Users\Fabio\.codex\apps\study-quiz\index.html` direkt im Browser oeffnen.
-2. Hinweis: Je nach Browser koennen lokale Sicherheitsregeln einzelne Features einschraenken. Daher ist der Server-Modus stabiler.
+1. `index.html` direkt per Doppelklick im Browser oeffnen.
+2. Hinweis: Dank eingebettetem Seed (`questions.seed.js`) funktioniert das auch ohne lokalen Server.
+3. Fuer stabilstes Verhalten (z. B. bei spaeteren Erweiterungen) bleibt Server-Modus empfohlen.
 
 ## Bedienung
 1. Lernmodus auswaehlen.
@@ -96,7 +97,7 @@ Repository:
 
 Push von lokalen Aenderungen:
 ```powershell
-cd C:\Users\Fabio\.codex\apps\study-quiz
+cd <project-folder>/study-quiz
 git add .
 git commit -m "Update quiz content"
 git push
@@ -120,3 +121,6 @@ python -m http.server 8090
   - Dann im Browser `http://localhost:8090` oeffnen.
 - App zeigt alte Daten:
   - Seite hart neu laden (`Ctrl + F5`) oder Browser-Cache leeren.
+- Kein Pfadproblem:
+  - Das Projekt kann in jedem beliebigen Ordner liegen.
+  - Wichtig ist nur, dass du in den Ordner wechselst, in dem `index.html` liegt.
