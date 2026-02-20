@@ -5,6 +5,7 @@ const DEFAULT_SECTION = "Section 1";
 const DB_NAME = "studyQuizDB";
 const DB_VERSION = 1;
 const DB_STORE = "kv";
+const LANGUAGE_KEY = "studyQuizLanguageV1";
 
 let questions = [];
 let progress = {};
@@ -13,8 +14,11 @@ let currentOptionOrder = [];
 let answerLocked = false;
 let popupTimer = null;
 let dbPromise = null;
+let currentLanguage = "de";
 
 const refs = {
+  languageSelect: document.getElementById("languageSelect"),
+  languageResetBtn: document.getElementById("languageResetBtn"),
   tabs: Array.from(document.querySelectorAll(".tab-btn")),
   tabPanels: {
     learn: document.getElementById("tab-learn"),
@@ -70,11 +74,374 @@ const refs = {
   factPopupBody: document.getElementById("factPopupBody"),
 };
 
+const UI_TEXTS = {
+  de: {
+    app: {
+      title: "Lernquiz",
+      subtitle: "Multiple-Choice Trainer fuer grosse Lerninhalte",
+      langLabel: "Sprache",
+      langReset: "Sprache zuruecksetzen",
+    },
+    tabs: {
+      learn: "Lernen",
+      build: "Fragen bauen",
+      data: "Daten",
+    },
+    learn: {
+      module: "Modul",
+      section: "Section",
+      tagFilter: "Tag-Filter",
+      mode: "Modus",
+      nextQuestion: "Naechste Frage",
+      continue: "Weiter",
+      modeMixed: "Gemischt",
+      modeWeak: "Schwachstellen zuerst",
+      modeNew: "Neue Fragen zuerst",
+      tagPlaceholder: "z.B. Kapitel 1, Definition",
+      allModules: "Alle Module",
+      allSections: "Alle Sections",
+    },
+    build: {
+      question: "Frage",
+      answerA: "Antwort A",
+      answerB: "Antwort B",
+      answerC: "Antwort C",
+      answerD: "Antwort D",
+      correct: "Richtige Antwort",
+      explanation: "Erklaerung (optional)",
+      tags: "Tags (optional)",
+      source: "Quelle (optional)",
+      module: "Modul (optional)",
+      section: "Section (optional)",
+      save: "Frage speichern",
+      clear: "Leeren",
+      questionPlaceholder: "Was ist ...?",
+      explanationPlaceholder: "Kurz warum die Antwort stimmt",
+      tagsPlaceholder: "z.B. Kapitel 1, Definition",
+      sourcePlaceholder: "z.B. Folie 42",
+      modulePlaceholder: "z.B. Modul 1",
+      sectionPlaceholder: "z.B. Section 2",
+    },
+    data: {
+      importLabel: "JSON Import (Array von Fragen)",
+      mergeImport: "Import zusammenfuehren",
+      replaceImport: "Import ersetzen",
+      exportLabel: "JSON Export",
+      refreshExport: "Export aktualisieren",
+      copyExport: "Export kopieren",
+      syncSeed: "Seed aktualisieren (Fortschritt behalten)",
+      resetProgress: "Lernfortschritt reset",
+      resetAll: "Alle Fragen + Fortschritt reset",
+    },
+    overview: {
+      title: "Uebersicht",
+      total: "Fragen gesamt",
+      answered: "Beantwortet",
+      correct: "Richtig",
+      accuracy: "Trefferquote",
+      areaTitle: "Bereichsstatistik",
+      noAreas: "Noch keine Bereiche verfuegbar.",
+      areaMetrics: "Fragen: {questions} | Antworten: {answered} | Quote: {rate}%",
+    },
+    question: {
+      readyTitle: "Bereit?",
+      readyMeta: 'Klicke auf "Naechste Frage".',
+      areaPrefix: "Bereich",
+      tagsPrefix: "Tags",
+      sourcePrefix: "Quelle",
+      missingOption: "(fehlende Antwortoption)",
+      resultCorrect: "Richtig.",
+      resultWrong: "Nicht ganz.",
+      noExplanation: "Keine Erklaerung hinterlegt.",
+    },
+    popup: {
+      titleCorrect: "Richtig",
+      titleWrong: "Nicht ganz",
+      fallbackInfo: "Merke dir den Kernbegriff und den typischen Einsatzbereich dieser Technologie.",
+      tipPrefix: "Tipp: {tip}",
+    },
+    status: {
+      startError: "Fehler beim Start: {msg}",
+      ready: "App bereit. Du kannst sofort lernen oder Fragen bauen.",
+      savedQuestion: "Frage gespeichert: {question}",
+      formCleared: "Formular geleert.",
+      copiedExport: "Export in Zwischenablage kopiert.",
+      copyFailed: "Kopieren fehlgeschlagen. Bitte manuell kopieren.",
+      progressReset: "Lernfortschritt wurde zurueckgesetzt.",
+      resetAllDone: "Alles wurde auf Seed-Daten zurueckgesetzt.",
+      importPrompt: "Bitte JSON zum Import einfuegen.",
+      importArrayError: "JSON muss ein Array von Fragen sein.",
+      importSuccess: "Import erfolgreich. Fragen gesamt: {count}",
+      importFailed: "Import fehlgeschlagen: {msg}",
+      seedUpdated: "Seed aktualisiert. Fragen gesamt: {count}. Fortschritt bleibt erhalten.",
+      seedUpdateFailed: "Seed-Update fehlgeschlagen: {msg}",
+      noQuestions: "Keine Fragen vorhanden.",
+      noFilterMatch: "Mit diesem Filter wurden keine Fragen gefunden.",
+      confirmResetAll: "Wirklich alle Fragen UND Fortschritt loeschen?",
+      languageReset: "Sprache wurde zurueckgesetzt: {lang}",
+    },
+  },
+  en: {
+    app: {
+      title: "Study Quiz",
+      subtitle: "Multiple-choice trainer for large learning content",
+      langLabel: "Language",
+      langReset: "Reset language",
+    },
+    tabs: {
+      learn: "Learn",
+      build: "Build Questions",
+      data: "Data",
+    },
+    learn: {
+      module: "Module",
+      section: "Section",
+      tagFilter: "Tag filter",
+      mode: "Mode",
+      nextQuestion: "Next question",
+      continue: "Continue",
+      modeMixed: "Mixed",
+      modeWeak: "Weak areas first",
+      modeNew: "New questions first",
+      tagPlaceholder: "e.g. Chapter 1, Definition",
+      allModules: "All modules",
+      allSections: "All sections",
+    },
+    build: {
+      question: "Question",
+      answerA: "Answer A",
+      answerB: "Answer B",
+      answerC: "Answer C",
+      answerD: "Answer D",
+      correct: "Correct answer",
+      explanation: "Explanation (optional)",
+      tags: "Tags (optional)",
+      source: "Source (optional)",
+      module: "Module (optional)",
+      section: "Section (optional)",
+      save: "Save question",
+      clear: "Clear",
+      questionPlaceholder: "What is ...?",
+      explanationPlaceholder: "Short why this answer is correct",
+      tagsPlaceholder: "e.g. Chapter 1, Definition",
+      sourcePlaceholder: "e.g. Slide 42",
+      modulePlaceholder: "e.g. Module 1",
+      sectionPlaceholder: "e.g. Section 2",
+    },
+    data: {
+      importLabel: "JSON import (array of questions)",
+      mergeImport: "Merge import",
+      replaceImport: "Replace import",
+      exportLabel: "JSON export",
+      refreshExport: "Refresh export",
+      copyExport: "Copy export",
+      syncSeed: "Update seed (keep progress)",
+      resetProgress: "Reset learning progress",
+      resetAll: "Reset all questions + progress",
+    },
+    overview: {
+      title: "Overview",
+      total: "Total questions",
+      answered: "Answered",
+      correct: "Correct",
+      accuracy: "Accuracy",
+      areaTitle: "Area statistics",
+      noAreas: "No areas available yet.",
+      areaMetrics: "Questions: {questions} | Answers: {answered} | Rate: {rate}%",
+    },
+    question: {
+      readyTitle: "Ready?",
+      readyMeta: 'Click "Next question".',
+      areaPrefix: "Area",
+      tagsPrefix: "Tags",
+      sourcePrefix: "Source",
+      missingOption: "(missing answer option)",
+      resultCorrect: "Correct.",
+      resultWrong: "Not quite.",
+      noExplanation: "No explanation provided.",
+    },
+    popup: {
+      titleCorrect: "Correct",
+      titleWrong: "Not quite",
+      fallbackInfo: "Remember the key concept and its typical use case.",
+      tipPrefix: "Tip: {tip}",
+    },
+    status: {
+      startError: "Startup error: {msg}",
+      ready: "App ready. You can start learning or build questions now.",
+      savedQuestion: "Question saved: {question}",
+      formCleared: "Form cleared.",
+      copiedExport: "Export copied to clipboard.",
+      copyFailed: "Copy failed. Please copy manually.",
+      progressReset: "Learning progress was reset.",
+      resetAllDone: "Everything was reset to seed data.",
+      importPrompt: "Please paste JSON for import.",
+      importArrayError: "JSON must be an array of questions.",
+      importSuccess: "Import successful. Total questions: {count}",
+      importFailed: "Import failed: {msg}",
+      seedUpdated: "Seed updated. Total questions: {count}. Progress was kept.",
+      seedUpdateFailed: "Seed update failed: {msg}",
+      noQuestions: "No questions available.",
+      noFilterMatch: "No questions found for this filter.",
+      confirmResetAll: "Really delete all questions and progress?",
+      languageReset: "Language was reset: {lang}",
+    },
+  },
+};
+
+function t(path, params = {}) {
+  const source = UI_TEXTS[currentLanguage] || UI_TEXTS.de;
+  const fallback = UI_TEXTS.de;
+  const parts = path.split(".");
+  let value = parts.reduce((obj, key) => (obj && obj[key] != null ? obj[key] : null), source);
+  if (value == null) {
+    value = parts.reduce((obj, key) => (obj && obj[key] != null ? obj[key] : null), fallback);
+  }
+  if (typeof value !== "string") return path;
+  return value.replace(/\{(\w+)\}/g, (_, key) => (params[key] != null ? String(params[key]) : ""));
+}
+
+function normalizeLanguageValue(value) {
+  const text = typeof value === "string" ? value.trim().toLowerCase() : "";
+  if (text === "en" || text === "english" || text === "englisch" || text.startsWith("en-")) return "en";
+  if (text === "de" || text === "deutsch" || text === "german" || text.startsWith("de-")) return "de";
+  return "de";
+}
+
+function detectPreferredLanguage() {
+  if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+    return normalizeLanguageValue(navigator.languages[0]);
+  }
+  if (typeof navigator.language === "string" && navigator.language.trim()) {
+    return normalizeLanguageValue(navigator.language);
+  }
+  return "de";
+}
+
+function loadLanguage() {
+  const stored = localStorage.getItem(LANGUAGE_KEY);
+  if (stored != null) return normalizeLanguageValue(stored);
+
+  const legacy = localStorage.getItem("studyQuizLanguage") || localStorage.getItem("quizLanguage");
+  if (legacy != null) return normalizeLanguageValue(legacy);
+  return detectPreferredLanguage();
+}
+
+function setLanguage(language) {
+  currentLanguage = normalizeLanguageValue(language);
+  localStorage.setItem(LANGUAGE_KEY, currentLanguage);
+  applyI18n();
+  refreshFilterOptions();
+  refreshExport();
+  refreshStats();
+  if (currentQuestion) {
+    resetQuestionCard();
+  }
+  setStatus(t("status.ready"));
+}
+
+function resetLanguagePreference() {
+  localStorage.removeItem(LANGUAGE_KEY);
+  localStorage.removeItem("studyQuizLanguage");
+  localStorage.removeItem("quizLanguage");
+  const preferred = detectPreferredLanguage();
+  setLanguage(preferred);
+  setStatus(t("status.languageReset", { lang: preferred.toUpperCase() }));
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function setPlaceholder(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.placeholder = value;
+}
+
+function applyI18n() {
+  document.documentElement.lang = currentLanguage === "en" ? "en" : "de";
+  if (refs.languageSelect) {
+    refs.languageSelect.value = currentLanguage;
+  }
+
+  setText("appTitle", t("app.title"));
+  setText("langLabel", t("app.langLabel"));
+  setText("languageResetBtn", t("app.langReset"));
+  setText("appSubtitle", t("app.subtitle"));
+  setText("tabLearnBtn", t("tabs.learn"));
+  setText("tabBuildBtn", t("tabs.build"));
+  setText("tabDataBtn", t("tabs.data"));
+
+  setText("moduleLabel", t("learn.module"));
+  setText("sectionLabel", t("learn.section"));
+  setText("tagFilterLabel", t("learn.tagFilter"));
+  setText("modeLabel", t("learn.mode"));
+  setText("modeMixedOpt", t("learn.modeMixed"));
+  setText("modeWeakOpt", t("learn.modeWeak"));
+  setText("modeNewOpt", t("learn.modeNew"));
+  setText("nextQuestionBtn", t("learn.nextQuestion"));
+  setText("continueBtn", t("learn.continue"));
+  setPlaceholder("tagFilterInput", t("learn.tagPlaceholder"));
+
+  setText("buildQuestionLabel", t("build.question"));
+  setText("buildAnswerALabel", t("build.answerA"));
+  setText("buildAnswerBLabel", t("build.answerB"));
+  setText("buildAnswerCLabel", t("build.answerC"));
+  setText("buildAnswerDLabel", t("build.answerD"));
+  setText("buildCorrectLabel", t("build.correct"));
+  setText("buildExplanationLabel", t("build.explanation"));
+  setText("buildTagsLabel", t("build.tags"));
+  setText("buildSourceLabel", t("build.source"));
+  setText("buildModuleLabel", t("build.module"));
+  setText("buildSectionLabel", t("build.section"));
+  setText("saveQuestionBtn", t("build.save"));
+  setText("clearBuildFormBtn", t("build.clear"));
+  setPlaceholder("qQuestion", t("build.questionPlaceholder"));
+  setPlaceholder("qExplanation", t("build.explanationPlaceholder"));
+  setPlaceholder("qTags", t("build.tagsPlaceholder"));
+  setPlaceholder("qSource", t("build.sourcePlaceholder"));
+  setPlaceholder("qModule", t("build.modulePlaceholder"));
+  setPlaceholder("qSection", t("build.sectionPlaceholder"));
+
+  setText("importLabel", t("data.importLabel"));
+  setText("mergeImportBtn", t("data.mergeImport"));
+  setText("replaceImportBtn", t("data.replaceImport"));
+  setText("exportLabel", t("data.exportLabel"));
+  setText("refreshExportBtn", t("data.refreshExport"));
+  setText("copyExportBtn", t("data.copyExport"));
+  setText("syncSeedBtn", t("data.syncSeed"));
+  setText("resetProgressBtn", t("data.resetProgress"));
+  setText("resetAllBtn", t("data.resetAll"));
+
+  setText("overviewTitle", t("overview.title"));
+  setText("statTotalLabel", t("overview.total"));
+  setText("statAnsweredLabel", t("overview.answered"));
+  setText("statCorrectLabel", t("overview.correct"));
+  setText("statAccuracyLabel", t("overview.accuracy"));
+  setText("areaStatsTitle", t("overview.areaTitle"));
+
+  if (!currentQuestion) {
+    refs.questionTitle.textContent = t("question.readyTitle");
+    refs.questionMeta.textContent = t("question.readyMeta");
+  }
+}
+
 init().catch((err) => {
-  setStatus(`Fehler beim Start: ${err.message}`);
+  setStatus(t("status.startError", { msg: err.message }));
 });
 
 async function init() {
+  currentLanguage = loadLanguage();
+  applyI18n();
+  if (refs.languageSelect) {
+    refs.languageSelect.addEventListener("change", () => {
+      setLanguage(refs.languageSelect.value);
+    });
+  }
+  if (refs.languageResetBtn) {
+    refs.languageResetBtn.addEventListener("click", resetLanguagePreference);
+  }
   setupTabs();
   setupLearnActions();
   setupBuildActions();
@@ -83,7 +450,7 @@ async function init() {
   refreshFilterOptions();
   refreshExport();
   refreshStats();
-  setStatus("App bereit. Du kannst sofort lernen oder Fragen bauen.");
+  setStatus(t("status.ready"));
 }
 
 async function openDb() {
@@ -202,12 +569,12 @@ function setupBuildActions() {
     refreshExport();
     refreshStats();
     refs.questionForm.reset();
-    setStatus(`Frage gespeichert: ${question.question}`);
+    setStatus(t("status.savedQuestion", { question: question.question }));
   });
 
   refs.clearBuildFormBtn.addEventListener("click", () => {
     refs.questionForm.reset();
-    setStatus("Formular geleert.");
+    setStatus(t("status.formCleared"));
   });
 }
 
@@ -219,19 +586,19 @@ function setupDataActions() {
   refs.copyExportBtn.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(refs.exportJson.value);
-      setStatus("Export in Zwischenablage kopiert.");
+      setStatus(t("status.copiedExport"));
     } catch (err) {
-      setStatus("Kopieren fehlgeschlagen. Bitte manuell kopieren.");
+      setStatus(t("status.copyFailed"));
     }
   });
   refs.resetProgressBtn.addEventListener("click", () => {
     progress = {};
     saveProgress();
     refreshStats();
-    setStatus("Lernfortschritt wurde zurueckgesetzt.");
+    setStatus(t("status.progressReset"));
   });
   refs.resetAllBtn.addEventListener("click", async () => {
-    const confirmed = confirm("Wirklich alle Fragen UND Fortschritt loeschen?");
+    const confirmed = confirm(t("status.confirmResetAll"));
     if (!confirmed) return;
     removeJson(STORAGE_KEY);
     removeJson(PROGRESS_KEY);
@@ -240,7 +607,7 @@ function setupDataActions() {
     refreshExport();
     refreshStats();
     resetQuestionCard();
-    setStatus("Alles wurde auf Seed-Daten zurueckgesetzt.");
+    setStatus(t("status.resetAllDone"));
   });
 }
 
@@ -262,6 +629,10 @@ async function loadData(forceSeed = false) {
       questions = await resp.json();
     }
   }
+  const normalizedBundledSeed = normalizeQuestions(getBundledSeedQuestions());
+  if (normalizedBundledSeed.length > 0 && questions.length > 0) {
+    questions = mergeMissingLocalizedFields(questions, normalizedBundledSeed);
+  }
   questions = normalizeQuestions(questions);
   saveQuestions();
 
@@ -272,6 +643,65 @@ function getBundledSeedQuestions() {
   const seed = globalThis.STUDY_QUIZ_SEED;
   if (!Array.isArray(seed)) return [];
   return seed.map((q) => ({ ...q }));
+}
+
+function mergeMissingLocalizedFields(existingQuestions, seedQuestions) {
+  const seedById = new Map(seedQuestions.map((q) => [q.id, q]));
+  const normalizeText = (text) => String(text || "").trim().toLowerCase();
+  return existingQuestions.map((question) => {
+    const seedMatch = seedById.get(question.id);
+    if (!seedMatch) return question;
+
+    const merged = { ...question };
+    const textFields = [
+      "question_en",
+      "explanation_en",
+      "extraInfo_en",
+      "tip_en",
+      "source_en",
+      "module_en",
+      "section_en",
+    ];
+
+    textFields.forEach((field) => {
+      const current = typeof merged[field] === "string" ? merged[field].trim() : "";
+      const fromSeed = typeof seedMatch[field] === "string" ? seedMatch[field].trim() : "";
+      let shouldReplace = !current && !!fromSeed;
+      if (!shouldReplace && field.endsWith("_en") && current && fromSeed) {
+        const baseField = field.slice(0, -3);
+        const deValue = typeof merged[baseField] === "string" ? merged[baseField].trim() : "";
+        if (
+          deValue &&
+          normalizeText(current) === normalizeText(deValue) &&
+          normalizeText(fromSeed) !== normalizeText(current)
+        ) {
+          shouldReplace = true;
+        }
+      }
+      if (shouldReplace) {
+        merged[field] = seedMatch[field];
+      }
+    });
+
+    const hasValidOptionsEn =
+      Array.isArray(merged.options_en) &&
+      Array.isArray(merged.options) &&
+      merged.options_en.length === merged.options.length &&
+      merged.options_en.every((opt) => String(opt || "").trim().length > 0);
+
+    const optionsEnLooksGerman =
+      hasValidOptionsEn &&
+      merged.options_en.every(
+        (opt, idx) =>
+          normalizeText(opt) === normalizeText((Array.isArray(merged.options) ? merged.options[idx] : "") || "")
+      );
+
+    if ((!hasValidOptionsEn || optionsEnLooksGerman) && Array.isArray(seedMatch.options_en)) {
+      merged.options_en = seedMatch.options_en.slice();
+    }
+
+    return merged;
+  });
 }
 
 function saveQuestions() {
@@ -304,26 +734,54 @@ function normalizeQuestion(raw) {
     ...raw,
     id: raw.id || `q-${Date.now()}-${Math.floor(Math.random() * 100000)}`,
     question: typeof raw.question === "string" ? raw.question.trim() : "",
+    question_en: typeof raw.question_en === "string" ? raw.question_en.trim() : "",
     options: Array.isArray(raw.options) ? raw.options.map((o) => String(o)) : [],
+    options_en: Array.isArray(raw.options_en) ? raw.options_en.map((o) => String(o)) : [],
     correctIndex: Number(raw.correctIndex),
     explanation: typeof raw.explanation === "string" ? raw.explanation : "",
+    explanation_en: typeof raw.explanation_en === "string" ? raw.explanation_en : "",
     extraInfo: typeof raw.extraInfo === "string" ? raw.extraInfo : "",
+    extraInfo_en: typeof raw.extraInfo_en === "string" ? raw.extraInfo_en : "",
     tip: typeof raw.tip === "string" ? raw.tip : "",
+    tip_en: typeof raw.tip_en === "string" ? raw.tip_en : "",
     tags,
     source,
+    source_en: typeof raw.source_en === "string" ? raw.source_en.trim() : "",
     module: sanitizeModule(raw.module || inferredModule),
+    module_en: typeof raw.module_en === "string" ? toEnglishModuleName(raw.module_en) : "",
     section: sanitizeSection(raw.section || inferredSection),
+    section_en: typeof raw.section_en === "string" ? toEnglishSectionName(raw.section_en) : "",
   };
 }
 
 function sanitizeModule(value) {
   const text = typeof value === "string" ? value.trim() : "";
-  return text || DEFAULT_MODULE;
+  if (!text) return DEFAULT_MODULE;
+  const moduleMatch = text.match(/^(?:modul|module)\s*(\d+)$/i);
+  if (moduleMatch) return `Modul ${moduleMatch[1]}`;
+  return text;
 }
 
 function sanitizeSection(value) {
   const text = typeof value === "string" ? value.trim() : "";
-  return text || DEFAULT_SECTION;
+  if (!text) return DEFAULT_SECTION;
+  const sectionMatch = text.match(/^(?:abschnitt|section|sec)\s*[-:]?\s*(\d+)$/i);
+  if (sectionMatch) return `Section ${Number(sectionMatch[1])}`;
+  return text;
+}
+
+function toEnglishModuleName(value) {
+  const text = typeof value === "string" ? value.trim() : "";
+  if (!text) return "";
+  const moduleMatch = text.match(/^(?:modul|module)\s*(\d+)$/i);
+  if (moduleMatch) return `Module ${moduleMatch[1]}`;
+  return text;
+}
+
+function toEnglishSectionName(value) {
+  const text = typeof value === "string" ? value.trim() : "";
+  if (!text) return "";
+  return sanitizeSection(text);
 }
 
 function inferModule(raw, tags, source) {
@@ -390,26 +848,33 @@ function refreshExport() {
 }
 
 function refreshFilterOptions() {
-  const modules = uniqueSorted(questions.map((q) => q.module).filter(Boolean));
-  const currentModule = refs.moduleSelect.value;
-  setSelectOptions(refs.moduleSelect, "Alle Module", modules, currentModule);
+  const modules = uniqueSorted(questions.map((q) => sanitizeModule(q.module)).filter(Boolean));
+  const currentModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
+  setSelectOptions(refs.moduleSelect, t("learn.allModules"), modules, currentModule, (value) =>
+    localizeModuleName(value)
+  );
   refreshSectionOptions();
 }
 
 function refreshSectionOptions() {
-  const selectedModule = refs.moduleSelect.value;
+  const selectedModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
   const sections = uniqueSorted(
-    questions.filter((q) => !selectedModule || q.module === selectedModule).map((q) => q.section).filter(Boolean)
+    questions
+      .filter((q) => !selectedModule || sanitizeModule(q.module) === selectedModule)
+      .map((q) => sanitizeSection(q.section))
+      .filter(Boolean)
   );
-  const currentSection = refs.sectionSelect.value;
-  setSelectOptions(refs.sectionSelect, "Alle Sections", sections, currentSection);
+  const currentSection = refs.sectionSelect.value ? sanitizeSection(refs.sectionSelect.value) : "";
+  setSelectOptions(refs.sectionSelect, t("learn.allSections"), sections, currentSection, (value) =>
+    localizeSectionName(value)
+  );
 }
 
 function uniqueSorted(values) {
   return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, "de"));
 }
 
-function setSelectOptions(selectEl, allLabel, values, preferredValue) {
+function setSelectOptions(selectEl, allLabel, values, preferredValue, labelFormatter = (value) => value) {
   if (!selectEl) return;
   selectEl.innerHTML = "";
   const allOpt = document.createElement("option");
@@ -417,10 +882,15 @@ function setSelectOptions(selectEl, allLabel, values, preferredValue) {
   allOpt.textContent = allLabel;
   selectEl.appendChild(allOpt);
 
+  const seenLabels = new Set();
   values.forEach((value) => {
+    const label = labelFormatter(value);
+    const labelKey = String(label || "").trim().toLowerCase();
+    if (labelKey && seenLabels.has(labelKey)) return;
+    if (labelKey) seenLabels.add(labelKey);
     const opt = document.createElement("option");
     opt.value = value;
-    opt.textContent = value;
+    opt.textContent = label;
     selectEl.appendChild(opt);
   });
 
@@ -429,6 +899,151 @@ function setSelectOptions(selectEl, allLabel, values, preferredValue) {
   } else {
     selectEl.value = "";
   }
+}
+
+function localizeModuleName(moduleName) {
+  const text = (moduleName || "").trim();
+  if (!text) return text;
+  if (currentLanguage === "en") {
+    return toEnglishModuleName(text);
+  }
+  return sanitizeModule(text);
+}
+
+function localizeSectionName(sectionName) {
+  const text = (sectionName || "").trim();
+  if (!text) return text;
+  return sanitizeSection(text);
+}
+
+function getLocalizedField(q, baseField) {
+  const deValue = q && typeof q[baseField] === "string" ? q[baseField] : "";
+  const enValue = q && typeof q[`${baseField}_en`] === "string" ? q[`${baseField}_en`] : "";
+  if (currentLanguage === "en") {
+    return (enValue && enValue.trim()) || autoTranslateDeToEn(deValue);
+  }
+  return (deValue && deValue.trim()) || enValue;
+}
+
+function getLocalizedOptions(q) {
+  const deOptions = Array.isArray(q.options) ? q.options : [];
+  const enOptions = Array.isArray(q.options_en) ? q.options_en : [];
+  if (currentLanguage === "en") {
+    if (enOptions.length === deOptions.length && enOptions.every((o) => String(o).trim().length > 0)) {
+      return enOptions.map((o) => String(o));
+    }
+    return deOptions.map((o) => autoTranslateDeToEn(String(o)));
+  }
+  return deOptions;
+}
+
+function getLocalizedModule(q) {
+  const moduleDe = q && typeof q.module === "string" ? q.module : DEFAULT_MODULE;
+  const moduleEn = q && typeof q.module_en === "string" ? q.module_en : "";
+  if (currentLanguage === "en") {
+    return moduleEn.trim() || localizeModuleName(moduleDe);
+  }
+  return moduleDe;
+}
+
+function getLocalizedSection(q) {
+  const sectionDe = q && typeof q.section === "string" ? q.section : DEFAULT_SECTION;
+  const sectionEn = q && typeof q.section_en === "string" ? q.section_en : "";
+  if (currentLanguage === "en") {
+    return sectionEn.trim() || localizeSectionName(sectionDe);
+  }
+  return sectionDe;
+}
+
+const DE_EN_REPLACEMENTS = [
+  ["nicht ganz", "not quite"],
+  ["richtig", "correct"],
+  ["frage", "question"],
+  ["antwort", "answer"],
+  ["welche", "which"],
+  ["was", "what"],
+  ["warum", "why"],
+  ["wie", "how"],
+  ["wofuer", "what is used for"],
+  ["wodurch", "through what"],
+  ["trifft am besten zu", "is most accurate"],
+  ["am besten", "best"],
+  ["am ehesten", "most likely"],
+  ["hauptrolle", "main role"],
+  ["hauptgrund", "main reason"],
+  ["herausforderung", "challenge"],
+  ["provider-sicht", "provider perspective"],
+  ["kundensicht", "customer perspective"],
+  ["kunden", "customer"],
+  ["kundenverkehr", "customer traffic"],
+  ["kundendaten", "customer data"],
+  ["netzwerk", "network"],
+  ["netzwerke", "networks"],
+  ["netz", "network"],
+  ["core", "core"],
+  ["service", "service"],
+  ["services", "services"],
+  ["service-label", "service label"],
+  ["transport-label", "transport label"],
+  ["transport", "transport"],
+  ["weiterleitung", "forwarding"],
+  ["weitergeleitet", "forwarded"],
+  ["routing", "routing"],
+  ["signalisierung", "signaling"],
+  ["kapselung", "encapsulation"],
+  ["encapsulation", "encapsulation"],
+  ["ingress", "ingress"],
+  ["egress", "egress"],
+  ["richtig ist", "is correct"],
+  ["falsch", "wrong"],
+  ["wichtig", "important"],
+  ["optional", "optional"],
+  ["typischerweise", "typically"],
+  ["hauptunterschied", "main difference"],
+  ["genutzt", "used"],
+  ["unterstuetzt", "supports"],
+  ["skaliert", "scales"],
+  ["skalierung", "scalability"],
+  ["effizienz", "efficiency"],
+  ["bandbreite", "bandwidth"],
+  ["beim", "at the"],
+  ["im", "in the"],
+  ["und", "and"],
+  ["oder", "or"],
+  ["fuer", "for"],
+  ["zum", "for the"],
+  ["zur", "for the"],
+  ["mit", "with"],
+  ["ueber", "over"],
+  ["durch", "through"],
+  ["ohne", "without"],
+  ["mehrere", "multiple"],
+  ["einzige", "single"],
+  ["privates", "private"],
+  ["virtuelles", "virtual"],
+  ["legacy", "legacy"],
+  ["gleichzeitig", "at the same time"],
+  ["stetig", "steadily"],
+  ["sinkend", "decreasing"],
+];
+
+function autoTranslateDeToEn(text) {
+  if (!text || typeof text !== "string") return "";
+  let out = text;
+  DE_EN_REPLACEMENTS.forEach(([de, en]) => {
+    const pattern = new RegExp(`\\b${escapeRegExp(de)}\\b`, "gi");
+    out = out.replace(pattern, (match) => {
+      if (match === match.toUpperCase()) return en.toUpperCase();
+      if (match[0] === match[0].toUpperCase()) return en[0].toUpperCase() + en.slice(1);
+      return en;
+    });
+  });
+  out = out.replace(/\s{2,}/g, " ").trim();
+  return out;
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function refreshStats() {
@@ -449,8 +1064,8 @@ function refreshAreaStats() {
 
   const grouped = new Map();
   questions.forEach((q) => {
-    const module = q.module || DEFAULT_MODULE;
-    const section = q.section || DEFAULT_SECTION;
+    const module = sanitizeModule(q.module || DEFAULT_MODULE);
+    const section = sanitizeSection(q.section || DEFAULT_SECTION);
     const key = `${module}||${section}`;
     const p = getProgressSnapshot(q);
     if (!grouped.has(key)) {
@@ -471,7 +1086,7 @@ function refreshAreaStats() {
 
   if (areas.length === 0) {
     const li = document.createElement("li");
-    li.textContent = "Noch keine Bereiche verfuegbar.";
+    li.textContent = t("overview.noAreas");
     refs.areaStats.appendChild(li);
     return;
   }
@@ -482,11 +1097,15 @@ function refreshAreaStats() {
 
     const name = document.createElement("span");
     name.className = "area-name";
-    name.textContent = `${area.module} / ${area.section}`;
+    name.textContent = `${localizeModuleName(area.module)} / ${localizeSectionName(area.section)}`;
 
     const metrics = document.createElement("span");
     metrics.className = "area-metrics";
-    metrics.textContent = `Fragen: ${area.questions} | Antworten: ${area.answered} | Quote: ${hitRate}%`;
+    metrics.textContent = t("overview.areaMetrics", {
+      questions: area.questions,
+      answered: area.answered,
+      rate: hitRate,
+    });
 
     li.appendChild(name);
     li.appendChild(metrics);
@@ -498,6 +1117,11 @@ function buildQuestionFromForm() {
   const options = [refs.qOpt0.value, refs.qOpt1.value, refs.qOpt2.value, refs.qOpt3.value].map((v) =>
     v.trim()
   );
+  const questionText = refs.qQuestion.value.trim();
+  const explanationText = refs.qExplanation.value.trim();
+  const sourceText = refs.qSource.value.trim();
+  const moduleText = sanitizeModule(refs.qModule.value || refs.moduleSelect.value);
+  const sectionText = sanitizeSection(refs.qSection.value || refs.sectionSelect.value);
   const tags = refs.qTags.value
     .split(",")
     .map((t) => t.trim())
@@ -505,28 +1129,34 @@ function buildQuestionFromForm() {
 
   return {
     id: `q-${Date.now()}-${Math.floor(Math.random() * 100000)}`,
-    question: refs.qQuestion.value.trim(),
+    question: questionText,
+    question_en: autoTranslateDeToEn(questionText),
     options,
+    options_en: options.map((option) => autoTranslateDeToEn(option)),
     correctIndex: Number(refs.qCorrect.value),
-    explanation: refs.qExplanation.value.trim(),
+    explanation: explanationText,
+    explanation_en: autoTranslateDeToEn(explanationText),
     tags,
-    source: refs.qSource.value.trim(),
-    module: sanitizeModule(refs.qModule.value || refs.moduleSelect.value),
-    section: sanitizeSection(refs.qSection.value || refs.sectionSelect.value),
+    source: sourceText,
+    source_en: autoTranslateDeToEn(sourceText),
+    module: moduleText,
+    module_en: toEnglishModuleName(moduleText),
+    section: sectionText,
+    section_en: toEnglishSectionName(sectionText),
   };
 }
 
 function importJson(replace) {
   const raw = refs.importJson.value.trim();
   if (!raw) {
-    setStatus("Bitte JSON zum Import einfuegen.");
+    setStatus(t("status.importPrompt"));
     return;
   }
 
   try {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) {
-      throw new Error("JSON muss ein Array von Fragen sein.");
+      throw new Error(t("status.importArrayError"));
     }
 
     const cleaned = parsed.filter(
@@ -556,9 +1186,9 @@ function importJson(replace) {
     refreshFilterOptions();
     refreshExport();
     refreshStats();
-    setStatus(`Import erfolgreich. Fragen gesamt: ${questions.length}`);
+    setStatus(t("status.importSuccess", { count: questions.length }));
   } catch (err) {
-    setStatus(`Import fehlgeschlagen: ${err.message}`);
+    setStatus(t("status.importFailed", { msg: err.message }));
   }
 }
 
@@ -577,7 +1207,7 @@ async function syncSeedKeepProgress() {
       seedQuestions = normalizeQuestions(getBundledSeedQuestions());
     }
     if (seedQuestions.length === 0) {
-      throw new Error("Seed-Datei konnte nicht geladen werden.");
+      throw new Error(currentLanguage === "en" ? "Seed file could not be loaded." : "Seed-Datei konnte nicht geladen werden.");
     }
 
     const mergedById = new Map();
@@ -592,15 +1222,15 @@ async function syncSeedKeepProgress() {
     refreshExport();
     refreshStats();
     resetQuestionCard();
-    setStatus(`Seed aktualisiert. Fragen gesamt: ${questions.length}. Fortschritt bleibt erhalten.`);
+    setStatus(t("status.seedUpdated", { count: questions.length }));
   } catch (err) {
-    setStatus(`Seed-Update fehlgeschlagen: ${err.message}`);
+    setStatus(t("status.seedUpdateFailed", { msg: err.message }));
   }
 }
 
 function nextQuestion() {
   if (questions.length === 0) {
-    setStatus("Keine Fragen vorhanden.");
+    setStatus(t("status.noQuestions"));
     return;
   }
 
@@ -614,7 +1244,7 @@ function nextQuestion() {
     refs.sectionSelect.value
   );
   if (filtered.length === 0) {
-    setStatus("Mit diesem Tag-Filter wurden keine Fragen gefunden.");
+    setStatus(t("status.noFilterMatch"));
     resetQuestionCard();
     return;
   }
@@ -626,9 +1256,11 @@ function nextQuestion() {
 
 function applyFilter(items, rawFilter, moduleFilter, sectionFilter) {
   const filter = rawFilter.trim().toLowerCase();
+  const wantedModule = moduleFilter ? sanitizeModule(moduleFilter) : "";
+  const wantedSection = sectionFilter ? sanitizeSection(sectionFilter) : "";
   return items.filter((q) => {
-    if (moduleFilter && q.module !== moduleFilter) return false;
-    if (sectionFilter && q.section !== sectionFilter) return false;
+    if (wantedModule && sanitizeModule(q.module) !== wantedModule) return false;
+    if (wantedSection && sanitizeSection(q.section) !== wantedSection) return false;
     if (!filter) return true;
     const tags = (q.tags || []).join(" ").toLowerCase();
     const source = (q.source || "").toLowerCase();
@@ -666,21 +1298,23 @@ function randomItem(arr) {
 }
 
 function renderQuestion(q) {
-  refs.questionTitle.textContent = q.question;
-  const area = `${q.module || DEFAULT_MODULE} / ${q.section || DEFAULT_SECTION}`;
+  refs.questionTitle.textContent = getLocalizedField(q, "question");
+  const area = `${getLocalizedModule(q)} / ${getLocalizedSection(q)}`;
   const tags = (q.tags || []).join(", ");
-  const metaParts = [`Bereich: ${area}`];
-  if (tags) metaParts.push(`Tags: ${tags}`);
-  if (q.source) metaParts.push(`Quelle: ${q.source}`);
+  const source = getLocalizedField(q, "source");
+  const metaParts = [`${t("question.areaPrefix")}: ${area}`];
+  if (tags) metaParts.push(`${t("question.tagsPrefix")}: ${tags}`);
+  if (source) metaParts.push(`${t("question.sourcePrefix")}: ${source}`);
   refs.questionMeta.textContent = metaParts.join(" | ");
   refs.optionsWrap.innerHTML = "";
 
-  currentOptionOrder = shuffledIndices(q.options.length);
+  const localizedOptions = getLocalizedOptions(q);
+  currentOptionOrder = shuffledIndices(localizedOptions.length);
 
   currentOptionOrder.forEach((originalIdx, displayIdx) => {
-    const option = q.options[originalIdx];
+    const option = localizedOptions[originalIdx];
     const optionText =
-      typeof option === "string" && option.trim().length > 0 ? option : "(fehlende Antwortoption)";
+      typeof option === "string" && option.trim().length > 0 ? option : t("question.missingOption");
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "opt-btn";
@@ -715,9 +1349,10 @@ function onSelectAnswer(index) {
   saveProgress();
   refreshStats();
 
-  refs.answerResult.textContent = isCorrect ? "Richtig." : "Nicht ganz.";
+  refs.answerResult.textContent = isCorrect ? t("question.resultCorrect") : t("question.resultWrong");
   refs.answerResult.style.color = isCorrect ? "var(--ok)" : "var(--bad)";
-  refs.answerExplanation.textContent = currentQuestion.explanation || "Keine Erklaerung hinterlegt.";
+  refs.answerExplanation.textContent =
+    getLocalizedField(currentQuestion, "explanation") || t("question.noExplanation");
   refs.answerWrap.classList.remove("hidden");
   showFactPopup(currentQuestion, isCorrect);
 }
@@ -726,8 +1361,8 @@ function resetQuestionCard() {
   currentQuestion = null;
   currentOptionOrder = [];
   answerLocked = false;
-  refs.questionTitle.textContent = "Bereit?";
-  refs.questionMeta.textContent = 'Klicke auf "Naechste Frage".';
+  refs.questionTitle.textContent = t("question.readyTitle");
+  refs.questionMeta.textContent = t("question.readyMeta");
   refs.optionsWrap.innerHTML = "";
   refs.answerWrap.classList.add("hidden");
 }
@@ -753,15 +1388,14 @@ function showFactPopup(question, isCorrect) {
     popupTimer = null;
   }
 
-  const title = isCorrect ? "Richtig" : "Nicht ganz";
+  const title = isCorrect ? t("popup.titleCorrect") : t("popup.titleWrong");
   const baseInfo =
-    (typeof question.extraInfo === "string" && question.extraInfo.trim()) ||
-    (typeof question.explanation === "string" && question.explanation.trim()) ||
-    "Merke dir den Kernbegriff und den typischen Einsatzbereich dieser Technologie.";
+    getLocalizedField(question, "extraInfo") ||
+    getLocalizedField(question, "explanation") ||
+    t("popup.fallbackInfo");
+  const tipText = getLocalizedField(question, "tip");
   const tip =
-    !isCorrect && typeof question.tip === "string" && question.tip.trim()
-      ? ` Tipp: ${question.tip.trim()}`
-      : "";
+    !isCorrect && tipText.trim().length > 0 ? ` ${t("popup.tipPrefix", { tip: tipText.trim() })}` : "";
 
   refs.factPopupTitle.textContent = title;
   refs.factPopupBody.textContent = `${baseInfo}${tip}`;

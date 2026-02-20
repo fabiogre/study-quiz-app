@@ -8,42 +8,54 @@
   </head>
   <body>
     <header class="topbar">
-      <h1>Study Quiz</h1>
-      <p class="muted">Multiple-Choice Trainer fuer grosse Lerninhalte</p>
+      <div class="topbar-row">
+        <h1 id="appTitle">Study Quiz</h1>
+        <div class="lang-controls">
+          <label class="lang-picker">
+            <span id="langLabel">Sprache</span>
+            <select id="languageSelect">
+              <option value="de">Deutsch</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+          <button id="languageResetBtn" type="button" class="secondary">Sprache zuruecksetzen</button>
+        </div>
+      </div>
+      <p id="appSubtitle" class="muted">Multiple-Choice Trainer fuer grosse Lerninhalte</p>
     </header>
 
     <main class="layout">
       <section class="panel panel-quiz">
         <div class="tabs">
-          <button class="tab-btn active" data-tab="learn">Lernen</button>
-          <button class="tab-btn" data-tab="build">Fragen bauen</button>
-          <button class="tab-btn" data-tab="data">Daten</button>
+          <button id="tabLearnBtn" class="tab-btn active" data-tab="learn">Lernen</button>
+          <button id="tabBuildBtn" class="tab-btn" data-tab="build">Fragen bauen</button>
+          <button id="tabDataBtn" class="tab-btn" data-tab="data">Daten</button>
         </div>
 
         <div id="tab-learn" class="tab-content active">
           <div class="toolbar">
             <label>
-              Modul
+              <span id="moduleLabel">Modul</span>
               <select id="moduleSelect">
                 <option value="">Alle Module</option>
               </select>
             </label>
             <label>
-              Section
+              <span id="sectionLabel">Section</span>
               <select id="sectionSelect">
                 <option value="">Alle Sections</option>
               </select>
             </label>
             <label>
-              Tag-Filter
+              <span id="tagFilterLabel">Tag-Filter</span>
               <input id="tagFilterInput" type="text" placeholder="z.B. Kapitel 1, Definition" />
             </label>
             <label>
-              Modus
+              <span id="modeLabel">Modus</span>
               <select id="modeSelect">
-                <option value="mixed">Gemischt</option>
-                <option value="weak">Schwachstellen zuerst</option>
-                <option value="new">Neue Fragen zuerst</option>
+                <option id="modeMixedOpt" value="mixed">Gemischt</option>
+                <option id="modeWeakOpt" value="weak">Schwachstellen zuerst</option>
+                <option id="modeNewOpt" value="new">Neue Fragen zuerst</option>
               </select>
             </label>
             <button id="nextQuestionBtn" type="button">Naechste Frage</button>
@@ -64,29 +76,29 @@
         <div id="tab-build" class="tab-content">
           <form id="questionForm" class="form-grid">
             <label>
-              Frage
+              <span id="buildQuestionLabel">Frage</span>
               <textarea id="qQuestion" required placeholder="Was ist ...?"></textarea>
             </label>
 
             <label>
-              Antwort A
+              <span id="buildAnswerALabel">Antwort A</span>
               <input id="qOpt0" type="text" required />
             </label>
             <label>
-              Antwort B
+              <span id="buildAnswerBLabel">Antwort B</span>
               <input id="qOpt1" type="text" required />
             </label>
             <label>
-              Antwort C
+              <span id="buildAnswerCLabel">Antwort C</span>
               <input id="qOpt2" type="text" required />
             </label>
             <label>
-              Antwort D
+              <span id="buildAnswerDLabel">Antwort D</span>
               <input id="qOpt3" type="text" required />
             </label>
 
             <label>
-              Richtige Antwort
+              <span id="buildCorrectLabel">Richtige Antwort</span>
               <select id="qCorrect" required>
                 <option value="0">A</option>
                 <option value="1">B</option>
@@ -96,30 +108,30 @@
             </label>
 
             <label>
-              Erklaerung (optional)
+              <span id="buildExplanationLabel">Erklaerung (optional)</span>
               <textarea id="qExplanation" placeholder="Kurz warum die Antwort stimmt"></textarea>
             </label>
 
             <label>
-              Tags (optional)
+              <span id="buildTagsLabel">Tags (optional)</span>
               <input id="qTags" type="text" placeholder="z.B. Kapitel 1, Definition" />
             </label>
 
             <label>
-              Quelle (optional)
+              <span id="buildSourceLabel">Quelle (optional)</span>
               <input id="qSource" type="text" placeholder="z.B. Folie 42" />
             </label>
             <label>
-              Modul (optional)
+              <span id="buildModuleLabel">Modul (optional)</span>
               <input id="qModule" type="text" placeholder="z.B. Modul 1" />
             </label>
             <label>
-              Section (optional)
+              <span id="buildSectionLabel">Section (optional)</span>
               <input id="qSection" type="text" placeholder="z.B. Section 2" />
             </label>
 
             <div class="actions">
-              <button type="submit">Frage speichern</button>
+              <button id="saveQuestionBtn" type="submit">Frage speichern</button>
               <button id="clearBuildFormBtn" type="button" class="secondary">Leeren</button>
             </div>
           </form>
@@ -128,7 +140,7 @@
         <div id="tab-data" class="tab-content">
           <div class="stack">
             <label>
-              JSON Import (Array von Fragen)
+              <span id="importLabel">JSON Import (Array von Fragen)</span>
               <textarea id="importJson" class="code"></textarea>
             </label>
             <div class="actions">
@@ -137,7 +149,7 @@
             </div>
 
             <label>
-              JSON Export
+              <span id="exportLabel">JSON Export</span>
               <textarea id="exportJson" class="code" readonly></textarea>
             </label>
             <div class="actions">
@@ -155,14 +167,14 @@
       </section>
 
       <aside class="panel panel-side">
-        <h2>Uebersicht</h2>
+        <h2 id="overviewTitle">Uebersicht</h2>
         <ul class="stats">
-          <li><span>Fragen gesamt</span><strong id="statTotal">0</strong></li>
-          <li><span>Beantwortet</span><strong id="statAnswered">0</strong></li>
-          <li><span>Richtig</span><strong id="statCorrect">0</strong></li>
-          <li><span>Trefferquote</span><strong id="statAccuracy">0%</strong></li>
+          <li><span id="statTotalLabel">Fragen gesamt</span><strong id="statTotal">0</strong></li>
+          <li><span id="statAnsweredLabel">Beantwortet</span><strong id="statAnswered">0</strong></li>
+          <li><span id="statCorrectLabel">Richtig</span><strong id="statCorrect">0</strong></li>
+          <li><span id="statAccuracyLabel">Trefferquote</span><strong id="statAccuracy">0%</strong></li>
         </ul>
-        <h3>Bereichsstatistik</h3>
+        <h3 id="areaStatsTitle">Bereichsstatistik</h3>
         <ul id="areaStats" class="area-stats"></ul>
         <p id="statusMsg" class="status"></p>
       </aside>

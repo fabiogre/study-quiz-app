@@ -5,6 +5,7 @@ Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 ## Was die App kann
 - Multiple-Choice Fragen loesen
 - Lernmodi: `Gemischt`, `Schwachstellen zuerst`, `Neue Fragen zuerst`
+- Sprachumschaltung `Deutsch` / `English`
 - Filter nach `Modul` und `Section`
 - Tag-Filter fuer Themengebiete
 - Eigene Fragen direkt in der App anlegen
@@ -21,7 +22,9 @@ Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 - `styles.css` - Layout und Design
 - `app.js` - Logik (Quiz, Modi, Speicher, Import/Export)
 - `questions.seed.json` - Start-Fragen
+- `questions.seed.js` - eingebetteter Seed-Fallback (fuer Start ohne lokalen Server)
 - `wissensbasis_einfach.md` - geordnete, einfache Zusammenfassung des Lernstoffs
+- `wissensbasis_english.md` - englische Wissensbasis (Draft)
 
 ## Schnellstart (empfohlen)
 1. In den Projektordner wechseln:
@@ -57,15 +60,23 @@ Die App erwartet ein JSON-Array aus Frageobjekten:
   {
     "id": "q-123",
     "question": "Frage?",
+    "question_en": "Question?",
     "options": ["A", "B", "C", "D"],
+    "options_en": ["A", "B", "C", "D"],
     "correctIndex": 2,
     "explanation": "Warum C richtig ist",
+    "explanation_en": "Why C is correct",
     "extraInfo": "Kurzer Zusatzkontext fuer Popup/Verstaendnis",
+    "extraInfo_en": "Short extra context for better understanding",
     "tip": "Hinweis, der vor allem bei falscher Antwort hilft",
+    "tip_en": "Hint shown especially when the answer is wrong",
     "module": "Modul 1",
+    "module_en": "Module 1",
     "section": "Section 2",
+    "section_en": "Section 2",
     "tags": ["Kapitel 1", "Definition"],
-    "source": "Folie 42"
+    "source": "Folie 42",
+    "source_en": "Slide 42"
   }
 ]
 ```
@@ -78,12 +89,20 @@ Pflichtfelder:
 Empfohlen:
 - `id`
 - `explanation`
+- `question_en`
+- `options_en`
+- `explanation_en`
 - `extraInfo`
+- `extraInfo_en`
 - `tip`
+- `tip_en`
 - `module`
+- `module_en`
 - `section`
+- `section_en`
 - `tags`
 - `source`
+- `source_en`
 
 ## Lern-Workflow fuer den 500-Folien-Kurs
 1. Du lieferst Inhalte in kleinen Bloecken.

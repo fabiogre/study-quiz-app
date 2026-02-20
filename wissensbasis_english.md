@@ -1,4 +1,4 @@
-# Wissensbasis (einfach erklaert)
+﻿# Knowledge Base (EN draft)\n\nThis file is an English draft derived from wissensbasis_einfach.md.\nUse it as quick reference; the German source stays authoritative for exact wording.\n\n# Knowledge Base (simple explanation)
 
 Dieses File sammelt alles Wissen, das du mir gibst.
 Ziel:
@@ -6,7 +6,7 @@ Ziel:
 - klar geordnet
 - schnell wiederholbar
 
-## Nutzung
+## Usage
 - Neue Infos kommen als kurze Punkte in die passenden Kapitel.
 - Wenn noetig, schreibe ich darunter:
   - "Merksatz"
@@ -21,7 +21,7 @@ Ziel:
 - In vanilla Diablo 2 Resurrected gibt es keine Klasse "Warlock".
 - Wenn irgendwo "Warlock" steht, ist das meistens eine Mod oder eine Verwechslung mit anderen Games.
 
-Merksatz:
+Key takeaway:
 - Vanilla D2R hat feste Originalklassen, kein Warlock.
 
 ### A2) Gruene Aura
@@ -29,7 +29,7 @@ Merksatz:
 - Conviction senkt deine Defense und Elementar-Resistenzen.
 - Folge: Du bekommst deutlich mehr Elementarschaden.
 
-Merksatz:
+Key takeaway:
 - Gruen + ploetzlich viel Elementarschaden = oft Conviction.
 
 ---
@@ -57,7 +57,7 @@ Merksatz:
 - Treachery = Shael + Thul + Lem in 3 Sockel Body Armor.
 - Reihenfolge der Runen muss exakt stimmen.
 
-Merksatz:
+Key takeaway:
 - Smoke = sichere Res-Armor.
 - Treachery = starke Utility/Defense durch Fade.
 
@@ -105,7 +105,7 @@ Merksatz:
 - Damage Reduction
 - Genug Angriffsgeschwindigkeit fuer regelmaessigen Leech
 
-Merksatz:
+Key takeaway:
 - Tanky Merc lebt durch Leech + Res, nicht nur durch Defense-Zahl.
 
 ---
@@ -144,7 +144,7 @@ Merksatz:
 - TDM ist typisch fuer aeltere Netze.
 - SONET war wichtig, wurde aber durch moderne optische Netztechnik weitgehend ersetzt.
 
-Merksatz:
+Key takeaway:
 - Modern: IP + Ethernet. Legacy: Frame Relay, ATM, TDM, SONET.
 
 ### F2) Wofuer die Technologien historisch genutzt wurden
@@ -152,14 +152,14 @@ Merksatz:
 - Frame Relay / ATM: haeufig fuer private WAN-Netzwerke.
 - IP: Best-effort Data Services (keine harte Zustellgarantie).
 
-Merksatz:
+Key takeaway:
 - Voice frueher eher TDM, Daten heute meist IP.
 
 ### F3) Wichtige Architektur-Aussage aus Slide 1
 - Eine Plattform sollte mehrere Technologien gleichzeitig bereitstellen koennen.
 - Ziel ist Konvergenz: alte und neue Dienste auf einer gemeinsamen Infrastruktur.
 
-Typischer Fehler:
+Typical mistake:
 - Zu denken, dass eine moderne Plattform nur IP koennen muss.
 - In der Praxis muss sie oft auch Legacy-Services integrieren oder migrieren.
 
@@ -168,7 +168,7 @@ Typischer Fehler:
   - Das Netz versucht Daten zu liefern.
   - Es gibt aber ohne zusaetzliche Mechanismen keine feste Garantie fuer Latenz, Jitter oder Paketverlust.
 
-Pruefungsfrage-Idee:
+Exam question idea:
 - Warum war TDM fuer Voice historisch attraktiv, waehrend IP als Best-effort gilt?
 
 ### F5) Wichtige Einordnung fuer heute
@@ -179,7 +179,7 @@ Pruefungsfrage-Idee:
   - Traffic Engineering
 - Dadurch kann das Verhalten fuer kritische Services deutlich besser steuerbar sein als im reinen Best-effort-Modell.
 
-Merksatz:
+Key takeaway:
 - IP ist die Basis, Servicequalitaet kommt oft ueber Zusatzmechanismen.
 
 ---
@@ -191,7 +191,7 @@ Merksatz:
 - Mehrere diskrete Plattformen parallel zu betreiben verursacht hohe Kosten.
 - Deshalb werden mehrere Service-Typen auf eine gemeinsame Netzwerktechnologie zusammengefuehrt.
 
-Merksatz:
+Key takeaway:
 - Konsolidierung = weniger Parallelbetrieb, bessere Kostenkontrolle.
 
 ### G2) Wirtschaftlicher Spagat
@@ -200,7 +200,7 @@ Merksatz:
 - Gleichzeitig verlangen Kunden neue Services mit mehr Bandbreite zu sinkenden Preisen.
 - Die Nachfrage nach neuen Services wie Wireless Data und Videostreaming steigt zusaetzlich.
 
-Merksatz:
+Key takeaway:
 - Altgeschaeft halten, Neugeschaeft skalieren.
 
 ### G3) Konkrete Nachfragetreiber
@@ -211,7 +211,7 @@ Merksatz:
   - Effizienz
   - Preis-Leistungs-Verhaeltnis
 
-Merksatz:
+Key takeaway:
 - Mehr mobile Daten + mehr Video = mehr Last bei gleichzeitigem Preisdruck.
 
 ### G4) Kernaussage slide-uebergreifend (Slide 1 + 2)
@@ -219,11 +219,11 @@ Merksatz:
 - Slide 2: Warum das wirtschaftlich notwendig ist (Kosten + Marktanforderung).
 - Zusammen: Technische Konvergenz als Antwort auf Betriebs- und Preisdruck.
 
-Typischer Fehler:
+Typical mistake:
 - Nur auf Technik schauen und die Kosten-/Marktseite vergessen.
 - Oder nur auf Preis schauen und die Legacy-Verpflichtungen ignorieren.
 
-Pruefungsfrage-Idee:
+Exam question idea:
 - Erklaere, warum Provider nicht einfach alle Legacy-Services sofort abschalten.
 
 ---
@@ -235,7 +235,7 @@ Pruefungsfrage-Idee:
 - Ziel: ein einziges, skalierbares Netz statt vieler isolierter Teilnetze.
 - Dadurch koennen verschiedene VPN-Services parallel unterstuetzt werden.
 
-Merksatz:
+Key takeaway:
 - Eine Plattform, viele Services.
 
 ### H2) Service-Bild (vereinfacht)
@@ -260,10 +260,10 @@ Einfach erklaert:
   - weniger Betriebsaufwand
   - weiterhin klare Service-Trennung und Kundenisolation
 
-Merksatz:
+Key takeaway:
 - Unten gemeinsam (Infrastruktur), oben getrennt (Service-Logik).
 
-Typischer Fehler:
+Typical mistake:
 - Zu glauben, dass Konsolidierung automatisch alle Kunden/Services technisch "zusammenmischt".
 - Das Overlay-Modell sorgt weiterhin fuer logische Trennung.
 
@@ -277,7 +277,7 @@ Typischer Fehler:
 - Provider-Sicht: virtuelles Netzwerk.
 - Kunden-Sicht: privates Netzwerk.
 
-Merksatz:
+Key takeaway:
 - Shared transport, private experience.
 
 ### I2) Was ein "Service" ist
@@ -289,7 +289,7 @@ Merksatz:
   - Management
   - Kosten-/Abrechnungsmodell
 
-Merksatz:
+Key takeaway:
 - Service = eindeutige logische Einheit mit technischer und betrieblicher Ordnung.
 
 ### I3) PE, P, CE einfach
@@ -304,7 +304,7 @@ Merksatz:
   - Typisch service-unaware im Provider-Servicekontext.
   - Anbindung an PE ueber definierte Uebergabepunkte (z. B. SAPs).
 
-Typischer Fehler:
+Typical mistake:
 - PE und P verwechseln.
 - CE als Provider-Serviceknoten betrachten, obwohl er kundenseitig ist.
 
@@ -326,7 +326,7 @@ Einfach gesagt:
   - bei starkem Wachstum fehlt oft die notwendige Skalierung.
 - Deshalb werden fuer grosse Service-Umgebungen robuste Service-Edge-Plattformen bevorzugt.
 
-Merksatz:
+Key takeaway:
 - Features aehnlich, Skalierung oft der echte Unterschied.
 
 ### J3) Rolle der P-Router
@@ -338,7 +338,7 @@ Merksatz:
   - Bandwidth-Management je Service
   - servicebezogenes Accounting
 
-Merksatz:
+Key takeaway:
 - P = Durchsatz im Core, PE = Serviceintelligenz am Edge.
 
 ### J4) Interne Core-Logik
@@ -355,7 +355,7 @@ Merksatz:
   - oft nicht dieselbe volle Internet-Routing-Funktionalitaet
   - oft nicht dieselbe Breite an Routing-Policies wie ein starker Edge-Router
 
-Typischer Fehler:
+Typical mistake:
 - Ergaenzende Plattformen als vollwertigen Ersatz fuer alle Edge-Funktionen sehen.
 
 ---
@@ -419,7 +419,7 @@ Provider-Sicht:
   - Verifikation
   - tiefere Traffic-Analyse mit Sniffer-Tools
 
-Merksatz:
+Key takeaway:
 - Mirroring ist Beobachtung und Analyse, nicht eigentliche Serviceweiterleitung.
 
 ---
@@ -440,7 +440,7 @@ Merksatz:
 - MPLS: Weiterleitung im Core ueber Label-Logik.
 - GRE: IP-basierte Tunnelkapselung ohne klassischen MPLS-Label-Stack als Pflicht.
 
-Merksatz:
+Key takeaway:
 - MPLS denkt in Labeln, GRE denkt in Tunneln.
 
 ### L3) Encapsulation einfach erklaert
@@ -463,7 +463,7 @@ Bedeutung:
 - Inner Service Label:
   - Ordnet den Traffic dem richtigen Dienst/VPN am Service-Edge zu.
 
-Merksatz:
+Key takeaway:
 - Aussen der Weg, innen der Service.
 
 ### L5) GRE-Kapselung (vereinfacht)
@@ -490,7 +490,7 @@ Wichtig:
 - Control Plane richtet Pfade/Zuordnungen ein.
 - Data Plane transportiert danach den eigentlichen Kundentraffic.
 
-Merksatz:
+Key takeaway:
 - Control baut, Data faehrt.
 
 ### L7) Warum das fuer die Praxis wichtig ist
@@ -501,7 +501,7 @@ Merksatz:
   - Fehler im Weg? -> Transport-Label/Path ansehen
   - Fehler im Dienst? -> Service-Label/Service-Mapping ansehen
 
-Typischer Fehler:
+Typical mistake:
 - Alles als "ein Labelproblem" sehen, ohne zwischen Transport- und Serviceebene zu unterscheiden.
 
 ### L8) Verifiziert und praezisiert (wichtige Pruefungspunkte)
@@ -520,7 +520,7 @@ Wichtige Praezisierung 2:
   - Outer Transport-Label wird im Core typischerweise geswappt/poppt.
   - Inneres Service-/VC-Label bleibt bei klassischem MPLS-VPN/PW-Stack im Transit meist bis zum Egress erhalten.
 
-Pruefungs-Merksatz:
+Pruefungs-Key takeaway:
 - Outer Label kann unterwegs wechseln, Inner Label traegt den Servicekontext bis zum Ziel-PE.
 
 ### L9) Konkreter Aufbau und Signalisierung (kompakt)
@@ -549,7 +549,7 @@ Einfach erklaert:
 - Service Packet:
   - eigentliche Kundennutzdaten.
 
-Merksatz:
+Key takeaway:
 - Im klassischen Service-MPLS sind mindestens Outer- und Inner-Label das Standardmuster.
 
 ### L10) GRE-Transport fuer VPN-Traffic (praezise)
@@ -576,7 +576,7 @@ Praezisierung Control Word:
 - Das Control Word ist optional bzw. dienst-/designabhaengig.
 - "Nur fuer ATM/Frame Relay" ist als allgemeine Regel zu eng formuliert.
 
-Merksatz:
+Key takeaway:
 - GRE transportiert den Weg, Service-/VC-Label sichert die richtige Dienstzuordnung.
 
 ### L11) MPLS Transport- und Service-Label-Signaling (Section 2 Vertiefung)
@@ -611,271 +611,272 @@ Martini und Kompella:
 - Kompella-Signaling:
   - basiert auf BGP-Mechanismen fuer die jeweilige Serviceumgebung
 
-Merksatz:
+Key takeaway:
 - Core-Transport und Service-Signaling getrennt denken: LSP fuer den Weg, Service-/VC-Label fuer den Dienst.
 
-### L12) Szenario PE -- P -- P -- PE (Signalfluss und Datenfluss)
-- Beispieltopologie:
+### L12) Scenario PE -- P -- P -- PE (signaling flow vs data flow)
+- Example topology:
   - `PE1 -- P1 -- P2 -- PE2`
-- Ziel:
-  - PE1 soll Kundendaten zu PE2 senden.
+- Goal:
+  - PE1 should send customer data to PE2.
 
-Wichtige Reihenfolge (vereinfacht):
-1. Underlay-Reachability im Core:
-   - typischerweise per IGP (z. B. OSPF/IS-IS) fuer stabile Loopback-/Next-Hop-Erreichbarkeit.
-2. Transport-LSP:
-   - per LDP oder RSVP-TE.
-3. Service-Labels:
-   - per tLDP oder MP-BGP (serviceabhaengig, z. B. VPWS/VPLS vs VPRN).
+Typical sequence (simplified):
+1. Underlay reachability in the core:
+   - usually via an IGP (for example OSPF/IS-IS) for stable loopback/next-hop reachability.
+2. Transport LSP:
+   - built with LDP or RSVP-TE.
+3. Service labels:
+   - exchanged with tLDP or MP-BGP (service-dependent, for example VPWS/VPLS vs VPRN).
 
-Praezisierung zu deiner iBGP-Aussage:
-- iBGP/MP-BGP ist wichtig fuer Service-/VPN-Routen.
-- Die reine Transport-Erreichbarkeit im Core kommt in vielen Designs primaer aus dem IGP.
+Important clarification to the iBGP statement:
+- iBGP/MP-BGP is important for service/VPN route exchange.
+- Pure transport reachability in the core is usually provided by IGP in many designs.
 
-LSP-Richtung:
-- Ein LSP ist unidirektional.
-- Fuer bidirektionale Kommunikation braucht man zwei entgegengesetzte LSPs.
+LSP direction:
+- An LSP is unidirectional.
+- Bidirectional communication needs two opposite LSPs.
 
-Control Plane vs Data Plane:
-- Beim klassischen downstream-assigned Labelverhalten wird Label-Info vom egress/downstream in Richtung ingress verteilt.
-- Der spaetere Nutzdatenfluss laeuft dann vom ingress zum egress.
-- Deshalb wirken Signalisierungsrichtung und Datenflussrichtung oft entgegengesetzt.
+Control plane vs data plane:
+- With classic downstream-assigned label behavior, label information is distributed from egress/downstream toward ingress.
+- User traffic later flows from ingress toward egress.
+- That is why signaling direction and data-flow direction often look opposite.
 
-Rollen im Core:
-- P-Router: typischerweise LSR (Label Switching Router), sie switchen Transport-Labels.
-- PE-Router: typischerweise LER (Label Edge Router), sie pushen/poppen Label und ordnen Services zu.
+Core roles:
+- P routers: typically LSRs (Label Switching Routers), switching transport labels.
+- PE routers: typically LERs (Label Edge Routers), pushing/popping labels and mapping services.
 
-T-LDP Hinweis:
-- tLDP ist keine komplett getrennte Welt von LDP, sondern targeted LDP.
-- In der Praxis braucht tLDP daher eine aktive LDP-Basisfunktion auf dem Router.
+T-LDP note:
+- tLDP is not a completely separate protocol from LDP; it is targeted LDP.
+- In practice, tLDP therefore needs an active LDP base function on the router.
 
-## Kapitel M - Section 3: Service Components (Nokia 7750 SR)
+## Chapter M - Section 3: Service Components (Nokia 7750 SR)
 
-### M1) Grundidee
-- Das Nokia-Servicemodell nutzt Service-Edge-Router (PE) und logische Service-Entities.
-- Ziel:
-  - ein einheitliches, service-zentriertes Modell fuer
-    - Konfiguration
-    - Management
-    - Billing
+### M1) Core idea
+- The Nokia service model uses service-edge routers (PEs) and logical service entities.
+- Goal:
+  - provide a uniform, service-centric model for
+    - configuration
+    - management
+    - billing
 
-Merksatz:
-- Services werden als logische Objekte gebaut und betrieben, nicht nur als lose Interface-Configs.
+Key takeaway:
+- Services are built and operated as logical objects, not as loose interface configs.
 
-### M2) Service-Bausteine kompakt
+### M2) Service building blocks
 - Subscriber:
-  - der Nutzer des Services.
+  - the user of the service.
 - SAP (Service Access Point):
-  - Zugriffspunkt des Subscribers am Interface zum Service-Netz.
-  - lokal signifikant.
+  - subscriber access point at the interface into the service network.
+  - locally significant.
 - Customer ID:
-  - global signifikant.
-  - dient der Gruppierung von Services eines Kunden und fuer Reporting.
+  - globally significant.
+  - used to group a customer's services and for reporting.
 - Service ID:
-  - numerischer, global signifikanter Service-Identifier.
+  - numeric, globally significant service identifier.
 - Service Type:
-  - Dienstklasse (z. B. VPWS, VPLS, VPRN, IES je nach Kontext).
+  - service class (for example VPWS, VPLS, VPRN, IES depending on context).
 - VC ID:
-  - identifiziert den Service im Label-Signaling-Kontext.
-  - muss Ende-zu-Ende konsistent sein.
-  - oft wird derselbe Wert wie bei der Service ID verwendet (Designkonvention).
+  - identifies the service in label-signaling context.
+  - must be consistent end-to-end.
+  - often set to the same value as service ID (design convention).
 - SDP:
-  - logische Repraesentation eines Transport-Tunnels.
-  - lokal signifikant.
-- Transport Tunnel:
-  - typischerweise LSP-basierte Transportpfade.
-  - immer mit SDPs verknuepft.
-- Service Tunnel:
-  - Ende-zu-Ende-Servicepfad, repraesentiert durch Service-Labels zwischen PEs.
-- Demultiplexer / Demultiplexing:
-  - Egress-Operation: Service wird anhand des Service-Labels eindeutig zugeordnet.
+  - logical representation of a transport tunnel.
+  - locally significant.
+- Transport tunnel:
+  - typically an LSP-based transport path.
+  - associated with SDPs.
+- Service tunnel:
+  - end-to-end service path represented by service labels between PEs.
+- Demultiplexer / demultiplexing:
+  - egress operation where the service is identified by the service label.
 
-### M3) Wichtig fuer Pruefung und Troubleshooting
-- P-Router im Core sind typischerweise service-unaware:
-  - sie switchen primaer Transport-Labels.
-- PE-Router tragen die Service-Intelligenz:
-  - Termination, Zuordnung, Richtlinien pro Service/Kunde.
-- Service Label am Egress ist entscheidend fuer die korrekte Dienstzuordnung.
+### M3) Important for exams and troubleshooting
+- P routers in the core are typically service-unaware:
+  - they mainly switch transport labels.
+- PE routers carry service intelligence:
+  - termination, mapping, and per-service/per-customer policy.
+- Service labels at egress are critical for correct service mapping.
 
-Merksatz:
-- Transport bringt Pakete ans Ziel, Service-Labels sagen dem Ziel-PE, zu welchem Dienst das Paket gehoert.
+Key takeaway:
+- Transport gets packets to the destination; service labels tell the destination PE which service the packet belongs to.
 
-### M4) Customer-ID- und SAP-Regeln (praxisnah)
+### M4) Customer-ID and SAP rules (practical)
 - Customer ID:
-  - Ein Service wird beim Erstellen an eine Customer ID gebunden.
-  - Diese Customer-Zuordnung ist danach nicht direkt editierbar.
-  - Mehrere Services koennen derselben Customer ID zugeordnet sein.
+  - A service is bound to a customer ID when created.
+  - This customer association is not directly editable afterward.
+  - Multiple services can be associated with the same customer ID.
 
 - SAP:
-  - Ein SAP gehoert zum Service, in dem er erzeugt wurde (service-gebunden).
-  - SAP-Identitaet ist lokal und wird ueber Port/Channel + Encapsulation-Identifier bestimmt.
-  - Je nach Encapsulation koennen mehrere SAPs auf demselben Port existieren.
-  - SAPs werden auf Access-Kontexten gebaut (auch bei Hybrid im Access-Teil), nicht auf reinen Core-/Network-only Ports.
-  - Bei IES/VPRN werden SAPs innerhalb der jeweiligen Service-/IP-Interface-Kontexte definiert.
+  - A SAP belongs to the service where it was created (service-bound).
+  - SAP identity is local and based on port/channel plus encapsulation identifier.
+  - Depending on encapsulation, multiple SAPs can exist on the same port.
+  - SAPs are built in access context (including access part of hybrid), not on pure core/network-only ports.
+  - For IES/VPRN, SAPs are defined in the relevant service/IP-interface context.
 
-Merksatz:
-- Customer ID gruppiert Services, SAP verankert den konkreten Servicezugang am Interface.
+Key takeaway:
+- Customer ID groups services, SAP anchors the actual service access on an interface.
 
-### M5) SAP-Encapsulation, MTU und Local vs Distributed Service
+### M5) SAP encapsulation, MTU, and local vs distributed service
 
-SAP-Encapsulation (vereinfacht):
+SAP encapsulation (simplified):
 - `null`:
-  - Single-Service-Fall auf dem Port.
-  - Encapsulation-Identifier ist `0`.
+  - single-service case on the port.
+  - encapsulation identifier is `0`.
 - `dot1q <vlan-id>`:
-  - ein VLAN-Tag pro Service-Zuordnung.
-  - im Modell bis `4094` (regulaere VLAN-IDs typischerweise `1..4094`).
+  - one VLAN tag per service mapping.
+  - modeled up to `4094` (regular VLAN IDs are typically `1..4094`).
 - `qinq <outer>.<inner>`:
-  - zwei Tag-Ebenen (outer/inner), jeweils bis `4094`.
-  - daher oft als `4094 x 4094` beschrieben (sehr grosser Trennraum fuer Servicezuordnung).
+  - two tag levels (outer/inner), each up to `4094`.
+  - often described as `4094 x 4094` (very large separation space for service mapping).
 
-MTU-Hinweis:
-- Bei Ethernet-Access mit dot1q ist der Default-MTU im Kurskontext `1518`.
-- In der Praxis muss die End-to-End-MTU (SAP, Service, SDP/Transportpfad) zusammenpassen.
+MTU note:
+- For Ethernet access with dot1q, the default MTU in this course context is `1518`.
+- In practice, end-to-end MTU (SAP, service, SDP/transport path) must match.
 
-Policies auf SAP:
-- Typisch konfigurierbar:
-  - ingress/egress Filter Policies
-  - QoS Policies
-  - Scheduler Policies
-  - Accounting Policies
+Policies on SAP:
+- Typical configurable policy types:
+  - ingress/egress filter policies
+  - QoS policies
+  - scheduler policies
+  - accounting policies
 
-Local Service:
-- Ein einzelner PE kann zwei CEs ueber zwei SAPs im selben Service verbinden.
-- Kein Remote-Tunnel noetig, solange beide Enden lokal auf demselben PE liegen.
+Local service:
+- A single PE can connect two CEs using two SAPs in the same service.
+- No remote tunnel is needed as long as both endpoints are local on that PE.
 
-Distributed Service:
-- Service-Enden liegen auf verschiedenen PEs.
-- Dann sind SDPs fuer das Tunneling ueber das IP/MPLS-Netz noetig.
+Distributed service:
+- Service endpoints are on different PEs.
+- Then SDPs are required for tunneling over the IP/MPLS network.
 
-Merksatz:
-- Lokal = nur SAPs auf einem PE.
-- Distributed = SAPs plus SDP ueber das Core-Netz.
+Key takeaway:
+- Local = only SAPs on one PE.
+- Distributed = SAPs plus SDP through the core network.
 
-### M6) SDP-Binding, Schutz und Tunnelwahl
+### M6) SDP binding, protection, and tunnel selection
 
-SDP-Basics:
-- SDP = lokale Router-Entity fuer den Transport zu einem Remote-PE.
-- SDP-ID ist lokal eindeutig (kann auf anderem Router wiederverwendet werden).
-- Far-End wird typischerweise ueber die System-IP des Remote-PE identifiziert.
-- Ein SDP kann von mehreren Services genutzt werden (shared Transportobjekt).
+SDP basics:
+- SDP = local router entity for transport toward a remote PE.
+- SDP ID is locally unique (can be reused on another router).
+- Far-end is typically identified by the remote PE system IP.
+- One SDP can be used by multiple services (shared transport object).
 
-Wichtige Folge:
-- SDP-Aenderungen koennen alle daran gebundenen Services beeinflussen.
+Important consequence:
+- SDP changes can affect all services bound to that SDP.
 
-Binding an Service:
-- Ein Service nutzt den Transportpfad erst durch `SDP Binding`.
-- Service-Label-Signaling fuer distributed Services wird im Binding-Kontext relevant.
-- Ohne aktives Signaling muessen benoetigte Label manuell konfiguriert werden.
+Binding to service:
+- A service uses the transport path only through `SDP binding`.
+- Service-label signaling for distributed services becomes relevant in the binding context.
+- If signaling is not active, required labels must be configured manually.
 
-Tunneltypen unter SDP:
+Tunnel types under SDP:
 - MPLS:
-  - LDP-LSP oder RSVP-TE-LSP.
+  - LDP LSP or RSVP-TE LSP.
 - GRE:
-  - IP-basierter Tunneltransport.
+  - IP-based tunnel transport.
 
-Designvergleich (kurz):
+Design comparison (short):
 - LDP:
-  - folgt typischerweise IGP-Pfaden.
-  - geringer Engineering-Aufwand.
+  - typically follows IGP paths.
+  - lower engineering effort.
 - RSVP-TE:
-  - mehr Konfigurationsaufwand.
-  - dafuer feinere Pfadsteuerung (Traffic Engineering, explicit path).
+  - higher configuration effort.
+  - finer path control (traffic engineering, explicit path).
 - GRE:
-  - geringerer Label-Control-Plane-Overhead.
-  - Pfad/Convergence haengt von IP-Routing/IGP ab.
+  - lower label-control-plane overhead.
+  - path/convergence depends on IP routing/IGP.
 
-Schutzmechanismen (kursnah):
+Protection mechanisms (course context):
 - Secondary RSVP LSP:
-  - alternativer Pfad, der bei Ausfall des Primary genutzt wird.
-- Secondary Standby RSVP LSP:
-  - Backup ist bereits operational/warm und kann schneller uebernehmen.
+  - alternate path used when the primary path fails.
+- Secondary standby RSVP LSP:
+  - backup is already operational/warm and can take over faster.
 - FRR one-to-one:
-  - dedizierter Detour pro geschuetztem LSP.
+  - dedicated detour per protected LSP.
 - FRR facility:
-  - gemeinsame Bypass-Tunnel fuer mehrere LSPs.
+  - shared bypass tunnels for multiple LSPs.
 
-Merksatz:
-- SDP ist ein geteiltes Transportobjekt. Deshalb immer Schutz, Change-Impact und Binding-Kontext mitdenken.
+Key takeaway:
+- SDP is a shared transport object, so always consider protection, change impact, and binding context.
 
-### M7) VC-ID (PWid) und Martini/tLDP - Praezisierung
+### M7) VC ID (PWid) and Martini/tLDP - clarification
 
-Kernaussage (klassischer Martini-PW):
-- VC-ID (PWid/FEC128) wird auf beiden PE-Enden provisioniert.
-- VC-ID + PW-Typ muessen zusammenpassen, damit der Pseudowire korrekt gemappt wird.
-- Das wird ueber tLDP-Label-Mapping ausgetauscht.
+Core statement (classic Martini PW):
+- VC ID (PWid/FEC128) is provisioned on both PE endpoints.
+- VC ID + PW type must match so the pseudowire maps correctly.
+- This is exchanged through tLDP label mapping.
 
-Wichtig:
-- Jede Richtung hat ihr eigenes Service-Label.
-- Ingress-/Egress-Label zusammen bilden den bidirektionalen Service-/PW-Kontext zwischen den Enden.
+Important:
+- Each direction has its own service label.
+- Ingress/egress label pair together forms the bidirectional service/PW context between endpoints.
 
-Praezisierung zur Pruefung:
-- "VC-ID muss end-to-end identisch sein" ist fuer den klassischen PWid/FEC128-Fall korrekt.
-- Bei Generalized-PW/FEC129 wird stattdessen ueber AGI/SAII/TAII-Endpoint-Identifier gearbeitet.
+Exam clarification:
+- \"VC ID must be identical end-to-end\" is correct for classic PWid/FEC128.
+- In generalized PW/FEC129, endpoint identifiers (AGI/SAII/TAII) are used instead.
 
-Merksatz:
-- Erst FEC-Typ klaeren, dann VC-ID-Regel anwenden.
+Key takeaway:
+- Determine FEC type first, then apply VC-ID rule.
 
-## Kapitel N - Section 4: Distributed Service Configuration
+## Chapter N - Section 4: Distributed Service Configuration
 
-### N1) Zielbild
-- Distributed Service bedeutet:
-  - Service-Enden liegen auf verschiedenen PEs.
-  - Der Datenpfad muss ueber das Provider-Core-Netz stabil stehen.
+### N1) Target model
+- Distributed service means:
+  - service endpoints are on different PEs.
+  - data path must be stable across the provider core.
 
-### N2) Pflichtschritte (in sinnvoller Reihenfolge)
-1. IGP-Basis konfigurieren:
-   - System-/Loopback-Adressen muessen in den Routing-Tabellen erreichbar sein.
-2. Transport-Label-Signaling aktivieren:
-   - LDP oder RSVP-TE (je Design).
-3. Transportpfad bereitstellen:
-   - LSP (und bei RSVP zusaetzlich sauberer Bind-Path/Schutzdesign).
-4. SDP erstellen und an Transport anbinden:
-   - bei RSVP an passenden LSP/bind-path,
-   - bei LDP entsprechend LDP-Transportauswahl.
-5. Service anlegen:
-   - Service-Typ definieren.
-   - SAPs dem Service zuordnen.
-   - SDP-Binding + VC-ID korrekt setzen.
-6. End-to-End-Pruefung:
-   - VC-ID muss an beiden Enden matchen (klassischer PWid/FEC128-Kontext).
+### N2) Required steps (recommended order)
+1. Configure IGP base reachability:
+   - system/loopback addresses must be reachable in routing tables.
+2. Enable transport label signaling:
+   - LDP or RSVP-TE (depending on design).
+3. Prepare transport path:
+   - LSP (and with RSVP also clean bind-path/protection design).
+4. Create SDP and bind it to transport:
+   - with RSVP, bind to matching LSP/bind-path,
+   - with LDP, select corresponding LDP transport.
+5. Create the service:
+   - define service type,
+   - add SAPs,
+   - set SDP binding + VC ID correctly.
+6. Validate end-to-end:
+   - VC ID must match on both ends (classic PWid/FEC128 context).
 
-### N3) tLDP-Sonderfall (kursnah)
-- Fuer dynamisches tLDP-Signaling muss LDP als Basisfunktion aktiv sein.
-- tLDP allein ersetzt nicht die Underlay-Reachability.
+### N3) tLDP special case (course context)
+- Dynamic tLDP signaling requires LDP base function to be enabled.
+- tLDP does not replace underlay reachability.
 
-### N4) Praktische Designregel
-- Alles von unten nach oben bauen:
-  - Underlay (IGP) -> Transport (LDP/RSVP/GRE) -> Service (SAP/SDP/VC).
+### N4) Practical design rule
+- Build bottom-up:
+  - underlay (IGP) -> transport (LDP/RSVP/GRE) -> service (SAP/SDP/VC).
 
-Merksatz:
-- Wenn der Transportpfad nicht stabil ist, wird auch der Service nicht stabil.
+Key takeaway:
+- If transport is not stable, service will not be stable either.
 
-### N5) RSVP-Path und SDP-Details (kursnah)
+### N5) RSVP path and SDP details (course context)
 
-tLDP/LDP-Default-Nuance:
-- Im SDP-Kontext ist signaling standardmaessig tLDP.
-- Die eigentliche Transportauswahl (LDP/RSVP/GRE) ist davon getrennt zu konfigurieren.
-- Fuer dynamisches tLDP braucht man eine funktionierende LDP-Basis.
+tLDP/LDP default nuance:
+- In SDP context, signaling is tLDP by default.
+- Actual transport selection (LDP/RSVP/GRE) is configured separately.
+- Dynamic tLDP requires a working LDP base.
 
-RSVP-TE Path-Konfiguration:
-- Path-Objekt zuerst erstellen (`router mpls path`), danach im LSP referenzieren.
-- Path kann als primary oder secondary genutzt werden.
+RSVP-TE path configuration:
+- Create path object first (`router mpls path`), then reference it in LSP.
+- Path can be used as primary or secondary.
 - `loose`:
-  - Zwischenknoten duerfen via IGP bestimmt werden.
+  - intermediate hops may be resolved by IGP.
 - `strict`:
-  - Hops muessen explizit und direkt passend definiert sein.
+  - hops must be explicitly defined with strict adjacency behavior.
 
-SDP-Praxis:
-- Erst SDP erstellen, dann Service daran binden.
-- Mehrere Services koennen dasselbe SDP nutzen.
-- VC-/Service-Labels werden relevant signalisiert, wenn der Service an SDP gebunden wird.
-- Ohne explizite Angabe ist SDP-Encapsulation im 7750-Kontext standardmaessig GRE.
+SDP practice:
+- Create SDP first, then bind services to it.
+- Multiple services can share the same SDP.
+- VC/service labels are meaningfully signaled when service is bound to SDP.
+- Without explicit type, SDP encapsulation defaults to GRE in 7750 context.
 
-Merksatz:
-- Path vor LSP, SDP vor Service-Binding, dann erst stabile Label-/Service-Operation.
+Key takeaway:
+- Path before LSP, SDP before service binding, then stable label/service operation.
 
 ---
 
-## Offene Punkte / naechste Inhalte
+## Open points / next topics
 - Hier tragen wir neue Themen ein, sobald du sie schickst.
+
