@@ -1711,3 +1711,83 @@ Reminder:
 ### U6) One more important practical point
 - Non-directly-connected `eBGP` needs `multihop`
 - Otherwise the session often fails already because of TTL behavior
+
+## Chapter V - BGP Module 2 Section 1: MP-BGP and VPN Routing
+
+### V1) When does BGP become MP-BGP?
+- Classic BGP was originally focused mainly on IPv4 unicast
+- As soon as a BGP implementation can carry multiple address families or reachability types, we speak of `MP-BGP`
+- Typical examples:
+  - `VPN-IPv4`
+  - `VPN-IPv6`
+  - label-related families
+  - other VPN-related families
+
+### V2) The three VPN service pictures
+- `VPWS`
+  - Layer 2 point-to-point
+- `VPLS`
+  - Layer 2 multipoint
+- `VPRN`
+  - Layer 3 multipoint
+
+Memory line:
+- VPWS = like a wire
+- VPLS = like a distributed switch
+- VPRN = like a distributed routed network
+
+### V3) Distributed VPN explained simply
+- A distributed VPN is jointly provided by multiple PE devices
+- Tunnels are required between them
+- The simplified data flow is:
+  - CE sends traffic to PE
+  - ingress PE encapsulates
+  - P routers transport
+  - egress PE decapsulates
+  - CE receives the traffic
+
+### V4) Transport and service tunnels
+- A transport tunnel carries traffic through the provider network
+- Many services can share the same transport tunnel
+- That is why an additional service context or service tunnel is needed
+- The `SDP` is the binding element between service and transport path
+
+### V5) Service interconnections
+- VPN services can be interconnected
+- Examples:
+  - VPLS attached to a VPRN interface
+  - VPWS terminated into VPLS
+  - VPWS terminated into a VPRN interface
+- When VPLS is attached to a VPRN interface, this is often called `rVPLS`
+
+### V6) Multiple router instances in VPRN
+- In addition to the base router, each `VPRN` has its own logical router instance
+- Each instance has:
+  - its own Layer 3 interfaces
+  - its own routing protocols
+  - its own routing view
+
+### V7) Why MP-BGP is so important for VPRN
+- VPRN is a distributed Layer 3 service
+- The PE routers must exchange VPN routing information for customer sites
+- That is exactly where `MP-BGP` becomes central
+- For full exchange, a full mesh is typically needed unless helper mechanisms are used
+- Route reflectors improve scalability here
+
+### V8) Route distinguisher
+- Customers may use overlapping prefixes
+- To let BGP distinguish them anyway, there is the `route distinguisher`
+- Put simply:
+  - `RD + IPv4 prefix = VPN-IPv4`
+  - `RD + IPv6 prefix = VPN-IPv6`
+
+Reminder:
+- RD makes prefixes unique
+- It does not change the customer address itself
+- It only creates a unique VPN context
+
+### V9) VPN address families on the session
+- For PE routers to actually exchange those VPN prefixes, the matching MP-BGP address family must be enabled
+- Typical examples:
+  - `VPN-IPv4`
+  - `VPN-IPv6`

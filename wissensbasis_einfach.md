@@ -1711,3 +1711,83 @@ Merker:
 ### U6) Noch ein wichtiger Praxispunkt
 - Nicht direkt benachbartes `eBGP` braucht `multihop`
 - Sonst scheitert die Session oft schon am TTL-Verhalten
+
+## Kapitel V - BGP Modul 2 Section 1: MP-BGP und VPN Routing
+
+### V1) Wann wird aus BGP MP-BGP?
+- Klassisches BGP war frueher im Kern auf IPv4-Unicast fokussiert
+- Sobald eine BGP-Implementierung mehrere Address Families oder Reachability-Typen transportieren kann, spricht man von `MP-BGP`
+- Typische Beispiele:
+  - `VPN-IPv4`
+  - `VPN-IPv6`
+  - labelbezogene Familien
+  - weitere VPN-bezogene Familien
+
+### V2) Die drei VPN-Servicebilder
+- `VPWS`
+  - Layer 2 Punkt-zu-Punkt
+- `VPLS`
+  - Layer 2 Multipoint
+- `VPRN`
+  - Layer 3 Multipoint
+
+Merker:
+- VPWS = wie eine Leitung
+- VPLS = wie ein verteilter Switch
+- VPRN = wie ein verteiltes Router-Netz
+
+### V3) Distributed VPN einfach erklaert
+- Ein distributed VPN wird von mehreren PE-Geraeten gemeinsam bereitgestellt
+- Zwischen ihnen braucht es Tunnel
+- Der Datenfluss ist vereinfacht:
+  - CE gibt Daten an PE
+  - ingress-PE kapselt
+  - P-Router transportieren
+  - egress-PE entkapselt
+  - CE erhaelt die Daten
+
+### V4) Transport- und Service-Tunnel
+- Ein Transport-Tunnel bringt die Daten durch das Provider-Netz
+- Viele Services koennen denselben Transport-Tunnel teilen
+- Deshalb braucht es zusaetzlich einen Service-Kontext oder Service-Tunnel
+- Der `SDP` ist dabei das Bindeglied zwischen Dienst und Transportweg
+
+### V5) Service-Kopplungen
+- VPN-Services koennen miteinander verbunden werden
+- Beispiele:
+  - VPLS an VPRN-Interface
+  - VPWS terminiert in VPLS
+  - VPWS terminiert in VPRN-Interface
+- Wird VPLS an ein VPRN-Interface angebunden, spricht man oft von `rVPLS`
+
+### V6) Multiple Router Instances in VPRN
+- Neben dem Base Router hat jedes `VPRN` seine eigene logische Router-Instanz
+- Jede Instanz hat:
+  - eigene Layer-3-Interfaces
+  - eigene Routing-Protokolle
+  - eigene Routing-Sicht
+
+### V7) Warum MP-BGP fuer VPRN so wichtig ist
+- VPRN ist ein verteilter Layer-3-Service
+- Die PE-Router muessen VPN-Routing-Informationen der Kundenseiten austauschen
+- Genau dafuer ist `MP-BGP` zentral
+- Fuer den vollen Austausch braucht man ohne Hilfsmittel typischerweise ein Full Mesh
+- Route Reflectors verbessern hier die Skalierbarkeit
+
+### V8) Route Distinguisher
+- Kunden koennen ueberlappende Prefixe benutzen
+- Damit BGP diese trotzdem unterscheiden kann, gibt es den `Route Distinguisher`
+- Vereinfacht:
+  - `RD + IPv4-Prefix = VPN-IPv4`
+  - `RD + IPv6-Prefix = VPN-IPv6`
+
+Merker:
+- RD macht Praefixe eindeutig
+- Er aendert nicht die Kundenadresse selbst
+- Er schafft nur einen eindeutigen VPN-Kontext
+
+### V9) VPN Address Families auf der Session
+- Damit PE-Router diese VPN-Praefixe wirklich austauschen koennen, muss die passende MP-BGP-Address-Family aktiviert sein
+- Typisch:
+  - `VPN-IPv4`
+  - `VPN-IPv6`

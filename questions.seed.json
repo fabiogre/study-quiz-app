@@ -11244,5 +11244,544 @@
     "module_en": "Module 1",
     "section": "Section 6",
     "section_en": "Section 6"
+  },
+  {
+    "id": "bgp-m2s1-q1",
+    "question": "Wann spricht man von Multiprotocol BGP oder MP-BGP?",
+    "question_en": "When do we speak of Multiprotocol BGP or MP-BGP?",
+    "options": [
+      "Wenn eine BGP-Implementierung mehrere Address Families und Reachability-Typen transportieren kann",
+      "Sobald BGP ueber TCP Port 179 laeuft",
+      "Nur wenn Route Reflectors aktiviert sind",
+      "Nur wenn MPLS im Core verwendet wird"
+    ],
+    "options_en": [
+      "When a BGP implementation can carry multiple address families and reachability types",
+      "As soon as BGP runs over TCP port 179",
+      "Only when route reflectors are enabled",
+      "Only when MPLS is used in the core"
+    ],
+    "correctIndex": 0,
+    "explanation": "Klassisches BGP war auf IPv4-Unicast fokussiert. Mit den Multiprotocol-Erweiterungen kann BGP mehrere Address Families parallel transportieren.",
+    "explanation_en": "Classic BGP was focused on IPv4 unicast. With the multiprotocol extensions, BGP can carry multiple address families in parallel.",
+    "extraInfo": "Genau deshalb spricht man dann von MP-BGP.",
+    "extraInfo_en": "That is exactly why it is then called MP-BGP.",
+    "tip": "Mehrere Address Families = MP-BGP.",
+    "tip_en": "Multiple address families = MP-BGP.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "Address Family"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q2",
+    "question": "Welche Aussage beschreibt die Entwicklung von BGP zu MP-BGP am besten?",
+    "question_en": "Which statement best describes the evolution from BGP to MP-BGP?",
+    "options": [
+      "Frueher war BGP im Wesentlichen IPv4-orientiert, spaeter kamen weitere Adressfamilien wie VPN-IPv4, VPN-IPv6 oder labelbezogene Familien hinzu",
+      "BGP war schon immer automatisch fuer jede denkbare Adressfamilie aktiv",
+      "MP-BGP ersetzt TCP als Transportprotokoll",
+      "MP-BGP ist nur ein anderer Name fuer iBGP"
+    ],
+    "options_en": [
+      "Originally BGP was essentially IPv4-oriented, and later more address families such as VPN-IPv4, VPN-IPv6, or label-related families were added",
+      "BGP was always automatically active for every possible address family",
+      "MP-BGP replaces TCP as the transport protocol",
+      "MP-BGP is just another name for iBGP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Mit MP-BGP wurde BGP erweitert, damit nicht nur IPv4-Unicast, sondern auch VPN-, IPv6-, Label- und andere Reachability-Typen transportiert werden koennen.",
+    "explanation_en": "MP-BGP extended BGP so that not only IPv4 unicast, but also VPN, IPv6, label, and other reachability types can be carried.",
+    "extraInfo": "Die Kernidee ist AFI/SAFI-Unterstuetzung statt nur eines einzigen Adresstyps.",
+    "extraInfo_en": "The core idea is AFI/SAFI support instead of just one address type.",
+    "tip": "MP-BGP = BGP plus mehrere Reachability-Familien.",
+    "tip_en": "MP-BGP = BGP plus multiple reachability families.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "VPN-IPv4",
+      "VPN-IPv6"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q3",
+    "question": "Wie passen VPWS, VPLS und VPRN als VPN-Servicearten am besten zusammen?",
+    "question_en": "How do VPWS, VPLS, and VPRN best map as VPN service types?",
+    "options": [
+      "VPWS = Layer 2 Punkt-zu-Punkt, VPLS = Layer 2 Multipoint, VPRN = Layer 3 Multipoint",
+      "VPWS = Layer 3 Multipoint, VPLS = Layer 1 Punkt-zu-Punkt, VPRN = Layer 2 Broadcast",
+      "Alle drei sind nur Layer-3-Services",
+      "Alle drei sind nur lokale Single-Router-Services"
+    ],
+    "options_en": [
+      "VPWS = Layer 2 point-to-point, VPLS = Layer 2 multipoint, VPRN = Layer 3 multipoint",
+      "VPWS = Layer 3 multipoint, VPLS = Layer 1 point-to-point, VPRN = Layer 2 broadcast",
+      "All three are only Layer 3 services",
+      "All three are only local single-router services"
+    ],
+    "correctIndex": 0,
+    "explanation": "Diese drei Services decken typische Provider-VPN-Modelle fuer L2-Punkt-zu-Punkt, L2-Multipoint und L3-Multipoint ab.",
+    "explanation_en": "These three services cover typical provider VPN models for L2 point-to-point, L2 multipoint, and L3 multipoint.",
+    "extraInfo": "Gerade VPRN ist der Kontext, in dem MP-BGP besonders wichtig wird.",
+    "extraInfo_en": "VPRN in particular is the context where MP-BGP becomes especially important.",
+    "tip": "VPWS kabelartig, VPLS switchartig, VPRN routerartig.",
+    "tip_en": "VPWS is cable-like, VPLS switch-like, VPRN router-like.",
+    "tags": [
+      "BGP",
+      "VPN",
+      "VPWS",
+      "VPLS",
+      "VPRN"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q4",
+    "question": "Was kennzeichnet ein distributed VPN am besten?",
+    "question_en": "What best characterizes a distributed VPN?",
+    "options": [
+      "Der Service wird durch mehrere PE-Geraete gemeinsam bereitgestellt und braucht Tunnel fuer den Transport zwischen ihnen",
+      "Er existiert immer nur auf einem einzelnen CE-Router",
+      "Er benoetigt grundsaetzlich weder Tunnel noch PE-Router",
+      "Er kann nur mit GRE und niemals mit MPLS arbeiten"
+    ],
+    "options_en": [
+      "The service is jointly provided by multiple PE devices and requires tunnels for transport between them",
+      "It always exists only on a single CE router",
+      "It fundamentally needs neither tunnels nor PE routers",
+      "It can work only with GRE and never with MPLS"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bei einem distributed VPN arbeiten mehrere Provider-Edge-Geraete zusammen. Zwischen ihnen muessen die Kundendaten durch geeignete Tunnel transportiert werden.",
+    "explanation_en": "In a distributed VPN, multiple provider-edge devices work together. Customer traffic must be transported between them through suitable tunnels.",
+    "extraInfo": "Die P-Router in der Mitte transportieren dabei nur den Tunnelverkehr weiter.",
+    "extraInfo_en": "The P routers in the middle simply forward the tunnel traffic.",
+    "tip": "Distributed = mehrere PE, nicht nur ein lokaler Router.",
+    "tip_en": "Distributed = multiple PEs, not just one local router.",
+    "tags": [
+      "BGP",
+      "VPN",
+      "Distributed VPN",
+      "PE"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q5",
+    "question": "Welche Kombination von VPN-Services ist korrekt beschrieben?",
+    "question_en": "Which combination of VPN services is described correctly?",
+    "options": [
+      "Ein VPLS kann an ein VPRN-Interface angebunden werden; ein VPWS kann in VPLS oder ein VPRN-Interface terminiert werden",
+      "Ein VPRN kann nie mit einem VPLS in Beziehung stehen",
+      "Ein VPWS kann nur direkt an einen CE und nie an andere Services gebunden werden",
+      "Routed VPLS bedeutet, dass ein VPRN in ein VPWS umgewandelt wird"
+    ],
+    "options_en": [
+      "A VPLS can be attached to a VPRN interface; a VPWS can be terminated into VPLS or a VPRN interface",
+      "A VPRN can never have any relation to a VPLS",
+      "A VPWS can only terminate directly on a CE and never into other services",
+      "Routed VPLS means that a VPRN is converted into a VPWS"
+    ],
+    "correctIndex": 0,
+    "explanation": "Provider-Services koennen sinnvoll miteinander verbunden werden. Wird ein VPLS an ein VPRN-Interface angebunden, spricht man typischerweise von routed VPLS oder rVPLS.",
+    "explanation_en": "Provider services can be meaningfully interconnected. When a VPLS is attached to a VPRN interface, that is typically called routed VPLS or rVPLS.",
+    "extraInfo": "Solche Kopplungen erlauben komplexere Kunden-Topologien statt isolierter Einzelservices.",
+    "extraInfo_en": "Such combinations allow more complex customer topologies instead of isolated single services.",
+    "tip": "Services koennen gekoppelt werden, nicht nur isoliert existieren.",
+    "tip_en": "Services can be interconnected, not only exist in isolation.",
+    "tags": [
+      "BGP",
+      "VPN",
+      "VPLS",
+      "VPRN",
+      "VPWS",
+      "rVPLS"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q6",
+    "question": "Wie funktioniert das Tunneling von VPN-Daten zwischen PE-Routern im Kern?",
+    "question_en": "How does VPN data tunneling between PE routers work in the core?",
+    "options": [
+      "Am ingress-PE wird ein Tunnel-Header hinzugefuegt, P-Router leiten anhand dieses Transports weiter, und am egress-PE wird er wieder entfernt",
+      "Die CE-Router fuehren das gesamte Provider-Tunneling selbst aus",
+      "P-Router muessen alle Kundennetze komplett lernen und routen",
+      "Tunnel-Header bleiben immer bis zum CE bestehen"
+    ],
+    "options_en": [
+      "At the ingress PE a tunnel header is added, P routers forward based on that transport, and at the egress PE it is removed again",
+      "The CE routers perform the entire provider tunneling themselves",
+      "P routers must fully learn and route all customer networks",
+      "Tunnel headers always remain all the way to the CE"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der Kern der Idee ist: PE kapselt, P transportiert, egress-PE entkapselt. Die mittleren Core-Router muessen den Kundendienst selbst nicht terminieren.",
+    "explanation_en": "The core idea is: PE encapsulates, P transports, egress PE decapsulates. The core routers in the middle do not have to terminate the customer service themselves.",
+    "extraInfo": "Genau so bleibt der Core vom eigentlichen Kundendienst weitgehend entkoppelt.",
+    "extraInfo_en": "That is exactly how the core remains largely decoupled from the actual customer service.",
+    "tip": "PE packt ein, P transportiert, PE packt aus.",
+    "tip_en": "PE wraps, P transports, PE unwraps.",
+    "tags": [
+      "BGP",
+      "VPN",
+      "Tunnel",
+      "PE",
+      "P Router"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q7",
+    "question": "Warum braucht man neben Transport-Tunneln noch Service-Tunnel oder Service-Kontexte?",
+    "question_en": "Why do we need service tunnels or service contexts in addition to transport tunnels?",
+    "options": [
+      "Weil viele verschiedene VPN-Services denselben Transport-Tunnel teilen koennen und trotzdem voneinander unterscheidbar bleiben muessen",
+      "Weil sonst TCP nicht mehr funktioniert",
+      "Weil ein Tunnel immer nur genau eine Community tragen darf",
+      "Weil Route Reflectors keine Tunnel verstehen"
+    ],
+    "options_en": [
+      "Because many different VPN services can share the same transport tunnel and still need to remain distinguishable",
+      "Because otherwise TCP no longer works",
+      "Because one tunnel may carry only a single community",
+      "Because route reflectors do not understand tunnels"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ein Transport-Tunnel allein sagt noch nicht, zu welchem Kundendienst die Daten gehoeren. Deshalb braucht es einen zusaetzlichen Service-Kontext pro Dienst.",
+    "explanation_en": "A transport tunnel alone does not say which customer service the traffic belongs to. That is why an additional service context is needed per service.",
+    "extraInfo": "Hier kommt der Service Distribution Point als Bindeglied ins Spiel.",
+    "extraInfo_en": "This is where the service distribution point comes in as the binding element.",
+    "tip": "Ein Tunnel kann viele Services tragen, also braucht es Demultiplexing.",
+    "tip_en": "One tunnel can carry many services, so demultiplexing is required.",
+    "tags": [
+      "BGP",
+      "VPN",
+      "Transport Tunnel",
+      "Service Tunnel",
+      "SDP"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q8",
+    "question": "Welche Rolle spielt ein SDP in diesem VPN-Kontext am besten?",
+    "question_en": "What best describes the role of an SDP in this VPN context?",
+    "options": [
+      "Es bindet Service-Kontext und Transportweg logisch zusammen",
+      "Es ersetzt den Route Distinguisher",
+      "Es ist nur eine andere Bezeichnung fuer LOCAL_PREF",
+      "Es ist das gleiche wie ein CE-Router"
+    ],
+    "options_en": [
+      "It logically binds the service context and the transport path together",
+      "It replaces the route distinguisher",
+      "It is just another name for LOCAL_PREF",
+      "It is the same thing as a CE router"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der SDP ist die logische Bindestelle, ueber die ein Dienst einem Transporttunnel zugeordnet werden kann.",
+    "explanation_en": "The SDP is the logical attachment point through which a service can be associated with a transport tunnel.",
+    "extraInfo": "Ohne diese Zuordnung gaebe es keinen sauberen Weg, Dienst und Transportbeziehung zusammenzubringen.",
+    "extraInfo_en": "Without that association there would be no clean way to bring service and transport together.",
+    "tip": "SDP = Bindeglied zwischen Service und Tunnel.",
+    "tip_en": "SDP = link between service and tunnel.",
+    "tags": [
+      "BGP",
+      "VPN",
+      "SDP",
+      "Transport"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q9",
+    "question": "Was bedeutet 'multiple router instances' im VPRN-Kontext?",
+    "question_en": "What does 'multiple router instances' mean in the VPRN context?",
+    "options": [
+      "Neben dem Default- oder Base-Router existiert pro VPRN eine eigene logische Router-Instanz mit eigenen Layer-3-Interfaces und Routing-Protokollen",
+      "Alle VPRNs teilen sich zwingend dieselbe einzige Routing-Tabelle",
+      "Jeder CE-Router wird automatisch zu einem Route Reflector",
+      "Es gibt im VPRN-Kontext keine separaten Instanzen"
+    ],
+    "options_en": [
+      "Besides the default or base router, each VPRN has its own logical router instance with its own Layer 3 interfaces and routing protocols",
+      "All VPRNs must share the same single routing table",
+      "Each CE router automatically becomes a route reflector",
+      "There are no separate instances in the VPRN context"
+    ],
+    "correctIndex": 0,
+    "explanation": "Genau dadurch kann jedes VPRN als eigenes L3-Kundennetz mit eigener Routing-Sicht betrieben werden.",
+    "explanation_en": "That is exactly what allows each VPRN to be operated as its own Layer 3 customer network with its own routing view.",
+    "extraInfo": "Der Base Router bleibt davon logisch getrennt.",
+    "extraInfo_en": "The base router remains logically separate from that.",
+    "tip": "VPRN = eigene Routing-Instanz, nicht nur ein weiteres Interface.",
+    "tip_en": "VPRN = its own routing instance, not just another interface.",
+    "tags": [
+      "BGP",
+      "VPRN",
+      "Router Instance",
+      "Routing"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q10",
+    "question": "Warum ist MP-BGP fuer VPRN besonders wichtig?",
+    "question_en": "Why is MP-BGP especially important for VPRN?",
+    "options": [
+      "Weil PE-Router damit die VPN-Routing-Informationen verschiedener Kundenseiten austauschen koennen",
+      "Weil sonst keine Ethernet-Frames mehr moeglich sind",
+      "Weil MP-BGP den Need fuer Route Distinguisher komplett entfernt",
+      "Weil VPRN ohne TCP arbeitet"
+    ],
+    "options_en": [
+      "Because it allows PE routers to exchange VPN routing information for different customer sites",
+      "Because otherwise Ethernet frames are no longer possible",
+      "Because MP-BGP completely removes the need for route distinguishers",
+      "Because VPRN operates without TCP"
+    ],
+    "correctIndex": 0,
+    "explanation": "MP-BGP transportiert die VPN-spezifischen Routing-Informationen zwischen den PE-Routern und ist damit zentral fuer verteilte Layer-3-VPNs.",
+    "explanation_en": "MP-BGP carries the VPN-specific routing information between PE routers and is therefore central to distributed Layer 3 VPNs.",
+    "extraInfo": "Gerade VPRN ist einer der klassischen Einsatzzwecke von MP-BGP im Provider-Netz.",
+    "extraInfo_en": "VPRN is one of the classic use cases of MP-BGP in provider networks.",
+    "tip": "VPRN braucht MP-BGP fuer den VPN-Routen-Austausch.",
+    "tip_en": "VPRN needs MP-BGP for VPN route exchange.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "VPRN",
+      "PE"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q11",
+    "question": "Welche Aussage zu MP-BGP-Sessions zwischen PE-Routern ist fachlich korrekt?",
+    "question_en": "Which statement about MP-BGP sessions between PE routers is technically correct?",
+    "options": [
+      "Ohne Hilfskonstrukte wie Route Reflectors braucht man fuer den vollen Austausch typischerweise ein Full Mesh; alternativ kann ein Route Reflector die Skalierbarkeit verbessern",
+      "MP-BGP erlaubt nie den Einsatz von Route Reflectors",
+      "Ein einziges CE-PE-Peering ersetzt alle PE-PE-Beziehungen",
+      "Full Mesh ist nur bei Layer 2 und nie bei VPRN relevant"
+    ],
+    "options_en": [
+      "Without helper constructs such as route reflectors, full exchange typically requires a full mesh; alternatively a route reflector can improve scalability",
+      "MP-BGP never allows the use of route reflectors",
+      "A single CE-PE peering replaces all PE-PE relationships",
+      "Full mesh matters only for Layer 2 and never for VPRN"
+    ],
+    "correctIndex": 0,
+    "explanation": "Wie bei iBGP allgemein skaliert ein Full Mesh schlecht. Route Reflectors sind die uebliche Antwort auf dieses Problem.",
+    "explanation_en": "As with iBGP in general, a full mesh scales poorly. Route reflectors are the usual answer to that problem.",
+    "extraInfo": "Das ist genau der Grund, warum Route Reflectors in grösseren MP-BGP-VPN-Umgebungen so wichtig werden.",
+    "extraInfo_en": "That is exactly why route reflectors become so important in larger MP-BGP VPN environments.",
+    "tip": "PE-VPN-Routing folgt den normalen iBGP-Skalierungsregeln.",
+    "tip_en": "PE VPN routing follows the normal iBGP scaling rules.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "Route Reflector",
+      "Full Mesh",
+      "VPRN"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q12",
+    "question": "Wofuer dient der Route Distinguisher in einem VPRN am besten?",
+    "question_en": "What is the main purpose of the route distinguisher in a VPRN?",
+    "options": [
+      "Er macht ueberlappende Kundenpraefixe im MP-BGP-Kontext eindeutig, indem er sie mit einem zusaetzlichen Wert kombiniert",
+      "Er ersetzt den NEXT_HOP",
+      "Er setzt automatisch den MED-Wert",
+      "Er schaltet private Adressen in oeffentliche um"
+    ],
+    "options_en": [
+      "It makes overlapping customer prefixes unique in the MP-BGP context by combining them with an additional value",
+      "It replaces the NEXT_HOP",
+      "It automatically sets the MED value",
+      "It converts private addresses into public ones"
+    ],
+    "correctIndex": 0,
+    "explanation": "Wenn mehrere Kunden gleiche oder ueberlappende Praefixe nutzen, sorgt der RD dafuer, dass BGP daraus unterschiedliche VPN-Praefixe bilden kann.",
+    "explanation_en": "When multiple customers use the same or overlapping prefixes, the RD allows BGP to create distinct VPN prefixes from them.",
+    "extraInfo": "Gerade in Multi-Customer-VPRN-Umgebungen ist das unverzichtbar.",
+    "extraInfo_en": "That is indispensable especially in multi-customer VPRN environments.",
+    "tip": "RD macht gleiche Kundenpraefixe in BGP eindeutig.",
+    "tip_en": "RD makes identical customer prefixes unique in BGP.",
+    "tags": [
+      "BGP",
+      "VPRN",
+      "Route Distinguisher",
+      "VPN-IPv4",
+      "VPN-IPv6"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q13",
+    "question": "Wie entsteht aus einem normalen Kundenpraefix ein VPN-Praefix fuer MP-BGP?",
+    "question_en": "How is a normal customer prefix turned into a VPN prefix for MP-BGP?",
+    "options": [
+      "Indem der Route Distinguisher mit dem IPv4- oder IPv6-Praefix kombiniert wird",
+      "Indem der AS_PATH an das Prefix angehaengt wird",
+      "Indem das Prefix in eine Community umgewandelt wird",
+      "Indem das Prefix immer in ein MPLS-Label uebersetzt wird"
+    ],
+    "options_en": [
+      "By combining the route distinguisher with the IPv4 or IPv6 prefix",
+      "By appending the AS_PATH to the prefix",
+      "By converting the prefix into a community",
+      "By always translating the prefix into an MPLS label"
+    ],
+    "correctIndex": 0,
+    "explanation": "Vereinfacht gesagt entsteht `VPN-IPv4` oder `VPN-IPv6`, indem ein RD vor das eigentliche Kundenpraefix gesetzt wird.",
+    "explanation_en": "Put simply, `VPN-IPv4` or `VPN-IPv6` is created by placing an RD in front of the actual customer prefix.",
+    "extraInfo": "Genau so kann MP-BGP dieselben Kundenadressen in verschiedenen VPNs sauber auseinanderhalten.",
+    "extraInfo_en": "That is exactly how MP-BGP can cleanly distinguish the same customer addresses in different VPNs.",
+    "tip": "RD + Prefix = VPN-Prefix.",
+    "tip_en": "RD + prefix = VPN prefix.",
+    "tags": [
+      "BGP",
+      "VPN-IPv4",
+      "VPN-IPv6",
+      "Route Distinguisher"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q14",
+    "question": "Was muss auf der MP-BGP-Session zwischen PE-Routern zusaetzlich aktiviert sein, damit diese VPN-Praefixe ausgetauscht werden koennen?",
+    "question_en": "What must additionally be enabled on the MP-BGP session between PE routers so that these VPN prefixes can be exchanged?",
+    "options": [
+      "Die passende VPN-IPv4- oder VPN-IPv6-Address-Family",
+      "Nur eine hoehere Router-ID",
+      "Nur ein anderer TCP-Port",
+      "Nur ein Layer-2-Switch zwischen den Routern"
+    ],
+    "options_en": [
+      "The corresponding VPN-IPv4 or VPN-IPv6 address family",
+      "Only a higher router ID",
+      "Only a different TCP port",
+      "Only a Layer 2 switch between the routers"
+    ],
+    "correctIndex": 0,
+    "explanation": "Ohne die passende VPN-Address-Family auf der MP-BGP-Session koennen die PE-Router diese VPN-Praefixe nicht austauschen.",
+    "explanation_en": "Without the matching VPN address family on the MP-BGP session, the PE routers cannot exchange those VPN prefixes.",
+    "extraInfo": "Der RD allein reicht also nicht; die Session muss die richtige Familie auch wirklich sprechen.",
+    "extraInfo_en": "So the RD alone is not enough; the session must actually speak the right family.",
+    "tip": "VPN-Prefixe brauchen die passende VPN-AF auf der Session.",
+    "tip_en": "VPN prefixes need the matching VPN AF on the session.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "VPN-IPv4",
+      "VPN-IPv6",
+      "Address Family"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
   }
 ]
