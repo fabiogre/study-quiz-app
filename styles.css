@@ -164,6 +164,222 @@ textarea {
   background: #fffefb;
 }
 
+.kid-explain-card {
+  margin-top: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at top right, rgba(208, 146, 60, 0.12), transparent 24%),
+    linear-gradient(180deg, #fffdf8, #f9f4e8);
+}
+
+.kid-explain-head h3 {
+  margin: 0 0 0.25rem;
+}
+
+.kid-explain-head p {
+  margin: 0;
+}
+
+.kid-explain-actions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.kid-explain-actions .secondary.is-active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.kid-explain-scene {
+  margin-top: 0.9rem;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 0.95rem;
+  min-height: 210px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 239, 224, 0.92)),
+    #fff;
+  overflow: hidden;
+}
+
+.kid-explain-copy {
+  margin-top: 0.85rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.kid-explain-copy p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.kid-empty {
+  min-height: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 180px));
+  justify-content: center;
+  gap: 1rem;
+  align-content: center;
+}
+
+.kid-empty-card,
+.kid-card,
+.kid-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 16px rgba(31, 108, 90, 0.08);
+}
+
+.kid-empty-card {
+  min-height: 106px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  padding: 0.8rem;
+}
+
+.kid-empty-card strong {
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.kid-lane {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(120px, 1fr) minmax(140px, 220px);
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.kid-lane + .kid-lane {
+  margin-top: 0.85rem;
+}
+
+.kid-box {
+  padding: 0.7rem 0.8rem;
+  display: grid;
+  gap: 0.25rem;
+  min-height: 88px;
+}
+
+.kid-box.customer {
+  background: linear-gradient(180deg, #eef8f4, #f8fffd);
+}
+
+.kid-box.provider {
+  background: linear-gradient(180deg, #fbf5e8, #fffdf8);
+}
+
+.kid-box.vpn {
+  background: linear-gradient(180deg, #eef3fb, #fcfdff);
+}
+
+.kid-box.vpn.match {
+  border-color: var(--ok);
+  box-shadow: 0 8px 18px rgba(47, 125, 47, 0.16);
+}
+
+.kid-box strong,
+.kid-card strong {
+  font-size: 0.95rem;
+}
+
+.kid-box span,
+.kid-card span {
+  display: block;
+  line-height: 1.35;
+  font-size: 0.9rem;
+}
+
+.kid-travel {
+  display: flex;
+  justify-content: center;
+}
+
+.kid-card {
+  padding: 0.7rem 0.8rem;
+  min-width: 160px;
+  display: grid;
+  gap: 0.35rem;
+  animation: kid-slide 3.4s ease-in-out infinite alternate;
+}
+
+.kid-card-wide {
+  min-width: min(100%, 290px);
+}
+
+.kid-tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.22rem 0.48rem;
+  border-radius: 999px;
+  background: rgba(208, 146, 60, 0.16);
+  color: #7a4f0f;
+  font-size: 0.82rem;
+  border: 1px solid rgba(208, 146, 60, 0.28);
+}
+
+.delay-a .kid-card {
+  animation-delay: -0.2s;
+}
+
+.delay-b .kid-card {
+  animation-delay: -1.5s;
+}
+
+.kid-route-stage {
+  min-height: 92px;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.kid-pointer {
+  width: 110px;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(31, 108, 90, 0.2), var(--accent), rgba(31, 108, 90, 0.2));
+  position: relative;
+}
+
+.kid-pointer::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid var(--accent);
+}
+
+.kid-target-grid {
+  margin-top: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 0.8rem;
+}
+
+.kid-note {
+  margin-top: 0.1rem;
+  color: var(--muted);
+}
+
+@keyframes kid-slide {
+  0% {
+    transform: translateX(-18px);
+  }
+
+  100% {
+    transform: translateX(18px);
+  }
+}
+
 .scope-stats {
   margin-bottom: 0.8rem;
   border: 1px solid var(--line);
@@ -400,5 +616,15 @@ button.danger:not(.opt-btn) {
 
   .toolbar {
     grid-template-columns: 1fr;
+  }
+
+  .kid-lane,
+  .kid-target-grid,
+  .kid-empty {
+    grid-template-columns: 1fr;
+  }
+
+  .kid-explain-scene {
+    min-height: 260px;
   }
 }

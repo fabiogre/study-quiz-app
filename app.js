@@ -16,6 +16,7 @@ let answerLocked = false;
 let popupTimer = null;
 let dbPromise = null;
 let currentLanguage = "de";
+let currentKidExplainer = "";
 
 const refs = {
   languageSelect: document.getElementById("languageSelect"),
@@ -48,6 +49,13 @@ const refs = {
   scopeStats: document.getElementById("scopeStats"),
   scopeStatsTitle: document.getElementById("scopeStatsTitle"),
   scopeStatsBody: document.getElementById("scopeStatsBody"),
+  kidExplainTitle: document.getElementById("kidExplainTitle"),
+  kidExplainIntro: document.getElementById("kidExplainIntro"),
+  kidExplainRdBtn: document.getElementById("kidExplainRdBtn"),
+  kidExplainRtBtn: document.getElementById("kidExplainRtBtn"),
+  kidExplainScene: document.getElementById("kidExplainScene"),
+  kidExplainSceneTitle: document.getElementById("kidExplainSceneTitle"),
+  kidExplainText: document.getElementById("kidExplainText"),
 
   questionForm: document.getElementById("questionForm"),
   qQuestion: document.getElementById("qQuestion"),
@@ -109,6 +117,31 @@ const UI_TEXTS = {
       allTopics: "Alle Themen",
       allModules: "Alle Module",
       allSections: "Alle Sections",
+    },
+    explainer: {
+      title: "Mini-Erklaerung fuer RD und RT",
+      intro: "Klicke auf einen Begriff und ich erklaere ihn wie fuer ein Kind.",
+      rdBtn: "Route Distinguisher",
+      rtBtn: "Route Target",
+      emptyTitle: "Noch nichts ausgewaehlt",
+      emptyText: "Waehle einen Button und ich zeige dir ein kleines Bild mit einer sehr einfachen Erklaerung.",
+      rdTitle: "Route Distinguisher: Namensschild fuer gleiche Adressen",
+      rdText:
+        "Stell dir vor, zwei Kinder haben beide eine Kiste mit der Aufschrift 10.0.0.0/24. Der Route Distinguisher klebt an jede Kiste noch ein extra Namensschild. So weiss das Provider-Netz: Das sind zwei verschiedene Kisten, auch wenn vorne der gleiche Name steht.",
+      rtTitle: "Route Target: Club-Aufkleber fuer die richtigen Freunde",
+      rtText:
+        "Ein Route Target ist wie ein Club-Aufkleber. Nur Router, die diesen Aufkleber moegen, nehmen die Route in ihren eigenen Club auf. So landen Routen nur bei den richtigen VPN-Freunden.",
+      laneA: "Kunde Blau",
+      laneB: "Kunde Gruen",
+      samePrefix: "gleiches Netz",
+      providerView: "Provider sieht daraus",
+      routeCard: "Route",
+      rdSticker: "RD Aufkleber",
+      blueVpn: "VPN Blau",
+      greenVpn: "VPN Gruen",
+      targetSticker: "RT Aufkleber",
+      likesThis: "nimmt diesen Aufkleber an",
+      ignoresThis: "ignoriert diesen Aufkleber",
     },
     build: {
       question: "Frage",
@@ -223,6 +256,31 @@ const UI_TEXTS = {
       allTopics: "All topics",
       allModules: "All modules",
       allSections: "All sections",
+    },
+    explainer: {
+      title: "Mini explainer for RD and RT",
+      intro: "Click one term and I explain it in a very simple way.",
+      rdBtn: "Route Distinguisher",
+      rtBtn: "Route Target",
+      emptyTitle: "Nothing selected yet",
+      emptyText: "Pick one button and I will show a small picture with a very simple explanation.",
+      rdTitle: "Route Distinguisher: name tag for equal addresses",
+      rdText:
+        "Imagine two kids both have a box called 10.0.0.0/24. The Route Distinguisher adds one more name tag to each box. That way the provider network knows these are two different boxes, even though the front label looks the same.",
+      rtTitle: "Route Target: club sticker for the right friends",
+      rtText:
+        "A Route Target is like a club sticker. Only routers that accept this sticker put the route into their own club. That way routes only go to the right VPN friends.",
+      laneA: "Blue customer",
+      laneB: "Green customer",
+      samePrefix: "same network",
+      providerView: "Provider turns it into",
+      routeCard: "Route",
+      rdSticker: "RD sticker",
+      blueVpn: "Blue VPN",
+      greenVpn: "Green VPN",
+      targetSticker: "RT sticker",
+      likesThis: "accepts this sticker",
+      ignoresThis: "ignores this sticker",
     },
     build: {
       question: "Question",
@@ -407,6 +465,10 @@ function applyI18n() {
   setText("nextQuestionBtn", t("learn.nextQuestion"));
   setText("continueBtn", t("learn.continue"));
   setPlaceholder("tagFilterInput", t("learn.tagPlaceholder"));
+  setText("kidExplainTitle", t("explainer.title"));
+  setText("kidExplainIntro", t("explainer.intro"));
+  setText("kidExplainRdBtn", t("explainer.rdBtn"));
+  setText("kidExplainRtBtn", t("explainer.rtBtn"));
 
   setText("buildQuestionLabel", t("build.question"));
   setText("buildAnswerALabel", t("build.answerA"));
@@ -451,6 +513,7 @@ function applyI18n() {
     refs.questionTitle.textContent = t("question.readyTitle");
     refs.questionMeta.textContent = t("question.readyMeta");
   }
+  renderKidExplainer(currentKidExplainer);
 }
 
 init().catch((err) => {
@@ -470,6 +533,7 @@ async function init() {
   }
   setupTabs();
   setupLearnActions();
+  setupExplainerActions();
   setupBuildActions();
   setupDataActions();
   await loadData();
@@ -477,6 +541,115 @@ async function init() {
   refreshExport();
   refreshStats();
   setStatus(t("status.ready"));
+}
+
+function setupExplainerActions() {
+  if (refs.kidExplainRdBtn) {
+    refs.kidExplainRdBtn.addEventListener("click", () => {
+      currentKidExplainer = currentKidExplainer === "rd" ? "" : "rd";
+      renderKidExplainer(currentKidExplainer);
+    });
+  }
+  if (refs.kidExplainRtBtn) {
+    refs.kidExplainRtBtn.addEventListener("click", () => {
+      currentKidExplainer = currentKidExplainer === "rt" ? "" : "rt";
+      renderKidExplainer(currentKidExplainer);
+    });
+  }
+  renderKidExplainer("");
+}
+
+function renderKidExplainer(mode = "") {
+  if (!refs.kidExplainScene || !refs.kidExplainSceneTitle || !refs.kidExplainText) return;
+
+  currentKidExplainer = mode || "";
+  refs.kidExplainRdBtn?.classList.toggle("is-active", currentKidExplainer === "rd");
+  refs.kidExplainRtBtn?.classList.toggle("is-active", currentKidExplainer === "rt");
+  refs.kidExplainScene.className = "kid-explain-scene";
+
+  if (currentKidExplainer === "rd") {
+    refs.kidExplainScene.classList.add("rd-mode");
+    refs.kidExplainScene.innerHTML = `
+      <div class="kid-lane">
+        <div class="kid-box customer">
+          <strong>${t("explainer.laneA")}</strong>
+          <span>${t("explainer.samePrefix")}: 10.0.0.0/24</span>
+        </div>
+        <div class="kid-travel delay-a">
+          <div class="kid-card">
+            <span>${t("explainer.routeCard")}: 10.0.0.0/24</span>
+            <span class="kid-tag">${t("explainer.rdSticker")}: 65001:10</span>
+          </div>
+        </div>
+        <div class="kid-box provider">
+          <strong>${t("explainer.providerView")}</strong>
+          <span>65001:10 + 10.0.0.0/24</span>
+        </div>
+      </div>
+      <div class="kid-lane">
+        <div class="kid-box customer">
+          <strong>${t("explainer.laneB")}</strong>
+          <span>${t("explainer.samePrefix")}: 10.0.0.0/24</span>
+        </div>
+        <div class="kid-travel delay-b">
+          <div class="kid-card">
+            <span>${t("explainer.routeCard")}: 10.0.0.0/24</span>
+            <span class="kid-tag">${t("explainer.rdSticker")}: 65002:10</span>
+          </div>
+        </div>
+        <div class="kid-box provider">
+          <strong>${t("explainer.providerView")}</strong>
+          <span>65002:10 + 10.0.0.0/24</span>
+        </div>
+      </div>
+    `;
+    refs.kidExplainSceneTitle.textContent = t("explainer.rdTitle");
+    refs.kidExplainText.textContent = t("explainer.rdText");
+    return;
+  }
+
+  if (currentKidExplainer === "rt") {
+    refs.kidExplainScene.classList.add("rt-mode");
+    refs.kidExplainScene.innerHTML = `
+      <div class="kid-route-stage">
+        <div class="kid-card kid-card-wide">
+          <span>${t("explainer.routeCard")}: 10.0.0.0/24</span>
+          <span class="kid-tag">${t("explainer.targetSticker")}: 65001:200</span>
+        </div>
+        <div class="kid-pointer"></div>
+      </div>
+      <div class="kid-target-grid">
+        <div class="kid-box vpn">
+          <strong>${t("explainer.blueVpn")}</strong>
+          <span>${t("explainer.likesThis")}: 65001:100</span>
+          <span class="kid-note">${t("explainer.ignoresThis")}</span>
+        </div>
+        <div class="kid-box vpn match">
+          <strong>${t("explainer.greenVpn")}</strong>
+          <span>${t("explainer.likesThis")}: 65001:200</span>
+          <span class="kid-note">${currentLanguage === "en" ? "This route is imported" : "Diese Route wird genommen"}</span>
+        </div>
+      </div>
+    `;
+    refs.kidExplainSceneTitle.textContent = t("explainer.rtTitle");
+    refs.kidExplainText.textContent = t("explainer.rtText");
+    return;
+  }
+
+  refs.kidExplainScene.innerHTML = `
+    <div class="kid-empty">
+      <div class="kid-empty-card">
+        <strong>RD</strong>
+        <span>${t("explainer.rdBtn")}</span>
+      </div>
+      <div class="kid-empty-card">
+        <strong>RT</strong>
+        <span>${t("explainer.rtBtn")}</span>
+      </div>
+    </div>
+  `;
+  refs.kidExplainSceneTitle.textContent = t("explainer.emptyTitle");
+  refs.kidExplainText.textContent = t("explainer.emptyText");
 }
 
 async function openDb() {
