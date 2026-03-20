@@ -53,6 +53,7 @@ const refs = {
   kidExplainIntro: document.getElementById("kidExplainIntro"),
   kidExplainRdBtn: document.getElementById("kidExplainRdBtn"),
   kidExplainRtBtn: document.getElementById("kidExplainRtBtn"),
+  kidExplainBothBtn: document.getElementById("kidExplainBothBtn"),
   kidExplainScene: document.getElementById("kidExplainScene"),
   kidExplainSceneTitle: document.getElementById("kidExplainSceneTitle"),
   kidExplainText: document.getElementById("kidExplainText"),
@@ -123,6 +124,7 @@ const UI_TEXTS = {
       intro: "Klicke auf einen Begriff und ich erklaere ihn wie fuer ein Kind.",
       rdBtn: "Route Distinguisher",
       rtBtn: "Route Target",
+      bothBtn: "Warum beide?",
       emptyTitle: "Noch nichts ausgewaehlt",
       emptyText: "Waehle einen Button und ich zeige dir ein kleines Bild mit einer sehr einfachen Erklaerung.",
       rdTitle: "Route Distinguisher: Namensschild fuer gleiche Adressen",
@@ -131,6 +133,9 @@ const UI_TEXTS = {
       rtTitle: "Route Target: Club-Aufkleber fuer die richtigen Freunde",
       rtText:
         "Ein Route Target ist wie ein Club-Aufkleber. Nur Router, die diesen Aufkleber moegen, nehmen die Route in ihren eigenen Club auf. So landen Routen nur bei den richtigen VPN-Freunden.",
+      bothTitle: "Warum braucht man RD und RT zusammen?",
+      bothText:
+        "Zuerst macht RD zwei gleich aussehende Netze im Provider eindeutig. Danach sagt RT, welche VPNs diese eindeutigen Routen wirklich bekommen duerfen. RD loest also das Namensproblem. RT loest das Verteilerproblem. Ein RT ist nicht im RD drin. Es ist ein eigener Aufkleber fuer Import und Export von Routen zwischen Services.",
       laneA: "Kunde Blau",
       laneB: "Kunde Gruen",
       samePrefix: "gleiches Netz",
@@ -142,6 +147,10 @@ const UI_TEXTS = {
       targetSticker: "RT Aufkleber",
       likesThis: "nimmt diesen Aufkleber an",
       ignoresThis: "ignoriert diesen Aufkleber",
+      stepOne: "1. RD macht es eindeutig",
+      stepTwo: "2. RT verteilt nur an passende VPNs",
+      imports: "importiert",
+      notImported: "bekommt es nicht",
     },
     build: {
       question: "Frage",
@@ -262,6 +271,7 @@ const UI_TEXTS = {
       intro: "Click one term and I explain it in a very simple way.",
       rdBtn: "Route Distinguisher",
       rtBtn: "Route Target",
+      bothBtn: "Why both?",
       emptyTitle: "Nothing selected yet",
       emptyText: "Pick one button and I will show a small picture with a very simple explanation.",
       rdTitle: "Route Distinguisher: name tag for equal addresses",
@@ -270,6 +280,9 @@ const UI_TEXTS = {
       rtTitle: "Route Target: club sticker for the right friends",
       rtText:
         "A Route Target is like a club sticker. Only routers that accept this sticker put the route into their own club. That way routes only go to the right VPN friends.",
+      bothTitle: "Why do you need RD and RT together?",
+      bothText:
+        "First, RD makes two equal-looking networks unique inside the provider. Then RT decides which VPNs are actually allowed to receive those unique routes. RD solves the naming problem. RT solves the distribution problem. An RT is not inside the RD. It is a separate sticker for route import and export between services.",
       laneA: "Blue customer",
       laneB: "Green customer",
       samePrefix: "same network",
@@ -281,6 +294,10 @@ const UI_TEXTS = {
       targetSticker: "RT sticker",
       likesThis: "accepts this sticker",
       ignoresThis: "ignores this sticker",
+      stepOne: "1. RD makes it unique",
+      stepTwo: "2. RT sends it only to matching VPNs",
+      imports: "imports",
+      notImported: "does not get it",
     },
     build: {
       question: "Question",
@@ -469,6 +486,7 @@ function applyI18n() {
   setText("kidExplainIntro", t("explainer.intro"));
   setText("kidExplainRdBtn", t("explainer.rdBtn"));
   setText("kidExplainRtBtn", t("explainer.rtBtn"));
+  setText("kidExplainBothBtn", t("explainer.bothBtn"));
 
   setText("buildQuestionLabel", t("build.question"));
   setText("buildAnswerALabel", t("build.answerA"));
@@ -556,6 +574,12 @@ function setupExplainerActions() {
       renderKidExplainer(currentKidExplainer);
     });
   }
+  if (refs.kidExplainBothBtn) {
+    refs.kidExplainBothBtn.addEventListener("click", () => {
+      currentKidExplainer = currentKidExplainer === "both" ? "" : "both";
+      renderKidExplainer(currentKidExplainer);
+    });
+  }
   renderKidExplainer("");
 }
 
@@ -565,6 +589,7 @@ function renderKidExplainer(mode = "") {
   currentKidExplainer = mode || "";
   refs.kidExplainRdBtn?.classList.toggle("is-active", currentKidExplainer === "rd");
   refs.kidExplainRtBtn?.classList.toggle("is-active", currentKidExplainer === "rt");
+  refs.kidExplainBothBtn?.classList.toggle("is-active", currentKidExplainer === "both");
   refs.kidExplainScene.className = "kid-explain-scene";
 
   if (currentKidExplainer === "rd") {
@@ -636,6 +661,53 @@ function renderKidExplainer(mode = "") {
     return;
   }
 
+  if (currentKidExplainer === "both") {
+    refs.kidExplainScene.classList.add("both-mode");
+    refs.kidExplainScene.innerHTML = `
+      <div class="kid-combo-head">
+        <div class="kid-combo-step">${t("explainer.stepOne")}</div>
+        <div class="kid-combo-step">${t("explainer.stepTwo")}</div>
+      </div>
+      <div class="kid-combo-grid">
+        <div class="kid-box customer">
+          <strong>${t("explainer.laneA")}</strong>
+          <span>10.0.0.0/24</span>
+          <span class="kid-tag">${t("explainer.rdSticker")}: 65001:10</span>
+        </div>
+        <div class="kid-box provider">
+          <strong>${t("explainer.providerView")}</strong>
+          <span>65001:10 + 10.0.0.0/24</span>
+          <span class="kid-tag">${t("explainer.targetSticker")}: 65000:100</span>
+        </div>
+        <div class="kid-box vpn match">
+          <strong>${t("explainer.blueVpn")}</strong>
+          <span>${t("explainer.imports")}: 65000:100</span>
+        </div>
+        <div class="kid-box customer">
+          <strong>${t("explainer.laneB")}</strong>
+          <span>10.0.0.0/24</span>
+          <span class="kid-tag">${t("explainer.rdSticker")}: 65002:10</span>
+        </div>
+        <div class="kid-box provider">
+          <strong>${t("explainer.providerView")}</strong>
+          <span>65002:10 + 10.0.0.0/24</span>
+          <span class="kid-tag">${t("explainer.targetSticker")}: 65000:200</span>
+        </div>
+        <div class="kid-box vpn">
+          <strong>${t("explainer.greenVpn")}</strong>
+          <span>${t("explainer.imports")}: 65000:200</span>
+        </div>
+      </div>
+      <div class="kid-combo-foot">
+        <div class="kid-pill">${currentLanguage === "en" ? "Same IP prefix can exist twice because RD is different" : "Dasselbe IP-Netz kann doppelt existieren, weil RD verschieden ist"}</div>
+        <div class="kid-pill">${currentLanguage === "en" ? "Only matching RT imports the route into the VPN" : "Nur passendes RT importiert die Route ins VPN"}</div>
+      </div>
+    `;
+    refs.kidExplainSceneTitle.textContent = t("explainer.bothTitle");
+    refs.kidExplainText.textContent = t("explainer.bothText");
+    return;
+  }
+
   refs.kidExplainScene.innerHTML = `
     <div class="kid-empty">
       <div class="kid-empty-card">
@@ -645,6 +717,10 @@ function renderKidExplainer(mode = "") {
       <div class="kid-empty-card">
         <strong>RT</strong>
         <span>${t("explainer.rtBtn")}</span>
+      </div>
+      <div class="kid-empty-card">
+        <strong>RD + RT</strong>
+        <span>${t("explainer.bothBtn")}</span>
       </div>
     </div>
   `;
