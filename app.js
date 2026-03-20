@@ -1,5 +1,6 @@
 const STORAGE_KEY = "studyQuizQuestionsV1";
 const PROGRESS_KEY = "studyQuizProgressV1";
+const DEFAULT_TOPIC = "Hauptquiz";
 const DEFAULT_MODULE = "Modul 1";
 const DEFAULT_SECTION = "Section 1";
 const DB_NAME = "studyQuizDB";
@@ -39,10 +40,14 @@ const refs = {
   answerExplanation: document.getElementById("answerExplanation"),
   nextQuestionBtn: document.getElementById("nextQuestionBtn"),
   continueBtn: document.getElementById("continueBtn"),
+  topicSelect: document.getElementById("topicSelect"),
   moduleSelect: document.getElementById("moduleSelect"),
   sectionSelect: document.getElementById("sectionSelect"),
   tagFilterInput: document.getElementById("tagFilterInput"),
   modeSelect: document.getElementById("modeSelect"),
+  scopeStats: document.getElementById("scopeStats"),
+  scopeStatsTitle: document.getElementById("scopeStatsTitle"),
+  scopeStatsBody: document.getElementById("scopeStatsBody"),
 
   questionForm: document.getElementById("questionForm"),
   qQuestion: document.getElementById("qQuestion"),
@@ -54,6 +59,7 @@ const refs = {
   qExplanation: document.getElementById("qExplanation"),
   qTags: document.getElementById("qTags"),
   qSource: document.getElementById("qSource"),
+  qTopic: document.getElementById("qTopic"),
   qModule: document.getElementById("qModule"),
   qSection: document.getElementById("qSection"),
   clearBuildFormBtn: document.getElementById("clearBuildFormBtn"),
@@ -88,9 +94,11 @@ const UI_TEXTS = {
       data: "Daten",
     },
     learn: {
+      topic: "Thema",
       module: "Modul",
       section: "Section",
       tagFilter: "Tag-Filter",
+      scopeStatsTitle: "Auswahlstatistik",
       mode: "Modus",
       nextQuestion: "Naechste Frage",
       continue: "Weiter",
@@ -98,6 +106,7 @@ const UI_TEXTS = {
       modeWeak: "Schwachstellen zuerst",
       modeNew: "Neue Fragen zuerst",
       tagPlaceholder: "z.B. Kapitel 1, Definition",
+      allTopics: "Alle Themen",
       allModules: "Alle Module",
       allSections: "Alle Sections",
     },
@@ -111,6 +120,7 @@ const UI_TEXTS = {
       explanation: "Erklaerung (optional)",
       tags: "Tags (optional)",
       source: "Quelle (optional)",
+      topic: "Thema (optional)",
       module: "Modul (optional)",
       section: "Section (optional)",
       save: "Frage speichern",
@@ -119,6 +129,7 @@ const UI_TEXTS = {
       explanationPlaceholder: "Kurz warum die Antwort stimmt",
       tagsPlaceholder: "z.B. Kapitel 1, Definition",
       sourcePlaceholder: "z.B. Folie 42",
+      topicPlaceholder: "z.B. BGP",
       modulePlaceholder: "z.B. Modul 1",
       sectionPlaceholder: "z.B. Section 2",
     },
@@ -142,6 +153,9 @@ const UI_TEXTS = {
       areaTitle: "Bereichsstatistik",
       noAreas: "Noch keine Bereiche verfuegbar.",
       areaMetrics: "Fragen: {questions} | Antworten: {answered} | Quote: {rate}%",
+      scopeArea: "Aktive Auswahl: {area}",
+      scopeMetrics:
+        "Fragen: {questions} | Beantwortet: {answered} | Richtig: {correct} | Falsch: {wrong} | Offen: {open} | Quote: {rate}%",
     },
     question: {
       readyTitle: "Bereit?",
@@ -194,9 +208,11 @@ const UI_TEXTS = {
       data: "Data",
     },
     learn: {
+      topic: "Topic",
       module: "Module",
       section: "Section",
       tagFilter: "Tag filter",
+      scopeStatsTitle: "Selection stats",
       mode: "Mode",
       nextQuestion: "Next question",
       continue: "Continue",
@@ -204,6 +220,7 @@ const UI_TEXTS = {
       modeWeak: "Weak areas first",
       modeNew: "New questions first",
       tagPlaceholder: "e.g. Chapter 1, Definition",
+      allTopics: "All topics",
       allModules: "All modules",
       allSections: "All sections",
     },
@@ -217,6 +234,7 @@ const UI_TEXTS = {
       explanation: "Explanation (optional)",
       tags: "Tags (optional)",
       source: "Source (optional)",
+      topic: "Topic (optional)",
       module: "Module (optional)",
       section: "Section (optional)",
       save: "Save question",
@@ -225,6 +243,7 @@ const UI_TEXTS = {
       explanationPlaceholder: "Short why this answer is correct",
       tagsPlaceholder: "e.g. Chapter 1, Definition",
       sourcePlaceholder: "e.g. Slide 42",
+      topicPlaceholder: "e.g. BGP",
       modulePlaceholder: "e.g. Module 1",
       sectionPlaceholder: "e.g. Section 2",
     },
@@ -248,6 +267,9 @@ const UI_TEXTS = {
       areaTitle: "Area statistics",
       noAreas: "No areas available yet.",
       areaMetrics: "Questions: {questions} | Answers: {answered} | Rate: {rate}%",
+      scopeArea: "Active selection: {area}",
+      scopeMetrics:
+        "Questions: {questions} | Answered: {answered} | Correct: {correct} | Wrong: {wrong} | Open: {open} | Rate: {rate}%",
     },
     question: {
       readyTitle: "Ready?",
@@ -373,9 +395,11 @@ function applyI18n() {
   setText("tabBuildBtn", t("tabs.build"));
   setText("tabDataBtn", t("tabs.data"));
 
+  setText("topicLabel", t("learn.topic"));
   setText("moduleLabel", t("learn.module"));
   setText("sectionLabel", t("learn.section"));
   setText("tagFilterLabel", t("learn.tagFilter"));
+  setText("scopeStatsTitle", t("learn.scopeStatsTitle"));
   setText("modeLabel", t("learn.mode"));
   setText("modeMixedOpt", t("learn.modeMixed"));
   setText("modeWeakOpt", t("learn.modeWeak"));
@@ -393,6 +417,7 @@ function applyI18n() {
   setText("buildExplanationLabel", t("build.explanation"));
   setText("buildTagsLabel", t("build.tags"));
   setText("buildSourceLabel", t("build.source"));
+  setText("buildTopicLabel", t("build.topic"));
   setText("buildModuleLabel", t("build.module"));
   setText("buildSectionLabel", t("build.section"));
   setText("saveQuestionBtn", t("build.save"));
@@ -401,6 +426,7 @@ function applyI18n() {
   setPlaceholder("qExplanation", t("build.explanationPlaceholder"));
   setPlaceholder("qTags", t("build.tagsPlaceholder"));
   setPlaceholder("qSource", t("build.sourcePlaceholder"));
+  setPlaceholder("qTopic", t("build.topicPlaceholder"));
   setPlaceholder("qModule", t("build.modulePlaceholder"));
   setPlaceholder("qSection", t("build.sectionPlaceholder"));
 
@@ -549,11 +575,22 @@ function setupTabs() {
 function setupLearnActions() {
   refs.nextQuestionBtn.addEventListener("click", nextQuestion);
   refs.continueBtn.addEventListener("click", nextQuestion);
+  refs.topicSelect.addEventListener("change", () => {
+    refreshFilterOptions();
+    refreshScopedStats();
+    resetQuestionCard();
+  });
   refs.moduleSelect.addEventListener("change", () => {
     refreshSectionOptions();
+    refreshScopedStats();
     resetQuestionCard();
   });
   refs.sectionSelect.addEventListener("change", () => {
+    refreshScopedStats();
+    resetQuestionCard();
+  });
+  refs.tagFilterInput.addEventListener("input", () => {
+    refreshScopedStats();
     resetQuestionCard();
   });
 }
@@ -631,7 +668,7 @@ async function loadData(forceSeed = false) {
   }
   const normalizedBundledSeed = normalizeQuestions(getBundledSeedQuestions());
   if (normalizedBundledSeed.length > 0 && questions.length > 0) {
-    questions = mergeMissingLocalizedFields(questions, normalizedBundledSeed);
+    questions = mergeSeedQuestions(questions, normalizedBundledSeed);
   }
   questions = normalizeQuestions(questions);
   saveQuestions();
@@ -659,6 +696,7 @@ function mergeMissingLocalizedFields(existingQuestions, seedQuestions) {
       "extraInfo_en",
       "tip_en",
       "source_en",
+      "topic_en",
       "module_en",
       "section_en",
     ];
@@ -700,8 +738,23 @@ function mergeMissingLocalizedFields(existingQuestions, seedQuestions) {
       merged.options_en = seedMatch.options_en.slice();
     }
 
+    const metadataFields = ["topic", "topic_en", "module", "module_en", "section", "section_en"];
+    metadataFields.forEach((field) => {
+      const seedValue = typeof seedMatch[field] === "string" ? seedMatch[field].trim() : "";
+      if (seedValue) {
+        merged[field] = seedValue;
+      }
+    });
+
     return merged;
   });
+}
+
+function mergeSeedQuestions(existingQuestions, seedQuestions) {
+  const mergedExisting = mergeMissingLocalizedFields(existingQuestions, seedQuestions);
+  const knownIds = new Set(mergedExisting.map((q) => q.id));
+  const missingSeedQuestions = seedQuestions.filter((q) => !knownIds.has(q.id)).map((q) => ({ ...q }));
+  return [...mergedExisting, ...missingSeedQuestions];
 }
 
 function saveQuestions() {
@@ -727,6 +780,7 @@ function normalizeQuestion(raw) {
         .filter(Boolean)
     : [];
   const source = typeof raw.source === "string" ? raw.source.trim() : "";
+  const inferredTopic = inferTopic(raw, tags, source);
   const inferredModule = inferModule(raw, tags, source);
   const inferredSection = inferSection(raw, tags, source);
 
@@ -747,11 +801,34 @@ function normalizeQuestion(raw) {
     tags,
     source,
     source_en: typeof raw.source_en === "string" ? raw.source_en.trim() : "",
+    topic: sanitizeTopic(raw.topic || inferredTopic),
+    topic_en: typeof raw.topic_en === "string" ? toEnglishTopicName(raw.topic_en) : "",
     module: sanitizeModule(raw.module || inferredModule),
     module_en: typeof raw.module_en === "string" ? toEnglishModuleName(raw.module_en) : "",
     section: sanitizeSection(raw.section || inferredSection),
     section_en: typeof raw.section_en === "string" ? toEnglishSectionName(raw.section_en) : "",
   };
+}
+
+function sanitizeTopic(value) {
+  const text = typeof value === "string" ? value.trim() : "";
+  if (!text) return DEFAULT_TOPIC;
+  const normalized = text.toLowerCase();
+  if (
+    normalized === "hauptquiz" ||
+    normalized === "hauptquizfragen" ||
+    normalized === "hauptfragen" ||
+    normalized === "main quiz" ||
+    normalized === "main questions" ||
+    normalized === "telecommunication" ||
+    normalized === "telecom"
+  ) {
+    return DEFAULT_TOPIC;
+  }
+  if (normalized === "bgp" || normalized.startsWith("bgp ")) {
+    return "BGP";
+  }
+  return text;
 }
 
 function sanitizeModule(value) {
@@ -778,10 +855,41 @@ function toEnglishModuleName(value) {
   return text;
 }
 
+function toGermanTopicName(value) {
+  const text = typeof value === "string" ? value.trim() : "";
+  if (!text) return "";
+  const normalized = text.toLowerCase();
+  if (normalized === "main quiz" || normalized === "main questions") return DEFAULT_TOPIC;
+  if (normalized === "bgp") return "BGP";
+  return text;
+}
+
+function toEnglishTopicName(value) {
+  const text = sanitizeTopic(value || "");
+  if (!text) return "";
+  if (text === DEFAULT_TOPIC) return "Main Quiz";
+  if (text.toLowerCase() === "bgp") return "BGP";
+  return text;
+}
+
 function toEnglishSectionName(value) {
   const text = typeof value === "string" ? value.trim() : "";
   if (!text) return "";
   return sanitizeSection(text);
+}
+
+function inferTopic(raw, tags, source) {
+  if (typeof raw.topic === "string" && raw.topic.trim()) return raw.topic.trim();
+  if (typeof raw.topic_en === "string" && raw.topic_en.trim()) return toGermanTopicName(raw.topic_en.trim());
+  const idText = String(raw.id || "").toLowerCase();
+  const normalizedSource = String(source || "").toLowerCase();
+  const normalizedTags = tags.map((tag) => String(tag || "").trim().toLowerCase());
+  const questionText = String(raw.question || "").toLowerCase();
+  if (idText.startsWith("bgp-")) return "BGP";
+  if (normalizedSource.includes("bgp grundlagen") || normalizedSource.includes("bgp fundamentals")) return "BGP";
+  if (normalizedTags.includes("bgp")) return "BGP";
+  if (questionText.includes("border gateway protocol")) return "BGP";
+  return DEFAULT_TOPIC;
 }
 
 function inferModule(raw, tags, source) {
@@ -848,7 +956,19 @@ function refreshExport() {
 }
 
 function refreshFilterOptions() {
-  const modules = uniqueSorted(questions.map((q) => sanitizeModule(q.module)).filter(Boolean));
+  const topics = uniqueSorted(questions.map((q) => sanitizeTopic(q.topic)).filter(Boolean));
+  const currentTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
+  setSelectOptions(refs.topicSelect, t("learn.allTopics"), topics, currentTopic, (value) =>
+    localizeTopicName(value)
+  );
+
+  const selectedTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
+  const modules = uniqueSorted(
+    questions
+      .filter((q) => !selectedTopic || sanitizeTopic(q.topic) === selectedTopic)
+      .map((q) => sanitizeModule(q.module))
+      .filter(Boolean)
+  );
   const currentModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
   setSelectOptions(refs.moduleSelect, t("learn.allModules"), modules, currentModule, (value) =>
     localizeModuleName(value)
@@ -857,9 +977,11 @@ function refreshFilterOptions() {
 }
 
 function refreshSectionOptions() {
+  const selectedTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
   const selectedModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
   const sections = uniqueSorted(
     questions
+      .filter((q) => !selectedTopic || sanitizeTopic(q.topic) === selectedTopic)
       .filter((q) => !selectedModule || sanitizeModule(q.module) === selectedModule)
       .map((q) => sanitizeSection(q.section))
       .filter(Boolean)
@@ -901,6 +1023,15 @@ function setSelectOptions(selectEl, allLabel, values, preferredValue, labelForma
   }
 }
 
+function localizeTopicName(topicName) {
+  const text = (topicName || "").trim();
+  if (!text) return text;
+  if (currentLanguage === "en") {
+    return toEnglishTopicName(text);
+  }
+  return toGermanTopicName(text);
+}
+
 function localizeModuleName(moduleName) {
   const text = (moduleName || "").trim();
   if (!text) return text;
@@ -935,6 +1066,15 @@ function getLocalizedOptions(q) {
     return deOptions.map((o) => autoTranslateDeToEn(String(o)));
   }
   return deOptions;
+}
+
+function getLocalizedTopic(q) {
+  const topicDe = q && typeof q.topic === "string" ? q.topic : DEFAULT_TOPIC;
+  const topicEn = q && typeof q.topic_en === "string" ? q.topic_en : "";
+  if (currentLanguage === "en") {
+    return topicEn.trim() || localizeTopicName(topicDe);
+  }
+  return toGermanTopicName(topicDe);
 }
 
 function getLocalizedModule(q) {
@@ -1056,7 +1196,55 @@ function refreshStats() {
   refs.statAnswered.textContent = String(answered);
   refs.statCorrect.textContent = String(correct);
   refs.statAccuracy.textContent = `${accuracy.toFixed(1)}%`;
+  refreshScopedStats();
   refreshAreaStats();
+}
+
+function refreshScopedStats() {
+  if (!refs.scopeStats || !refs.scopeStatsBody) return;
+
+  const selectedModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
+  const selectedSection = refs.sectionSelect.value ? sanitizeSection(refs.sectionSelect.value) : "";
+
+  if (!selectedModule && !selectedSection) {
+    refs.scopeStats.classList.add("hidden");
+    refs.scopeStatsBody.textContent = "";
+    return;
+  }
+
+  const filtered = applyFilter(
+    questions,
+    refs.tagFilterInput.value || "",
+    refs.topicSelect.value || "",
+    refs.moduleSelect.value || "",
+    refs.sectionSelect.value || ""
+  );
+
+  const total = filtered.length;
+  const answeredQuestions = filtered.filter((q) => getProgressSnapshot(q).answered > 0);
+  const answered = answeredQuestions.length;
+  const correct = answeredQuestions.filter((q) => getProgressSnapshot(q).correct > 0).length;
+  const wrong = answeredQuestions.filter((q) => getProgressSnapshot(q).correct === 0).length;
+  const open = Math.max(0, total - answered);
+  const rate = answered > 0 ? ((correct / answered) * 100).toFixed(1) : "0.0";
+
+  const areaParts = [];
+  const selectedTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
+  if (selectedTopic) areaParts.push(localizeTopicName(selectedTopic));
+  if (selectedModule) areaParts.push(localizeModuleName(selectedModule));
+  if (selectedSection) areaParts.push(localizeSectionName(selectedSection));
+  const areaLabel = areaParts.join(" / ");
+
+  refs.scopeStatsTitle.textContent = t("learn.scopeStatsTitle");
+  refs.scopeStatsBody.textContent = `${t("overview.scopeArea", { area: areaLabel })} | ${t("overview.scopeMetrics", {
+    questions: total,
+    answered,
+    correct,
+    wrong,
+    open,
+    rate,
+  })}`;
+  refs.scopeStats.classList.remove("hidden");
 }
 
 function refreshAreaStats() {
@@ -1064,12 +1252,13 @@ function refreshAreaStats() {
 
   const grouped = new Map();
   questions.forEach((q) => {
+    const topic = sanitizeTopic(q.topic || DEFAULT_TOPIC);
     const module = sanitizeModule(q.module || DEFAULT_MODULE);
     const section = sanitizeSection(q.section || DEFAULT_SECTION);
-    const key = `${module}||${section}`;
+    const key = `${topic}||${module}||${section}`;
     const p = getProgressSnapshot(q);
     if (!grouped.has(key)) {
-      grouped.set(key, { module, section, questions: 0, answered: 0, correct: 0 });
+      grouped.set(key, { topic, module, section, questions: 0, answered: 0, correct: 0 });
     }
     const item = grouped.get(key);
     item.questions += 1;
@@ -1079,6 +1268,8 @@ function refreshAreaStats() {
 
   refs.areaStats.innerHTML = "";
   const areas = Array.from(grouped.values()).sort((a, b) => {
+    const byTopic = a.topic.localeCompare(b.topic, "de");
+    if (byTopic !== 0) return byTopic;
     const byModule = a.module.localeCompare(b.module, "de");
     if (byModule !== 0) return byModule;
     return a.section.localeCompare(b.section, "de");
@@ -1097,7 +1288,7 @@ function refreshAreaStats() {
 
     const name = document.createElement("span");
     name.className = "area-name";
-    name.textContent = `${localizeModuleName(area.module)} / ${localizeSectionName(area.section)}`;
+    name.textContent = `${localizeTopicName(area.topic)} / ${localizeModuleName(area.module)} / ${localizeSectionName(area.section)}`;
 
     const metrics = document.createElement("span");
     metrics.className = "area-metrics";
@@ -1120,6 +1311,7 @@ function buildQuestionFromForm() {
   const questionText = refs.qQuestion.value.trim();
   const explanationText = refs.qExplanation.value.trim();
   const sourceText = refs.qSource.value.trim();
+  const topicText = sanitizeTopic(refs.qTopic.value || refs.topicSelect.value || DEFAULT_TOPIC);
   const moduleText = sanitizeModule(refs.qModule.value || refs.moduleSelect.value);
   const sectionText = sanitizeSection(refs.qSection.value || refs.sectionSelect.value);
   const tags = refs.qTags.value
@@ -1139,6 +1331,8 @@ function buildQuestionFromForm() {
     tags,
     source: sourceText,
     source_en: autoTranslateDeToEn(sourceText),
+    topic: topicText,
+    topic_en: toEnglishTopicName(topicText),
     module: moduleText,
     module_en: toEnglishModuleName(moduleText),
     section: sectionText,
@@ -1240,6 +1434,7 @@ function nextQuestion() {
   const filtered = applyFilter(
     questions,
     refs.tagFilterInput.value,
+    refs.topicSelect.value,
     refs.moduleSelect.value,
     refs.sectionSelect.value
   );
@@ -1254,11 +1449,13 @@ function nextQuestion() {
   renderQuestion(selected);
 }
 
-function applyFilter(items, rawFilter, moduleFilter, sectionFilter) {
+function applyFilter(items, rawFilter, topicFilter, moduleFilter, sectionFilter) {
   const filter = rawFilter.trim().toLowerCase();
+  const wantedTopic = topicFilter ? sanitizeTopic(topicFilter) : "";
   const wantedModule = moduleFilter ? sanitizeModule(moduleFilter) : "";
   const wantedSection = sectionFilter ? sanitizeSection(sectionFilter) : "";
   return items.filter((q) => {
+    if (wantedTopic && sanitizeTopic(q.topic) !== wantedTopic) return false;
     if (wantedModule && sanitizeModule(q.module) !== wantedModule) return false;
     if (wantedSection && sanitizeSection(q.section) !== wantedSection) return false;
     if (!filter) return true;
@@ -1299,7 +1496,7 @@ function randomItem(arr) {
 
 function renderQuestion(q) {
   refs.questionTitle.textContent = getLocalizedField(q, "question");
-  const area = `${getLocalizedModule(q)} / ${getLocalizedSection(q)}`;
+  const area = `${getLocalizedTopic(q)} / ${getLocalizedModule(q)} / ${getLocalizedSection(q)}`;
   const tags = (q.tags || []).join(", ");
   const source = getLocalizedField(q, "source");
   const metaParts = [`${t("question.areaPrefix")}: ${area}`];

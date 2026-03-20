@@ -875,7 +875,839 @@ SDP-Praxis:
 Merksatz:
 - Path vor LSP, SDP vor Service-Binding, dann erst stabile Label-/Service-Operation.
 
+### N6) Was benutze ich wann? (LDP-LSP vs RSVP-TE-LSP vs GRE)
+
+Grundlogik:
+- SDP bindet einen Service an eine Transportmethode.
+- Transportmethode ist typischerweise eine von drei Optionen:
+  - LDP-LSP (MPLS, IGP-folgend)
+  - RSVP-TE-LSP (MPLS, explizite/feinere Pfadsteuerung)
+  - GRE-Tunnel (IP-Tunneltransport)
+
+SDP-Konfigurationsmerker:
+- `far-end`:
+  - zeigt auf den Remote-PE (typisch System-IP).
+  - im Kurskontext zugleich relevante Peer-Zieladresse fuer tLDP-Service-Signaling.
+- `lsp <name>`:
+  - nutzt du typischerweise, wenn ein RSVP-TE-LSP bereits definiert wurde und das SDP genau diesen Pfad nutzen soll.
+
+MPLS-LSPs:
+- koennen dynamisch signalisiert werden (z. B. LDP/RSVP-TE),
+- oder in Spezialfaellen statisch hop-by-hop konfiguriert werden.
+
+tLDP Ende-zu-Ende:
+- Service-Signaling muss auf beiden PE-Enden kompatibel aktiv sein.
+- Einseitige Aktivierung reicht nicht fuer sauberen VC-/Service-Label-Austausch.
+
+Binding-Typen:
+- `spoke-sdp <sdp-id>:<vc-id>`
+  - typischer PW-/Punkt-zu-Punkt-Binding-Stil
+  - links: Transportweg (SDP)
+  - rechts: Service-/PW-Kontext (VC-ID)
+- `mesh-sdp`
+  - typischerweise fuer VPLS (Multipoint)
+
+Merksatz:
+- Erst fragen: \"Welcher Transportpfad?\" (LDP/RSVP/GRE)
+- Dann fragen: \"Wie binde ich den Service darauf?\" (spoke/mesh + VC-ID)
+
+### N7) Zusatz-Merker: tLDP-Servicetypen und ID-Signifikanz
+
+tLDP-Service-Merker:
+- tLDP-Sessions werden im Kurskontext typischerweise fuer VPWS und VPLS verwendet.
+- VPWS:
+  - P2P-Pseudowire / virtuelle Standleitung.
+- VPLS:
+  - logische Gruppe von Pseudowires mit MAC-Learning (multipoint L2-Verhalten).
+
+ID-Signifikanz (Merktabelle):
+- SAP-ID: lokal signifikant
+- SDP-ID: lokal signifikant
+- VC-ID: P2P-/PW-Kontext (Ende-zu-Ende zwischen Service-Enden abzustimmen)
+- Service-ID: global signifikant
+- Customer-ID: global signifikant
+
+Merksatz:
+- Access-/Transportobjekte oft lokal, Verwaltungs-/Serviceobjekte oft global.
+
 ---
 
 ## Offene Punkte / naechste Inhalte
 - Hier tragen wir neue Themen ein, sobald du sie schickst.
+
+## Kapitel O - Modul 2 Section 1: VPWS / Epipe (SAP Encapsulation)
+
+### O1) epipe / VPWS Grundidee
+- epipe ist im Nokia-Kontext ein Ethernet Point-to-Point Service (VPWS/Pseudowire-orientiert).
+- Zentral fuer den Access-Einstieg ist die SAP-Encapsulation:
+  - Sie bestimmt, wie Frames einem Service zugeordnet werden (Service-Delineation).
+
+### O2) Encapsulation-Typen auf Ethernet-SAPs
+- `null`
+  - kein VLAN-Tag als Service-Delimiter
+  - typisch, wenn ein einzelner CE/Service den Port nutzt
+  - VLAN-Tags werden dann als Kundendaten behandelt (nicht als Netz-Delimiter)
+- `dot1q`
+  - ein Q-Tag als Service-Delimiter
+  - 12-Bit VLAN-ID-Feld (mit Sonder-/Reservierungswerten)
+- `qinq`
+  - zwei Q-Tags (outer/inner) als Delimiting-/Transportmodell
+  - oft: outer = Provider-Tag, inner = Customer-Tag (designabhaengig)
+
+Merktabelle (Service-Delimiting-Tags):
+- `null` -> 0
+- `dot1q` -> 1
+- `qinq` -> 2
+
+### O3) VLAN-ID-Sonderfaelle (kursnah)
+- VLAN-ID `0`
+  - Sonderfall fuer Priority-Tagged / 802.1p-Kontext
+  - kein normales Kunden-Service-VLAN wie die typischen Werte
+- VLAN-ID `4095`
+  - reserviert
+
+Pruefungs-Merker:
+- 12 Bit bedeuten viele Werte, aber nicht alle sind normale Service-IDs fuer Dot1Q-Delimiting.
+
+### O4) Verhalten am SAP-Ingress
+- Bei `dot1q`:
+  - nur Frames mit passendem VLAN-Tag werden dem Service zugeordnet
+  - das service-delimiting Tag wird am SAP-Ingress gestripped
+- Bei `qinq`:
+  - nur Frames mit passendem outer+inner Tag werden zugeordnet
+  - service-delimiting Tags werden am SAP-Ingress gestripped
+- Frame Check Sequence (FCS):
+  - wird im Kurskontext am SAP-Ingress ebenfalls entfernt
+
+Wichtig:
+- Bei Dot1Q/QinQ haben VLAN-Tags logische Signifikanz fuer die Servicezuordnung.
+
+### O5) Spezielle SAP-Werte (kursnah)
+- `1/1/1:*`
+  - Wildcard-/Catch-all-Verhalten fuer untagged und nicht anderweitig belegte Tag-Werte (kursnah beschrieben)
+  - VLAN-Tags koennen transparent weitergegeben werden (nicht als Delimiting-Tags gestripped)
+- `1/1/1:0` (Null-SAP)
+  - typischerweise untagged Frames + VLAN-0-Frames
+
+### O6) Exklusivitaetsregel
+- Null-SAP und Default-SAP sind auf demselben Port gegenseitig ausschliessend (mutually exclusive).
+
+Merksatz:
+- Erst festlegen, ob VLAN-Tags zur Service-Abgrenzung dienen sollen.
+- Danach passend waehlen: `null`, `dot1q` oder `qinq`.
+
+### O7) Spezielle QinQ-SAP-Werte (Vertiefung)
+- `port:x.*`
+  - fester outer Tag `x`, inner Tag flexibel (kursnah oft auch "inner transparent")
+- `port:0.*`
+  - Null-/Default-Sonderfall im QinQ-Kontext
+  - typischerweise untagged oder outer VLAN `0`
+- `port:x.0`
+  - fester outer Tag `x` mit inner `0` bzw. kursnah no-inner-/Null-bottom-Sonderfall
+- `port:*.*`
+  - nicht pauschal "immer unmoeglich" auf 7750
+  - Verfuegbarkeit/Verhalten ist release-/featureabhaengig (Kursunterlagen koennen eingeschraenkt vereinfachen)
+
+Wichtiger Merker:
+- In `port:qtag1.qtag2` ist `qtag1` der outer/top Tag und `qtag2` der inner/bottom Tag.
+
+### O8) Tag-Stripping-Ausnahmen und TPID/Ethertype
+- Regelfall:
+  - bei regulaeren Dot1Q/QinQ-Delimiting-SAPs werden die Service-Delimiting-Tags ausgewertet und gestripped
+- Wichtige Ausnahme:
+  - bestimmte Default-/Special-QinQ-SAPs koennen Tags transparent behandeln
+
+Beispiel (kursnah):
+- SAP `port:0.*`, Frame mit outer `0` und inner `10`
+  - outer `0` wird fuer die Zuordnung genutzt und entfernt
+  - inner `10` kann transparent weitertransportiert werden
+
+TPID/Ethertype:
+- `0x8100` ist der klassische 802.1Q-TPID/Ethertype fuer VLAN-Tag-Erkennung
+- Fuer outer/inner Tags koennen (plattform-/kontextabhaengig) unterschiedliche erwartete TPID-Werte konfiguriert werden
+- Wenn der TPID nicht zum erwarteten Wert passt, entsteht typischerweise ein Matching-/Klassifizierungsproblem (kursnah oft als `untagged/non-matching` vereinfacht)
+
+### O9) MTU-Ueberblick im MPLS-Servicepfad
+Wichtige MTU-Ebenen im Kurskontext:
+- SAP/Access-Port-MTU
+- Service-MTU
+- SDP Path MTU
+- Network-Port-MTU
+
+Merker:
+- Die MTU muss als Kette passen. Ein einzelner zu kleiner Wert reicht fuer Drops.
+
+### O10) SAP MTU, Service MTU und "service-delimiting" Tags
+SAP MTU (kursnah):
+- `null` typischerweise `1514`
+- `dot1q` typischerweise `1518` (`+4` Byte fuer ein VLAN-Tag)
+- `qinq` typischerweise `1522` (`+8` Byte fuer zwei VLAN-Tags)
+
+Was bedeutet "service-delimiting"?
+- Ein VLAN-Tag dient am SAP zur Auswahl/Zuordnung des richtigen Services.
+- Bei regulaeren Dot1Q/QinQ-SAPs wird dieser Delimiting-Tag am SAP-Ingress typischerweise ausgewertet und gestripped.
+- Dann zaehlt dieser Tag nicht mehr zur Service-Frame-Groesse im Servicekern.
+
+Wichtig fuer die MTU-Rechnung:
+- Wenn Tags transparent mittransportiert werden (z. B. Wildcard-/Default-Verhalten wie `port:*` im Kursbeispiel), bleiben sie Teil des Service-Frames.
+- Dadurch kann aus einer Service-Groesse von `1514` schnell `1518` werden.
+- Dann muss haeufig die Service-MTU erhoeht werden.
+
+Service MTU (kursnah):
+- Default fuer Ethernet Layer-2 Service oft `1514` (`1500` Payload + `14` Byte Ethernet-Header, ohne FCS)
+- Regel: `SAP MTU >= Service MTU`
+
+### O11) SDP Path MTU (kursnah)
+- SDP Path MTU = groesste Frame-Groesse, die ueber den SDP transportiert werden kann
+- Kursformel (vereinfacht):
+  - `SDP Path MTU = Network Port MTU - Layer-2 Header - MPLS Overhead`
+
+Hinweise:
+- Der MPLS-Overhead kann je nach Label-Anzahl variieren
+- Bei RSVP/LDP/GRE ist der Overhead-/Transportkontext unterschiedlich
+- Wenn Service-MTU steigt, muss auch der SDP Path MTU weiterhin ausreichen
+
+Regeln:
+- `SDP Path MTU >= Service MTU`
+- SDP Path MTU muss nicht zwingend auf beiden Seiten exakt gleich sein
+- Aenderungen sind ueber Network-Port-MTU und/oder SDP-MTU-Konfiguration relevant
+
+Zusatz (Layer 2 vs Layer 3):
+- Oversized Layer-2 Frames werden typischerweise gedroppt
+- Layer-3 Fragmentierung kann (wenn erlaubt) passieren, ist aber teuer und wird meist vermieden
+
+### O12) Network-Port-MTU und konkrete SDP-Path-MTU-Rechnungen (kursnah)
+Default-Tabelle (dein Kurs):
+- Ethernet access `null` = `1514`
+- Ethernet access `dot1q` = `1518`
+- Ethernet access `qinq` = `1522`
+- Fast Ethernet network = `1514`
+- Gigabit Ethernet network = `9212`
+
+Beispiel MPLS-SDP (kursnah):
+- Wenn mit `9212` gerechnet wird und zwei MPLS-Labels (Transport + Service) sowie Ethernet-Header abgezogen werden, bleibt die SDP Path MTU uebrig.
+- Wichtiger Rechenhinweis:
+  - `9190` ergibt sich nur mit `14` Byte Ethernet-Header: `9212 - 14 - 4 - 4 = 9190`
+  - mit `12` Byte waere das Ergebnis `9192`
+
+Beispiel GRE-SDP (kursnah):
+- `9212 - 14 (Eth) - 20 (IP) - 4 (GRE) - 4 (Service Label) = 9170`
+- Wenn irgendwo `1970` steht, ist das ein Zahlendreher/Rechenfehler.
+
+Zusatz-Overhead:
+- Facility-Backup oder LDP-over-RSVP koennen weitere MPLS-Labels hinzufuegen
+- Pro zusaetzlichem Label: `+4` Byte Overhead
+- Zwei zusaetzliche Labels: `+8` Byte Overhead
+
+### O13) Effektive SDP Path MTU messen vs. herleiten
+Messen/Pruefen:
+- Auf 7750 kann ein OAM SDP-MTU-Path-Test genutzt werden (kursnah als `oam sdp-mtu` bezeichnet)
+- Damit pruefst du die praktisch erreichbare Path MTU eines SDP
+
+Herleiten (Control Plane, RSVP-TE):
+- Bei signaled RSVP-TE LSPs kann `adspec` genutzt werden
+- Das ADSPEC-Objekt sammelt Pfadinformationen (inkl. MTU-bezogenem Wert) entlang des RSVP-Pfads
+- Die effektive LSP-/Path-MTU orientiert sich am kleinsten MTU-Wert auf dem Pfad (Bottleneck)
+- Aendert sich der RSVP-Pfad, kann sich auch die effektive MTU aendern
+
+### O14) VC-MTU (Layer 2) vs. operative IP-MTU (Layer 3) - einfach erklaert
+Layer 2 (z. B. Epipe / PW):
+- Hier ist `Service MTU` zentral
+- `VC-MTU` (advertised MTU) ist kursnah die nutzbare Payload-Groesse im Service-Tunnel
+- Fuer Ethernet gilt im Kurs oft: `VC-MTU = Service-MTU - 14`
+- Beispiel: `1514 -> 1500`
+- Diese advertised/VC-MTU wird im T-LDP-/PW-Kontext ausgetauscht und muss zur Gegenseite passen
+
+Layer 3 (IES/VPRN):
+- Hier denkt man eher in `IP MTU` statt im Layer-2-Service-MTU-Modell
+- Es gibt eine administrative IP-MTU (konfiguriert) und eine operative IP-MTU (tatsaechlich nutzbar)
+- Die operative IP-MTU ist durch den Unterbau begrenzt:
+  - bei SAP-Anbindung durch SAP-MTU
+  - bei spoke-SDP-Anbindung durch SDP Path MTU
+- Vereinfacht:
+  - `operational IP MTU <= admin IP MTU`
+  - `operational IP MTU <= SAP MTU` oder `<= SDP Path MTU`
+
+Warum du "zweimal Ethernet Header" siehst (dein Gedanke):
+- In manchen kursnahen Herleitungen wird erst die SDP Path MTU vom Network-Port inkl. Link-/Tunnel-Overhead abgeleitet
+- Danach wird fuer eine IP-Payload-/VC-nahe Betrachtung nochmal Ethernet-Header-Anteil subtrahiert
+- Das ist keine doppelte "echte" Uebertragung desselben Headers, sondern eine gestufte Herleitung ueber verschiedene MTU-Ebenen
+
+Dummy-Merksatz:
+- L2: `Service MTU` + `VC-MTU` denken
+- L3: `Admin IP MTU` vs `Oper IP MTU` denken
+- Immer pruefen, welches Glied in der Kette der kleinste Wert ist
+
+### O15) Dot1Q service-delimiting + MPLS Labels (Praxisbeispiel)
+Wichtiger Merker:
+- DLC = Ethernet/L2-Header (nicht vergessen)
+
+Beispiel (kursnah):
+- Frame kommt an einem Dot1Q-SAP an: `1518` Byte (inkl. 1 VLAN-Tag)
+- Das VLAN-Tag (z. B. `50`) ist service-delimiting
+- Am SAP wird dieses Delimiting-Tag gestripped
+- Es bleibt der Service-Frame mit:
+  - `1500` Payload
+  - `+14` Byte Ethernet/DLC-Header
+  - also `1514` Byte
+- Danach wird fuer MPLS transportiert:
+  - `+4` Byte Transport-Label
+  - `+4` Byte Service-Label
+- Tunnel-Frame (kursnah gerechnet): `1514 + 8 = 1522`
+
+Haeufiger Fehler:
+- Das Delimiting-Tag wird korrekt entfernt, aber versehentlich wird auch der Ethernet/DLC-Header "mit weggedacht".
+
+### O16) MTU mit Ping testen (DF / do-not-fragment)
+Kurslogik (IPv4-Ping-Test):
+- `ping <ip> size 1472 do-not-fragment` funktioniert typischerweise bei `1500` Byte IP-MTU
+- Grund:
+  - `1472` (ICMP-Daten)
+  - `+20` Byte IPv4-Header
+  - `+8` Byte ICMP-Header
+  - `= 1500` Byte IP-Paket
+
+Warum `1473` scheitert (mit DF):
+- `1473 + 20 + 8 = 1501` Byte
+- Das ist `1` Byte ueber `1500`
+- Mit gesetztem DF-Bit darf das Paket nicht fragmentiert werden -> Test scheitert
+
+Ohne DF-Bit:
+- Dann kann (wenn erlaubt/moeglich) IP-Fragmentierung stattfinden
+- Wichtig: Das ist Layer-3-Fragmentierung, nicht Layer-2-Frame-Fragmentierung im Service
+
+Dummy-Merksatz:
+- Ping-Groesse + `28` Byte (IPv4+ICMP) = echte IP-Paketgroesse
+
+### O17) Payload-Erhoehung auf 1504 bei Dot1Q (service-delimiting) - Schritt fuer Schritt
+Szenario:
+- Kunde will Payload von `1500` auf `1504` erhoehen
+- Dot1Q-SAP, VLAN ist service-delimiting
+
+Rechnung (kursnah):
+1. Neue Service-Frame-Groesse berechnen
+- `1504` Payload + `14` Byte Ethernet/DLC = `1518`
+- -> `Service MTU` muss auf `1518` erhoeht werden
+
+2. SAP-Ingress bedenken (Delimiting-Tag ist beim Eingang noch da)
+- Das Dot1Q-Tag wird erst am SAP ausgewertet und dann gestripped
+- Daher kann am SAP ein Frame von `1518 + 4 = 1522` ankommen
+- -> `SAP MTU` muss auf `1522` erhoeht werden
+
+Merksatz:
+- Service sieht nach Strip `1518`
+- SAP muss vor Strip `1522` schlucken koennen
+
+### O18) SDP-Path-MTU bestimmen und Overhead rueckrechnen
+Classic CLI (kursnah beschrieben):
+- `oam sdp-mtu <serviceid> size-inc <wert1> <wert2> step <increment>`
+- Zweck: durch Herantasten die effektiv nutzbare SDP Path MTU bestimmen
+
+Danach (Basisfall MPLS) haeufige Rueckrechnung Richtung Network-Port-MTU:
+- `+14` Byte DLC/Ethernet Header
+- `+4` Byte Transport-Label
+- `+4` Byte Service-Label
+- zusammen oft `+22` Byte (ohne weitere zusaetzliche Labels)
+
+### O19) ADSPEC/RSVP-TE, PathMTUTooSmall und LSP-Trace (Troubleshooting)
+ADSPEC (einfach erklaert):
+- Wenn ein SDP einen RSVP-TE-LSP als Transport nutzt, kann ADSPEC helfen, die effektive Path-MTU des LSPs aus dem Pfad abzuleiten
+- Diese effektive MTU orientiert sich am kleinsten MTU-Wert entlang des Pfads (Bottleneck)
+- Aendert sich der RSVP-Pfad, kann sich die effektive MTU dynamisch mit aendern
+
+Warum ein Service ohne ADSPEC "up" wirken kann:
+- Ohne erkennbare effektive Path-MTU sieht man Engpaesse oft erst im Datenpfad (bei grossen Frames)
+- Ein Jumbo-Service (z. B. `9000`) kann formal up sein, obwohl irgendwo im Core ein kleiner Port limitiert
+
+Mit ADSPEC/MTU-Erkennung kann dann sichtbar werden:
+- `minReqd MTU` (vom Service benoetigt) > `oper path MTU` (real verfuegbar)
+- Flag wie `PathMTUTooSmall`
+- Folge: Service/SDP wird als MTU-problematisch erkannt (ggf. down/failed, je nach Verhalten/Statusmodell)
+
+Typische Diagnosekette:
+1. `show service id <id> sdp <spoke-sdp> detail` -> `minReqd MTU`, `oper path MTU`, Flags pruefen
+2. `oam lsp-trace rsvp-te ... output-format detail` -> problematischen Hop/Port finden
+3. Kleine `MRU`/Port-MTU im Core korrigieren
+
+Hinweis zu MRU (kursnah):
+- In manchen Outputs wird `MRU` als relevante physische Port-Groesse angezeigt
+- Fuer dein Troubleshooting ist das praktisch das Feld, an dem du den zu kleinen Port erkennst
+
+### O20) SDP und VC Type (RFC 4448) - einfach erklaert
+Grundidee:
+- RFC 4448 beschreibt fuer Ethernet Pseudowires zwei zentrale VC-Typ-Sichten:
+  - Ethernet Raw Mode
+  - Ethernet Tagged Mode (oft als VLAN-spezifischer Modus bezeichnet)
+
+Wo wird das relevant?
+- Beim Binden eines Services an ein SDP/PW-Kontext (z. B. spoke-sdp)
+- Im T-LDP-Signaling zwischen den PE-Routern
+
+Raw Mode (kursnah als Default-Sicht):
+- Service-delimiting VLAN-Tag wird am Ingress typischerweise gestripped
+- Dieses Delimiting-Tag wird nicht als Nutz-Tag durch die epipe getragen
+
+Tagged Mode (VC Type VLAN):
+- VLAN-Tag bleibt als Teil des transportierten Frames erhalten
+- Wird oft fuer Interoperabilitaet mit Gegenstellen benoetigt, die tagged mode erwarten
+- Folge fuer MTU:
+  - Das VLAN-Tag muss in der Service-MTU-Betrachtung mitgezaehlt werden (`+4` Byte)
+
+Wichtiger Tag-Merker:
+- Ein ankommender VLAN-Tag ist nur dann service-delimiting, wenn er auf die SAP-Encapsulation matcht
+- Matcht er nicht als Delimiter, kann er je nach Modus transparenter Nutz-Tag sein
+
+Dot1Q mit VLAN 0 (kursnah):
+- Untagged Traffic und VLAN-ID-0-Traffic koennen auf denselben SAP-Kontext gemappt werden
+- VLAN 0 bleibt ein Sonderfall (Priority-Tag-Kontext)
+
+Kurzvergleich:
+- service-delimiting VLAN (oft Provider-Sicht): Tag dient primaer der Servicezuordnung
+- transparent carried VLAN (Nutzsicht): Tag bleibt Teil des transportierten Kundendaten-Frames
+
+## Kapitel P - Modul 2 Section 2: VPLS Label Signaling
+
+### P1) Grundprinzip
+- In VPLS sind die beteiligten PE-Router T-LDP-Peers fuer den jeweiligen Service
+- Diese PE-Enden tauschen die Service-/PW-Labels fuer den Dienst aus
+- Eine PE-Serviceinstanz wird kursnah oft als virtueller Switch (VS) betrachtet
+
+### P2) Topologie-Idee
+- VPLS kann man als multipoint-L2-Dienst mit Full-Mesh-Charakter zwischen den beteiligten PEs verstehen
+- Zwischen zwei PE-Routern reicht typischerweise eine T-LDP-Session, ueber die mehrere Services signalisiert werden koennen
+
+### P3) VC-ID und Service-Zustand
+- Bei p2p-PW-/spoke-Kontext muss die VC-ID Ende-zu-Ende passen
+- Bei VC-ID-Mismatch kommt kein passender Service-/PW-Labelkontext zustande
+
+### P4) Broadcast-Domain und MAC-Learning
+- Alle SAPs eines VPLS gehoeren zur selben L2-Broadcast-Domain des Services
+- Pro Service gibt es eine eigene MAC-Learning-/Forwarding-Sicht (virtueller Switch pro Service)
+
+### P5) Unknown vs Known Unicast
+- Unknown destination (MAC unbekannt):
+  - standardmaessig Flooding/Replication auf alle relevanten PWs/LSPs im Service
+- Known unicast (MAC gelernt):
+  - gezielte Weiterleitung nur zum bekannten Ziel
+
+Merksatz:
+- VPLS funktioniert wie ein verteilter virtueller Switch:
+  - erst lernen (MAC), dann gezielt weiterleiten
+
+## Kapitel Q - BGP Modul 1 Section 2: BGP Overview
+
+### Q1) BGP Grundidee
+- BGP = Border Gateway Protocol
+- Es ist das zentrale Inter-Domain-Routingprotokoll zwischen autonomen Systemen (AS)
+- BGP wird klassisch als Path-Vector-Protokoll betrachtet
+
+### Q2) Session und Typen
+- BGP-Session laeuft ueber TCP Port 179
+- eBGP: zwischen verschiedenen AS
+- iBGP: innerhalb desselben AS
+
+### Q3) Wichtige BGP-Konzepte im Overview
+- BGP nutzt Attribute (z. B. LOCAL_PREF, AS_PATH, MED, NEXT_HOP) fuer Pfadwahl und Policy
+- AS_PATH hilft bei Schleifenvermeidung zwischen AS
+- Updates sind typischerweise inkrementell (nach initialem Austausch)
+- Keepalives halten die Session lebendig
+
+### Q4) BGP und IGP (Zusammenspiel)
+- IGP stellt intern Reachability bereit (Unterbau im AS)
+- BGP trifft Inter-Domain-/Policy-Entscheidungen
+- Next-Hop-Erreichbarkeit bleibt ein zentraler Praxispunkt
+
+### Q5) Skalierungshinweis
+- iBGP basiert klassisch auf Full-Mesh-Idee
+- Fuer groessere Netze kommen spaeter Mechanismen wie Route Reflector hinzu
+
+Dummy-Merksatz:
+- IGP sagt: "Wie komme ich intern hin?"
+- BGP sagt: "Welchen externen Pfad will ich policy-seitig nutzen?"
+
+### Q6) AS, ASN und interne Protokolle
+- Ein AS ist eine Router-Sammlung unter einer gemeinsamen Administration.
+- Jedes AS hat eine ASN (AS-Nummer), die im Internet-Kontext eindeutig sein muss.
+- Kursnah: ASN-Zuteilung ueber Regional Internet Registries (RIR).
+- Innerhalb eines AS laufen typischerweise IGP/IRP-Protokolle wie OSPF oder IS-IS.
+
+### Q7) BGP Rolle und Entwicklung
+- Urspruenglich: Exterior-Routing fuer Reachability-Austausch zwischen unabhaengigen AS.
+- Heute: multiprotocol faehig (mehrere Address Families, zusaetzliche Funktionen).
+- Typischer AS-Beispieltraeger: ISP.
+
+### Q8) Peers, Sessionaufbau, kein Discovery
+- BGP-Router im Austausch heissen Peers / Neighbors / Speakers.
+- Ablauf:
+1. TCP-Session (Port 179) aufbauen.
+2. Danach BGP-Session ueber OPEN/KEEPALIVE/UPDATE usw.
+- Es gibt keinen automatischen Neighbor-Discovery-Mechanismus wie klassische Hello-Protokolle.
+- Jeder Peer wird explizit konfiguriert.
+
+### Q9) OPEN Message - was wirklich drin ist
+- Typische OPEN-Elemente:
+  - BGP Version
+  - My AS
+  - Hold Time
+  - BGP Identifier
+  - Optional Parameters (Capabilities, z. B. Address Families, Auth-Mechanismen je nach Plattform/Verfahren)
+- Wichtige Klarstellung:
+  - Die Source-IP kommt aus der TCP-Verbindung, nicht als eigenes OPEN-Feld.
+
+### Q10) Policy und Route Refresh
+- Import Policy:
+  - steuert Annahme/Ablehnung eingehender Routen
+  - kann Attribute modifizieren
+- Route Refresh:
+  - nach Policy-Aenderung kann ein Router den Neighbor um erneutes Senden von Routen bitten
+  - Ziel: neue Policy anwenden, ohne harte Session-Resets
+- Kurskontext Nokia 7750:
+  - in deinem Material besonders im BGP/VPRN-Umfeld hervorgehoben
+
+### Q11) Haupt-Messages einer BGP-Session
+- OPEN:
+  - Session-Parameter und Capabilities abgleichen
+- KEEPALIVE:
+  - Session-Liveness bestaetigen
+- UPDATE:
+  - neue Routen announcen oder vorhandene withdrawen
+- NOTIFICATION:
+  - Fehler melden und Session beenden
+
+### Q12) Praktischer Merksatz
+- TCP macht den Transport zuverlaessig.
+- BGP macht die Pfad-/Policy-Entscheidung.
+- IGP macht die interne Erreichbarkeit im AS.
+
+## Kapitel R - BGP Modul 1 Section 3: BGP Peering Sessions
+
+### R1) BGP Connection States (FSM)
+- Die klassischen BGP-Zustaende sind:
+  - Idle
+  - Connect
+  - Active
+  - OpenSent
+  - OpenConfirm
+  - Established
+
+### R2) Die wichtigsten Zustaende einfach erklaert
+- Idle:
+  - Session ist nicht aktiv gestartet
+  - bei administrativem Shutdown bleiben auch TCP-Verbindungsversuche aus
+- Connect:
+  - aktiver TCP-Aufbauversuch zum Peer
+- Active:
+  - kein "guter Aktivzustand", sondern eher Retry-/Wartezustand
+  - Router lauscht auf eingehende TCP-Verbindung oder versucht den Aufbau erneut
+- OpenSent:
+  - OPEN wurde gesendet, man wartet auf OPEN vom Peer
+- OpenConfirm:
+  - gueltige OPEN wurde empfangen, KEEPALIVE wurde gesendet, man wartet auf KEEPALIVE vom Peer
+- Established:
+  - Session steht, BGP-Message-Austausch kann normal laufen
+
+Merker:
+- `Active` wird oft missverstanden. In der Praxis bedeutet es haeufig: Session kommt gerade nicht sauber hoch.
+
+### R3) iBGP vs eBGP
+- Gleiches AS:
+  - iBGP
+- Unterschiedliche AS:
+  - eBGP
+
+### R4) Full-Mesh iBGP und Split Horizon
+- Klassische iBGP-Regel:
+  - Eine Route, die von einem iBGP-Peer gelernt wurde, darf nicht an einen anderen iBGP-Peer weiteradvertised werden
+- Diese Regel wird oft als iBGP Split Horizon bezeichnet
+- Daraus folgt die Full-Mesh-Annahme:
+  - Wenn jeder Speaker alle relevanten Routen lernen soll, muessen alle relevanten iBGP-Speaker direkt peeren
+
+### R5) Warum Route Reflectors spaeter wichtig werden
+- Full Mesh skaliert schlecht
+- Route Reflectors reduzieren die Zahl noetiger iBGP-Sessions
+- Sie sind die klassische Antwort auf das Skalierungsproblem grosser iBGP-Netze
+
+Dummy-Merksatz:
+- Idle = nichts startet
+- Active = es klappt gerade nicht sauber
+- Established = Session steht
+- iBGP Split Horizon = Grund fuer Full Mesh
+
+## Kapitel S - BGP Modul 1 Section 4: Path Attributes und Route Processing
+
+### S1) Die Grundklassen der BGP-Attribute
+- BGP-Path-Attribute werden zuerst in zwei Hauptgruppen eingeteilt:
+  - well-known
+  - optional
+- Well-known Attribute muessen von jeder BGP-Implementierung verstanden werden
+- Optionale Attribute koennen je nach Implementierung und Einsatzfall unterschiedlich unterstuetzt werden
+
+### S2) Mandatory, Discretionary, Transitive, Non-Transitive
+- Well-known mandatory:
+  - muessen fuer passende Routen-Updates vorhanden sein
+- Well-known discretionary:
+  - sind standardisiert, aber nicht fuer jede Route noetig
+- Optional transitive:
+  - duerfen weitergegeben werden
+- Optional non-transitive:
+  - sollen nicht unveraendert ueber AS-Grenzen hinweg weitergereicht werden
+
+Merker:
+- mandatory = Pflicht
+- discretionary = situationsabhaengig
+- transitive = darf weiterwandern
+- non-transitive = bleibt nicht fuer andere AS erhalten
+
+### S3) Wichtige Path Attributes
+- Well-known mandatory:
+  - `AS_PATH`
+  - `NEXT_HOP`
+  - `ORIGIN`
+- Well-known discretionary:
+  - `LOCAL_PREF`
+  - `ATOMIC_AGGREGATE`
+- Weitere wichtige optionale Attribute:
+  - `COMMUNITY`
+  - `MED`
+  - `AGGREGATOR`
+  - `AS4_PATH`
+  - `ORIGINATOR_ID`
+  - `CLUSTER_LIST`
+
+### S4) COMMUNITY und LOCAL_PREF einfach
+- COMMUNITY ist oft zuerst nur ein Marker
+- Eine Policy kann aus einer Community einen `LOCAL_PREF` ableiten
+- Dadurch kann innerhalb des eigenen AS entschieden werden:
+  - welcher Exit-Router bevorzugt wird
+  - welche Route attraktiver ist
+- Communities koennen auch intern benutzt werden, um Prefixe spaeter vor dem eBGP-Export zu filtern
+
+Dummy-Merksatz:
+- Community markiert
+- Policy entscheidet
+- Local Preference wirkt
+
+### S5) AS_PATH, ORIGIN und MED
+- `AS_PATH` zeigt die Folge der AS, durch die die Routeninformation gelaufen ist
+- Ein kuerzerer `AS_PATH` wird oft bevorzugt
+- Aber:
+  - das beweist nicht automatisch weniger Delay
+  - das beweist nicht automatisch geringere reale Kosten
+- `ORIGIN` wird typischerweise so bewertet:
+  - `IGP` besser als `EGP`
+  - `EGP` besser als `INCOMPLETE`
+- Redistributete Routen landen haeufig bei `INCOMPLETE`
+- `MED` ist ein Hinweis an ein anderes AS, welchen Eintrittspunkt es bevorzugen soll
+- Kleinere MED-Werte sind besser
+
+### S6) Fruehe Route-Selection-Reihenfolge
+- In deinen Notizen ist die wichtige Reihenfolge:
+  - hoehere `LOCAL_PREF`
+  - kuerzerer `AS_PATH`
+  - besserer `ORIGIN`
+  - niedrigeres `MED`
+  - `eBGP` vor `iBGP`
+- Danach kommen weitere Tie-Breaker
+
+Wichtig:
+- `eBGP vor iBGP` gilt nicht als absolute Regel fuer alles
+- Es gilt erst dann, wenn die frueheren Kriterien noch keinen Sieger bestimmt haben
+
+### S7) Best, Used, RIB-IN, Local BGP RIB
+- Eine empfangene BGP-Route landet zuerst im `RIB-IN`
+- Dort wird geprueft:
+  - ist sie gueltig?
+  - darf sie laut Policy angenommen werden?
+  - sind die noetigen Daten wie `NEXT_HOP` erreichbar?
+- Danach nimmt sie am Best-Path-Prozess teil
+- Die beste valide Route pro Prefix wird in die lokale BGP-RIB uebernommen
+- Danach wird sie dem `RTM` angeboten
+
+### S8) Warum Best nicht immer Used ist
+- Eine Route kann die beste BGP-Route sein
+- Trotzdem muss sie nicht die aktive Systemroute werden
+- Grund:
+  - ein anderes Protokoll kann denselben Prefix mit besserer administrativer Praeferenz liefern
+- Dann bleibt die BGP-Route zwar `best`, aber nicht `used`
+
+### S9) advertise-inactive
+- Normalerweise sind beste und benutzte BGP-Routen die Kandidaten fuer den Export
+- Mit `advertise-inactive` kann auch eine beste, aber lokal nicht genutzte BGP-Route advertised werden
+- Das ist nuetzlich, wenn:
+  - lokal ein anderes Protokoll gewinnt
+  - man trotzdem BGP-seitig eine Route nach aussen geben will
+
+### S10) Import-, Export-Policies und Debug-Sicht
+- Import-Policy:
+  - bewertet empfangene Routen
+  - kann Routen akzeptieren, verwerfen oder Attribute aendern
+- Export-Policy:
+  - bewertet lokal bekannte Routen vor dem Advertisieren
+  - kann ebenfalls Attribute setzen oder aendern
+- Beim Export zu `eBGP` wird typischerweise:
+  - die eigene AS-Nummer dem `AS_PATH` hinzugefuegt
+  - `NEXT_HOP` auf die lokale ausgehende Adresse gesetzt
+
+Nuance auf Nokia:
+- In neueren MD-CLI-Kontexten ist eBGP ohne passende Policies standardmaessig abgesichert
+- Classic CLI war historisch offener
+- Saubere Praxis bleibt:
+  - explizite Import- und Export-Policies bauen
+
+Troubleshooting:
+- `show router bgp routes ... detail`
+  - gut fuer Attributwerte
+- `show router bgp routes ... hunt`
+  - gut, um die Route durch Eingangs-, Best- und Export-Sicht zu verfolgen
+
+## Kapitel T - BGP Modul 1 Section 5: Basic Route Policies
+
+### T1) Grundidee einer Route Policy
+- Eine Routing-Policy besteht aus Regeln oder Eintraegen
+- Jeder Eintrag hat im Kern zwei Seiten:
+  - `from`
+  - `action`
+- `from` beschreibt:
+  - welche Routen oder Prefixe betroffen sind
+- `action` beschreibt:
+  - was mit diesen gematchten Routen gemacht wird
+
+Dummy-Merksatz:
+- From = welche Route?
+- Action = was passiert damit?
+
+### T2) Was kann im From-Teil stehen?
+- Typische Match-Kriterien sind:
+  - Prefix-Liste
+  - Address Family
+  - Protokoll, ueber das die Route gelernt wurde
+  - BGP-Nachbar
+  - BGP-Attribute
+- Wenn ein bestimmtes Kriterium weggelassen wird, wird an dieser Stelle meist nicht weiter eingeschraenkt
+
+### T3) Accept und Reject bei Import und Export
+- Import `accept`:
+  - Route wird angenommen
+  - Route darf weiter in die BGP-Auswahl
+- Import `reject`:
+  - Route wird ignoriert
+- Export `accept`:
+  - Route darf an passende BGP-Peers advertised werden
+- Export `reject`:
+  - Route wird nicht advertised
+
+### T4) Policies koennen auch Attribute aendern
+- Eine Policy kann nicht nur filtern
+- Sie kann auch BGP-Attribute setzen oder aendern
+- Das geht sowohl:
+  - beim Import
+  - als auch beim Export
+
+### T5) Reihenfolge und Abbruch
+- Policy-Eintraege werden sequenziell ausgewertet
+- Normalfall:
+  - erster Match fuehrt die Action aus
+  - danach wird nicht weiter ausgewertet
+- Deshalb ist die Reihenfolge der Eintraege wichtig
+
+### T6) next-entry und next-policy
+- Mit `next-entry` oder `next-policy` kann die Verarbeitung trotz Treffer fortgesetzt werden
+- Das ist nuetzlich, wenn:
+  - mehrere Bearbeitungsschritte noetig sind
+  - nicht der erste Treffer schon das Ende sein soll
+
+### T7) Default Action
+- Wenn kein Eintrag matched, greift die `default action`
+- Falls keine eigene Default Action gesetzt ist:
+  - dann gilt das Default-Verhalten des verwendenden Protokolls
+
+Merker:
+- Kein Match = Default entscheidet
+
+### T8) Bogon oder bogus prefix
+- Im BGP-Alltag ist damit fast immer ein `bogon prefix` gemeint
+- Das sind Prefixe, die im globalen Internet-Routing normalerweise nicht auftauchen sollten
+- Beispiele:
+  - private RFC-1918-Bereiche
+  - reservierte Bereiche
+  - noch nicht vergebene Bereiche
+
+Praxis:
+- Solche Prefixe werden haeufig per Policy gefiltert
+- Gerade an eBGP-Kanten ist das ein wichtiger Basisschutz
+
+### T9) MED, COMMUNITY und LOCAL_PREF in Policies
+- `MED` kann per Policy gesetzt werden
+- Je nach Syntax:
+  - als fester Wert
+  - oder IGP-bezogen
+- `LOCAL_PREF` kann ebenfalls per Policy gesetzt oder geaendert werden
+- Hoehere `LOCAL_PREF` ist attraktiver
+
+### T10) Prefix-Listen mit Communities kombinieren
+- Ein sauberes Designmuster ist:
+  - Prefix-Liste fuer die Auswahl
+  - Community fuer die Markierung
+- Beispiel:
+  - `NORTH_PREFIXES` matchen
+  - `NORTH_COMMUNITY` adden
+  - `SOUTH_PREFIXES` matchen
+  - `SOUTH_COMMUNITY` adden
+- So kann ein nachgelagerter Router spaeter leicht unterschiedlich auf diese Gruppen reagieren
+
+### T11) from protocol ospf richtig lesen
+- Wenn in einer Export-Policy `from protocol ospf` steht, geht es um lokal per OSPF gelernte Routen
+- Diese werden dann fuer den Export in BGP betrachtet
+- Das ist nicht dasselbe wie das BGP-`ORIGIN`-Attribut
+
+## Kapitel U - BGP Modul 1 Section 6: Verstaendnisfragen und Gesamtbild
+
+### U1) Das grobe BGP-Bild
+- BGP ist fuer den Austausch von Erreichbarkeitsinformationen gedacht
+- Klassisch:
+  - zwischen verschiedenen AS
+- Ein AS ist:
+  - eine Router-Sammlung unter gemeinsamer Administration
+
+### U2) Session und Zustaende
+- Fruehe Problemzustaende:
+  - `Connect`
+  - `Active`
+- Nach erfolgreichem TCP-Aufbau:
+  - `OpenSent`
+  - `OpenConfirm`
+  - `Established`
+
+Merker:
+- TCP muss zuerst stehen
+- Danach kommt die eigentliche BGP-Session-Logik
+
+### U3) Nachrichten und Inhalte
+- Wichtige BGP-Nachrichten:
+  - `OPEN`
+  - `KEEPALIVE`
+  - `UPDATE`
+  - `NOTIFICATION`
+- `UPDATE` transportiert:
+  - Reachability/NLRI
+  - Path Attributes
+
+### U4) Pfadwahl in einem Satz
+- Wenn mehrere Updates fuer denselben Prefix da sind, vergleicht BGP die Pfade geordnet
+- Typische fruehe Kriterien:
+  - `LOCAL_PREF`
+  - `AS_PATH`
+  - `ORIGIN`
+  - `MED`
+  - spaeter `eBGP` vor `iBGP`
+
+### U5) Warum Policies das Verhalten aendern
+- Policies entscheiden:
+  - was angenommen wird
+  - was verworfen wird
+  - welche Attribute veraendert werden
+- Genau dadurch wird das Default-Verhalten eines BGP-Speakers gezielt angepasst
+
+### U6) Noch ein wichtiger Praxispunkt
+- Nicht direkt benachbartes `eBGP` braucht `multihop`
+- Sonst scheitert die Session oft schon am TTL-Verhalten

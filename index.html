@@ -35,6 +35,12 @@
         <div id="tab-learn" class="tab-content active">
           <div class="toolbar">
             <label>
+              <span id="topicLabel">Thema</span>
+              <select id="topicSelect">
+                <option value="">Alle Themen</option>
+              </select>
+            </label>
+            <label>
               <span id="moduleLabel">Modul</span>
               <select id="moduleSelect">
                 <option value="">Alle Module</option>
@@ -59,6 +65,11 @@
               </select>
             </label>
             <button id="nextQuestionBtn" type="button">Naechste Frage</button>
+          </div>
+
+          <div id="scopeStats" class="scope-stats hidden">
+            <strong id="scopeStatsTitle">Auswahlstatistik</strong>
+            <p id="scopeStatsBody" class="muted"></p>
           </div>
 
           <article id="questionCard" class="question-card">
@@ -120,6 +131,10 @@
             <label>
               <span id="buildSourceLabel">Quelle (optional)</span>
               <input id="qSource" type="text" placeholder="z.B. Folie 42" />
+            </label>
+            <label>
+              <span id="buildTopicLabel">Thema (optional)</span>
+              <input id="qTopic" type="text" placeholder="z.B. BGP" />
             </label>
             <label>
               <span id="buildModuleLabel">Modul (optional)</span>

@@ -124,7 +124,7 @@ body {
 
 .toolbar {
   display: grid;
-  grid-template-columns: 170px 170px minmax(200px, 1fr) 170px auto;
+  grid-template-columns: 170px 170px 170px minmax(200px, 1fr) 170px auto;
   gap: 0.6rem;
   margin-bottom: 0.8rem;
   align-items: end;
@@ -162,6 +162,24 @@ textarea {
   border-radius: 10px;
   padding: 1rem;
   background: #fffefb;
+}
+
+.scope-stats {
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  background: linear-gradient(180deg, #fffdf7, #f8f3e8);
+}
+
+.scope-stats strong {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.scope-stats p {
+  margin: 0;
+  line-height: 1.4;
 }
 
 .question-card h2 {
