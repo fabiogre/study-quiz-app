@@ -1806,3 +1806,94 @@ Merker:
 - Typisch:
   - `VPN-IPv4`
   - `VPN-IPv6`
+
+## Kapitel W - BGP Modul 2 Section 3: Inter-Region Transport Tunnels
+
+### W1) Service-Labels in MP-BGP VPN-Routen
+- MP-BGP VPN-IPv4/VPN-IPv6 Updates koennen Label-Information fuer die spaetere VPN-Weiterleitung mittragen
+- Wichtig:
+  - das bedeutet nicht automatisch "ein ganz anderer Labelwert pro Prefix"
+  - auf `SR OS` ist bei `VPRN` oft `label-per-VRF` aktiv
+- Das heisst:
+  - mehrere Prefixe derselben VRF koennen denselben Service-Labelwert verwenden
+
+Merker:
+- MP-BGP traegt die Label-Info
+- die Plattform kann trotzdem label-per-VRF arbeiten
+
+### W2) Rolle des Route Distinguisher hier
+- Der `RD` ist fuer die Control Plane da
+- Er macht aus normalen Prefixen eindeutige `VPN-IPv4` oder `VPN-IPv6` Routen
+- In der eigentlichen VRF-Route-Table oder FIB arbeitet die Box wieder mit den normalen IPv4/IPv6-Prefixen
+
+Merker:
+- `RD` = Eindeutigkeit im BGP
+- `RT` = Import/Export-Mitgliedschaft
+- `RD` ist kein Data-Plane-Header
+
+### W3) Warum Inter-Region-Tunnel gebraucht werden
+- In grossen Netzen gehen VPNs oft ueber mehrere Regionen
+- Diese Regionen koennen auch von unterschiedlichen Teams oder Operatoren betrieben werden
+- Ein gut skalierbarer Ansatz ist:
+  - End-to-End-Transport zwischen den PEs
+  - service-spezifisches Wissen bleibt an den PEs
+  - Zwischenrouter muessen die einzelnen VPN-Services nicht kennen
+
+### W4) Warum man Tunnel stitcht
+- LDP, RSVP-TE oder Segment Routing laufen oft nicht einfach ueber alle Regionen hinweg durch
+- Deshalb baut man:
+  - intra-region Tunnel in jeder Region
+  - und stitcht sie an den Regionsgrenzen zusammen
+- Fuer dieses Stitching hilft `MP-BGP labeled unicast`
+
+Typisch:
+- `label-ipv4`
+- `label-ipv6`
+
+### W5) Was die PE-Router typischerweise advertisieren
+- Meist advertisieren PEs ihre Loopback- oder System-IP
+- Diese Adresse ist der stabile Tunnel-Endpunkt
+- Border- und Core-Router koennen darauf dann den Transportpfad aufbauen
+
+### W6) Data Plane einfach erklaert
+- Innerhalb einer Region sieht das Paket oft so aus:
+  - inneres `BGP`-Label
+  - aeusseres `LDP`/`RSVP`/`SR`-Label
+- Das aeussere Label bringt das Paket bis zum Border Router der Region
+- Dort faellt das aeussere Label weg
+- Das sichtbare BGP-Label wird dann fuer den naechsten Abschnitt weiterverwendet oder geswappt
+
+Merker:
+- outer label = regionaler Transport
+- inner label = stitched Weiterweg
+
+### W7) Border Router und Stitching
+- Treffen zwei Border Router direkt aufeinander, braucht man fuer diesen direkten Hop oft kein weiteres regionales Transportlabel
+- Dann ist das BGP-Label der entscheidende Hinweis fuer den naechsten Schritt
+- In der naechsten Region kann wieder ein neues outer label dazukommen
+
+### W8) Segment Routing in diesem Bild
+- Bei Segment Routing kann der outer Stack aus mehreren Labels oder SIDs bestehen
+- Die Grundidee bleibt aber gleich:
+  - innen der ueberregionale BGP-Kontext
+  - aussen der regionale Transportkontext
+
+### W9) Was nach dem Transportaufbau folgt
+- Wenn der End-to-End-Transport steht, koennen die PE-Router direkt dienstspezifische Infos austauschen
+- Je nach Dienst sind das zum Beispiel:
+  - Service-Labels
+  - Layer-3-Prefixe
+  - Layer-2-MAC-Adressen
+
+Moegliche Signalisierung:
+- `targeted LDP`
+- `MP-BGP`
+
+### W10) Intra-Region-Tunnel im SR OS Kontext
+- Oft werden standardmaessig zunaechst `LDP`-Tunnel fuer die Aufloesung von label-IP Next-Hops genutzt
+- Man kann aber weitere Tunneltypen einbeziehen
+- Mit `resolution any` erweitert man die moeglichen Aufloesungswege
+- Wenn mehrere Tunnel moeglich sind, entscheidet der `Tunnel Table Manager`
+
+Merker:
+- kleinere numerische Preference ist besser

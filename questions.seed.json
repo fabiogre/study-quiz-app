@@ -12086,5 +12086,507 @@
     "module_en": "Module 1",
     "section": "Section 5",
     "section_en": "Section 5"
+  },
+  {
+    "id": "bgp-m2s3-q1",
+    "question": "Welche Aussage zu Service-Labels in MP-BGP VPN-IPv4/IPv6 Updates ist am saubersten?",
+    "question_en": "Which statement about service labels in MP-BGP VPN-IPv4/IPv6 updates is the most accurate?",
+    "options": [
+      "Die Updates tragen Label-Information fuer die VPN-Weiterleitung; auf SR OS kann dabei derselbe Service-Labelwert fuer mehrere Prefixe derselben VRF genutzt werden",
+      "Das Service-Label ersetzt den Route Distinguisher im Control Plane NLRI",
+      "Service-Labels existieren nur bei Layer-2-VPNs, nicht bei VPN-IPv4/IPv6",
+      "Jeder Intermediate Router muss pro VPN-Prefix das Service-Label manuell konfigurieren"
+    ],
+    "options_en": [
+      "The updates carry label information for VPN forwarding; on SR OS, the same service-label value can be reused for multiple prefixes in the same VRF",
+      "The service label replaces the route distinguisher in the control-plane NLRI",
+      "Service labels exist only for Layer-2 VPNs, not for VPN-IPv4/IPv6",
+      "Every intermediate router must manually configure the service label for each VPN prefix"
+    ],
+    "correctIndex": 0,
+    "explanation": "VPN-IPv4/VPN-IPv6 MP-BGP updates can carry the MPLS label information needed for the VPN route. On SR OS VPRN, label-per-VRF is common, so multiple prefixes of one VRF may share the same service label.",
+    "explanation_en": "VPN-IPv4/VPN-IPv6 MP-BGP updates can carry the MPLS label information needed for the VPN route. On SR OS VPRN, label-per-VRF is common, so multiple prefixes of one VRF may share the same service label.",
+    "extraInfo": "Das ist der wichtige Unterschied zwischen \"Label pro Route in der BGP-Info\" und \"gleicher Service-Labelwert fuer mehrere Prefixe derselben VRF in der Plattform-Implementierung\".",
+    "extraInfo_en": "That is the important difference between \"a label carried with the BGP route\" and \"the same service-label value reused for multiple prefixes of the same VRF in the platform implementation\".",
+    "tip": "MP-BGP traegt Label-Info mit. Die Plattform kann trotzdem label-per-VRF arbeiten.",
+    "tip_en": "MP-BGP carries label information. The platform can still operate in label-per-VRF mode.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "Service Labels",
+      "VPN-IPv4",
+      "VPN-IPv6"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q2",
+    "question": "Welche Aussage zum Route Distinguisher in diesem Kontext ist korrekt?",
+    "question_en": "Which statement about the route distinguisher in this context is correct?",
+    "options": [
+      "Der RD sorgt im Control Plane fuer eindeutige VPN-IPv4/IPv6-Routen; in der VRF/FIB der Data Plane wird mit den eigentlichen IP-Prefixen gearbeitet",
+      "Der RD wird im Forwarding als zusaetzlicher Lookup-Schluessel vor jedes Kundendatenpaket gesetzt",
+      "Der RD bestimmt, welche VPNs eine Route importieren duerfen",
+      "Der RD ersetzt das Service-Label, sobald das Paket den ersten Border Router erreicht"
+    ],
+    "options_en": [
+      "The RD makes VPN-IPv4/IPv6 routes unique in the control plane; the VRF/FIB in the data plane works with the actual IP prefixes",
+      "The RD is used in forwarding as an additional lookup key placed in front of every customer data packet",
+      "The RD decides which VPNs are allowed to import a route",
+      "The RD replaces the service label once the packet reaches the first border router"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der RD macht Prefixe im MP-BGP eindeutig. Die eigentliche Weiterleitung in der VRF/FIB verwendet wieder die normalen IPv4/IPv6-Prefixe plus Tunnel-/Label-Kontext.",
+    "explanation_en": "The RD makes prefixes unique in MP-BGP. Actual forwarding in the VRF/FIB uses the normal IPv4/IPv6 prefixes again plus tunnel/label context.",
+    "extraInfo": "Import/Export-Mitgliedschaft wird durch RT gesteuert, nicht durch RD.",
+    "extraInfo_en": "Import/export membership is controlled by RT, not by RD.",
+    "tip": "RD = Eindeutigkeit im Control Plane, nicht Service-Mitgliedschaft im Data Plane.",
+    "tip_en": "RD = uniqueness in the control plane, not service membership in the data plane.",
+    "tags": [
+      "BGP",
+      "Route Distinguisher",
+      "Control Plane",
+      "Data Plane"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q3",
+    "question": "Warum sind End-to-End-Transport-Tunnel ueber mehrere Regionen hinweg oft eine gut skalierende Option?",
+    "question_en": "Why are end-to-end transport tunnels across multiple regions often a well-scaling option?",
+    "options": [
+      "Weil Service-Labels und Service-Parameter nur zwischen den PE-Routern ausgetauscht werden muessen und Zwischenrouter nicht service-spezifisch konfiguriert werden muessen",
+      "Weil dann jeder Intermediate Router alle VPN-MACs und VPN-Prefixe lokal speichern muss",
+      "Weil PE-Router dann kein MP-BGP oder tLDP mehr benoetigen",
+      "Weil damit automatisch keine Transport-Labels mehr benoetigt werden"
+    ],
+    "options_en": [
+      "Because service labels and service parameters only need to be exchanged between the PE routers and intermediate routers do not need service-specific configuration",
+      "Because every intermediate router then has to locally store all VPN MACs and VPN prefixes",
+      "Because PE routers no longer need MP-BGP or tLDP",
+      "Because transport labels are then automatically no longer needed"
+    ],
+    "correctIndex": 0,
+    "explanation": "Das Skalierungsziel ist: der Dienst bleibt eine PE-zu-PE-Sache. Die dazwischenliegenden Router transportieren nur Tunnelinformationen.",
+    "explanation_en": "The scaling goal is that the service remains a PE-to-PE matter. Intermediate routers transport only tunnel information.",
+    "extraInfo": "Je weniger service-spezifisches Wissen in der Mitte gebraucht wird, desto besser skaliert das Netz.",
+    "extraInfo_en": "The less service-specific knowledge is required in the middle, the better the network scales.",
+    "tip": "PEs kennen den Dienst, die Mitte kennt vor allem den Tunnel.",
+    "tip_en": "PEs know the service, the middle mainly knows the tunnel.",
+    "tags": [
+      "BGP",
+      "Inter-Region",
+      "Transport Tunnel",
+      "Scalability"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q4",
+    "question": "Wie baut man typischerweise einen End-to-End-Transport-Tunnel ueber mehrere Regionen, wenn LDP/RSVP/SR nicht einfach regionsuebergreifend signalisiert wird?",
+    "question_en": "How do you typically build an end-to-end transport tunnel across multiple regions when LDP/RSVP/SR is not simply signaled across regions?",
+    "options": [
+      "Man stitcht mehrere kleinere Tunnels an den Regionsgrenzen zusammen, typischerweise mit BGP-gelernten Label-Prefixen",
+      "Man ersetzt alle Tunnel durch GRE und braucht dann keinerlei Label mehr",
+      "Man verteilt an allen Zwischenroutern die kompletten Service-Labels per tLDP",
+      "Man deaktiviert MP-BGP und benutzt nur noch OSPF Area Summaries"
+    ],
+    "options_en": [
+      "You stitch multiple smaller tunnels together at regional boundaries, typically using BGP-learned labeled prefixes",
+      "You replace all tunnels with GRE and then no longer need any labels at all",
+      "You distribute the full service labels to all intermediate routers using tLDP",
+      "You disable MP-BGP and use only OSPF area summaries"
+    ],
+    "correctIndex": 0,
+    "explanation": "Die Grundidee ist Stitching: innerhalb jeder Region kommt man mit einem intra-region Tunnel bis zum Border Router, und zwischen den Regionen wird ueber BGP-labeled reachability weitergereicht.",
+    "explanation_en": "The basic idea is stitching: within each region an intra-region tunnel reaches the border router, and between regions BGP-labeled reachability carries the traffic further.",
+    "extraInfo": "Dadurch muss das lokale IGP/MPLS-Signaling nicht einfach ungefiltert ueber alle Regionen erweitert werden.",
+    "extraInfo_en": "This avoids blindly extending local IGP/MPLS signaling across all regions.",
+    "tip": "Stitching = viele kurze Tunnel logisch zu einem langen Tunnel verbinden.",
+    "tip_en": "Stitching = logically joining many short tunnels into one long tunnel.",
+    "tags": [
+      "BGP",
+      "Inter-Region",
+      "Tunnel Stitching",
+      "Label-IPv4",
+      "Label-IPv6"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q5",
+    "question": "Welche MP-BGP Address Family wird typischerweise genutzt, um transportrelevante Prefixe samt Label fuer solche End-to-End-Tunnel zu verteilen?",
+    "question_en": "Which MP-BGP address family is typically used to distribute transport-relevant prefixes together with labels for such end-to-end tunnels?",
+    "options": [
+      "label-ipv4 oder label-ipv6",
+      "vpn-ipv4 oder vpn-ipv6",
+      "flow-ipv4 oder flow-ipv6",
+      "mcast-ipv4 oder mcast-ipv6"
+    ],
+    "options_en": [
+      "label-ipv4 or label-ipv6",
+      "vpn-ipv4 or vpn-ipv6",
+      "flow-ipv4 or flow-ipv6",
+      "mcast-ipv4 or mcast-ipv6"
+    ],
+    "correctIndex": 0,
+    "explanation": "Fuer das Transport-Tunnel-Stitching geht es um labeled unicast reachability, also typischerweise label-ipv4 oder label-ipv6.",
+    "explanation_en": "For transport-tunnel stitching, the point is labeled unicast reachability, typically label-ipv4 or label-ipv6.",
+    "extraInfo": "VPN-IPv4/VPN-IPv6 ist fuer die eigentlichen VPN-Routen, label-ipv4/ipv6 fuer den transportbezogenen labeled reachability-Teil.",
+    "extraInfo_en": "VPN-IPv4/VPN-IPv6 is for the actual VPN routes; label-ipv4/ipv6 is for the transport-related labeled reachability part.",
+    "tip": "Transport-Prefixe mit Label = label-ipv4/6.",
+    "tip_en": "Transport prefixes with a label = label-ipv4/6.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "Label-IPv4",
+      "Label-IPv6",
+      "Transport Tunnel"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q6",
+    "question": "Welche Adresse advertiset ein PE typischerweise, um den Tunnel-Endpunkt zu identifizieren?",
+    "question_en": "Which address does a PE typically advertise to identify the tunnel endpoint?",
+    "options": [
+      "Die Loopback- bzw. System-IP-Adresse",
+      "Die MAC-Adresse des Access-Ports",
+      "Die VLAN-ID des Kundensubinterfaces",
+      "Die Customer-ID des VPN-Service"
+    ],
+    "options_en": [
+      "The loopback or system IP address",
+      "The MAC address of the access port",
+      "The VLAN ID of the customer subinterface",
+      "The customer ID of the VPN service"
+    ],
+    "correctIndex": 0,
+    "explanation": "Loopback- oder System-IPs sind stabil und unabhaengig von einzelnen Access-Links. Deshalb eignen sie sich gut als Tunnel-Endpunkte.",
+    "explanation_en": "Loopback or system IPs are stable and independent of individual access links. That makes them good tunnel endpoints.",
+    "extraInfo": "Das passt auch zur Next-Hop-Aufloesung im Tunnel-Table.",
+    "extraInfo_en": "That also fits with next-hop resolution in the tunnel table.",
+    "tip": "Tunnel-Endpunkte sollten stabil sein, deshalb meist Loopback/System-IP.",
+    "tip_en": "Tunnel endpoints should be stable, so usually loopback/system IP.",
+    "tags": [
+      "BGP",
+      "PE Router",
+      "Loopback",
+      "System IP",
+      "Tunnel Endpoint"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q7",
+    "question": "Wie sieht der Label-Gedanke im Data Plane innerhalb einer Region typischerweise aus?",
+    "question_en": "What does the label logic in the data plane within one region typically look like?",
+    "options": [
+      "Ein inneres BGP-Label fuer den stitched Transport und ein aeusseres LDP/RSVP/SR-Label fuer den intra-region Weg",
+      "Nur ein einziges Service-Label ohne jegliches Transport-Label",
+      "Nur der Route Distinguisher und sonst keine Labels",
+      "Ein aeusseres Service-Label und ein inneres OSPF-Area-Label"
+    ],
+    "options_en": [
+      "An inner BGP label for the stitched transport and an outer LDP/RSVP/SR label for the intra-region path",
+      "Only a single service label without any transport label",
+      "Only the route distinguisher and no labels at all",
+      "An outer service label and an inner OSPF area label"
+    ],
+    "correctIndex": 0,
+    "explanation": "Innerhalb der Region bringt das aeussere LDP/RSVP/SR-Label das Paket bis zum Border Router. Danach bleibt das BGP-Label sichtbar und erlaubt das weitere Stitching.",
+    "explanation_en": "Inside the region, the outer LDP/RSVP/SR label carries the packet to the border router. After that, the BGP label remains visible and enables further stitching.",
+    "extraInfo": "Das ist die wichtige Trennung zwischen regionalem Transport und ueberregionalem stitched Label-Kontext.",
+    "extraInfo_en": "This is the key separation between regional transport and the inter-regional stitched label context.",
+    "tip": "Outer = Region, Inner = stitched Weiterweg.",
+    "tip_en": "Outer = region, inner = stitched onward path.",
+    "tags": [
+      "BGP",
+      "Data Plane",
+      "LDP",
+      "RSVP",
+      "Segment Routing"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q8",
+    "question": "Was passiert typischerweise am Region Border Router, wenn das Paket die Region verlaesst?",
+    "question_en": "What typically happens at the region border router when the packet leaves the region?",
+    "options": [
+      "Das aeussere intra-region Label wird entfernt, und das sichtbare BGP-Label wird fuer den naechsten MP-BGP-Hop weiterverwendet oder geswappt",
+      "Der Route Distinguisher wird in das Datenpaket eingefuegt, damit die naechste Region den Kunden erkennt",
+      "Alle Service-Labels werden geloescht und spaeter per ARP wieder aufgebaut",
+      "Das Paket wird in ein natives Ethernet-Frame ohne Tunnel umgewandelt"
+    ],
+    "options_en": [
+      "The outer intra-region label is removed, and the visible BGP label is reused or swapped for the next MP-BGP hop",
+      "The route distinguisher is inserted into the data packet so the next region can identify the customer",
+      "All service labels are deleted and later rebuilt using ARP",
+      "The packet is converted into a native Ethernet frame without a tunnel"
+    ],
+    "correctIndex": 0,
+    "explanation": "Am Border Router endet der regionale Transport. Das sichtbare BGP-Label uebernimmt dann die Rolle fuer den naechsten stitched Abschnitt und kann auf den vom naechsten BGP-Router advertised Wert geswappt werden.",
+    "explanation_en": "At the border router, regional transport ends. The visible BGP label then takes over for the next stitched segment and may be swapped to the value advertised by the next BGP router.",
+    "extraInfo": "Direkt benachbarte Border Router brauchen dafuer oft kein zusaetzliches inner-regionales LDP/RSVP/SR-Label.",
+    "extraInfo_en": "Directly adjacent border routers often do not need an additional intra-regional LDP/RSVP/SR label for that hop.",
+    "tip": "Am Border faellt das aeussere Regionslabel, das BGP-Label bleibt relevant.",
+    "tip_en": "At the border, the outer regional label falls away, and the BGP label stays relevant.",
+    "tags": [
+      "BGP",
+      "RBR",
+      "Data Plane",
+      "Label Swap",
+      "Inter-Region"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q9",
+    "question": "Welche Aussage zu Segment Routing in diesem Zusammenhang ist korrekt?",
+    "question_en": "Which statement about Segment Routing in this context is correct?",
+    "options": [
+      "Bei Segment Routing kann der aeussere Transport-Stack auch aus mehr als einem Label bestehen",
+      "Segment Routing ersetzt das innere BGP-Label immer vollstaendig",
+      "Segment Routing kann nur mit BGP und nie mit OSPF oder IS-IS signalisiert werden",
+      "Segment Routing ist nur fuer L2VPN, nicht fuer Transport-Tunnel nutzbar"
+    ],
+    "options_en": [
+      "With Segment Routing, the outer transport stack may contain more than one label",
+      "Segment Routing always fully replaces the inner BGP label",
+      "Segment Routing can be signaled only with BGP and never with OSPF or IS-IS",
+      "Segment Routing is usable only for L2VPN and not for transport tunnels"
+    ],
+    "correctIndex": 0,
+    "explanation": "Im SR-Fall kann der Transport-Stack mehrere Labels/SIDs umfassen. Das aendert aber nicht die Grundidee von innerem BGP-Label plus aeusserem Transportkontext.",
+    "explanation_en": "In the SR case, the transport stack may include multiple labels/SIDs. That does not change the core idea of an inner BGP label plus outer transport context.",
+    "extraInfo": "SR fuegt Flexibilitaet beim Pfad hinzu, nicht den Wegfall des gesamten Label-Konzepts.",
+    "extraInfo_en": "SR adds flexibility for the path, not the removal of the entire label concept.",
+    "tip": "SR kann mehr Label im Outer Stack bedeuten.",
+    "tip_en": "SR may mean more labels in the outer stack.",
+    "tags": [
+      "BGP",
+      "Segment Routing",
+      "Data Plane",
+      "Label Stack"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q10",
+    "question": "Was koennen die PE-Router austauschen, nachdem der End-to-End-Transport-Tunnel steht?",
+    "question_en": "What can the PE routers exchange once the end-to-end transport tunnel is in place?",
+    "options": [
+      "Je nach Service unter anderem Service-Labels, L3-Prefixe oder L2-MAC-Informationen",
+      "Nur noch TCP-Keepalives, aber keine dienstspezifischen Informationen mehr",
+      "Ausschliesslich Customer-IDs, aber keine eigentlichen VPN-Datenstrukturen",
+      "Nur OSPF Area-IDs, damit alle Zwischenrouter den Dienst lernen"
+    ],
+    "options_en": [
+      "Depending on the service, items such as service labels, L3 prefixes, or L2 MAC information",
+      "Only TCP keepalives, but no longer any service-specific information",
+      "Only customer IDs, but no actual VPN data structures",
+      "Only OSPF area IDs so that all intermediate routers learn the service"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sobald der Transportpfad klar ist, koennen die PEs die dienstspezifischen Informationen direkt austauschen. Die Mitte muss den einzelnen VPN-Service nicht verstehen.",
+    "explanation_en": "Once the transport path is known, the PEs can exchange service-specific information directly. The middle of the network does not have to understand each individual VPN service.",
+    "extraInfo": "Das ist der Kern der Skalierung: Transport und Dienstwissen bleiben getrennt.",
+    "extraInfo_en": "That is the core of scalability: transport and service knowledge stay separated.",
+    "tip": "Transport zuerst, Servicedetails danach.",
+    "tip_en": "Transport first, service details afterwards.",
+    "tags": [
+      "BGP",
+      "PE Router",
+      "Service Labels",
+      "MAC",
+      "L3 Prefix"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q11",
+    "question": "Welches Protokoll wird klassisch genutzt, um bei traditionellen Layer-2-VPN-Services die Service-Labels auszuhandeln?",
+    "question_en": "Which protocol is classically used to negotiate service labels for traditional Layer-2 VPN services?",
+    "options": [
+      "Targeted LDP",
+      "ICMP",
+      "RSTP",
+      "VRRP"
+    ],
+    "options_en": [
+      "Targeted LDP",
+      "ICMP",
+      "RSTP",
+      "VRRP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Targeted LDP ist der klassische Dienstsignalisierungsmechanismus fuer traditionelle L2VPN/Pseudowire-Services.",
+    "explanation_en": "Targeted LDP is the classic service-signaling mechanism for traditional L2VPN/pseudowire services.",
+    "extraInfo": "Fuer VPRN/VPN-IPv4/IPv6 spielt dagegen MP-BGP eine zentrale Rolle.",
+    "extraInfo_en": "For VPRN/VPN-IPv4/IPv6, MP-BGP instead plays the central role.",
+    "tip": "Traditionelles L2VPN-Service-Labeling = tLDP.",
+    "tip_en": "Traditional L2VPN service-label signaling = tLDP.",
+    "tags": [
+      "BGP",
+      "Targeted LDP",
+      "L2VPN",
+      "Service Labels"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q12",
+    "question": "Welche Aussage zu Intra-Region-Tunneln ist im SR OS Kontext am treffendsten?",
+    "question_en": "Which statement about intra-region tunnels is the most accurate in the SR OS context?",
+    "options": [
+      "Standardmaessig werden oft nur LDP-Tunnel zur Aufloesung von label-IP BGP Next-Hops genutzt; mit zusaetzlicher Konfiguration koennen weitere Tunneltypen beteiligt werden",
+      "Intra-Region-Tunnel werden grundsaetzlich immer nur per GRE gebaut, nie mit MPLS",
+      "Wenn mehrere Tunnel existieren, wird immer der mit der hoechsten numerischen Preference genommen",
+      "Resolution any bedeutet, dass gar keine Tunnelauflosung mehr noetig ist"
+    ],
+    "options_en": [
+      "By default, often only LDP tunnels are used to resolve label-IP BGP next hops; with additional configuration, other tunnel types can participate",
+      "Intra-region tunnels are always built only with GRE and never with MPLS",
+      "If multiple tunnels exist, the one with the highest numerical preference is always chosen",
+      "Resolution any means no tunnel resolution is needed anymore"
+    ],
+    "correctIndex": 0,
+    "explanation": "Im SR OS Kontext kann die Tunnelauflosung standardmaessig restriktiver sein. Mit zusaetzlichen Optionen wie resolution any werden weitere Tunneltypen in die Aufloesung einbezogen.",
+    "explanation_en": "In the SR OS context, tunnel resolution can be more restrictive by default. With additional options such as resolution any, more tunnel types are considered for resolution.",
+    "extraInfo": "Beim Tunnel Table Manager gilt typischerweise: kleinere Preference ist besser.",
+    "extraInfo_en": "For the tunnel table manager, the usual rule is: lower preference is better.",
+    "tip": "Resolution any erweitert die Auswahl, nicht den Verzicht auf Tunnel.",
+    "tip_en": "Resolution any expands the choice, it does not remove the need for tunnels.",
+    "tags": [
+      "BGP",
+      "Intra-Region",
+      "LDP",
+      "Tunnel Table Manager",
+      "Resolution Any"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s3-q13",
+    "question": "Welche Aussage zu Inter-Region-Transport-Tunneln ist falsch?",
+    "question_en": "Which statement about inter-region transport tunnels is false?",
+    "options": [
+      "Jeder Intermediate Router muss die VPN-Service-Labels pro Dienst manuell kennen und konfigurieren",
+      "BGP-labeled Reachability kann helfen, regionale Tunnel an den Grenzen zusammenzustitchen",
+      "Zwischenrouter koennen service-unaware bleiben, was die Skalierbarkeit verbessert",
+      "PE-Router koennen nach erfolgreichem Transportaufbau dienstspezifische Informationen direkt austauschen"
+    ],
+    "options_en": [
+      "Every intermediate router must manually know and configure the VPN service labels per service",
+      "BGP-labeled reachability can help stitch regional tunnels together at the boundaries",
+      "Intermediate routers can remain service-unaware, which improves scalability",
+      "After transport setup succeeds, PE routers can directly exchange service-specific information"
+    ],
+    "correctIndex": 0,
+    "explanation": "Gerade das soll vermieden werden: service-spezifisches Wissen in jedem Zwischenrouter. Der inter-region Ansatz skaliert besser, wenn die Mitte nur den Transport versteht.",
+    "explanation_en": "That is exactly what should be avoided: service-specific knowledge in every intermediate router. The inter-region approach scales better when the middle understands only transport.",
+    "extraInfo": "Wenn die Mitte jeden Dienst kennen muss, skaliert das Netz schlechter.",
+    "extraInfo_en": "If the middle has to know every service, the network scales worse.",
+    "tip": "Falsch ist hier die Aussage, dass jeder Intermediate Router den Dienst konfigurieren muss.",
+    "tip_en": "The false statement here is that every intermediate router must have the service configured.",
+    "tags": [
+      "BGP",
+      "Inter-Region",
+      "False Statement",
+      "Scalability"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 3",
+    "section_en": "Section 3"
   }
 ]
