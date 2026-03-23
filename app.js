@@ -1001,9 +1001,10 @@ function mergeMissingLocalizedFields(existingQuestions, seedQuestions) {
 
 function mergeSeedQuestions(existingQuestions, seedQuestions) {
   const mergedExisting = mergeMissingLocalizedFields(existingQuestions, seedQuestions);
-  const knownIds = new Set(mergedExisting.map((q) => q.id));
-  const missingSeedQuestions = seedQuestions.filter((q) => !knownIds.has(q.id)).map((q) => ({ ...q }));
-  return [...mergedExisting, ...missingSeedQuestions];
+  const seedById = new Map(seedQuestions.map((q) => [q.id, { ...q }]));
+  const customQuestions = mergedExisting.filter((q) => !seedById.has(q.id)).map((q) => ({ ...q }));
+  const orderedSeedQuestions = seedQuestions.map((q) => ({ ...q }));
+  return [...orderedSeedQuestions, ...customQuestions];
 }
 
 function saveQuestions() {

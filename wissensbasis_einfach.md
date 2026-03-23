@@ -1409,6 +1409,21 @@ Dummy-Merksatz:
 Merker:
 - `Active` wird oft missverstanden. In der Praxis bedeutet es haeufig: Session kommt gerade nicht sauber hoch.
 
+### R2b) Erfolgsfolge und Fehlersuche
+- Typische Erfolgsfolge ohne Rueckfall:
+  - `Idle -> Connect -> OpenSent -> OpenConfirm -> Established`
+- Was dabei passiert:
+  - `Connect`:
+    - TCP wird aufgebaut
+  - `OpenSent`:
+    - TCP steht, die lokale `OPEN` wurde gesendet
+  - `OpenConfirm`:
+    - die `OPEN` des Peers wurde akzeptiert, man wartet noch auf ein gueltiges `KEEPALIVE`
+  - `Established`:
+    - gueltiges `KEEPALIVE` vom Peer wurde empfangen, normaler Nachrichtenaustausch kann laufen
+- Wenn eine Session zwischen `Connect` und `Active` pendelt:
+  - liegt das oft zuerst an Reachability-, TCP-, Peer-IP-, ASN- oder Sessionaufbau-Problemen
+
 ### R3) iBGP vs eBGP
 - Gleiches AS:
   - iBGP

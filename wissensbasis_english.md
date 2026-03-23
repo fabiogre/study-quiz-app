@@ -1409,6 +1409,21 @@ Simple memory line:
 Reminder:
 - `Active` is often misunderstood. In practice, it often means the session is not coming up cleanly.
 
+### R2b) Success sequence and troubleshooting
+- Typical success sequence without fallback:
+  - `Idle -> Connect -> OpenSent -> OpenConfirm -> Established`
+- What happens in that sequence:
+  - `Connect`:
+    - TCP is being established
+  - `OpenSent`:
+    - TCP is up, the local `OPEN` has been sent
+  - `OpenConfirm`:
+    - the peer `OPEN` has been accepted, and the router is still waiting for a valid `KEEPALIVE`
+  - `Established`:
+    - a valid `KEEPALIVE` from the peer has been received, and normal message exchange can run
+- If a session keeps oscillating between `Connect` and `Active`:
+  - the first suspects are often reachability, TCP, peer IP, ASN, or session-setup issues
+
 ### R3) iBGP vs eBGP
 - Same AS:
   - iBGP

@@ -1,4 +1,4 @@
-﻿window.STUDY_QUIZ_SEED = [
+window.STUDY_QUIZ_SEED = [
   {
     "id": "telco-core-q1",
     "question": "Wofuer sind P-Router im Provider-Core primaer ausgelegt?",
@@ -1097,7 +1097,7 @@
     "section": "Section 2",
     "question_en": "Which statement best describes the control word in the MPLS service context?",
     "explanation_en": "The Control Word is optional and is used depending on the service type and implementation requirements.",
-    "extraInfo_en": "Important: â€œATM/Frame Relay onlyâ€ is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
+    "extraInfo_en": "Important: “ATM/Frame Relay only” is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
     "tip_en": "Always view Control Word in terms of service and design.",
     "source_en": "Telecommunication basics",
     "module_en": "Module 1",
@@ -1733,7 +1733,7 @@
       "Payload"
     ],
     "source": "Telecommunication Grundlagen",
-    "question_en": "What does â€œencapsulate customer payloadâ€ mean in the provider context?",
+    "question_en": "What does “encapsulate customer payload” mean in the provider context?",
     "explanation_en": "Encapsulation adds transport information without destroying the customer's payload functionality.",
     "extraInfo_en": "The provider thereby creates a stable transport shell for forwarding, separation and control.",
     "tip_en": "Payload content remains the same, headers are added.",
@@ -1895,7 +1895,7 @@
     "question_en": "What does it mean: \"combine separate overlay networks onto one platform and still retain an overlay model\"?",
     "explanation_en": "A common physical network is used while the logical service boundaries are maintained.",
     "extraInfo_en": "Simply put: a common infrastructure under the hood, externally separate virtual networks for each service/customer with their own policy and administration.",
-    "tip_en": "Separate in your mind â€œphysicalâ€ (joint) and â€œlogicalâ€ (separate).",
+    "tip_en": "Separate in your mind “physical” (joint) and “logical” (separate).",
     "source_en": "Telecommunication basics",
     "options_en": [
       "All customers share the same configuration without separation",
@@ -2079,7 +2079,7 @@
       "VPN"
     ],
     "source": "Telecommunication Grundlagen",
-    "question_en": "What best describes a â€œserviceâ€ in the provider environment?",
+    "question_en": "What best describes a “service” in the provider environment?",
     "explanation_en": "A service is a logically clearly described unit for connectivity and operation.",
     "extraInfo_en": "This typically includes end-to-end configuration, management and a clear cost/billing model.",
     "tip_en": "Service = logical unit, not just hardware.",
@@ -2363,10 +2363,10 @@
       "Customer Sicht"
     ],
     "source": "Telecommunication Grundlagen",
-    "question_en": "What is the typical advantage of VPWS from the customerâ€™s perspective?",
+    "question_en": "What is the typical advantage of VPWS from the customer’s perspective?",
     "explanation_en": "VPWS provides the customer with the behavior of a dedicated point-to-point line.",
     "extraInfo_en": "The provider transport structure for the customer user data path remains largely transparent.",
-    "tip_en": "Note: â€œlike a cable between two locationsâ€.",
+    "tip_en": "Note: “like a cable between two locations”.",
     "source_en": "Telecommunication basics",
     "options_en": [
       "It acts like a direct connection between two locations",
@@ -8002,15 +8002,15 @@
     "question_en": "Which transport does BGP use for its session?",
     "options": [
       "TCP Port 179",
-      "UDP Port 179",
-      "ICMP Echo Session",
-      "SCTP Port 179"
+      "TCP Port 180 fuer den eigentlichen UPDATE-Austausch",
+      "UDP Port 179 mit separatem Keepalive-Kanal",
+      "SCTP Port 179 bei eBGP standardmaessig"
     ],
     "options_en": [
       "TCP port 179",
-      "UDP port 179",
-      "ICMP echo session",
-      "SCTP port 179"
+      "TCP port 180 for the actual UPDATE exchange",
+      "UDP port 179 with a separate keepalive channel",
+      "SCTP port 179 by default for eBGP"
     ],
     "correctIndex": 0,
     "explanation": "BGP baut eine zuverlaessige TCP-Verbindung auf Port 179 zwischen Peers auf.",
@@ -8079,15 +8079,15 @@
     "question_en": "What is the most direct role of AS_PATH in BGP?",
     "options": [
       "Schleifenvermeidung zwischen AS und wichtiger Best-Path-Faktor",
-      "Ersetzt die Next-Hop-IP vollstaendig",
-      "Steuert nur QoS im Core",
-      "Ist nur fuer IPv6 vorhanden"
+      "Kennzeichnet den bevorzugten Exit-Punkt innerhalb eines AS wie MED",
+      "Legt fest, welche VRFs eine Route importieren duerfen",
+      "Beschreibt nur die TCP-Erreichbarkeit des Peers"
     ],
     "options_en": [
-      "Inter-AS loop prevention and an important best-path factor",
-      "It fully replaces next-hop IP",
-      "It controls only core QoS",
-      "It exists only for IPv6"
+      "Loop prevention between ASes and an important best-path factor",
+      "Marks the preferred exit point within an AS like MED",
+      "Defines which VRFs are allowed to import a route",
+      "Describes only the TCP reachability of the peer"
     ],
     "correctIndex": 0,
     "explanation": "AS_PATH zeigt, durch welche AS ein Prefix gelernt wurde. Ein bereits enthaltenes eigenes AS weist auf eine Schleife hin.",
@@ -8503,15 +8503,15 @@
     "question_en": "How has BGP evolved over time?",
     "options": [
       "Zu Multi-Protocol-BGP mit mehreren Address Families und zusaetzlichen Funktionen",
-      "Es kann heute nur noch IPv4 und keine weiteren Familien",
-      "Es wurde vollstaendig durch OSPF ersetzt",
-      "Es arbeitet nur noch ohne Policies"
+      "Zu einem Dual-Stack-Protokoll nur fuer IPv4 und IPv6, aber ohne VPN- oder Label-Familien",
+      "Zu einem reinen Transportprotokoll, das TCP fuer BGP ersetzt",
+      "Zu einem IGP mit automatischer Neighbor-Discovery"
     ],
     "options_en": [
-      "Into multiprotocol BGP with multiple address families and additional functions",
-      "It now supports only IPv4 and no additional families",
-      "It was completely replaced by OSPF",
-      "It now works only without policies"
+      "Into Multi-Protocol BGP with multiple address families and additional functions",
+      "Into a dual-stack protocol only for IPv4 and IPv6, but without VPN or label families",
+      "Into a pure transport protocol that replaces TCP for BGP",
+      "Into an IGP with automatic neighbor discovery"
     ],
     "correctIndex": 0,
     "explanation": "Modernes BGP transportiert unterschiedliche AFI/SAFI-Kontexte und wird breit eingesetzt.",
@@ -8742,7 +8742,7 @@
       "Only synchronize keepalive timers"
     ],
     "correctIndex": 0,
-    "explanation": "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃ¶sen.",
+    "explanation": "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulösen.",
     "explanation_en": "Route refresh helps trigger policy re-evaluation of received routes without hard-resetting the session.",
     "extraInfo": "Kursnah fuer Nokia 7750: in deinem Kontext besonders bei BGP-Informationen fuer VPRN relevant.",
     "extraInfo_en": "Course-style for Nokia 7750: in your context especially relevant with BGP information used for VPRN.",
@@ -8810,22 +8810,22 @@
     "question_en": "Which BGP connection states belong to the classic BGP FSM?",
     "options": [
       "Idle, Connect, Active, OpenSent, OpenConfirm, Established",
-      "Down, Hello, Exchange, Loading, Full, Established",
-      "Idle, TCP-Up, Policy, Update, Refresh, Done",
-      "Init, Discover, Sync, Open, Forward, Close"
+      "Idle, Connect, OpenSent, OpenReceive, OpenConfirm, Established",
+      "Idle, Active, OpenSent, Update, Keepalive, Established",
+      "Down, Init, TwoWay, Exchange, Loading, Full"
     ],
     "options_en": [
       "Idle, Connect, Active, OpenSent, OpenConfirm, Established",
-      "Down, Hello, Exchange, Loading, Full, Established",
-      "Idle, TCP-Up, Policy, Update, Refresh, Done",
-      "Init, Discover, Sync, Open, Forward, Close"
+      "Idle, Connect, OpenSent, OpenReceive, OpenConfirm, Established",
+      "Idle, Active, OpenSent, Update, Keepalive, Established",
+      "Down, Init, TwoWay, Exchange, Loading, Full"
     ],
     "correctIndex": 0,
     "explanation": "Die klassische BGP FSM besteht aus genau diesen sechs Zustaenden.",
     "explanation_en": "The classic BGP FSM consists of exactly these six states.",
     "extraInfo": "Fuer Troubleshooting sind vor allem Idle, Active und Established sehr praxisrelevant.",
     "extraInfo_en": "For troubleshooting, Idle, Active, and Established are especially relevant in practice.",
-    "tip": "Die 6 StandardzustÃ¤nde der BGP FSM auswendig koennen.",
+    "tip": "Die 6 Standardzustände der BGP FSM auswendig koennen.",
     "tip_en": "Know the 6 standard BGP FSM states by heart.",
     "tags": [
       "BGP",
@@ -8848,15 +8848,15 @@
     "question_en": "What does the Idle state mean in BGP in course context?",
     "options": [
       "Die Session ist nicht aktiv gestartet; bei administrativem Shutdown werden keine TCP-Verbindungsversuche gestartet",
-      "Die Session hat bereits Updates ausgetauscht, wartet aber auf neue Communities",
-      "Der Router floodet ARP, um den Peer zu finden",
-      "Die OPEN-Message wurde bereits akzeptiert"
+      "TCP steht bereits, aber die OPEN-Message wurde noch nicht gesendet",
+      "Eine gueltige OPEN wurde empfangen und KEEPALIVE bereits gesendet",
+      "Die Session ist established, es gibt nur gerade keine neuen Updates"
     ],
     "options_en": [
-      "The session is not actively started; with administrative shutdown no TCP connection attempts are made",
-      "The session has already exchanged updates but is waiting for new communities",
-      "The router floods ARP to find the peer",
-      "The OPEN message has already been accepted"
+      "The session is not actively started; with administrative shutdown no TCP connection attempts are started",
+      "TCP is already up, but the OPEN message has not yet been sent",
+      "A valid OPEN has been received and a KEEPALIVE has already been sent",
+      "The session is established; there are simply no new updates right now"
     ],
     "correctIndex": 0,
     "explanation": "Im Idle-Zustand startet BGP keine aktive Session. Bei administrativem Shutdown bleibt die Session dort.",
@@ -8886,15 +8886,15 @@
     "question_en": "What best describes the BGP Connect state?",
     "options": [
       "BGP versucht aktiv, die TCP-Verbindung zum Peer aufzubauen",
-      "BGP hat bereits eine gueltige KEEPALIVE erhalten",
-      "BGP ist nur noch fuer Route Refresh offen",
-      "BGP hoert ausschliesslich passiv auf Updates"
+      "TCP steht bereits und die OPEN-Message wurde gesendet",
+      "Eine OPEN vom Peer wurde akzeptiert und man wartet auf KEEPALIVE",
+      "Nach einem Fehlschlag wartet BGP nur noch passiv auf eine eingehende TCP-Verbindung"
     ],
     "options_en": [
       "BGP is actively trying to establish the TCP connection to the peer",
-      "BGP has already received a valid KEEPALIVE",
-      "BGP is open only for route refresh",
-      "BGP is listening passively only for updates"
+      "TCP is already up and the OPEN message has been sent",
+      "An OPEN from the peer has been accepted and the router is waiting for KEEPALIVE",
+      "After a failure, BGP is only passively waiting for an incoming TCP connection"
     ],
     "correctIndex": 0,
     "explanation": "Connect ist der Zustand, in dem der Aufbau der TCP-Session aktiv versucht wird.",
@@ -8925,15 +8925,15 @@
     "question_en": "What does the BGP Active state most accurately mean in RFC/Nokia terms?",
     "options": [
       "Der Router lauscht auf eine eingehende TCP-Verbindung bzw. versucht nach Fehlschlag erneut den Sessionaufbau",
-      "Die Session ist bereits established und transportiert aktiv Daten",
-      "Der Peer hat gerade einen Route Reflector aktiviert",
-      "Es bedeutet nur, dass ein TCP SYN empfangen wurde und sonst nichts"
+      "Die TCP-Verbindung steht stabil und OPEN wurde bereits beidseitig bestaetigt",
+      "Eine OPEN wurde gesendet und es wird nur noch auf die OPEN des Peers gewartet",
+      "Ein gueltiges KEEPALIVE des Peers wurde schon empfangen und die Session ist im normalen Austausch"
     ],
     "options_en": [
-      "The router is listening for an inbound TCP connection and/or retrying the session establishment after failure",
-      "The session is already established and actively carrying data",
-      "The peer has just enabled a route reflector",
-      "It means only that a TCP SYN was received and nothing else"
+      "The router listens for an incoming TCP connection or retries session setup after a failure",
+      "The TCP connection is stable and OPEN has already been confirmed on both sides",
+      "An OPEN has been sent and only the peer OPEN is still missing",
+      "A valid KEEPALIVE from the peer has already been received and the session is in normal exchange"
     ],
     "correctIndex": 0,
     "explanation": "Active ist kein \"guter\" aktiver Betriebszustand, sondern typischerweise ein Zwischen-/Retry-Zustand beim TCP-Aufbau.",
@@ -8964,15 +8964,15 @@
     "question_en": "When is a BGP session in OpenSent?",
     "options": [
       "Nachdem die TCP-Session steht und eine OPEN-Message gesendet wurde, waehrend auf die OPEN des Peers gewartet wird",
-      "Nachdem bereits Updates ausgetauscht wurden",
-      "Wenn nur noch Keepalives gesendet werden",
-      "Direkt nach administrativem Shutdown"
+      "Nachdem eine OPEN empfangen wurde und nur noch KEEPALIVE vom Peer fehlt",
+      "Sobald TCP aufgebaut wird, aber noch keine OPEN gesendet wurde",
+      "Sobald regulaere UPDATE-Messages ausgetauscht werden"
     ],
     "options_en": [
-      "After the TCP session is up and an OPEN message has been sent, while waiting for the peer's OPEN",
-      "After updates have already been exchanged",
-      "When only keepalives are sent",
-      "Immediately after administrative shutdown"
+      "After the TCP session is up and an OPEN message has been sent while waiting for the peer OPEN",
+      "After an OPEN has been received and only the peer KEEPALIVE is still missing",
+      "As soon as TCP setup begins but no OPEN has been sent yet",
+      "As soon as regular UPDATE messages are exchanged"
     ],
     "correctIndex": 0,
     "explanation": "OpenSent folgt auf den erfolgreichen TCP-Aufbau und die lokal gesendete OPEN-Message.",
@@ -9002,15 +9002,15 @@
     "question_en": "What best describes OpenConfirm?",
     "options": [
       "Eine akzeptable OPEN wurde empfangen, KEEPALIVE wurde gesendet, jetzt wartet man auf KEEPALIVE vom Peer",
-      "Die Session ist administrativ deaktiviert",
-      "TCP wird noch gar nicht genutzt",
-      "Nur Notifications werden noch akzeptiert"
+      "TCP wird gerade erst aufgebaut und es wurde noch keine OPEN gesendet",
+      "Die Session ist bereits Established und verarbeitet nur noch UPDATEs",
+      "Die Session ist administrativ down, aber TCP bleibt bestehen"
     ],
     "options_en": [
-      "An acceptable OPEN was received, a KEEPALIVE was sent, and now the router waits for the peer's KEEPALIVE",
-      "The session is administratively disabled",
-      "TCP is not yet used at all",
-      "Only notifications are still accepted"
+      "An acceptable OPEN was received, KEEPALIVE was sent, and now the router waits for KEEPALIVE from the peer",
+      "TCP is only just being set up and no OPEN has been sent yet",
+      "The session is already Established and now only processes UPDATEs",
+      "The session is administratively down, but TCP remains up"
     ],
     "correctIndex": 0,
     "explanation": "OpenConfirm ist der letzte Vorstufen-Zustand vor Established.",
@@ -9041,15 +9041,15 @@
     "question_en": "When is a BGP session considered Established?",
     "options": [
       "Wenn ein gueltiges KEEPALIVE vom Peer empfangen wurde und der Message-Austausch starten kann",
-      "Sobald TCP SYN gesendet wurde",
-      "Sobald die Session in Idle faellt",
-      "Sobald ein Route Reflector konfiguriert wurde"
+      "Sobald die lokale OPEN gesendet wurde, auch wenn der Peer noch nicht reagiert hat",
+      "Sobald TCP steht, unabhaengig von OPEN und KEEPALIVE",
+      "Sobald ein NOTIFICATION-Paket erfolgreich bestaetigt wurde"
     ],
     "options_en": [
-      "When a valid KEEPALIVE has been received from the peer and message exchange can start",
-      "As soon as a TCP SYN is sent",
-      "As soon as the session returns to Idle",
-      "As soon as a route reflector is configured"
+      "When a valid KEEPALIVE from the peer has been received and message exchange can start",
+      "As soon as the local OPEN has been sent, even if the peer has not yet responded",
+      "As soon as TCP is up, regardless of OPEN and KEEPALIVE",
+      "As soon as a NOTIFICATION message has been successfully acknowledged"
     ],
     "correctIndex": 0,
     "explanation": "Im Established-Zustand koennen UPDATE-, KEEPALIVE- und NOTIFICATION-Messages ausgetauscht werden.",
@@ -9118,15 +9118,15 @@
     "question_en": "Which statement best describes the iBGP split-horizon rule?",
     "options": [
       "Eine Route, die von einem iBGP-Peer gelernt wurde, darf nicht an andere iBGP-Peers weiteradvertised werden",
-      "iBGP-Routen muessen immer an alle iBGP-Peers gespiegelt werden",
-      "Nur eBGP-Routen duerfen in iBGP gelernt werden",
-      "Split Horizon gilt nur fuer MED"
+      "Eine von iBGP gelernte Route darf nur dann an andere iBGP-Peers weitergegeben werden, wenn NEXT_HOP unveraendert bleibt",
+      "Eine iBGP-Route darf an andere iBGP-Peers nur mit unveraendertem MED weitergegeben werden",
+      "Die Regel verhindert nur das Weitergeben von Communities zwischen iBGP-Peers"
     ],
     "options_en": [
       "A route learned from one iBGP peer must not be advertised to other iBGP peers",
-      "iBGP routes must always be mirrored to all iBGP peers",
-      "Only eBGP routes may be learned in iBGP",
-      "Split horizon applies only to MED"
+      "A route learned via iBGP may be advertised to other iBGP peers only if NEXT_HOP remains unchanged",
+      "An iBGP route may be advertised to other iBGP peers only if MED stays unchanged",
+      "The rule only prevents community propagation between iBGP peers"
     ],
     "correctIndex": 0,
     "explanation": "Diese Regel verhindert Schleifen innerhalb eines AS im klassischen iBGP-Modell.",
@@ -9234,15 +9234,15 @@
     "question_en": "How are BGP path attributes broadly classified?",
     "options": [
       "In well-known und optional",
-      "Nur in internal und external",
-      "Nur in TCP und UDP",
-      "Nur in ingress und egress"
+      "In mandatory und discretionary",
+      "In transitive und non-transitive",
+      "In internal und external"
     ],
     "options_en": [
       "Into well-known and optional",
-      "Only into internal and external",
-      "Only into TCP and UDP",
-      "Only into ingress and egress"
+      "Into mandatory and discretionary",
+      "Into transitive and non-transitive",
+      "Into internal and external"
     ],
     "correctIndex": 0,
     "explanation": "BGP unterscheidet zuerst zwischen well-known und optionalen Attributen. Danach folgen weitere Unterteilungen wie mandatory, discretionary, transitive und non-transitive.",
@@ -9271,15 +9271,15 @@
     "question_en": "What is the difference between well-known mandatory and well-known discretionary attributes?",
     "options": [
       "Mandatory muessen in jedem passenden UPDATE vorhanden sein, discretionary nur wenn sie fuer die Route relevant sind",
+      "Mandatory muessen in jedem UPDATE stehen, discretionary duerfen nur in iBGP genutzt werden",
       "Mandatory gelten nur fuer eBGP, discretionary nur fuer iBGP",
-      "Mandatory werden nie propagated, discretionary immer",
-      "Es gibt keinen Unterschied"
+      "Mandatory beschreiben TCP-Parameter, discretionary Routing-Parameter"
     ],
     "options_en": [
-      "Mandatory must be present in every applicable UPDATE, while discretionary are included only when relevant to the route",
-      "Mandatory apply only to eBGP, discretionary only to iBGP",
-      "Mandatory are never propagated, discretionary always are",
-      "There is no difference"
+      "Mandatory attributes must be present in every applicable UPDATE, discretionary ones only when relevant for the route",
+      "Mandatory attributes must appear in every UPDATE, discretionary ones may be used only in iBGP",
+      "Mandatory attributes apply only to eBGP, discretionary ones only to iBGP",
+      "Mandatory attributes describe TCP parameters, discretionary ones routing parameters"
     ],
     "correctIndex": 0,
     "explanation": "Well-known mandatory Attribute gehoeren zwingend zu passenden Routen-Updates. Well-known discretionary Attribute sind ebenfalls standardisiert, aber nicht fuer jede Route erforderlich.",
@@ -9309,15 +9309,15 @@
     "question_en": "What does 'optional transitive' mean for a BGP attribute?",
     "options": [
       "Es kann weitergegeben werden, selbst wenn der empfangende Router es nicht vollstaendig auswertet",
-      "Es darf nur innerhalb eines AS genutzt werden",
-      "Es muss in jeder OPEN-Message stehen",
-      "Es ersetzt LOCAL_PREF"
+      "Es darf nur weitergegeben werden, wenn jeder empfangende Router es versteht",
+      "Es bleibt innerhalb desselben AS, wird aber nie ueber AS-Grenzen propagiert",
+      "Es ersetzt bei unbekannten Routern automatisch LOCAL_PREF"
     ],
     "options_en": [
-      "It can be propagated even if the receiving router does not fully interpret it",
-      "It may only be used inside one AS",
-      "It must appear in every OPEN message",
-      "It replaces LOCAL_PREF"
+      "It may be propagated even if the receiving router does not fully understand it",
+      "It may be propagated only if every receiving router understands it",
+      "It stays inside the same AS but is never propagated across AS boundaries",
+      "It automatically replaces LOCAL_PREF on routers that do not understand it"
     ],
     "correctIndex": 0,
     "explanation": "Optionale transitive Attribute duerfen AS-Grenzen ueberschreiten. Auch ein Router, der sie nicht im Detail versteht, darf sie nicht einfach verwerfen wie ein non-transitives Attribut.",
@@ -9347,15 +9347,15 @@
     "question_en": "How is an optional non-transitive attribute typically handled when a route is received via eBGP and later sent via eBGP into another AS?",
     "options": [
       "Es wird nicht unveraendert in ein weiteres AS propagated",
-      "Es muss immer unveraendert an alle eBGP-Peers weitergegeben werden",
-      "Es wird automatisch zu COMMUNITY konvertiert",
-      "Es beendet die Session mit einer NOTIFICATION"
+      "Es muss an alle eBGP-Peers unveraendert weitergegeben werden, sobald der Router es erkennt",
+      "Es wird vor eBGP-Export automatisch in COMMUNITY umgewandelt",
+      "Es fuehrt dazu, dass die Route im RIB-IN automatisch invalid wird"
     ],
     "options_en": [
       "It is not propagated unchanged into another AS",
-      "It must always be forwarded unchanged to all eBGP peers",
-      "It is automatically converted into COMMUNITY",
-      "It terminates the session with a NOTIFICATION"
+      "It must be passed unchanged to all eBGP peers as soon as the router recognizes it",
+      "It is automatically converted to COMMUNITY before eBGP export",
+      "It causes the route to become automatically invalid in the RIB-IN"
     ],
     "correctIndex": 0,
     "explanation": "Non-transitive Attribute sollen nicht ueber AS-Grenzen hinweg erhalten bleiben. Innerhalb des eigenen AS koennen sie je nach Implementierung bzw. Kontext noch sichtbar oder nutzbar sein.",
@@ -9386,15 +9386,15 @@
     "question_en": "Which group belongs to the well-known mandatory path attributes?",
     "options": [
       "AS_PATH, NEXT_HOP und ORIGIN",
-      "LOCAL_PREF, MED und COMMUNITY",
-      "ATOMIC_AGGREGATE, MED und ORIGINATOR_ID",
-      "CLUSTER_LIST, COMMUNITY und NEXT_HOP"
+      "AS_PATH, LOCAL_PREF und ORIGIN",
+      "NEXT_HOP, MED und ORIGIN",
+      "AS_PATH, ORIGINATOR_ID und NEXT_HOP"
     ],
     "options_en": [
       "AS_PATH, NEXT_HOP, and ORIGIN",
-      "LOCAL_PREF, MED, and COMMUNITY",
-      "ATOMIC_AGGREGATE, MED, and ORIGINATOR_ID",
-      "CLUSTER_LIST, COMMUNITY, and NEXT_HOP"
+      "AS_PATH, LOCAL_PREF, and ORIGIN",
+      "NEXT_HOP, MED, and ORIGIN",
+      "AS_PATH, ORIGINATOR_ID, and NEXT_HOP"
     ],
     "correctIndex": 0,
     "explanation": "AS_PATH, NEXT_HOP und ORIGIN sind die klassischen well-known mandatory Attribute fuer BGP-Pfade.",
@@ -9576,15 +9576,15 @@
     "question_en": "Why is the shorter AS_PATH usually preferred when other conditions are equal?",
     "options": [
       "Weil er im BGP-Entscheidungsprozess als guenstiger gilt, nicht weil er automatisch die geringste Latenz garantiert",
-      "Weil er immer den billigsten kommerziellen Vertrag beweist",
-      "Weil BGP keine laengeren AS_PATHs akzeptiert",
-      "Weil kuerzere AS_PATHs immer aus demselben AS stammen"
+      "Weil kuerzere AS_PATHs immer automatisch die niedrigsten IGP-Kosten haben",
+      "Weil ein laengerer AS_PATH nur in iBGP erlaubt ist",
+      "Weil BGP laengere AS_PATHs nach RFC verwerfen muss"
     ],
     "options_en": [
-      "Because BGP treats it as more favorable in best-path selection, not because it automatically guarantees the lowest latency",
-      "Because it always proves the cheapest commercial contract",
-      "Because BGP does not accept longer AS_PATHs",
-      "Because shorter AS_PATHs always come from the same AS"
+      "Because the BGP decision process treats it as more attractive, not because it automatically guarantees the lowest latency",
+      "Because shorter AS_PATHs always automatically have the lowest IGP cost",
+      "Because a longer AS_PATH is allowed only in iBGP",
+      "Because BGP must discard longer AS_PATHs according to the RFC"
     ],
     "correctIndex": 0,
     "explanation": "Ein kurzer AS_PATH ist ein BGP-Entscheidungskriterium. Er ist aber kein direkter Beweis fuer weniger Delay oder geringere Kosten in der realen Transportwelt.",
@@ -9763,15 +9763,15 @@
     "question_en": "Which order matches the first important BGP selection criteria from your notes?",
     "options": [
       "Hoehere LOCAL_PREF, kuerzerer AS_PATH, besserer ORIGIN, niedrigeres MED, eBGP vor iBGP",
-      "Niedrigeres MED, hoehere LOCAL_PREF, laengerer AS_PATH, iBGP vor eBGP, ORIGIN",
-      "ORIGIN, NEXT_HOP, TCP-Port, Community-Anzahl, MED",
-      "Router-ID, Cluster-List, NEXT_HOP-IP, MED, LOCAL_PREF"
+      "Hoehere LOCAL_PREF, niedrigeres MED, kuerzerer AS_PATH, besserer ORIGIN, eBGP vor iBGP",
+      "Hoehere LOCAL_PREF, kuerzerer AS_PATH, niedrigeres MED, besserer ORIGIN, eBGP vor iBGP",
+      "Kuerzerer AS_PATH, hoehere LOCAL_PREF, besserer ORIGIN, niedrigeres MED, eBGP vor iBGP"
     ],
     "options_en": [
       "Higher LOCAL_PREF, shorter AS_PATH, better ORIGIN, lower MED, eBGP over iBGP",
-      "Lower MED, higher LOCAL_PREF, longer AS_PATH, iBGP over eBGP, ORIGIN",
-      "ORIGIN, NEXT_HOP, TCP port, community count, MED",
-      "Router ID, cluster list, NEXT_HOP IP, MED, LOCAL_PREF"
+      "Higher LOCAL_PREF, lower MED, shorter AS_PATH, better ORIGIN, eBGP over iBGP",
+      "Higher LOCAL_PREF, shorter AS_PATH, lower MED, better ORIGIN, eBGP over iBGP",
+      "Shorter AS_PATH, higher LOCAL_PREF, better ORIGIN, lower MED, eBGP over iBGP"
     ],
     "correctIndex": 0,
     "explanation": "Diese Reihenfolge bildet die typischen fruehen Best-Path-Schritte aus deinen Kursnotizen gut ab. Weitere Kriterien kommen spaeter als Tie-Breaker.",
@@ -10108,15 +10108,15 @@
     "question_en": "How is a basic route policy logically structured?",
     "options": [
       "From bestimmt, welche Prefixe oder Routen matchen; Action bestimmt, was danach mit ihnen passiert",
-      "Action waehlt die Prefixe aus, From setzt nur die Router-ID",
-      "From gilt nur fuer Export, Action nur fuer Import",
-      "Eine Policy hat nur Actions, aber keine Match-Kriterien"
+      "From beschreibt nur den Nachbarrouter; Action beschreibt nur den AS_PATH",
+      "From matcht Routen; Action gilt nur fuer Export und nie fuer Import",
+      "From matcht Routen; Action kann nur accept oder reject, aber keine Attribute veraendern"
     ],
     "options_en": [
-      "From determines which prefixes or routes match; Action determines what then happens to them",
-      "Action selects the prefixes, while From only sets the router ID",
-      "From applies only to export, Action only to import",
-      "A policy has only actions and no match criteria"
+      "From determines which prefixes or routes match; Action determines what happens to them afterwards",
+      "From describes only the neighbor router; Action describes only the AS_PATH",
+      "From matches routes; Action applies only to export and never to import",
+      "From matches routes; Action can only accept or reject, but cannot change attributes"
     ],
     "correctIndex": 0,
     "explanation": "Das Kernmodell ist einfach: `from` beschreibt die betroffenen Routen, `action` beschreibt die Folgeaktion.",
@@ -10146,15 +10146,15 @@
     "question_en": "What does it usually mean in a route policy when a specific From criterion is omitted?",
     "options": [
       "Das Kriterium wirkt dann allgemein auf alle passenden Routen dieser Policy-Ebene",
-      "Die Policy wird ungueltig",
-      "Nur IPv6-Routen werden noch betrachtet",
-      "Die Action wird automatisch reject"
+      "Das Kriterium gilt dann nur fuer bereits beste BGP-Routen",
+      "Der Entry matched dann nur, wenn auch alle anderen From-Kriterien leer sind",
+      "Die Policy wirkt dann nur noch auf IPv4-Routen"
     ],
     "options_en": [
-      "The criterion then applies generally to all relevant routes at that policy level",
-      "The policy becomes invalid",
-      "Only IPv6 routes are considered from then on",
-      "The action automatically becomes reject"
+      "The criterion then applies generally to all matching routes at that policy level",
+      "The criterion then applies only to routes that are already best BGP routes",
+      "The entry then matches only if all other From criteria are also empty",
+      "The policy then applies only to IPv4 routes"
     ],
     "correctIndex": 0,
     "explanation": "Wenn du ein Match-Kriterium wie Prefix-Liste oder Neighbor nicht setzt, wird an dieser Stelle typischerweise nicht weiter eingeschraenkt.",
@@ -10184,15 +10184,15 @@
     "question_en": "Which kinds of information can typically be checked in the From part of a BGP route policy?",
     "options": [
       "Zum Beispiel Prefix-Liste, Address Family, Lernprotokoll, BGP-Nachbar oder BGP-Attribute",
-      "Nur die TCP-Portnummer der Session",
-      "Nur die lokale CPU-Auslastung",
-      "Nur SAP- und SDP-Werte"
+      "Nur TCP-Portnummer, Hold Time und lokale Router-ID",
+      "Nur LOCAL_PREF und MED, aber keine Prefixe oder Nachbarn",
+      "Nur Informationen aus dem RIB-OUT, nie aus der empfangenen Route"
     ],
     "options_en": [
       "For example prefix list, address family, learning protocol, BGP neighbor, or BGP attributes",
-      "Only the TCP port number of the session",
-      "Only the local CPU utilization",
-      "Only SAP and SDP values"
+      "Only TCP port number, hold time, and local router ID",
+      "Only LOCAL_PREF and MED, but no prefixes or neighbors",
+      "Only information from the RIB-OUT, never from the received route"
     ],
     "correctIndex": 0,
     "explanation": "Der From-Teil kann sehr gezielt matchen, etwa nach Prefixen, AFI/SAFI, Protokollherkunft, Neighbor oder Attributen.",
@@ -10223,15 +10223,15 @@
     "question_en": "What does Action = accept mean in an import policy?",
     "options": [
       "Die Route wird angenommen und darf am BGP-Entscheidungsprozess teilnehmen",
-      "Die Route wird nur im RIB-OUT gespeichert",
-      "Die Session wird neu gestartet",
-      "Die Route wird sofort an alle eBGP-Peers exportiert"
+      "Die Route wird angenommen, aber erst nach einer Export-Policy in den Best-Path-Prozess gegeben",
+      "Die Route wird direkt an alle iBGP-Peers weitergereicht, aber lokal nicht verarbeitet",
+      "Die Session bleibt bestehen, aber die Route bleibt ausserhalb des BGP-Prozesses"
     ],
     "options_en": [
       "The route is accepted and may participate in the BGP decision process",
-      "The route is stored only in RIB-OUT",
-      "The session is restarted",
-      "The route is immediately exported to all eBGP peers"
+      "The route is accepted, but enters best-path selection only after an export policy",
+      "The route is immediately forwarded to all iBGP peers, but not processed locally",
+      "The session stays up, but the route remains outside the BGP process"
     ],
     "correctIndex": 0,
     "explanation": "Bei Import bedeutet accept, dass die Route angenommen wird und weiter in die BGP-Verarbeitung gehen darf.",
@@ -10603,15 +10603,15 @@
     "question_en": "How can the MED value typically be set in a route policy?",
     "options": [
       "Entweder auf einen festen Wert oder auf Basis des IGP-bezogenen Kostenwerts",
-      "Nur durch TCP-Optionen in der BGP-Session",
-      "Nur automatisch aus dem AS_PATH",
-      "Gar nicht per Policy"
+      "Nur wenn die AS_PATH-Laenge zuvor in der Policy berechnet wurde",
+      "Nur indem NEXT_HOP veraendert wird und MED daraus automatisch entsteht",
+      "Gar nicht per Policy, sondern ausschliesslich durch den Peer"
     ],
     "options_en": [
       "Either to a fixed value or based on the IGP-related cost value",
-      "Only through TCP options in the BGP session",
-      "Only automatically from the AS_PATH",
-      "Not by policy at all"
+      "Only if the AS_PATH length was previously calculated in the policy",
+      "Only by changing NEXT_HOP so that MED is created automatically from it",
+      "Not by policy at all, only by the peer"
     ],
     "correctIndex": 0,
     "explanation": "MED kann per Policy auf einen festen Wert gesetzt oder IGP-basiert abgeleitet werden, je nach Plattformsyntax.",
@@ -11648,7 +11648,7 @@
     "correctIndex": 0,
     "explanation": "Wie bei iBGP allgemein skaliert ein Full Mesh schlecht. Route Reflectors sind die uebliche Antwort auf dieses Problem.",
     "explanation_en": "As with iBGP in general, a full mesh scales poorly. Route reflectors are the usual answer to that problem.",
-    "extraInfo": "Das ist genau der Grund, warum Route Reflectors in grÃ¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
+    "extraInfo": "Das ist genau der Grund, warum Route Reflectors in grösseren MP-BGP-VPN-Umgebungen so wichtig werden.",
     "extraInfo_en": "That is exactly why route reflectors become so important in larger MP-BGP VPN environments.",
     "tip": "PE-VPN-Routing folgt den normalen iBGP-Skalierungsregeln.",
     "tip_en": "PE VPN routing follows the normal iBGP scaling rules.",
@@ -11783,6 +11783,309 @@
     "module_en": "Module 2",
     "section": "Section 1",
     "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m1s3-q12",
+    "question": "Welche Aussage ueber den BGP-State Active ist falsch?",
+    "question_en": "Which statement about the BGP Active state is false?",
+    "options": [
+      "Active bedeutet, dass die Session bereits stabil Established ist und regulare Updates austauscht",
+      "Active kann nach einem fehlgeschlagenen Connect-Versuch auftreten",
+      "In Active kann der Router auf eingehende TCP-Verbindungen warten",
+      "Aus Active kann erneut ein TCP-Sessionaufbau versucht werden"
+    ],
+    "options_en": [
+      "Active means the session is already stably Established and exchanging regular updates",
+      "Active can appear after a failed Connect attempt",
+      "In Active, the router may wait for incoming TCP connections",
+      "From Active, another TCP session setup attempt can be made"
+    ],
+    "correctIndex": 0,
+    "explanation": "Active ist kein stabiler Betriebszustand. Er gehoert noch zur fruehen Aufbau- oder Wiederholungsphase der Session.",
+    "explanation_en": "Active is not a stable operational state. It still belongs to the early setup or retry phase of the session.",
+    "extraInfo": "Viele Troubleshooting-Faelle zeigen ein Pendeln zwischen Connect und Active.",
+    "extraInfo_en": "Many troubleshooting cases show oscillation between Connect and Active.",
+    "tip": "Established ist der Zielzustand, Active nicht.",
+    "tip_en": "Established is the target state, not Active.",
+    "tags": [
+      "BGP",
+      "Connection States",
+      "FSM",
+      "Troubleshooting"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m1s3-q13",
+    "question": "Welche State-Reihenfolge passt am besten zu einem erfolgreichen BGP-Aufbau ohne Rueckfall?",
+    "question_en": "Which state sequence best matches a successful BGP bring-up without fallback?",
+    "options": [
+      "Idle -> Connect -> OpenSent -> OpenConfirm -> Established",
+      "Idle -> Active -> OpenConfirm -> OpenSent -> Established",
+      "Idle -> Connect -> Established -> OpenSent -> OpenConfirm",
+      "Idle -> OpenSent -> Connect -> Active -> Established"
+    ],
+    "options_en": [
+      "Idle -> Connect -> OpenSent -> OpenConfirm -> Established",
+      "Idle -> Active -> OpenConfirm -> OpenSent -> Established",
+      "Idle -> Connect -> Established -> OpenSent -> OpenConfirm",
+      "Idle -> OpenSent -> Connect -> Active -> Established"
+    ],
+    "correctIndex": 0,
+    "explanation": "Wenn TCP direkt klappt, geht die Session typischerweise ueber Connect zu OpenSent, dann OpenConfirm und schliesslich Established.",
+    "explanation_en": "If TCP works immediately, the session typically goes through Connect to OpenSent, then OpenConfirm, and finally Established.",
+    "extraInfo": "Active ist eher der Retry- oder Ausweichzustand, nicht die ideale Erfolgsfolge.",
+    "extraInfo_en": "Active is more the retry or fallback state, not the ideal success sequence.",
+    "tip": "Erfolgsweg merken: TCP zuerst, dann OPEN, dann KEEPALIVE.",
+    "tip_en": "Remember the success path: TCP first, then OPEN, then KEEPALIVE.",
+    "tags": [
+      "BGP",
+      "Connection States",
+      "FSM",
+      "State Sequence"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m1s3-q14",
+    "question": "Was passiert typischerweise beim Uebergang von Connect nach OpenSent?",
+    "question_en": "What typically happens at the transition from Connect to OpenSent?",
+    "options": [
+      "Die TCP-Verbindung steht, und der Router sendet seine BGP OPEN-Message",
+      "Der Router empfaengt bereits das KEEPALIVE des Peers und wird Established",
+      "Die Session faellt in Idle, weil keine Policies geladen sind",
+      "Es werden schon UPDATE-Messages ausgetauscht, aber noch ohne AS_PATH"
+    ],
+    "options_en": [
+      "The TCP connection is up, and the router sends its BGP OPEN message",
+      "The router is already receiving the peer KEEPALIVE and becomes Established",
+      "The session falls to Idle because no policies are loaded",
+      "UPDATE messages are already exchanged, but still without AS_PATH"
+    ],
+    "correctIndex": 0,
+    "explanation": "OpenSent beginnt, nachdem TCP steht und die BGP-spezifische OPEN-Phase startet.",
+    "explanation_en": "OpenSent begins once TCP is up and the BGP-specific OPEN phase starts.",
+    "extraInfo": "OpenSent ist der erste eigentliche BGP-Nachrichtenstatus nach erfolgreichem TCP-Aufbau.",
+    "extraInfo_en": "OpenSent is the first real BGP messaging state after successful TCP setup.",
+    "tip": "Connect = TCP aufbauen, OpenSent = OPEN senden.",
+    "tip_en": "Connect = build TCP, OpenSent = send OPEN.",
+    "tags": [
+      "BGP",
+      "Connection States",
+      "OpenSent",
+      "TCP"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m1s3-q15",
+    "question": "Welche Aussage zu OpenConfirm ist falsch?",
+    "question_en": "Which statement about OpenConfirm is false?",
+    "options": [
+      "OpenConfirm bedeutet, dass bereits regulaere UPDATE-Messages im Normalbetrieb ausgetauscht werden",
+      "In OpenConfirm wurde eine akzeptable OPEN verarbeitet",
+      "In OpenConfirm wartet man noch auf ein gueltiges KEEPALIVE des Peers",
+      "OpenConfirm ist die letzte Vorstufe vor Established"
+    ],
+    "options_en": [
+      "OpenConfirm means regular UPDATE messages are already being exchanged in normal operation",
+      "In OpenConfirm, an acceptable OPEN has been processed",
+      "In OpenConfirm, the router is still waiting for a valid KEEPALIVE from the peer",
+      "OpenConfirm is the last stage before Established"
+    ],
+    "correctIndex": 0,
+    "explanation": "Regulaerer UPDATE-Austausch gehoert zu Established. OpenConfirm ist noch die Vorstufe dazu.",
+    "explanation_en": "Regular UPDATE exchange belongs to Established. OpenConfirm is still the stage before that.",
+    "extraInfo": "OpenConfirm zeigt: OPEN ist im Wesentlichen ok, aber die Session ist noch nicht ganz fertig.",
+    "extraInfo_en": "OpenConfirm shows that OPEN is essentially okay, but the session is not fully finished yet.",
+    "tip": "OpenConfirm ist noch nicht Established.",
+    "tip_en": "OpenConfirm is not Established yet.",
+    "tags": [
+      "BGP",
+      "Connection States",
+      "OpenConfirm"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m1s3-q16",
+    "question": "Welche Aussage beschreibt den Unterschied zwischen Connect und Active am besten?",
+    "question_en": "Which statement best describes the difference between Connect and Active?",
+    "options": [
+      "Connect ist der aktive TCP-Aufbauversuch; Active ist eher der Retry- oder Wartezustand nach Problemen beim Aufbau",
+      "Connect und Active sind nur zwei Namen fuer denselben Established-Zustand",
+      "Connect bedeutet OPEN-Phase, Active bedeutet UPDATE-Phase",
+      "Connect wird nur in iBGP genutzt, Active nur in eBGP"
+    ],
+    "options_en": [
+      "Connect is the active TCP setup attempt; Active is more the retry or waiting state after setup problems",
+      "Connect and Active are just two names for the same Established state",
+      "Connect means OPEN phase, Active means UPDATE phase",
+      "Connect is used only in iBGP, Active only in eBGP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Beide Zustaende liegen vor der OPEN-/KEEPALIVE-Phase, aber Connect steht naeher am direkten TCP-Aufbau, waehrend Active oft einen Fehlschlag oder Retry markiert.",
+    "explanation_en": "Both states occur before the OPEN/KEEPALIVE phase, but Connect is closer to direct TCP setup while Active often marks a failure or retry.",
+    "extraInfo": "Connect/Active-Wechsel sind ein typisches Zeichen fuer Transport- oder Reachability-Probleme.",
+    "extraInfo_en": "Connect/Active oscillation is a typical sign of transport or reachability problems.",
+    "tip": "Connect = aktiv anklopfen, Active = erneut versuchen oder warten.",
+    "tip_en": "Connect = actively knock, Active = retry or wait.",
+    "tags": [
+      "BGP",
+      "Connection States",
+      "Connect",
+      "Active"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m1s3-q17",
+    "question": "Was ist ein typischer Grund dafuer, dass eine Session zwischen Connect und Active pendelt?",
+    "question_en": "What is a typical reason why a session oscillates between Connect and Active?",
+    "options": [
+      "Die TCP-Erreichbarkeit oder der Sessionaufbau zum Peer klappt nicht stabil",
+      "Der AS_PATH ist fuer denselben Prefix zu kurz",
+      "LOCAL_PREF ist auf beiden Seiten identisch",
+      "Der Peer hat zu viele Communities an eine Route angehaengt"
+    ],
+    "options_en": [
+      "TCP reachability or session setup to the peer is not working reliably",
+      "The AS_PATH is too short for the same prefix",
+      "LOCAL_PREF is identical on both sides",
+      "The peer attached too many communities to a route"
+    ],
+    "correctIndex": 0,
+    "explanation": "Wenn TCP nicht sauber hochkommt oder sofort wieder scheitert, sieht man oft Connect/Active-Wechsel statt einer stabilen BGP-Session.",
+    "explanation_en": "If TCP does not come up cleanly or immediately fails again, you often see Connect/Active transitions instead of a stable BGP session.",
+    "extraInfo": "Deshalb beginnt BGP-Troubleshooting oft bei IP-Reachability, TCP/179, ASN und Peer-IP.",
+    "extraInfo_en": "That is why BGP troubleshooting often starts with IP reachability, TCP/179, ASN, and peer IP.",
+    "tip": "Connect/Active deutet zuerst auf Transportprobleme, nicht auf Best Path.",
+    "tip_en": "Connect/Active points first to transport issues, not best path.",
+    "tags": [
+      "BGP",
+      "Connection States",
+      "Troubleshooting",
+      "TCP"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m1s4-q24",
+    "question": "Welche Aussage zu MED ist falsch?",
+    "question_en": "Which statement about MED is false?",
+    "options": [
+      "Ein hoeherer MED-Wert wird bei gleicher Vergleichsbasis bevorzugt",
+      "MED ist klassisch ein optional non-transitives Attribut",
+      "MED wird typischerweise genutzt, um einem Nachbar-AS einen bevorzugten Eintrittspfad zu zeigen",
+      "Viele Implementierungen vergleichen MED standardmaessig nur zwischen Pfaden aus demselben Nachbar-AS"
+    ],
+    "options_en": [
+      "A higher MED value is preferred when the comparison basis is equal",
+      "MED is classically an optional non-transitive attribute",
+      "MED is typically used to signal a preferred entry path to a neighboring AS",
+      "Many implementations compare MED by default only among paths from the same neighboring AS"
+    ],
+    "correctIndex": 0,
+    "explanation": "Beim MED gilt grundsaetzlich: niedriger ist besser, sofern die Implementierung diese Pfade miteinander vergleicht.",
+    "explanation_en": "For MED the basic rule is: lower is better, provided the implementation compares those paths against each other.",
+    "extraInfo": "MED ist ein Hinweis an ein anderes AS, keine absolute Kostenmessung fuer alle Faelle.",
+    "extraInfo_en": "MED is a hint to another AS, not an absolute cost measurement for every case.",
+    "tip": "MED merken: kleiner gewinnt.",
+    "tip_en": "Remember MED: lower wins.",
+    "tags": [
+      "BGP",
+      "Path Attributes",
+      "MED",
+      "False Statement"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 4",
+    "section_en": "Section 4"
+  },
+  {
+    "id": "bgp-m1s5-q19",
+    "question": "Welche Aussage zu Route Policies ist falsch?",
+    "question_en": "Which statement about route policies is false?",
+    "options": [
+      "Wenn ein Entry matched, werden standardmaessig immer alle weiteren Entries derselben Policy ebenfalls verarbeitet",
+      "Route Policies koennen import- und exportseitig Routen filtern und Attribute aendern",
+      "Mit next-entry oder next-policy kann das Standardverhalten der Auswertung veraendert werden",
+      "Wenn nichts matched, greift die definierte Default-Action oder das Protokoll-Default"
+    ],
+    "options_en": [
+      "When an entry matches, all further entries of the same policy are processed by default",
+      "Route policies can filter routes and change attributes on import and export",
+      "With next-entry or next-policy, the default evaluation behavior can be changed",
+      "If nothing matches, the configured default action or the protocol default applies"
+    ],
+    "correctIndex": 0,
+    "explanation": "Standardmaessig stoppt die Auswertung nach dem ersten passenden Entry. Erst next-entry oder next-policy oeffnen die weitere Verarbeitung.",
+    "explanation_en": "By default, evaluation stops after the first matching entry. Only next-entry or next-policy allow further processing.",
+    "extraInfo": "Das ist wichtig, weil die Reihenfolge der Policy-Entries damit direkt das Verhalten bestimmt.",
+    "extraInfo_en": "This matters because the order of policy entries directly determines behavior.",
+    "tip": "First match wins, ausser du oeffnest bewusst die naechsten Schritte.",
+    "tip_en": "First match wins, unless you explicitly open the next steps.",
+    "tags": [
+      "BGP",
+      "Route Policy",
+      "False Statement",
+      "Policy Processing"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 1",
+    "module_en": "Module 1",
+    "section": "Section 5",
+    "section_en": "Section 5"
   }
 ]
 ;
