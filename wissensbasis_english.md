@@ -1897,3 +1897,77 @@ Possible signaling methods:
 
 Reminder:
 - a lower numeric preference is better
+
+## Chapter X - BGP Module 3 Section 1: Improving iBGP Scalability with Route Reflectors
+
+### X1) Why route reflectors are needed
+- In large VPN environments, many PE routers must exchange VPN routes
+- Without helper mechanisms, iBGP quickly turns into a full mesh
+- That scales poorly because the number of sessions grows rapidly
+
+### X2) Basic idea of the route reflector
+- A `Route Reflector` is a special BGP speaker defined by `RFC 4456`
+- It may re-advertise routes learned via iBGP to selected other iBGP peers
+- That re-advertisement is called `reflecting`
+
+Reminder:
+- An RR relaxes the classic iBGP split-horizon rule in a controlled way
+- that is exactly why the number of required iBGP sessions goes down
+
+### X3) How the topology becomes simpler
+- Instead of every PE peering with every other PE, an RR can sit logically in the middle
+- Each PE then has only its session to the RR
+- The RR distributes the relevant routes onward
+
+### X4) Why this matters in VPN environments
+- In VPN environments, examples of exchanged routes include:
+  - `VPN-IPv4`
+  - `VPN-IPv6`
+  - `EVPN`
+- With many PEs, the session problem quickly becomes larger than the routing problem itself
+
+## Chapter Y - BGP Module 3 Section 2: Topology and Operation of Route-Reflection Clusters
+
+### Y1) Three roles in an RR design
+- One typically distinguishes:
+  - `Route Reflector`
+  - `RR Client`
+  - `Regular iBGP Speaker` or `Non-Client Peer`
+
+### Y2) Which peers still need full mesh
+- Clients do not need to be full-meshed with one another
+- Non-clients must still be treated as properly meshed
+- In simple designs, other RRs are often treated as non-clients
+
+Reminder:
+- RR mainly saves the full mesh on the client side
+- non-clients remain normal iBGP speakers from a routing perspective
+
+### Y3) What a cluster is
+- An RR and its clients logically form a `cluster`
+- The RR is the central point of that cluster
+- The clients peer toward the RR
+
+### Y4) Cluster ID
+- A cluster has a `4-byte cluster ID`
+- It identifies the cluster
+- A common choice is the router ID of the RR
+- With redundant RRs in the same cluster, the same cluster value can be used
+
+### Y5) Best and used routes on the RR
+- RRs typically advertise `best` and `used` routes
+- `best` means:
+  - the route won BGP path selection against other candidates for the same prefix
+- `used` means:
+  - it was also installed into the routing table by the RTM
+
+Reminder:
+- `best` is not automatically `used`
+- an RR does not blindly reflect every received route
+
+### Y6) Loop prevention in the RR environment
+- Route reflection introduces additional loop risks
+- That is why the following attributes matter:
+  - `ORIGINATOR_ID`
+  - `CLUSTER_LIST`
+- They help detect whether a reflected route has looped back in an unhealthy way

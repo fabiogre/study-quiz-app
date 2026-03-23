@@ -12588,5 +12588,695 @@
     "module_en": "Module 2",
     "section": "Section 3",
     "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m2s1-q15",
+    "question": "Welche Liste enthaelt nur typische MP-BGP Address Families oder Familienbeispiele aus deinem Stoff?",
+    "question_en": "Which list contains only typical MP-BGP address families or family examples from your material?",
+    "options": [
+      "IPv4, IPv6, VPN-IPv4, VPN-IPv6, label-IPv4, label-IPv6, EVPN",
+      "OSPF, IS-IS, ARP, STP, EVPN",
+      "IPv4, IPv6, TCP, UDP, label-IPv4",
+      "VPN-IPv4, VLAN, MAC table, EVPN, ICMP"
+    ],
+    "options_en": [
+      "IPv4, IPv6, VPN-IPv4, VPN-IPv6, label-IPv4, label-IPv6, EVPN",
+      "OSPF, IS-IS, ARP, STP, EVPN",
+      "IPv4, IPv6, TCP, UDP, label-IPv4",
+      "VPN-IPv4, VLAN, MAC table, EVPN, ICMP"
+    ],
+    "correctIndex": 0,
+    "explanation": "MP-BGP erweitert BGP um verschiedene Address Families wie IPv4/IPv6 Unicast, VPN-IPv4/IPv6, labeled unicast und EVPN.",
+    "explanation_en": "MP-BGP extends BGP with different address families such as IPv4/IPv6 unicast, VPN-IPv4/IPv6, labeled unicast, and EVPN.",
+    "extraInfo": "Die anderen Antworten mischen Routing-Protokolle, Transport-Protokolle oder Datenstrukturen hinein, die keine MP-BGP AFI/SAFI-Familien sind.",
+    "extraInfo_en": "The other answers mix in routing protocols, transport protocols, or data structures that are not MP-BGP AFI/SAFI families.",
+    "tip": "Address family = welche Art Reachability BGP traegt.",
+    "tip_en": "Address family = what kind of reachability BGP carries.",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "Address Families",
+      "VPN-IPv4",
+      "EVPN"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q16",
+    "question": "Welche Rolle spielt MP-BGP bei VPRNs am treffendsten?",
+    "question_en": "What best describes the role of MP-BGP for VPRNs?",
+    "options": [
+      "Es ermoeglicht den Austausch der VPN-Routing-Informationen verschiedener Kundenseiten zwischen den PE-Routern",
+      "Es ersetzt alle Tunnel und macht MPLS oder GRE ueberfluessig",
+      "Es dient nur dazu, CE-Router in Route Reflectors umzuwandeln",
+      "Es wird nur fuer Access-Port-MTU-Berechnungen benoetigt"
+    ],
+    "options_en": [
+      "It enables exchange of VPN routing information from different customer sites between PE routers",
+      "It replaces all tunnels and makes MPLS or GRE unnecessary",
+      "It is used only to turn CE routers into route reflectors",
+      "It is needed only for access-port MTU calculations"
+    ],
+    "correctIndex": 0,
+    "explanation": "VPRN ist ein verteilter L3-Dienst. Darum muessen die PE-Router die VPN-Routing-Informationen zwischen sich austauschen, und genau dafuer ist MP-BGP zentral.",
+    "explanation_en": "VPRN is a distributed L3 service. Therefore the PE routers must exchange VPN routing information with each other, and that is exactly where MP-BGP is central.",
+    "extraInfo": "Ohne Hilfsmittel wie Route Reflectors fuehrt das in groesseren Umgebungen oft zu Full-Mesh-Fragen.",
+    "extraInfo_en": "Without helpers such as route reflectors, this often leads to full-mesh issues in larger environments.",
+    "tip": "VPRN Routing-Infos zwischen PEs = MP-BGP-Aufgabe.",
+    "tip_en": "VPRN routing information between PEs = an MP-BGP job.",
+    "tags": [
+      "BGP",
+      "VPRN",
+      "MP-BGP",
+      "PE Routers"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q17",
+    "question": "Welche zusaetzlichen Informationen sind bei VPN-IPv4/IPv6-Routen besonders wichtig?",
+    "question_en": "Which additional information is especially important with VPN-IPv4/IPv6 routes?",
+    "options": [
+      "Route Targets fuer Import/Export und MPLS-Label-Information fuer die VPN-Weiterleitung",
+      "Nur die Cluster-ID des Route Reflectors und die TCP-Fenstergroesse",
+      "Nur die VLAN-ID des CE-Ports und der MAC-Age-Timer",
+      "Nur der ARP-Cache des PE-Routers und der ICMP-Type"
+    ],
+    "options_en": [
+      "Route targets for import/export and MPLS label information for VPN forwarding",
+      "Only the route reflector cluster ID and the TCP window size",
+      "Only the VLAN ID of the CE port and the MAC age timer",
+      "Only the ARP cache of the PE router and the ICMP type"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bei VPN-Routen sind Route Targets fuer die Mitgliedschaft und Label-Information fuer die spaetere VPN-Weiterleitung zentral.",
+    "explanation_en": "For VPN routes, route targets are central for membership and label information is central for later VPN forwarding.",
+    "extraInfo": "Der RD sorgt fuer Eindeutigkeit, der RT fuer Import/Export, und das Label fuer die Weiterleitung.",
+    "extraInfo_en": "The RD provides uniqueness, the RT handles import/export, and the label supports forwarding.",
+    "tip": "RT = wer importieren darf, Label = wie weitergeleitet wird.",
+    "tip_en": "RT = who may import, label = how forwarding happens.",
+    "tags": [
+      "BGP",
+      "VPN-IPv4",
+      "VPN-IPv6",
+      "Route Target",
+      "MPLS Label"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m2s1-q18",
+    "question": "Welche Aussage zu MP-BGP und Full Mesh bei VPRN ist falsch?",
+    "question_en": "Which statement about MP-BGP and full mesh for VPRN is false?",
+    "options": [
+      "Sobald MP-BGP fuer VPRN aktiviert ist, darf ein Route Reflector nicht mehr eingesetzt werden",
+      "Ohne Skalierungsmechanismen fuehrt vollstaendiger iBGP-Austausch in groesseren Umgebungen typischerweise zu vielen Sessions",
+      "Route Reflectors koennen die Zahl notwendiger iBGP-Sessions in MP-BGP-VPN-Umgebungen senken",
+      "Die Grundidee von MP-BGP fuer VPRN bleibt auch bei Einsatz eines Route Reflectors dieselbe: PE-Router tauschen VPN-Routing-Informationen aus"
+    ],
+    "options_en": [
+      "As soon as MP-BGP for VPRN is enabled, a route reflector may no longer be used",
+      "Without scaling mechanisms, full iBGP exchange typically leads to many sessions in larger environments",
+      "Route reflectors can reduce the number of required iBGP sessions in MP-BGP VPN environments",
+      "The basic idea of MP-BGP for VPRN remains the same even when a route reflector is used: PE routers exchange VPN routing information"
+    ],
+    "correctIndex": 0,
+    "explanation": "MP-BGP fuer VPRN verbietet Route Reflectors nicht. Im Gegenteil: Route Reflectors sind eine klassische Skalierungsantwort auf Full-Mesh-Probleme.",
+    "explanation_en": "MP-BGP for VPRN does not forbid route reflectors. On the contrary, route reflectors are a classic scaling answer to full-mesh problems.",
+    "extraInfo": "Der RR aendert die Topologie der Sessions, nicht die Grundfunktion von MP-BGP.",
+    "extraInfo_en": "The RR changes session topology, not the core function of MP-BGP.",
+    "tip": "RR = Skalierung fuer iBGP/MP-BGP, nicht Widerspruch dazu.",
+    "tip_en": "RR = scaling for iBGP/MP-BGP, not the opposite of it.",
+    "tags": [
+      "BGP",
+      "VPRN",
+      "MP-BGP",
+      "Route Reflector",
+      "False Statement"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 2",
+    "module_en": "Module 2",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s1-q1",
+    "question": "Warum verbessern Route Reflectors die iBGP-Skalierbarkeit?",
+    "question_en": "Why do route reflectors improve iBGP scalability?",
+    "options": [
+      "Weil nicht mehr jeder PE mit jedem anderen PE voll vermascht peeren muss",
+      "Weil sie TCP durch UDP ersetzen",
+      "Weil sie MPLS-Labels im Core abschaffen",
+      "Weil sie den AS_PATH fuer iBGP-Routen entfernen"
+    ],
+    "options_en": [
+      "Because not every PE has to peer in a full mesh with every other PE anymore",
+      "Because they replace TCP with UDP",
+      "Because they remove MPLS labels from the core",
+      "Because they remove AS_PATH from iBGP routes"
+    ],
+    "correctIndex": 0,
+    "explanation": "Route Reflectors reduzieren die Zahl noetiger iBGP-Sessions, indem sie iBGP-gelernte Routen reflektieren duerfen.",
+    "explanation_en": "Route reflectors reduce the number of required iBGP sessions by being allowed to reflect iBGP-learned routes.",
+    "extraInfo": "Das adressiert direkt das Full-Mesh-Problem in groesseren PE-Umgebungen.",
+    "extraInfo_en": "That directly addresses the full-mesh problem in larger PE environments.",
+    "tip": "RR = weniger Sessions durch Reflection.",
+    "tip_en": "RR = fewer sessions through reflection.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Scalability",
+      "iBGP"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s1-q2",
+    "question": "Was bedeutet \"reflecting\" im Route-Reflector-Kontext?",
+    "question_en": "What does \"reflecting\" mean in the route-reflector context?",
+    "options": [
+      "Dass ein RR eine von einem iBGP-Peer gelernte Route an bestimmte andere iBGP-Peers weiteradvertised",
+      "Dass ein RR alle eBGP-Routen in OSPF umwandelt",
+      "Dass ein Client die Router-ID des RR spiegelt",
+      "Dass ein RR nur noch selbst erzeugte lokale Routen sendet"
+    ],
+    "options_en": [
+      "That an RR re-advertises a route learned from one iBGP peer to selected other iBGP peers",
+      "That an RR converts all eBGP routes into OSPF",
+      "That a client mirrors the router ID of the RR",
+      "That an RR sends only locally originated routes from then on"
+    ],
+    "correctIndex": 0,
+    "explanation": "Route Reflection ist genau das gezielte Weiteradvertisen von iBGP-gelernten Routen, obwohl die klassische Split-Horizon-Regel das sonst verbieten wuerde.",
+    "explanation_en": "Route reflection is exactly the controlled re-advertisement of routes learned via iBGP, even though the classic split-horizon rule would otherwise forbid it.",
+    "extraInfo": "Ohne Reflection bliebe das Full Mesh bestehen.",
+    "extraInfo_en": "Without reflection, the full mesh would remain.",
+    "tip": "Reflecting = iBGP-gelernt und von RR weitergegeben.",
+    "tip_en": "Reflecting = learned via iBGP and re-advertised by the RR.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Reflection",
+      "iBGP"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s1-q3",
+    "question": "Welche Regel wird fuer ausgewaehlte iBGP-Peers durch Route Reflection praktisch aufgehoben?",
+    "question_en": "Which rule is practically relaxed for selected iBGP peers by route reflection?",
+    "options": [
+      "Die iBGP-Split-Horizon-Regel fuer das Weiteradvertisen von iBGP-gelernten Routen",
+      "Die eBGP-Regel, die den lokalen AS_PATH erweitert",
+      "Die OSPF-SPF-Berechnung fuer Next-Hops",
+      "Die MPLS-Labelvergabe im Dataplane"
+    ],
+    "options_en": [
+      "The iBGP split-horizon rule for re-advertising routes learned via iBGP",
+      "The eBGP rule that extends the local AS_PATH",
+      "The OSPF SPF calculation for next hops",
+      "The MPLS label allocation rule in the data plane"
+    ],
+    "correctIndex": 0,
+    "explanation": "RFC 4456 erlaubt einem RR, iBGP-gelernte Routen an bestimmte andere iBGP-Peers zu reflektieren. Genau damit wird das klassische Split-Horizon-Hindernis fuer diese Topologie gelockert.",
+    "explanation_en": "RFC 4456 allows an RR to reflect routes learned via iBGP to selected other iBGP peers. That is exactly how the classic split-horizon limitation is relaxed for this topology.",
+    "extraInfo": "Nicht jede iBGP-Beziehung wird frei; die Reflection folgt klaren RR-Regeln.",
+    "extraInfo_en": "Not every iBGP relationship becomes unrestricted; reflection follows clear RR rules.",
+    "tip": "RR lockert Split Horizon kontrolliert, nicht beliebig.",
+    "tip_en": "RR relaxes split horizon in a controlled way, not arbitrarily.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "RFC4456",
+      "Split Horizon"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s1-q4",
+    "question": "Wie sieht die Grundidee einer RR-Topologie mit vielen PE-Routern typischerweise aus?",
+    "question_en": "What does the basic idea of an RR topology with many PE routers typically look like?",
+    "options": [
+      "Der RR sitzt logisch in der Mitte und hat iBGP-Sessions zu vielen PEs, die dadurch nicht mehr untereinander voll vermascht sein muessen",
+      "Jeder CE baut eine eigene RR-Session zu jedem anderen CE auf",
+      "Alle P-Router werden automatisch zu RR-Clients",
+      "Ein RR ersetzt immer gleichzeitig alle Transport-Tunnel im Core"
+    ],
+    "options_en": [
+      "The RR sits logically in the middle and has iBGP sessions to many PEs so that the PEs no longer have to be fully meshed with each other",
+      "Each CE builds its own RR session to every other CE",
+      "All P routers automatically become RR clients",
+      "An RR always replaces all transport tunnels in the core at the same time"
+    ],
+    "correctIndex": 0,
+    "explanation": "Die Session-Topologie wird sternfoermiger. Das spart iBGP-Peerings zwischen den vielen PEs.",
+    "explanation_en": "The session topology becomes more hub-like. That saves iBGP peerings among the many PEs.",
+    "extraInfo": "Der RR ersetzt Session-Komplexitaet, nicht den eigentlichen Transportpfad.",
+    "extraInfo_en": "The RR replaces session complexity, not the actual transport path.",
+    "tip": "RR = weniger Session-Linien zwischen den PEs.",
+    "tip_en": "RR = fewer session lines between the PEs.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Topology",
+      "PE Routers"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s1-q5",
+    "question": "Welche Aussage zu Route Reflectors ist falsch?",
+    "question_en": "Which statement about route reflectors is false?",
+    "options": [
+      "Ein RR loest Skalierungsprobleme dadurch, dass alle Clients weiterhin voll vermascht untereinander peeren muessen",
+      "Ein RR kann iBGP-gelernte Routen an bestimmte andere iBGP-Peers reflektieren",
+      "Der Einsatz von RRs reduziert typischerweise die Zahl noetiger iBGP-Sessions im AS",
+      "RRs sind in RFC 4456 beschrieben"
+    ],
+    "options_en": [
+      "An RR solves scaling problems by requiring all clients to remain fully meshed with one another",
+      "An RR can reflect routes learned via iBGP to selected other iBGP peers",
+      "Using RRs typically reduces the number of required iBGP sessions in the AS",
+      "RRs are described in RFC 4456"
+    ],
+    "correctIndex": 0,
+    "explanation": "Gerade das Gegenteil ist der Zweck eines RR: Clients muessen nicht mehr alle untereinander full-meshed sein.",
+    "explanation_en": "The exact opposite is the goal of an RR: clients no longer have to be full-meshed with one another.",
+    "extraInfo": "Clients peeren prim?r mit dem RR, nicht mit jedem anderen Client.",
+    "extraInfo_en": "Clients primarily peer with the RR, not with every other client.",
+    "tip": "Falsch ist hier die Full-Mesh-Pflicht unter den Clients.",
+    "tip_en": "The false statement here is the full-mesh requirement among clients.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "False Statement",
+      "Scalability"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s1-q6",
+    "question": "Warum tauchen Route Reflectors besonders in VPN-Umgebungen mit vielen PE-Routern auf?",
+    "question_en": "Why do route reflectors appear especially in VPN environments with many PE routers?",
+    "options": [
+      "Weil viele PEs VPN-IPv4, VPN-IPv6 oder EVPN-Routen austauschen muessen und ein volles iBGP-Full-Mesh schnell unhandlich wird",
+      "Weil EVPN ohne RR keine MAC-Adressen transportieren kann",
+      "Weil MPLS-Labels nur durch RR-Speaker vergeben werden duerfen",
+      "Weil ein RR die Rolle des CE-Routers uebernimmt"
+    ],
+    "options_en": [
+      "Because many PEs must exchange VPN-IPv4, VPN-IPv6, or EVPN routes and a full iBGP mesh quickly becomes unwieldy",
+      "Because EVPN cannot transport MAC addresses without an RR",
+      "Because MPLS labels may only be allocated by RR speakers",
+      "Because an RR takes over the role of the CE router"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der RR ist eine Antwort auf Session-Skalierung, nicht auf fehlende Tunnel oder fehlende MAC-Funktionen.",
+    "explanation_en": "The RR is an answer to session scalability, not to missing tunnels or missing MAC functionality.",
+    "extraInfo": "Gerade viele PE-Router und viele VPN-Routen machen den RR wertvoll.",
+    "extraInfo_en": "Especially many PE routers and many VPN routes make the RR valuable.",
+    "tip": "Viele PEs + viele VPN-Routen = RR wird interessant.",
+    "tip_en": "Many PEs + many VPN routes = RR becomes interesting.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "VPN-IPv4",
+      "EVPN",
+      "Scalability"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 1",
+    "section_en": "Section 1"
+  },
+  {
+    "id": "bgp-m3s2-q1",
+    "question": "In welche drei Kategorien lassen sich iBGP-Speaker im Route-Reflection-Umfeld typischerweise einteilen?",
+    "question_en": "Into which three categories can iBGP speakers typically be grouped in a route-reflection environment?",
+    "options": [
+      "Route Reflectors, RR Clients und Regular iBGP Speakers als Non-Clients",
+      "CEs, SAPs und SDPs",
+      "Area Border Routers, ASBRs und PEs",
+      "LDP Peers, RSVP Peers und OSPF Neighbors"
+    ],
+    "options_en": [
+      "Route reflectors, RR clients, and regular iBGP speakers as non-clients",
+      "CEs, SAPs, and SDPs",
+      "Area border routers, ASBRs, and PEs",
+      "LDP peers, RSVP peers, and OSPF neighbors"
+    ],
+    "correctIndex": 0,
+    "explanation": "Im RR-Modell unterscheidet man typischerweise den RR selbst, seine Clients und normale iBGP-Non-Client-Peers.",
+    "explanation_en": "In the RR model, one typically distinguishes the RR itself, its clients, and normal iBGP non-client peers.",
+    "extraInfo": "Gerade diese Unterscheidung bestimmt spaeter, an wen der RR reflektieren darf.",
+    "extraInfo_en": "This distinction determines later to whom the RR may reflect routes.",
+    "tip": "RR-Modell merken: RR, Client, Non-Client.",
+    "tip_en": "Remember the RR model: RR, client, non-client.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Cluster",
+      "Clients",
+      "Non-Clients"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q2",
+    "question": "Welche Peering-Aussage zu RR-Clients und Non-Clients passt am besten?",
+    "question_en": "Which peering statement about RR clients and non-clients fits best?",
+    "options": [
+      "Clients muessen nicht full-meshed untereinander sein; Non-Clients muessen untereinander und mit den RRs sauber vermascht bleiben",
+      "Clients muessen immer voll vermascht sein; Non-Clients brauchen nur je einen RR-Link",
+      "Weder Clients noch Non-Clients brauchen in einem RR-Design irgendein iBGP-Peering mehr",
+      "Nur Clients duerfen untereinander peeren; RRs und Non-Clients duerfen nicht direkt verbunden werden"
+    ],
+    "options_en": [
+      "Clients do not need to be full-meshed with each other; non-clients must remain properly meshed among themselves and with the RRs",
+      "Clients must always be fully meshed; non-clients need only one RR link each",
+      "Neither clients nor non-clients need any iBGP peering anymore in an RR design",
+      "Only clients may peer with each other; RRs and non-clients must not be directly connected"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der Skalierungsgewinn kommt bei den Clients. Non-Clients bleiben aus Routing-Sicht normale iBGP-Speaker und muessen entsprechend behandelt werden.",
+    "explanation_en": "The scaling gain comes from the clients. Non-clients remain normal iBGP speakers from a routing perspective and must be treated accordingly.",
+    "extraInfo": "Clients werden entlastet, das komplette Non-Client-Mesh verschwindet aber nicht automatisch.",
+    "extraInfo_en": "Clients are relieved, but the full non-client mesh does not disappear automatically.",
+    "tip": "RR spart Full Mesh bei Clients, nicht blind bei allen.",
+    "tip_en": "RR saves full mesh for clients, not blindly for everyone.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Clients",
+      "Non-Clients",
+      "Topology"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q3",
+    "question": "Was ist ein Route-Reflection-Cluster am treffendsten?",
+    "question_en": "What best describes a route-reflection cluster?",
+    "options": [
+      "Ein RR zusammen mit seinen Clients bildet logisch ein Cluster",
+      "Alle P-Router derselben Region bilden automatisch ein Cluster",
+      "Ein Cluster ist nur die Menge aller Route Targets in einem VPRN",
+      "Ein Cluster ist gleichbedeutend mit einem einzelnen VPN-Prefix"
+    ],
+    "options_en": [
+      "An RR together with its clients logically forms a cluster",
+      "All P routers of the same region automatically form a cluster",
+      "A cluster is only the set of all route targets in one VPRN",
+      "A cluster is equivalent to a single VPN prefix"
+    ],
+    "correctIndex": 0,
+    "explanation": "Das Cluster ist die route-reflection-bezogene Gruppierung um einen RR herum, nicht einfach eine Region oder ein einzelnes VPN-Prefix.",
+    "explanation_en": "The cluster is the route-reflection-related grouping around one RR, not simply a region or a single VPN prefix.",
+    "extraInfo": "Clients werden nicht als eigene Clusterknoten konfiguriert, sondern peeren zum RR.",
+    "extraInfo_en": "Clients are not configured as their own cluster nodes; they peer to the RR.",
+    "tip": "Cluster = RR plus seine Clients.",
+    "tip_en": "Cluster = RR plus its clients.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Cluster",
+      "Clients"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q4",
+    "question": "Welche Aussage zur Cluster-ID ist korrekt?",
+    "question_en": "Which statement about the cluster ID is correct?",
+    "options": [
+      "Sie ist ein 4-Byte-Identifier fuer das Cluster; in der Praxis wird haeufig die Router-ID des RR verwendet",
+      "Sie ist immer identisch mit der AS-Nummer des Kunden",
+      "Sie wird nur auf Clients konfiguriert, nie auf dem RR",
+      "Sie darf in grossen Netzen absichtlich in allen Clustern gleich sein, damit Reflection leichter wird"
+    ],
+    "options_en": [
+      "It is a 4-byte identifier for the cluster; in practice the RR router ID is often used",
+      "It is always identical to the customer AS number",
+      "It is configured only on clients, never on the RR",
+      "In large networks it should intentionally be identical in all clusters so that reflection becomes easier"
+    ],
+    "correctIndex": 0,
+    "explanation": "Die Cluster-ID identifiziert das Cluster. Typisch wird die Router-ID des RR verwendet oder bei redundanten RRs derselbe gemeinsame Cluster-Wert.",
+    "explanation_en": "The cluster ID identifies the cluster. A common practice is to use the RR router ID or, with redundant RRs, the same shared cluster value.",
+    "extraInfo": "Sie spielt spaeter auch bei der Schleifenvermeidung via CLUSTER_LIST eine Rolle.",
+    "extraInfo_en": "It later also plays a role in loop prevention via CLUSTER_LIST.",
+    "tip": "Cluster-ID = Kennung des RR-Clusters.",
+    "tip_en": "Cluster ID = identity of the RR cluster.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Cluster ID",
+      "RFC4456"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q5",
+    "question": "Welche Aussage zur Konfiguration von RR und Clients ist am treffendsten?",
+    "question_en": "Which statement about RR and client configuration is the most accurate?",
+    "options": [
+      "Der RR wird als Cluster-/RR-Knoten konfiguriert; die Clients benoetigen im Kern nur ihre iBGP-Sessions zum RR",
+      "Clients muessen selbst jeweils eine eigene Cluster-ID erhalten, der RR nicht",
+      "Nur Non-Clients duerfen iBGP-Sessions zum RR haben",
+      "Clients muessen zwingend auch untereinander full-meshed sein, sonst funktioniert Reflection nicht"
+    ],
+    "options_en": [
+      "The RR is configured as the cluster/RR node; the clients essentially only need their iBGP sessions to the RR",
+      "Clients themselves each need their own cluster ID, while the RR does not",
+      "Only non-clients may have iBGP sessions toward the RR",
+      "Clients must also be fully meshed with each other, otherwise reflection does not work"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der RR traegt die route-reflection-spezifische Rolle. Die Clients sind aus dieser Sicht normale iBGP-Nachbarn des RR.",
+    "explanation_en": "The RR carries the route-reflection-specific role. From this perspective, the clients are normal iBGP neighbors of the RR.",
+    "extraInfo": "Gerade dadurch bleibt die Client-Seite vergleichsweise einfach.",
+    "extraInfo_en": "That is exactly why the client side remains comparatively simple.",
+    "tip": "RR konfiguriert die Reflection, Client peert zum RR.",
+    "tip_en": "RR configures the reflection, client peers to the RR.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Clients",
+      "Configuration"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q6",
+    "question": "Welche Routen advertiset ein RR typischerweise weiter?",
+    "question_en": "Which routes does an RR typically advertise onward?",
+    "options": [
+      "Best und used routes",
+      "Nur alle empfangenen routes aus dem RIB-IN ungeprueft",
+      "Nur die Routen mit dem laengsten AS_PATH",
+      "Nur lokale direkt angeschlossene Routen, nie iBGP-gelernte"
+    ],
+    "options_en": [
+      "Best and used routes",
+      "Only all received routes from the RIB-IN without any check",
+      "Only the routes with the longest AS_PATH",
+      "Only local directly connected routes and never routes learned via iBGP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Best bedeutet: die Route hat sich gegen andere Kandidaten desselben Prefixes in der BGP-Pfadwahl durchgesetzt. Used bedeutet: sie wurde auch vom RTM in die Routing-Tabelle uebernommen.",
+    "explanation_en": "Best means the route won against other candidates for the same prefix in BGP path selection. Used means it was also installed in the routing table by the RTM.",
+    "extraInfo": "Die Kombination verhindert, dass jeder Kandidat ungefiltert reflektiert wird.",
+    "extraInfo_en": "The combination prevents every candidate from being reflected without filtering.",
+    "tip": "RR spiegelt nicht blind alles, sondern typischerweise best und used.",
+    "tip_en": "RR does not reflect everything blindly, but typically best and used.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Best Path",
+      "RTM"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q7",
+    "question": "Was bedeutet \"best\" im RR-Kontext am treffendsten?",
+    "question_en": "What does \"best\" mean most accurately in the RR context?",
+    "options": [
+      "Die Route wurde unter mehreren Kandidaten desselben Prefixes anhand der BGP-Path-Selection ausgewaehlt",
+      "Die Route hat die hoechste lokale TCP-Portnummer",
+      "Die Route stammt immer von einem eBGP-Peer, unabhaengig von anderen Attributen",
+      "Die Route hat automatisch den niedrigsten OSPF-Cost im ganzen Netzwerk und ist deshalb immer used"
+    ],
+    "options_en": [
+      "The route was selected from multiple candidates for the same prefix using BGP path selection",
+      "The route has the highest local TCP port number",
+      "The route always comes from an eBGP peer regardless of other attributes",
+      "The route automatically has the lowest OSPF cost in the entire network and is therefore always used"
+    ],
+    "correctIndex": 0,
+    "explanation": "Best ist eine BGP-Auswahlentscheidung fuer einen Prefix. Das bedeutet noch nicht automatisch, dass die Route auch vom RTM genutzt wird.",
+    "explanation_en": "Best is a BGP selection decision for a prefix. That does not automatically mean the route is also used by the RTM.",
+    "extraInfo": "Genau deshalb unterscheidet man best und used.",
+    "extraInfo_en": "That is exactly why best and used are distinguished.",
+    "tip": "Best = im BGP gewonnen, Used = auch wirklich im Routing-Table.",
+    "tip_en": "Best = won in BGP, Used = actually in the routing table.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Best Path",
+      "Used Route"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q8",
+    "question": "Welche Aussage zu Non-Client-Peers in einem RR-Design ist falsch?",
+    "question_en": "Which statement about non-client peers in an RR design is false?",
+    "options": [
+      "Non-Client-Peers koennen ihre iBGP-Sessions untereinander komplett weglassen, sobald ein RR existiert",
+      "Non-Client-Peers bleiben aus RR-Sicht normale iBGP-Speaker",
+      "In einem einfachen RFC4456-Design werden andere RRs oft als Non-Clients behandelt",
+      "Non-Client-Peers muessen im Design sauber vermascht betrachtet werden"
+    ],
+    "options_en": [
+      "Non-client peers can completely omit iBGP sessions among themselves as soon as an RR exists",
+      "From the RR point of view, non-client peers remain normal iBGP speakers",
+      "In a simple RFC4456 design, other RRs are often treated as non-clients",
+      "Non-client peers must be treated as properly meshed in the design"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der RR spart das Full Mesh bei Clients. Non-Clients bleiben routingtechnisch normale iBGP-Speaker und duerfen deshalb nicht einfach blind entmesht werden.",
+    "explanation_en": "The RR saves the full mesh for clients. Non-clients remain normal iBGP speakers from a routing perspective and therefore cannot simply be blindly de-meshed.",
+    "extraInfo": "Gerade andere RRs werden in einfachen Designs oft als Non-Clients behandelt und deshalb sauber vermascht.",
+    "extraInfo_en": "Other RRs in simple designs are often treated as non-clients and therefore properly meshed.",
+    "tip": "Falsch ist hier das \"RR da = Non-Clients brauchen kein Mesh mehr\".",
+    "tip_en": "The false part here is \"RR exists = non-clients no longer need a mesh\".",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Non-Clients",
+      "False Statement"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
   }
 ]

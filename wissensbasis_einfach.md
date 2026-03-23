@@ -1897,3 +1897,77 @@ Moegliche Signalisierung:
 
 Merker:
 - kleinere numerische Preference ist besser
+
+## Kapitel X - BGP Modul 3 Section 1: Improving iBGP Scalability durch Route Reflectors
+
+### X1) Warum Route Reflectors gebraucht werden
+- In grossen VPN-Umgebungen muessen viele PE-Router VPN-Routen austauschen
+- Ohne Hilfsmittel fuehrt das bei iBGP schnell zu einem Full Mesh
+- Das skaliert schlecht, weil die Zahl der Sessions stark waechst
+
+### X2) Grundidee des Route Reflector
+- Ein `Route Reflector` ist ein spezieller BGP-Speaker nach `RFC 4456`
+- Er darf iBGP-gelernte Routen an bestimmte andere iBGP-Peers weiteradvertisen
+- Dieses Weiteradvertisen nennt man `reflecting`
+
+Merker:
+- RR lockert die klassische iBGP-Split-Horizon-Regel kontrolliert
+- genau dadurch sinkt die Zahl noetiger iBGP-Sessions
+
+### X3) Wie die Topologie vereinfacht wird
+- Statt dass jeder PE mit jedem anderen PE peert, kann ein RR logisch in der Mitte stehen
+- Jeder PE hat dann nur noch seine Session zum RR
+- Der RR verteilt die relevanten Routen weiter
+
+### X4) Warum das in VPN-Umgebungen wichtig ist
+- In VPN-Umgebungen werden zum Beispiel ausgetauscht:
+  - `VPN-IPv4`
+  - `VPN-IPv6`
+  - `EVPN`
+- Gerade bei vielen PEs wird das Session-Problem schnell groesser als das eigentliche Routing-Problem
+
+## Kapitel Y - BGP Modul 3 Section 2: Topology und Operation von Route-Reflection-Clustern
+
+### Y1) Drei Rollen im RR-Design
+- Typisch unterscheidet man:
+  - `Route Reflector`
+  - `RR Client`
+  - `Regular iBGP Speaker` bzw. `Non-Client Peer`
+
+### Y2) Welche Peers full-meshed sein muessen
+- Clients muessen nicht untereinander full-meshed sein
+- Non-Clients muessen sauber vermascht betrachtet werden
+- In einfachen Designs werden andere RRs oft als Non-Clients behandelt
+
+Merker:
+- RR spart Full Mesh vor allem auf der Client-Seite
+- Non-Clients bleiben aus Routing-Sicht normale iBGP-Speaker
+
+### Y3) Was ein Cluster ist
+- Ein RR und seine Clients bilden logisch ein `Cluster`
+- Der RR ist der zentrale Punkt dieses Clusters
+- Die Clients peeren zum RR
+
+### Y4) Cluster-ID
+- Ein Cluster hat eine `4-Byte Cluster-ID`
+- Sie identifiziert das Cluster
+- Hauefig wird dafuer die Router-ID des RR verwendet
+- Bei redundanten RRs im selben Cluster kann derselbe Cluster-Wert verwendet werden
+
+### Y5) Best und used Routes am RR
+- RRs advertisieren typischerweise `best` und `used` routes
+- `best` bedeutet:
+  - die Route hat sich in der BGP Path Selection gegen andere Kandidaten fuer denselben Prefix durchgesetzt
+- `used` bedeutet:
+  - sie wurde auch durch den RTM in die Routing-Tabelle uebernommen
+
+Merker:
+- `best` ist nicht automatisch `used`
+- ein RR spiegelt nicht einfach blind jede empfangene Route
+
+### Y6) Schleifenvermeidung im RR-Umfeld
+- Route Reflection bringt zusaetzliche Schleifenrisiken mit sich
+- Darum sind folgende Attribute wichtig:
+  - `ORIGINATOR_ID`
+  - `CLUSTER_LIST`
+- Damit kann erkannt werden, ob eine reflektierte Route unguenstig im Kreis gelaufen ist
