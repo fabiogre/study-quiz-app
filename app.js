@@ -2,6 +2,7 @@ const STORAGE_KEY = "studyQuizQuestionsV1";
 const PROGRESS_KEY = "studyQuizProgressV1";
 const NOTES_KEY = "studyQuizNotesV1";
 const CLOUD_SESSION_KEY = "studyQuizCloudSessionV1";
+const VIEW_STATE_KEY = "studyQuizViewStateV1";
 const DEFAULT_TOPIC = "Hauptquiz";
 const DEFAULT_MODULE = "Modul 1";
 const DEFAULT_SECTION = "Section 1";
@@ -702,6 +703,7 @@ async function init() {
   await loadData();
   await initializeCloud();
   refreshFilterOptions();
+  await restoreViewState();
   refreshExport();
   refreshStats();
   setStatus(t("status.ready"));
@@ -943,6 +945,8 @@ async function performCloudLogin() {
     saveCloudSession({ token: result.token, username: result.username || username });
     refs.loginPassword && (refs.loginPassword.value = "");
     await fetchCloudState();
+    refreshFilterOptions();
+    await restoreViewState();
     updateAuthUi();
     setAuthStatus(t("auth.welcome", { user: cloudSession.username }));
     setStatus(t("status.cloudStateLoaded", { user: cloudSession.username }));
@@ -963,6 +967,8 @@ async function logoutCloudSession() {
   }
   saveCloudSession(null);
   clearLoadedStudyState();
+  refreshFilterOptions();
+  await restoreViewState();
   updateAuthUi();
   setStatus(t("status.loggedOut"));
 }
@@ -1432,16 +1438,74 @@ function removeJson(key) {
   dbDelete(key).catch(() => {});
 }
 
+function getViewStateStorageKey() {
+  const profileName = isCloudAuthenticated() ? String(cloudSession.username || "local") : "local";
+  const normalized = profileName.trim().toLowerCase().replace(/[^a-z0-9_-]+/g, "-") || "local";
+  return `${VIEW_STATE_KEY}:${normalized}`;
+}
+
+function getActiveTabName() {
+  const active = refs.tabs.find((btn) => btn.classList.contains("active"));
+  return active?.dataset?.tab || "learn";
+}
+
+function setActiveTab(target) {
+  const tabName = Object.prototype.hasOwnProperty.call(refs.tabPanels, target) ? target : "learn";
+  refs.tabs.forEach((btn) => btn.classList.toggle("active", btn.dataset.tab === tabName));
+  Object.entries(refs.tabPanels).forEach(([key, panel]) => {
+    panel.classList.toggle("active", key === tabName);
+  });
+}
+
+function setSelectValueIfPresent(select, value) {
+  if (!select) return;
+  const wanted = String(value || "").trim();
+  const exists = Array.from(select.options).some((option) => option.value === wanted);
+  select.value = exists ? wanted : "";
+}
+
+function buildViewStatePayload() {
+  return {
+    activeTab: getActiveTabName(),
+    topic: refs.topicSelect?.value || "",
+    module: refs.moduleSelect?.value || "",
+    section: refs.sectionSelect?.value || "",
+    tagFilter: refs.tagFilterInput?.value || "",
+    mode: refs.modeSelect?.value || "mixed",
+  };
+}
+
+function saveViewState() {
+  persistJson(getViewStateStorageKey(), buildViewStatePayload());
+}
+
+async function restoreViewState() {
+  const state = await loadJson(getViewStateStorageKey());
+  if (!state || typeof state !== "object") {
+    refreshScopedStats();
+    return;
+  }
+
+  setSelectValueIfPresent(refs.topicSelect, state.topic ? sanitizeTopic(state.topic) : "");
+  refreshFilterOptions();
+  setSelectValueIfPresent(refs.moduleSelect, state.module ? sanitizeModule(state.module) : "");
+  refreshSectionOptions();
+  setSelectValueIfPresent(refs.sectionSelect, state.section ? sanitizeSection(state.section) : "");
+
+  if (refs.tagFilterInput) {
+    refs.tagFilterInput.value = typeof state.tagFilter === "string" ? state.tagFilter : "";
+  }
+
+  setSelectValueIfPresent(refs.modeSelect, typeof state.mode === "string" ? state.mode : "mixed");
+  setActiveTab(typeof state.activeTab === "string" ? state.activeTab : "learn");
+  refreshScopedStats();
+}
+
 function setupTabs() {
   refs.tabs.forEach((tabBtn) => {
     tabBtn.addEventListener("click", () => {
-      refs.tabs.forEach((btn) => btn.classList.remove("active"));
-      tabBtn.classList.add("active");
-
-      const target = tabBtn.dataset.tab;
-      Object.entries(refs.tabPanels).forEach(([key, panel]) => {
-        panel.classList.toggle("active", key === target);
-      });
+      setActiveTab(tabBtn.dataset.tab || "learn");
+      saveViewState();
     });
   });
 }
@@ -1453,20 +1517,25 @@ function setupLearnActions() {
     refreshFilterOptions();
     refreshScopedStats();
     resetQuestionCard();
+    saveViewState();
   });
   refs.moduleSelect.addEventListener("change", () => {
     refreshSectionOptions();
     refreshScopedStats();
     resetQuestionCard();
+    saveViewState();
   });
   refs.sectionSelect.addEventListener("change", () => {
     refreshScopedStats();
     resetQuestionCard();
+    saveViewState();
   });
   refs.tagFilterInput.addEventListener("input", () => {
     refreshScopedStats();
     resetQuestionCard();
+    saveViewState();
   });
+  refs.modeSelect.addEventListener("change", saveViewState);
 }
 
 function setupBuildActions() {
