@@ -1,5 +1,6 @@
 const STORAGE_KEY = "studyQuizQuestionsV1";
 const PROGRESS_KEY = "studyQuizProgressV1";
+const NOTES_KEY = "studyQuizNotesV1";
 const DEFAULT_TOPIC = "Hauptquiz";
 const DEFAULT_MODULE = "Modul 1";
 const DEFAULT_SECTION = "Section 1";
@@ -10,6 +11,7 @@ const LANGUAGE_KEY = "studyQuizLanguageV1";
 
 let questions = [];
 let progress = {};
+let notes = {};
 let currentQuestion = null;
 let currentOptionOrder = [];
 let answerLocked = false;
@@ -41,6 +43,12 @@ const refs = {
   answerWrap: document.getElementById("answerWrap"),
   answerResult: document.getElementById("answerResult"),
   answerExplanation: document.getElementById("answerExplanation"),
+  notesMeta: document.getElementById("notesMeta"),
+  noteInput: document.getElementById("noteInput"),
+  saveNoteBtn: document.getElementById("saveNoteBtn"),
+  toggleReviewBtn: document.getElementById("toggleReviewBtn"),
+  clearNoteBtn: document.getElementById("clearNoteBtn"),
+  reviewList: document.getElementById("reviewList"),
   nextQuestionBtn: document.getElementById("nextQuestionBtn"),
   continueBtn: document.getElementById("continueBtn"),
   topicSelect: document.getElementById("topicSelect"),
@@ -125,6 +133,25 @@ const UI_TEXTS = {
       allTopics: "Alle Themen",
       allModules: "Alle Module",
       allSections: "Alle Sections",
+    },
+    notes: {
+      title: "Lernnotizen",
+      intro: "Schreibe dir hier auf, was du falsch hattest oder spaeter nacharbeiten willst.",
+      inputLabel: "Notiz zur aktuellen Frage",
+      placeholder: "z.B. LOCAL_PREF ist wichtiger als AS_PATH. RR-Loop-Protection nochmal anschauen.",
+      save: "Notiz speichern",
+      clear: "Notiz loeschen",
+      mark: "Zur Nacharbeit markieren",
+      unmark: "Nacharbeit abhaken",
+      noQuestion: "Keine Frage aktiv.",
+      emptyMeta: "Noch keine Notiz gespeichert.",
+      savedAt: "Gespeichert: {time}",
+      reviewMarked: "Zur Nacharbeit markiert.",
+      reviewTitle: "Nacharbeiten",
+      emptyReview: "Noch keine offenen Nacharbeiten.",
+      itemOpen: "Oeffnen",
+      itemDone: "Erledigt",
+      autoMarkedWrong: "Automatisch markiert, weil die letzte Antwort falsch war.",
     },
     explainer: {
       title: "Mini-Erklaerung fuer RD und RT",
@@ -245,6 +272,11 @@ const UI_TEXTS = {
       noFilterMatch: "Mit diesem Filter wurden keine Fragen gefunden.",
       confirmResetAll: "Wirklich alle Fragen UND Fortschritt loeschen?",
       languageReset: "Sprache wurde zurueckgesetzt: {lang}",
+      noteSaved: "Notiz gespeichert.",
+      noteCleared: "Notiz geloescht.",
+      reviewMarked: "Frage zur Nacharbeit markiert.",
+      reviewCleared: "Frage aus der Nacharbeit entfernt.",
+      reviewNeedsQuestion: "Bitte erst eine Frage auswaehlen.",
     },
   },
   en: {
@@ -276,6 +308,25 @@ const UI_TEXTS = {
       allTopics: "All topics",
       allModules: "All modules",
       allSections: "All sections",
+    },
+    notes: {
+      title: "Study notes",
+      intro: "Write down what you got wrong or what you want to revisit later.",
+      inputLabel: "Note for the current question",
+      placeholder: "e.g. LOCAL_PREF is more important than AS_PATH. Review RR loop protection again.",
+      save: "Save note",
+      clear: "Delete note",
+      mark: "Mark for review",
+      unmark: "Mark as done",
+      noQuestion: "No active question.",
+      emptyMeta: "No note saved yet.",
+      savedAt: "Saved: {time}",
+      reviewMarked: "Marked for review.",
+      reviewTitle: "Review later",
+      emptyReview: "No open review items yet.",
+      itemOpen: "Open",
+      itemDone: "Done",
+      autoMarkedWrong: "Automatically marked because the last answer was wrong.",
     },
     explainer: {
       title: "Mini explainer for RD and RT",
@@ -396,6 +447,11 @@ const UI_TEXTS = {
       noFilterMatch: "No questions found for this filter.",
       confirmResetAll: "Really delete all questions and progress?",
       languageReset: "Language was reset: {lang}",
+      noteSaved: "Note saved.",
+      noteCleared: "Note deleted.",
+      reviewMarked: "Question marked for review.",
+      reviewCleared: "Question removed from review.",
+      reviewNeedsQuestion: "Please select a question first.",
     },
   },
 };
@@ -503,6 +559,14 @@ function applyI18n() {
   setText("kidExplainRdBtn", t("explainer.rdBtn"));
   setText("kidExplainRtBtn", t("explainer.rtBtn"));
   setText("kidExplainBothBtn", t("explainer.bothBtn"));
+  setText("notesTitle", t("notes.title"));
+  setText("notesIntro", t("notes.intro"));
+  setText("notesInputLabel", t("notes.inputLabel"));
+  setText("saveNoteBtn", t("notes.save"));
+  setText("clearNoteBtn", t("notes.clear"));
+  setText("reviewListTitle", t("notes.reviewTitle"));
+  setPlaceholder("noteInput", t("notes.placeholder"));
+  updateReviewToggleButton();
 
   setText("buildQuestionLabel", t("build.question"));
   setText("buildAnswerALabel", t("build.answerA"));
@@ -549,6 +613,7 @@ function applyI18n() {
     refs.questionMeta.textContent = t("question.readyMeta");
   }
   renderKidExplainer(currentKidExplainer);
+  renderNotesPanel();
 }
 
 init().catch((err) => {
@@ -569,6 +634,7 @@ async function init() {
   setupTabs();
   setupLearnActions();
   setupExplainerActions();
+  setupNoteActions();
   setupBuildActions();
   setupDataActions();
   await loadData();
@@ -612,6 +678,18 @@ function setupExplainerActions() {
     });
   }
   renderKidExplainer("");
+}
+
+function setupNoteActions() {
+  if (refs.saveNoteBtn) {
+    refs.saveNoteBtn.addEventListener("click", saveCurrentNote);
+  }
+  if (refs.clearNoteBtn) {
+    refs.clearNoteBtn.addEventListener("click", clearCurrentNote);
+  }
+  if (refs.toggleReviewBtn) {
+    refs.toggleReviewBtn.addEventListener("click", toggleCurrentReviewFlag);
+  }
 }
 
 function openExplainerModal() {
@@ -771,6 +849,191 @@ function renderKidExplainer(mode = "") {
   `;
   refs.kidExplainSceneTitle.textContent = t("explainer.emptyTitle");
   refs.kidExplainText.textContent = t("explainer.emptyText");
+}
+
+function updateReviewToggleButton() {
+  if (!refs.toggleReviewBtn) return;
+  const label =
+    currentQuestion && getNoteSnapshot(currentQuestion).needsReview ? t("notes.unmark") : t("notes.mark");
+  refs.toggleReviewBtn.textContent = label;
+}
+
+function formatNoteTimestamp(value) {
+  if (!value) return "";
+  try {
+    return new Intl.DateTimeFormat(currentLanguage === "en" ? "en-GB" : "de-DE", {
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(new Date(value));
+  } catch (error) {
+    return "";
+  }
+}
+
+function renderNotesPanel() {
+  if (!refs.noteInput || !refs.notesMeta || !refs.reviewList) return;
+
+  if (!currentQuestion) {
+    refs.noteInput.value = "";
+    refs.noteInput.disabled = true;
+    refs.saveNoteBtn && (refs.saveNoteBtn.disabled = true);
+    refs.clearNoteBtn && (refs.clearNoteBtn.disabled = true);
+    refs.toggleReviewBtn && (refs.toggleReviewBtn.disabled = true);
+    refs.notesMeta.textContent = t("notes.noQuestion");
+    updateReviewToggleButton();
+    renderReviewList();
+    return;
+  }
+
+  const note = getNoteSnapshot(currentQuestion);
+  refs.noteInput.disabled = false;
+  refs.saveNoteBtn && (refs.saveNoteBtn.disabled = false);
+  refs.clearNoteBtn && (refs.clearNoteBtn.disabled = false);
+  refs.toggleReviewBtn && (refs.toggleReviewBtn.disabled = false);
+  refs.noteInput.value = note.text || "";
+
+  const metaParts = [];
+  if (note.updatedAt) {
+    metaParts.push(t("notes.savedAt", { time: formatNoteTimestamp(note.updatedAt) }));
+  }
+  if (note.needsReview) {
+    metaParts.push(note.autoMarkedWrong ? t("notes.autoMarkedWrong") : t("notes.reviewMarked"));
+  }
+  refs.notesMeta.textContent = metaParts.join(" | ") || t("notes.emptyMeta");
+  updateReviewToggleButton();
+  renderReviewList();
+}
+
+function renderReviewList() {
+  if (!refs.reviewList) return;
+  refs.reviewList.innerHTML = "";
+
+  const filtered = applyFilter(
+    questions,
+    refs.tagFilterInput?.value || "",
+    refs.topicSelect?.value || "",
+    refs.moduleSelect?.value || "",
+    refs.sectionSelect?.value || ""
+  );
+
+  const items = filtered
+    .map((q) => ({ question: q, note: getNoteSnapshot(q) }))
+    .filter(({ note }) => note.needsReview)
+    .sort((a, b) => (b.note.updatedAt || 0) - (a.note.updatedAt || 0));
+
+  if (items.length === 0) {
+    const li = document.createElement("li");
+    li.textContent = t("notes.emptyReview");
+    refs.reviewList.appendChild(li);
+    return;
+  }
+
+  items.forEach(({ question, note }) => {
+    const li = document.createElement("li");
+
+    const head = document.createElement("div");
+    head.className = "review-item-head";
+
+    const title = document.createElement("p");
+    title.className = "review-item-title";
+    title.textContent = getLocalizedField(question, "question");
+
+    const meta = document.createElement("span");
+    meta.className = "review-item-meta";
+    meta.textContent = `${getLocalizedTopic(question)} / ${getLocalizedModule(question)} / ${getLocalizedSection(question)}`;
+
+    head.appendChild(title);
+    head.appendChild(meta);
+
+    const noteText = document.createElement("p");
+    noteText.className = "review-item-note";
+    noteText.textContent = note.text || t("notes.reviewMarked");
+
+    const actions = document.createElement("div");
+    actions.className = "review-item-actions";
+
+    const openBtn = document.createElement("button");
+    openBtn.type = "button";
+    openBtn.className = "secondary";
+    openBtn.textContent = t("notes.itemOpen");
+    openBtn.addEventListener("click", () => openQuestionForReview(question));
+
+    const doneBtn = document.createElement("button");
+    doneBtn.type = "button";
+    doneBtn.className = "secondary";
+    doneBtn.textContent = t("notes.itemDone");
+    doneBtn.addEventListener("click", () => {
+      const updated = { ...note, needsReview: false, autoMarkedWrong: false, updatedAt: Date.now() };
+      setNoteSnapshot(question, updated);
+      saveNotes();
+      renderNotesPanel();
+      setStatus(t("status.reviewCleared"));
+    });
+
+    actions.appendChild(openBtn);
+    actions.appendChild(doneBtn);
+
+    li.appendChild(head);
+    li.appendChild(noteText);
+    li.appendChild(actions);
+    refs.reviewList.appendChild(li);
+  });
+}
+
+function saveCurrentNote() {
+  if (!currentQuestion || !refs.noteInput) {
+    setStatus(t("status.reviewNeedsQuestion"));
+    return;
+  }
+  const note = getNoteSnapshot(currentQuestion);
+  note.text = refs.noteInput.value || "";
+  note.updatedAt = Date.now();
+  setNoteSnapshot(currentQuestion, note);
+  saveNotes();
+  renderNotesPanel();
+  setStatus(t("status.noteSaved"));
+}
+
+function clearCurrentNote() {
+  if (!currentQuestion) {
+    setStatus(t("status.reviewNeedsQuestion"));
+    return;
+  }
+  const note = getNoteSnapshot(currentQuestion);
+  note.text = "";
+  note.updatedAt = Date.now();
+  note.autoMarkedWrong = false;
+  setNoteSnapshot(currentQuestion, note);
+  saveNotes();
+  renderNotesPanel();
+  setStatus(t("status.noteCleared"));
+}
+
+function toggleCurrentReviewFlag() {
+  if (!currentQuestion) {
+    setStatus(t("status.reviewNeedsQuestion"));
+    return;
+  }
+  const note = getNoteSnapshot(currentQuestion);
+  note.needsReview = !note.needsReview;
+  note.autoMarkedWrong = false;
+  note.updatedAt = Date.now();
+  setNoteSnapshot(currentQuestion, note);
+  saveNotes();
+  renderNotesPanel();
+  setStatus(t(note.needsReview ? "status.reviewMarked" : "status.reviewCleared"));
+}
+
+function openQuestionForReview(question) {
+  if (!question) return;
+  currentQuestion = question;
+  currentOptionOrder = [];
+  answerLocked = false;
+  refs.answerWrap.classList.add("hidden");
+  renderQuestion(question);
+  renderNotesPanel();
+  closeExplainerModal();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 async function openDb() {
@@ -933,6 +1196,7 @@ function setupDataActions() {
     if (!confirmed) return;
     removeJson(STORAGE_KEY);
     removeJson(PROGRESS_KEY);
+    removeJson(NOTES_KEY);
     await loadData(true);
     refreshFilterOptions();
     refreshExport();
@@ -945,6 +1209,7 @@ function setupDataActions() {
 async function loadData(forceSeed = false) {
   const savedQuestions = !forceSeed ? await loadJson(STORAGE_KEY) : null;
   const savedProgress = !forceSeed ? await loadJson(PROGRESS_KEY) : null;
+  const savedNotes = !forceSeed ? await loadJson(NOTES_KEY) : null;
 
   questions = Array.isArray(savedQuestions) ? savedQuestions : [];
 
@@ -968,6 +1233,7 @@ async function loadData(forceSeed = false) {
   saveQuestions();
 
   progress = savedProgress && typeof savedProgress === "object" ? savedProgress : {};
+  notes = savedNotes && typeof savedNotes === "object" ? savedNotes : {};
 }
 
 function getBundledSeedQuestions() {
@@ -1058,6 +1324,10 @@ function saveQuestions() {
 
 function saveProgress() {
   persistJson(PROGRESS_KEY, progress);
+}
+
+function saveNotes() {
+  persistJson(NOTES_KEY, notes);
 }
 
 function normalizeQuestions(rawQuestions) {
@@ -1244,6 +1514,40 @@ function setProgressSnapshot(q, entry) {
     progress[getQuestionIdKey(q)] = normalized;
   }
   progress[getQuestionStableKey(q)] = normalized;
+}
+
+function getNoteStorageKey(q) {
+  return getQuestionIdKey(q) || getQuestionStableKey(q) || (q && q.id ? String(q.id) : "");
+}
+
+function getNoteSnapshot(q) {
+  const key = getNoteStorageKey(q);
+  const entry = key && notes[key] ? notes[key] : null;
+  return {
+    questionId: entry && typeof entry.questionId === "string" ? entry.questionId : (q && q.id ? String(q.id) : ""),
+    text: entry && typeof entry.text === "string" ? entry.text : "",
+    needsReview: !!(entry && entry.needsReview),
+    updatedAt: entry && Number.isFinite(entry.updatedAt) ? entry.updatedAt : 0,
+    autoMarkedWrong: !!(entry && entry.autoMarkedWrong),
+  };
+}
+
+function setNoteSnapshot(q, entry) {
+  const key = getNoteStorageKey(q);
+  if (!key) return;
+  const normalized = {
+    questionId: q && q.id ? String(q.id) : "",
+    text: typeof entry.text === "string" ? entry.text.trim() : "",
+    needsReview: !!entry.needsReview,
+    updatedAt: Number.isFinite(entry.updatedAt) ? entry.updatedAt : 0,
+    autoMarkedWrong: !!entry.autoMarkedWrong,
+  };
+
+  if (!normalized.text && !normalized.needsReview) {
+    delete notes[key];
+    return;
+  }
+  notes[key] = normalized;
 }
 
 function refreshExport() {
@@ -1497,6 +1801,7 @@ function refreshStats() {
   updateOverviewScopeLabel();
   refreshScopedStats();
   refreshAreaStats();
+  renderReviewList();
 }
 
 function getOverviewScopeQuestions() {
@@ -1863,6 +2168,7 @@ function renderQuestion(q) {
     btn.addEventListener("click", () => onSelectAnswer(displayIdx));
     refs.optionsWrap.appendChild(btn);
   });
+  renderNotesPanel();
 }
 
 function onSelectAnswer(index) {
@@ -1885,6 +2191,16 @@ function onSelectAnswer(index) {
   if (isCorrect) p.correct += 1;
   setProgressSnapshot(currentQuestion, p);
   saveProgress();
+
+  if (!isCorrect) {
+    const note = getNoteSnapshot(currentQuestion);
+    note.needsReview = true;
+    note.autoMarkedWrong = true;
+    note.updatedAt = Date.now();
+    setNoteSnapshot(currentQuestion, note);
+    saveNotes();
+  }
+
   refreshStats();
 
   refs.answerResult.textContent = isCorrect ? t("question.resultCorrect") : t("question.resultWrong");
@@ -1892,6 +2208,7 @@ function onSelectAnswer(index) {
   refs.answerExplanation.textContent =
     getLocalizedField(currentQuestion, "explanation") || t("question.noExplanation");
   refs.answerWrap.classList.remove("hidden");
+  renderNotesPanel();
   showFactPopup(currentQuestion, isCorrect);
 }
 
@@ -1903,6 +2220,7 @@ function resetQuestionCard() {
   refs.questionMeta.textContent = t("question.readyMeta");
   refs.optionsWrap.innerHTML = "";
   refs.answerWrap.classList.add("hidden");
+  renderNotesPanel();
 }
 
 function shuffledIndices(length) {

@@ -180,6 +180,82 @@ textarea {
   background: #fffefb;
 }
 
+.notes-panel {
+  margin-top: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1rem;
+  background:
+    linear-gradient(180deg, #fffefb, #f7f1e7);
+}
+
+.notes-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.notes-head h3,
+.review-list-wrap h4 {
+  margin: 0 0 0.2rem;
+}
+
+.notes-label {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.notes-meta {
+  white-space: nowrap;
+}
+
+.review-list-wrap {
+  margin-top: 0.9rem;
+}
+
+.review-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.review-list li {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.75rem 0.8rem;
+}
+
+.review-item-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.review-item-title {
+  font-weight: 600;
+  margin: 0;
+}
+
+.review-item-meta,
+.review-item-note {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.review-item-actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.55rem;
+}
+
 .kid-explain-card {
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -749,5 +825,14 @@ button.danger:not(.opt-btn) {
 
   .modal-head {
     flex-direction: column;
+  }
+
+  .notes-head,
+  .review-item-head {
+    flex-direction: column;
+  }
+
+  .notes-meta {
+    white-space: normal;
   }
 }

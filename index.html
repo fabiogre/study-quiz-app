@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Study Quiz App</title>
-    <link rel="stylesheet" href="./styles.css?v=20260324-4" />
+    <link rel="stylesheet" href="./styles.css?v=20260324-5" />
   </head>
   <body>
     <header class="topbar">
@@ -84,6 +84,29 @@
               <button id="continueBtn" type="button">Weiter</button>
             </div>
           </article>
+
+          <section class="notes-panel">
+            <div class="notes-head">
+              <div>
+                <h3 id="notesTitle">Lernnotizen</h3>
+                <p id="notesIntro" class="muted">Schreibe dir hier auf, was du falsch hattest oder spaeter nacharbeiten willst.</p>
+              </div>
+              <span id="notesMeta" class="notes-meta muted">Keine Frage aktiv.</span>
+            </div>
+            <label class="notes-label">
+              <span id="notesInputLabel">Notiz zur aktuellen Frage</span>
+              <textarea id="noteInput" placeholder="z.B. LOCAL_PREF ist wichtiger als AS_PATH. RR-Loop-Protection nochmal anschauen."></textarea>
+            </label>
+            <div class="actions">
+              <button id="saveNoteBtn" type="button">Notiz speichern</button>
+              <button id="toggleReviewBtn" type="button" class="secondary">Zur Nacharbeit markieren</button>
+              <button id="clearNoteBtn" type="button" class="secondary">Notiz loeschen</button>
+            </div>
+            <div class="review-list-wrap">
+              <h4 id="reviewListTitle">Nacharbeiten</h4>
+              <ul id="reviewList" class="review-list"></ul>
+            </div>
+          </section>
         </div>
 
         <div id="tab-build" class="tab-content">
@@ -226,7 +249,7 @@
       <p id="factPopupBody"></p>
     </div>
 
-    <script src="./questions.seed.js?v=20260324-4"></script>
-    <script src="./app.js?v=20260324-4"></script>
+    <script src="./questions.seed.js?v=20260324-5"></script>
+    <script src="./app.js?v=20260324-5"></script>
   </body>
 </html>
