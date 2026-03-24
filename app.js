@@ -905,6 +905,8 @@ async function initializeCloud() {
     }
     saveCloudSession({ token: saved.token, username: resumed.username || saved.username || "Fabio" });
     await fetchCloudState();
+    updateAuthUi();
+    setAuthStatus(t("auth.welcome", { user: cloudSession.username }));
     setStatus(t("status.cloudStateLoaded", { user: cloudSession.username }));
   } catch (error) {
     saveCloudSession(null);
