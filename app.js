@@ -1,6 +1,7 @@
 const STORAGE_KEY = "studyQuizQuestionsV1";
 const PROGRESS_KEY = "studyQuizProgressV1";
 const NOTES_KEY = "studyQuizNotesV1";
+const CLOUD_SESSION_KEY = "studyQuizCloudSessionV1";
 const DEFAULT_TOPIC = "Hauptquiz";
 const DEFAULT_MODULE = "Modul 1";
 const DEFAULT_SECTION = "Section 1";
@@ -19,10 +20,18 @@ let popupTimer = null;
 let dbPromise = null;
 let currentLanguage = "de";
 let currentKidExplainer = "";
+let cloudConfig = null;
+let cloudSession = null;
+let cloudSyncTimer = null;
+let cloudSyncInFlight = null;
+let suppressCloudSync = false;
 
 const refs = {
   languageSelect: document.getElementById("languageSelect"),
   languageResetBtn: document.getElementById("languageResetBtn"),
+  authControls: document.getElementById("authControls"),
+  profileBadge: document.getElementById("profileBadge"),
+  logoutBtn: document.getElementById("logoutBtn"),
   bgpCheatSheetLink: document.getElementById("bgpCheatSheetLink"),
   miniExplainerBtn: document.getElementById("miniExplainerBtn"),
   tabs: Array.from(document.querySelectorAll(".tab-btn")),
@@ -101,6 +110,15 @@ const refs = {
   factPopup: document.getElementById("factPopup"),
   factPopupTitle: document.getElementById("factPopupTitle"),
   factPopupBody: document.getElementById("factPopupBody"),
+  authGate: document.getElementById("authGate"),
+  authTitle: document.getElementById("authTitle"),
+  authIntro: document.getElementById("authIntro"),
+  authUsernameLabel: document.getElementById("authUsernameLabel"),
+  authPasswordLabel: document.getElementById("authPasswordLabel"),
+  loginUsername: document.getElementById("loginUsername"),
+  loginPassword: document.getElementById("loginPassword"),
+  loginBtn: document.getElementById("loginBtn"),
+  authStatus: document.getElementById("authStatus"),
 };
 
 const UI_TEXTS = {
@@ -111,6 +129,8 @@ const UI_TEXTS = {
       langLabel: "Sprache",
       langReset: "Sprache zuruecksetzen",
       miniExplainer: "Mini Explainer",
+      logout: "Abmelden",
+      offlineProfile: "Lokal",
     },
     tabs: {
       learn: "Lernen",
@@ -152,6 +172,19 @@ const UI_TEXTS = {
       itemOpen: "Oeffnen",
       itemDone: "Erledigt",
       autoMarkedWrong: "Automatisch markiert, weil die letzte Antwort falsch war.",
+    },
+    auth: {
+      title: "Privater Zugriff",
+      intro: "Melde dich an, um dein Profil, deinen Fortschritt und deine Notizen zu laden.",
+      username: "Benutzername",
+      password: "Passwort",
+      login: "Anmelden",
+      checking: "Pruefe Zugang...",
+      configMissing: "Cloud-Profil ist noch nicht konfiguriert. Die App laeuft aktuell nur lokal.",
+      lockedUntil: "Zugang gesperrt bis {time}",
+      loginFailed: "Anmeldung fehlgeschlagen.",
+      sessionExpired: "Sitzung abgelaufen. Bitte erneut anmelden.",
+      welcome: "Angemeldet als {user}",
     },
     explainer: {
       title: "Mini-Erklaerung fuer RD und RT",
@@ -277,6 +310,9 @@ const UI_TEXTS = {
       reviewMarked: "Frage zur Nacharbeit markiert.",
       reviewCleared: "Frage aus der Nacharbeit entfernt.",
       reviewNeedsQuestion: "Bitte erst eine Frage auswaehlen.",
+      cloudSyncFailed: "Cloud-Sync fehlgeschlagen: {msg}",
+      cloudStateLoaded: "Cloud-Profil geladen: {user}",
+      loggedOut: "Abgemeldet. Geladener Cloud-Fortschritt wurde aus diesem Browser entfernt.",
     },
   },
   en: {
@@ -286,6 +322,8 @@ const UI_TEXTS = {
       langLabel: "Language",
       langReset: "Reset language",
       miniExplainer: "Mini Explainer",
+      logout: "Log out",
+      offlineProfile: "Local",
     },
     tabs: {
       learn: "Learn",
@@ -327,6 +365,19 @@ const UI_TEXTS = {
       itemOpen: "Open",
       itemDone: "Done",
       autoMarkedWrong: "Automatically marked because the last answer was wrong.",
+    },
+    auth: {
+      title: "Private access",
+      intro: "Sign in to load your profile, progress, and notes.",
+      username: "Username",
+      password: "Password",
+      login: "Sign in",
+      checking: "Checking access...",
+      configMissing: "Cloud profile is not configured yet. The app is currently running in local-only mode.",
+      lockedUntil: "Access locked until {time}",
+      loginFailed: "Login failed.",
+      sessionExpired: "Session expired. Please sign in again.",
+      welcome: "Signed in as {user}",
     },
     explainer: {
       title: "Mini explainer for RD and RT",
@@ -452,6 +503,9 @@ const UI_TEXTS = {
       reviewMarked: "Question marked for review.",
       reviewCleared: "Question removed from review.",
       reviewNeedsQuestion: "Please select a question first.",
+      cloudSyncFailed: "Cloud sync failed: {msg}",
+      cloudStateLoaded: "Cloud profile loaded: {user}",
+      loggedOut: "Signed out. Loaded cloud progress was removed from this browser.",
     },
   },
 };
@@ -536,6 +590,7 @@ function applyI18n() {
   setText("langLabel", t("app.langLabel"));
   setText("languageResetBtn", t("app.langReset"));
   setText("miniExplainerBtn", t("app.miniExplainer"));
+  setText("logoutBtn", t("app.logout"));
   setText("appSubtitle", t("app.subtitle"));
   setText("tabLearnBtn", t("tabs.learn"));
   setText("tabBuildBtn", t("tabs.build"));
@@ -567,6 +622,11 @@ function applyI18n() {
   setText("reviewListTitle", t("notes.reviewTitle"));
   setPlaceholder("noteInput", t("notes.placeholder"));
   updateReviewToggleButton();
+  setText("authTitle", t("auth.title"));
+  setText("authIntro", t("auth.intro"));
+  setText("authUsernameLabel", t("auth.username"));
+  setText("authPasswordLabel", t("auth.password"));
+  setText("loginBtn", t("auth.login"));
 
   setText("buildQuestionLabel", t("build.question"));
   setText("buildAnswerALabel", t("build.answerA"));
@@ -614,6 +674,7 @@ function applyI18n() {
   }
   renderKidExplainer(currentKidExplainer);
   renderNotesPanel();
+  updateAuthUi();
 }
 
 init().catch((err) => {
@@ -635,9 +696,11 @@ async function init() {
   setupLearnActions();
   setupExplainerActions();
   setupNoteActions();
+  setupAuthActions();
   setupBuildActions();
   setupDataActions();
   await loadData();
+  await initializeCloud();
   refreshFilterOptions();
   refreshExport();
   refreshStats();
@@ -690,6 +753,258 @@ function setupNoteActions() {
   if (refs.toggleReviewBtn) {
     refs.toggleReviewBtn.addEventListener("click", toggleCurrentReviewFlag);
   }
+}
+
+function setupAuthActions() {
+  refs.loginBtn?.addEventListener("click", performCloudLogin);
+  refs.loginPassword?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      performCloudLogin();
+    }
+  });
+  refs.logoutBtn?.addEventListener("click", logoutCloudSession);
+}
+
+function getCloudConfig() {
+  const cfg = globalThis.STUDY_QUIZ_CLOUD;
+  if (!cfg || typeof cfg !== "object") return null;
+  if (!cfg.enabled) return null;
+  const supabaseUrl = typeof cfg.supabaseUrl === "string" ? cfg.supabaseUrl.trim().replace(/\/+$/, "") : "";
+  const anonKey = typeof cfg.anonKey === "string" ? cfg.anonKey.trim() : "";
+  if (!supabaseUrl || !anonKey) return null;
+  return {
+    enabled: true,
+    supabaseUrl,
+    anonKey,
+    appName: typeof cfg.appName === "string" ? cfg.appName.trim() : "Study Quiz",
+  };
+}
+
+function isCloudEnabled() {
+  return !!cloudConfig;
+}
+
+function isCloudAuthenticated() {
+  return !!(cloudSession && cloudSession.token);
+}
+
+function loadCloudSession() {
+  try {
+    const raw = localStorage.getItem(CLOUD_SESSION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveCloudSession(session) {
+  if (!session) {
+    localStorage.removeItem(CLOUD_SESSION_KEY);
+    cloudSession = null;
+    return;
+  }
+  cloudSession = session;
+  localStorage.setItem(CLOUD_SESSION_KEY, JSON.stringify(session));
+}
+
+function setAuthStatus(message, isError = false) {
+  if (!refs.authStatus) return;
+  refs.authStatus.textContent = message || "";
+  refs.authStatus.style.color = isError ? "var(--bad)" : "var(--muted)";
+}
+
+function showAuthGate(show) {
+  if (!refs.authGate) return;
+  refs.authGate.classList.toggle("hidden", !show);
+  refs.authGate.setAttribute("aria-hidden", show ? "false" : "true");
+  document.body.style.overflow = show ? "hidden" : "";
+}
+
+function updateAuthUi() {
+  const label = isCloudAuthenticated() ? cloudSession.username || "Profil" : t("app.offlineProfile");
+  if (refs.profileBadge) refs.profileBadge.textContent = label;
+  if (refs.authControls) refs.authControls.classList.toggle("hidden", !isCloudEnabled());
+  if (!isCloudEnabled()) {
+    showAuthGate(false);
+    setAuthStatus(t("auth.configMissing"), false);
+    return;
+  }
+  showAuthGate(!isCloudAuthenticated());
+}
+
+function clearLoadedStudyState() {
+  progress = {};
+  notes = {};
+  removeJson(PROGRESS_KEY);
+  removeJson(NOTES_KEY);
+  resetQuestionCard();
+  refreshStats();
+}
+
+function formatAuthTime(value) {
+  if (!value) return "";
+  try {
+    return new Intl.DateTimeFormat(currentLanguage === "en" ? "en-GB" : "de-DE", {
+      dateStyle: "short",
+      timeStyle: "short",
+    }).format(new Date(value));
+  } catch {
+    return String(value);
+  }
+}
+
+async function cloudRpc(fnName, payload = {}) {
+  if (!cloudConfig) throw new Error("Cloud not configured");
+  const response = await fetch(`${cloudConfig.supabaseUrl}/rest/v1/rpc/${fnName}`, {
+    method: "POST",
+    headers: {
+      apikey: cloudConfig.anonKey,
+      Authorization: `Bearer ${cloudConfig.anonKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  const text = await response.text();
+  let data = null;
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = text;
+  }
+  if (!response.ok) {
+    const message =
+      (data && typeof data === "object" && (data.message || data.error || data.hint)) || response.statusText;
+    throw new Error(message || "RPC failed");
+  }
+  return data;
+}
+
+async function initializeCloud() {
+  cloudConfig = getCloudConfig();
+  updateAuthUi();
+  if (!cloudConfig) return;
+
+  const saved = loadCloudSession();
+  if (!saved || !saved.token) {
+    clearLoadedStudyState();
+    setAuthStatus(t("auth.intro"));
+    return;
+  }
+
+  try {
+    const resumed = await cloudRpc("quiz_resume_session", { p_token: saved.token });
+    if (!resumed || !resumed.ok) {
+      saveCloudSession(null);
+      clearLoadedStudyState();
+      setAuthStatus(t("auth.sessionExpired"), true);
+      updateAuthUi();
+      return;
+    }
+    saveCloudSession({ token: saved.token, username: resumed.username || saved.username || "Fabio" });
+    await fetchCloudState();
+    setStatus(t("status.cloudStateLoaded", { user: cloudSession.username }));
+  } catch (error) {
+    saveCloudSession(null);
+    clearLoadedStudyState();
+    setAuthStatus(`${t("auth.sessionExpired")} ${error.message}`, true);
+    updateAuthUi();
+  }
+}
+
+async function performCloudLogin() {
+  if (!cloudConfig) {
+    setAuthStatus(t("auth.configMissing"), true);
+    return;
+  }
+  const username = refs.loginUsername?.value?.trim() || "";
+  const password = refs.loginPassword?.value || "";
+  if (!username || !password) {
+    setAuthStatus(t("auth.loginFailed"), true);
+    return;
+  }
+
+  refs.loginBtn && (refs.loginBtn.disabled = true);
+  setAuthStatus(t("auth.checking"));
+  try {
+    const result = await cloudRpc("quiz_login", { p_username: username, p_password: password });
+    if (!result || !result.ok) {
+      if (result && result.locked_until) {
+        setAuthStatus(t("auth.lockedUntil", { time: formatAuthTime(result.locked_until) }), true);
+      } else {
+        setAuthStatus(result?.message || t("auth.loginFailed"), true);
+      }
+      return;
+    }
+    saveCloudSession({ token: result.token, username: result.username || username });
+    refs.loginPassword && (refs.loginPassword.value = "");
+    await fetchCloudState();
+    updateAuthUi();
+    setAuthStatus(t("auth.welcome", { user: cloudSession.username }));
+    setStatus(t("status.cloudStateLoaded", { user: cloudSession.username }));
+  } catch (error) {
+    setAuthStatus(`${t("auth.loginFailed")} ${error.message}`, true);
+  } finally {
+    refs.loginBtn && (refs.loginBtn.disabled = false);
+  }
+}
+
+async function logoutCloudSession() {
+  if (isCloudAuthenticated()) {
+    try {
+      await cloudRpc("quiz_logout", { p_token: cloudSession.token });
+    } catch {
+      // ignore server logout failure, local logout still happens
+    }
+  }
+  saveCloudSession(null);
+  clearLoadedStudyState();
+  updateAuthUi();
+  setStatus(t("status.loggedOut"));
+}
+
+async function fetchCloudState() {
+  if (!isCloudAuthenticated()) return;
+  const state = await cloudRpc("quiz_get_state", { p_token: cloudSession.token });
+  if (!state || !state.ok) throw new Error(state?.message || "State load failed");
+  suppressCloudSync = true;
+  try {
+    progress = normalizeCloudProgress(state.progress);
+    notes = normalizeCloudNotes(state.notes);
+    saveProgress();
+    saveNotes();
+  } finally {
+    suppressCloudSync = false;
+  }
+  refreshStats();
+  renderNotesPanel();
+}
+
+function queueCloudSync() {
+  if (!isCloudAuthenticated()) return;
+  if (cloudSyncTimer) {
+    clearTimeout(cloudSyncTimer);
+  }
+  cloudSyncTimer = setTimeout(() => {
+    syncCloudState().catch((error) => {
+      setStatus(t("status.cloudSyncFailed", { msg: error.message }));
+    });
+  }, 350);
+}
+
+async function syncCloudState() {
+  if (!isCloudAuthenticated()) return;
+  if (cloudSyncInFlight) return cloudSyncInFlight;
+  cloudSyncInFlight = cloudRpc("quiz_set_state", {
+    p_token: cloudSession.token,
+    p_progress: buildCloudProgressPayload(),
+    p_notes: buildCloudNotesPayload(),
+  }).finally(() => {
+    cloudSyncInFlight = null;
+  });
+  return cloudSyncInFlight;
 }
 
 function openExplainerModal() {
@@ -1198,6 +1513,8 @@ function setupDataActions() {
     removeJson(PROGRESS_KEY);
     removeJson(NOTES_KEY);
     await loadData(true);
+    saveProgress();
+    saveNotes();
     refreshFilterOptions();
     refreshExport();
     refreshStats();
@@ -1324,10 +1641,12 @@ function saveQuestions() {
 
 function saveProgress() {
   persistJson(PROGRESS_KEY, progress);
+  if (!suppressCloudSync) queueCloudSync();
 }
 
 function saveNotes() {
   persistJson(NOTES_KEY, notes);
+  if (!suppressCloudSync) queueCloudSync();
 }
 
 function normalizeQuestions(rawQuestions) {
@@ -1548,6 +1867,70 @@ function setNoteSnapshot(q, entry) {
     return;
   }
   notes[key] = normalized;
+}
+
+function buildCloudProgressPayload() {
+  const payload = {};
+  questions.forEach((q) => {
+    if (!q || !q.id) return;
+    const snapshot = getProgressSnapshot(q);
+    if (snapshot.answered > 0 || snapshot.correct > 0) {
+      payload[q.id] = {
+        answered: snapshot.answered,
+        correct: snapshot.correct,
+      };
+    }
+  });
+  return payload;
+}
+
+function buildCloudNotesPayload() {
+  const payload = {};
+  questions.forEach((q) => {
+    if (!q || !q.id) return;
+    const snapshot = getNoteSnapshot(q);
+    if (snapshot.text || snapshot.needsReview) {
+      payload[q.id] = {
+        questionId: q.id,
+        text: snapshot.text || "",
+        needsReview: !!snapshot.needsReview,
+        updatedAt: snapshot.updatedAt || 0,
+        autoMarkedWrong: !!snapshot.autoMarkedWrong,
+      };
+    }
+  });
+  return payload;
+}
+
+function normalizeCloudProgress(value) {
+  const out = {};
+  if (!value || typeof value !== "object") return out;
+  Object.entries(value).forEach(([questionId, entry]) => {
+    if (!questionId || !entry || typeof entry !== "object") return;
+    const normalized = {
+      answered: Number.isFinite(entry.answered) ? entry.answered : 0,
+      correct: Number.isFinite(entry.correct) ? entry.correct : 0,
+    };
+    out[questionId] = normalized;
+    out[`id:${questionId}`] = normalized;
+  });
+  return out;
+}
+
+function normalizeCloudNotes(value) {
+  const out = {};
+  if (!value || typeof value !== "object") return out;
+  Object.entries(value).forEach(([questionId, entry]) => {
+    if (!questionId || !entry || typeof entry !== "object") return;
+    out[`id:${questionId}`] = {
+      questionId,
+      text: typeof entry.text === "string" ? entry.text : "",
+      needsReview: !!entry.needsReview,
+      updatedAt: Number.isFinite(entry.updatedAt) ? entry.updatedAt : 0,
+      autoMarkedWrong: !!entry.autoMarkedWrong,
+    };
+  });
+  return out;
 }
 
 function refreshExport() {

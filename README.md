@@ -12,6 +12,7 @@ Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 - Fragen per JSON importieren und exportieren
 - Antwort-Feedback als kleines Popup mit Zusatzinfo (richtig/falsch)
 - Lernfortschritt lokal im Browser speichern
+- Optionales Cloud-Profil mit Login und geraeteuebergreifendem Sync
 - Lernfortschritt in Browser-Datenbank (IndexedDB) + localStorage-Fallback
 - Seed-Updates ohne Fortschrittverlust (`Seed aktualisieren`)
 - Bereichsstatistik pro `Modul/Section`
@@ -23,6 +24,9 @@ Lokale Lern-Webapp fuer Multiple-Choice-Training mit eigener Fragenbasis.
 - `app.js` - Logik (Quiz, Modi, Speicher, Import/Export)
 - `questions.seed.json` - Start-Fragen
 - `questions.seed.js` - eingebetteter Seed-Fallback (fuer Start ohne lokalen Server)
+- `cloud-config.js` - lokale oder Cloud-Konfiguration
+- `cloud-config.example.js` - Vorlage fuer Supabase-Konfiguration
+- `supabase/quiz_auth_schema.sql` - SQL fuer Profil-Login, Lockout und Sync
 - `wissensbasis_einfach.md` - geordnete, einfache Zusammenfassung des Lernstoffs
 - `wissensbasis_english.md` - englische Wissensbasis (Draft)
 
@@ -51,6 +55,41 @@ http://localhost:8080
 3. Antworten und Erklaerung lesen.
 4. Schwachstellen-Modus nutzen, um falsch beantwortete Fragen gezielt zu wiederholen.
 5. Eigene Fragen per Formular erfassen oder per JSON importieren.
+
+## Cloud-Profil fuer Handy und PC
+Die App kann optional mit einem Supabase-Backend arbeiten. Dann werden:
+- Fortschritt
+- Notizen
+- Nacharbeiten-Liste
+
+ueber Geraete hinweg synchronisiert.
+
+### Einmalige Einrichtung
+1. In Supabase ein neues Projekt anlegen.
+2. Den Inhalt aus `supabase/quiz_auth_schema.sql` im SQL Editor ausfuehren.
+3. `cloud-config.example.js` nach `cloud-config.js` kopieren.
+4. In `cloud-config.js` eintragen:
+   - `supabaseUrl`
+   - `anonKey`
+5. Seite neu laden.
+
+### Erster Nutzer
+Das SQL-Setup legt standardmaessig diesen ersten Nutzer an:
+- Benutzername: `Fabio`
+- Passwort: selbst im SQL-Block setzen
+
+Wenn du exakt deinen gewuenschten ersten Login willst, ersetze im SQL-Skript:
+- `CHANGE_ME_PASSWORD`
+
+zum Beispiel durch:
+- `Greco`
+
+Wichtig:
+- Ich habe das Passwort absichtlich **nicht fest ins Repo geschrieben**, weil dein Repo oeffentlich sein kann und der Login sonst sofort kompromittiert waere.
+- Das Setup sperrt den Zugang nach `3` Fehlversuchen aktuell fuer `30 Minuten`.
+
+### Verhalten ohne Cloud-Konfiguration
+Wenn `cloud-config.js` nicht aktiviert ist, laeuft die App wie bisher rein lokal im Browser.
 
 ## Fragenformat (JSON)
 Die App erwartet ein JSON-Array aus Frageobjekten:

@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Study Quiz App</title>
-    <link rel="stylesheet" href="./styles.css?v=20260324-5" />
+    <link rel="stylesheet" href="./styles.css?v=20260324-7" />
   </head>
   <body>
     <header class="topbar">
       <div class="topbar-row">
         <h1 id="appTitle">Study Quiz</h1>
         <div class="lang-controls">
+          <div id="authControls" class="auth-controls hidden">
+            <span id="profileBadge" class="profile-badge">Offline</span>
+            <button id="logoutBtn" type="button" class="secondary">Logout</button>
+          </div>
           <a id="bgpCheatSheetLink" href="./bgp-cheatsheet.html" class="secondary link-btn">BGP Cheat Sheet</a>
           <button id="miniExplainerBtn" type="button" class="secondary">Mini Explainer</button>
           <label class="lang-picker">
@@ -249,7 +253,27 @@
       <p id="factPopupBody"></p>
     </div>
 
-    <script src="./questions.seed.js?v=20260324-5"></script>
-    <script src="./app.js?v=20260324-5"></script>
+    <div id="authGate" class="auth-gate hidden" aria-hidden="true">
+      <section class="auth-card">
+        <h2 id="authTitle">Privater Zugriff</h2>
+        <p id="authIntro" class="muted">Melde dich an, um dein Profil, deinen Fortschritt und deine Notizen zu laden.</p>
+        <label>
+          <span id="authUsernameLabel">Benutzername</span>
+          <input id="loginUsername" type="text" autocomplete="username" />
+        </label>
+        <label>
+          <span id="authPasswordLabel">Passwort</span>
+          <input id="loginPassword" type="password" autocomplete="current-password" />
+        </label>
+        <div class="actions">
+          <button id="loginBtn" type="button">Anmelden</button>
+        </div>
+        <p id="authStatus" class="status auth-status"></p>
+      </section>
+    </div>
+
+    <script src="./cloud-config.js?v=20260324-2"></script>
+    <script src="./questions.seed.js?v=20260324-7"></script>
+    <script src="./app.js?v=20260324-7"></script>
   </body>
 </html>

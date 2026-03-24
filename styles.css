@@ -59,6 +59,20 @@ body {
   flex-wrap: wrap;
 }
 
+.auth-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.profile-badge {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.9rem;
+}
+
 .link-btn {
   border: 1px solid var(--accent);
   background: var(--accent);
@@ -779,6 +793,40 @@ button.danger:not(.opt-btn) {
 .fact-popup p {
   margin: 0;
   line-height: 1.45;
+}
+
+.auth-gate {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at top left, rgba(208, 146, 60, 0.18), transparent 28%),
+    rgba(15, 19, 20, 0.58);
+  z-index: 9500;
+  padding: 1rem;
+}
+
+.auth-gate.hidden {
+  display: none;
+}
+
+.auth-card {
+  width: min(420px, calc(100vw - 2rem));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fffefb;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+  padding: 1.15rem;
+}
+
+.auth-card h2 {
+  margin: 0 0 0.35rem;
+}
+
+.auth-status {
+  min-height: 54px;
+  margin-top: 0.9rem;
 }
 
 @media (max-width: 980px) {
