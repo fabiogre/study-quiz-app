@@ -1971,3 +1971,29 @@ Merker:
   - `ORIGINATOR_ID`
   - `CLUSTER_LIST`
 - Damit kann erkannt werden, ob eine reflektierte Route unguenstig im Kreis gelaufen ist
+
+### Y7) Update-Regeln auf dem RR
+- Wenn die beste Route von einem `Non-Client` kommt:
+  - an Clients reflektieren
+  - an eBGP-Peers propagieren, soweit Policy es erlaubt
+  - nicht an andere Non-Clients reflektieren
+- Wenn die beste Route von einem `Client` kommt:
+  - an Clients reflektieren
+  - an Non-Clients reflektieren
+  - an eBGP-Peers propagieren, soweit Policy es erlaubt
+- Wenn die beste Route von einem `eBGP`-Peer kommt:
+  - an Clients
+  - an Non-Clients
+  - an andere eBGP-Peers
+  - jeweils soweit Policy es erlaubt
+
+### Y8) Nokia-Sicht auf Split Horizon und Rueckadvertising
+- Auf `SR OS` ist das Non-Client-Verhalten fest eingebaut
+- Fuer Clients, confed-eBGP und eBGP braucht man zusaetzlich den `split-horizon` BGP-Command, wenn man Rueckadvertising unterdruecken will
+- Ohne diese zusaetzliche Split-Horizon-Steuerung kann eine beste Route von einem Client oder eBGP-Peer grundsaetzlich auch an denselben Peer zurueckadvertised werden
+
+Merker:
+- bei eBGP hilft dann typischerweise die `AS_PATH`-Loop-Erkennung
+- wenn man das Verhalten nicht will:
+  - Export-Policy nutzen
+  - oder `split-horizon` konfigurieren

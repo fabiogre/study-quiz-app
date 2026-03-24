@@ -1971,3 +1971,29 @@ Reminder:
   - `ORIGINATOR_ID`
   - `CLUSTER_LIST`
 - They help detect whether a reflected route has looped back in an unhealthy way
+
+### Y7) Update rules on the RR
+- If the best route comes from a `non-client`:
+  - reflect it to clients
+  - propagate it to eBGP peers as allowed by policy
+  - do not reflect it to other non-clients
+- If the best route comes from a `client`:
+  - reflect it to clients
+  - reflect it to non-clients
+  - propagate it to eBGP peers as allowed by policy
+- If the best route comes from an `eBGP` peer:
+  - advertise it to clients
+  - advertise it to non-clients
+  - advertise it to other eBGP peers
+  - each case still depends on policy
+
+### Y8) Nokia view of split horizon and re-advertisement
+- On `SR OS`, the non-client behavior is built in
+- For clients, confed-eBGP, and eBGP, the `split-horizon` BGP command is additionally needed if you want to suppress re-advertisement
+- Without that extra split-horizon control, a best route learned from a client or eBGP peer can in principle be advertised back to the same peer
+
+Reminder:
+- in eBGP, `AS_PATH` loop detection then typically helps
+- if you do not want that behavior:
+  - use export policy
+  - or configure `split-horizon`

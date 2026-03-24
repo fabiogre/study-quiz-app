@@ -13278,5 +13278,314 @@
     "module_en": "Module 3",
     "section": "Section 2",
     "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q9",
+    "question": "Wenn der beste Pfad fuer einen Prefix auf einem RR von einem Non-Client kommt, wohin wird er nach RFC4456/Nokia-Grundlogik weitergegeben?",
+    "question_en": "If the best path for a prefix on an RR is learned from a non-client, where is it propagated according to basic RFC4456/Nokia logic?",
+    "options": [
+      "Zu allen Clients und zu eBGP-Peers, aber nicht zu anderen Non-Clients",
+      "Zu allen Clients, allen Non-Clients und allen eBGP-Peers",
+      "Nur zu anderen Non-Clients, nie zu Clients",
+      "Nur zurueck an den sendenden Non-Client"
+    ],
+    "options_en": [
+      "To all clients and to eBGP peers, but not to other non-clients",
+      "To all clients, all non-clients, and all eBGP peers",
+      "Only to other non-clients and never to clients",
+      "Only back to the sending non-client"
+    ],
+    "correctIndex": 0,
+    "explanation": "RFC 4456 spiegelt eine vom non-client gelernte beste Route an Clients. Nokia SR OS propagiert sie zusaetzlich an eBGP peers, soweit Policy das erlaubt.",
+    "explanation_en": "RFC 4456 reflects a best route learned from a non-client to clients. Nokia SR OS additionally propagates it to eBGP peers as allowed by policy.",
+    "extraInfo": "Nicht zu anderen Non-Clients zu schicken, ist genau die klassische RR-Regel fuer non-client-gelernte Routen.",
+    "extraInfo_en": "Not sending it to other non-clients is exactly the classic RR rule for routes learned from a non-client.",
+    "tip": "Non-client gelernt = Clients ja, andere Non-Clients nein.",
+    "tip_en": "Learned from a non-client = clients yes, other non-clients no.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Non-Client",
+      "Propagation Rules"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q10",
+    "question": "Wenn der beste Pfad auf einem RR von einem Client kommt, welche Weitergabe passt am besten?",
+    "question_en": "If the best path on an RR is learned from a client, which propagation behavior fits best?",
+    "options": [
+      "Zu Clients, Non-Clients und eBGP-Peers, soweit Policy oder Split-Horizon das nicht unterdruecken",
+      "Nur zu Non-Clients, aber nie zu anderen Clients",
+      "Nur zu Clients desselben Clusters und nie zu eBGP-Peers",
+      "Nur lokal in das RIB, aber gar nicht weiter"
+    ],
+    "options_en": [
+      "To clients, non-clients, and eBGP peers, unless policy or split horizon suppresses it",
+      "Only to non-clients and never to other clients",
+      "Only to clients of the same cluster and never to eBGP peers",
+      "Only into the local RIB and not onward at all"
+    ],
+    "correctIndex": 0,
+    "explanation": "Eine client-gelernte beste Route ist der klassische Fall fuer breite Reflection: RR darf sie an andere Clients und Non-Clients weitergeben und auf SR OS auch an eBGP peers, wenn Policy das erlaubt.",
+    "explanation_en": "A best route learned from a client is the classic case for broad reflection: the RR may send it to other clients and non-clients and on SR OS also to eBGP peers if policy allows it.",
+    "extraInfo": "Split-Horizon oder spezielle Policy kann das Rueckadvertising zum sendenden Peer zusaetzlich einschraenken.",
+    "extraInfo_en": "Split horizon or specific policy can additionally limit re-advertisement back to the sending peer.",
+    "tip": "Client gelernt = breit reflektierbar.",
+    "tip_en": "Learned from a client = broadly reflectable.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Client",
+      "Propagation Rules"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q11",
+    "question": "Was passiert auf einem RR typischerweise mit einer besten Route, die von einem eBGP-Peer gelernt wurde?",
+    "question_en": "What typically happens on an RR with a best route learned from an eBGP peer?",
+    "options": [
+      "Sie kann zu Clients, Non-Clients und anderen eBGP-Peers propagiert werden, soweit Policy das erlaubt",
+      "Sie darf wegen RFC4456 nie zu iBGP-Peers propagiert werden",
+      "Sie wird zuerst in OSPF umgewandelt und dann reflektiert",
+      "Sie wird immer nur lokal genutzt und nie advertised"
+    ],
+    "options_en": [
+      "It can be propagated to clients, non-clients, and other eBGP peers as allowed by policy",
+      "RFC4456 forbids it from ever being propagated to iBGP peers",
+      "It is first converted into OSPF and then reflected",
+      "It is always used only locally and never advertised"
+    ],
+    "correctIndex": 0,
+    "explanation": "Eine vom eBGP-Peer gelernte beste Route kann im RR-Design an iBGP peers und andere eBGP peers weitergehen. Policy entscheidet dabei mit.",
+    "explanation_en": "A best route learned from an eBGP peer can be propagated to iBGP peers and other eBGP peers in an RR design. Policy also participates in that decision.",
+    "extraInfo": "Fuer eBGP-gelernte oder lokal erzeugte Routen werden ORIGINATOR_ID und CLUSTER_LIST dabei nicht neu hinzugefuegt.",
+    "extraInfo_en": "For eBGP-learned or locally originated routes, ORIGINATOR_ID and CLUSTER_LIST are not newly added in this process.",
+    "tip": "eBGP gelernt = kann breit weitergehen, wenn Policy es zulaesst.",
+    "tip_en": "Learned from eBGP = may be broadly propagated if policy allows it.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "eBGP",
+      "Propagation Rules"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q12",
+    "question": "Welche Aussage zur eBGP-Weitergabe auf einem Nokia 7750 RR ist am treffendsten?",
+    "question_en": "Which statement about eBGP propagation on a Nokia 7750 RR is the most accurate?",
+    "options": [
+      "Sie ist in der Praxis weiterhin von Export-Policy abhaengig; ohne erlaubende Policy wird nicht einfach blind exportiert",
+      "Sobald ein RR aktiv ist, werden alle besten Routen automatisch an jeden eBGP-Peer exportiert",
+      "Ein RR darf grundsaetzlich nie an eBGP-Peers advertisen",
+      "eBGP-Weitergabe ist nur moeglich, wenn der empfangene Pfad von einem Non-Client stammt"
+    ],
+    "options_en": [
+      "In practice it still depends on export policy; without an allowing policy routes are not blindly exported",
+      "As soon as an RR is active, all best routes are automatically exported to every eBGP peer",
+      "An RR may never advertise to eBGP peers at all",
+      "eBGP propagation is possible only if the received path came from a non-client"
+    ],
+    "correctIndex": 0,
+    "explanation": "Auf SR OS bleibt die Export-Policy massgeblich. Die RR-Logik oeffnet die moegliche Weitergabe, ersetzt aber nicht die Policy-Kontrolle.",
+    "explanation_en": "On SR OS, export policy remains decisive. RR logic opens the possibility of propagation, but does not replace policy control.",
+    "extraInfo": "Das verhindert, dass RR-Verhalten mit generellem \"alles nach eBGP\" verwechselt wird.",
+    "extraInfo_en": "This prevents RR behavior from being confused with a generic \"everything to eBGP\" rule.",
+    "tip": "RR-Logik und Export-Policy sind zwei verschiedene Ebenen.",
+    "tip_en": "RR logic and export policy are two different layers.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "eBGP",
+      "Export Policy",
+      "Nokia"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q13",
+    "question": "Welche Nokia-SR-OS-Aussage zum Split-Horizon-Verhalten ist korrekt?",
+    "question_en": "Which Nokia SR OS statement about split-horizon behavior is correct?",
+    "options": [
+      "Fuer von Non-Clients gelernte Routen wirkt dieses Split-Horizon-Verhalten immer; fuer Clients oder eBGP-Peers muss zusaetzlich split-horizon konfiguriert werden",
+      "Split-Horizon ist auf SR OS fuer alle Peer-Typen immer voll aktiv und kann nicht beeinflusst werden",
+      "Split-Horizon gilt nur fuer eBGP, nie fuer iBGP",
+      "Split-Horizon ist per Default fuer alle Peer-Typen aktiv und muss bei Bedarf global deaktiviert werden"
+    ],
+    "options_en": [
+      "For routes learned from non-clients, this split-horizon behavior always applies; for clients or eBGP peers, split-horizon must additionally be configured",
+      "On SR OS, split horizon is always fully active for all peer types and cannot be influenced",
+      "Split horizon applies only to eBGP and never to iBGP",
+      "Split horizon is active by default for all peer types and must be disabled globally when needed"
+    ],
+    "correctIndex": 0,
+    "explanation": "SR OS hat hier eine wichtige Nuance: das Non-Client-Verhalten ist fest verdrahtet. Fuer Clients, confed-eBGP oder eBGP braucht es zusaetzlich den split-horizon BGP-Command.",
+    "explanation_en": "SR OS has an important nuance here: the non-client behavior is hard-wired. For clients, confed-eBGP, or eBGP, the BGP split-horizon command is additionally required.",
+    "extraInfo": "Genau deshalb kann auf 7750 ohne extra Split-Horizon eine beste Route an den sendenden Client oder eBGP-Peer zurueckgehen.",
+    "extraInfo_en": "That is exactly why on a 7750, without extra split horizon, a best route can be advertised back to the sending client or eBGP peer.",
+    "tip": "Non-Client-Split-Horizon ist speziell; Client/eBGP braucht extra Konfiguration.",
+    "tip_en": "Non-client split horizon is special; client/eBGP needs extra configuration.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Split Horizon",
+      "Nokia",
+      "Non-Client"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q14",
+    "question": "Welche Aussage zum Rueckadvertising an denselben Peer auf einem 7750 ist korrekt?",
+    "question_en": "Which statement about re-advertising back to the same peer on a 7750 is correct?",
+    "options": [
+      "Ohne zusaetzliches Split-Horizon kann eine beste Route von einem eBGP-Peer oder RR-Client grundsaetzlich auch an denselben Peer zurueckadvertised werden",
+      "SR OS verhindert bei jedem Peer-Typ immer automatisch jede Rueckadvertisement-Situation",
+      "Rueckadvertising ist nur bei OSPF moeglich, nicht bei BGP",
+      "Rueckadvertising macht AS_PATH-Loop-Erkennung komplett ueberfluessig"
+    ],
+    "options_en": [
+      "Without additional split horizon, a best route from an eBGP peer or RR client can in principle be re-advertised back to the same peer",
+      "SR OS always automatically prevents every re-advertisement situation for every peer type",
+      "Re-advertisement is possible only in OSPF, not in BGP",
+      "Re-advertisement makes AS_PATH loop detection completely unnecessary"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nokia dokumentiert genau dieses Verhalten: ohne split-horizon wird kein Aufwand betrieben, um die beste Route vom sendenden Peer fernzuhalten. Bei eBGP schuetzt dann typischerweise AS_PATH-Loop-Erkennung.",
+    "explanation_en": "Nokia documents exactly this behavior: without split horizon, no effort is made to keep the best route away from the sending peer. In eBGP, AS_PATH loop detection then typically provides protection.",
+    "extraInfo": "Will man das unterbinden, kann man export policy oder den split-horizon command einsetzen.",
+    "extraInfo_en": "If you want to suppress it, you can use export policy or the split-horizon command.",
+    "tip": "Rueckadvertising ist auf SR OS eine Policy-/Split-Horizon-Frage.",
+    "tip_en": "Re-advertisement on SR OS is a policy/split-horizon question.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Split Horizon",
+      "AS_PATH",
+      "Nokia"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q15",
+    "question": "Welche Werkzeuge nennt dein Stoff, um unerwuenschtes Rueckadvertising zu unterdruecken?",
+    "question_en": "Which tools does your material mention to suppress unwanted re-advertisement?",
+    "options": [
+      "Export-Policies pro Nachbar und den BGP split-horizon command global, pro Group oder pro Neighbor",
+      "Nur ARP-Timeout und MAC-Aging",
+      "Nur OSPF passive-interface",
+      "Nur das Absenken des LOCAL_PREF auf 0"
+    ],
+    "options_en": [
+      "Export policies per neighbor and the BGP split-horizon command globally, per group, or per neighbor",
+      "Only ARP timeout and MAC aging",
+      "Only OSPF passive-interface",
+      "Only lowering LOCAL_PREF to 0"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nokia nennt hier genau diese beiden Hebel: Policy-basiert selektiv oder split-horizon als breiteres Verhaltensmerkmal.",
+    "explanation_en": "Nokia calls out exactly these two levers here: selectively by policy or more broadly through split-horizon behavior.",
+    "extraInfo": "Mit Policy kann man feiner pro Peer unterscheiden; split-horizon ist der grobere Mechanismus.",
+    "extraInfo_en": "With policy, you can differentiate more finely per peer; split horizon is the broader mechanism.",
+    "tip": "Policy = fein, split-horizon = grober.",
+    "tip_en": "Policy = fine-grained, split horizon = broader.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Export Policy",
+      "Split Horizon",
+      "Nokia"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s2-q16",
+    "question": "Welche Aussage zu ORIGINATOR_ID und CLUSTER_LIST passt am besten?",
+    "question_en": "Which statement about ORIGINATOR_ID and CLUSTER_LIST fits best?",
+    "options": [
+      "Sie werden vor allem bei reflektierten iBGP-Routen genutzt, um Schleifen im RR-Umfeld zu erkennen und zu vermeiden",
+      "Sie ersetzen in reflected routes immer den AS_PATH",
+      "Sie werden bei jeder eBGP-gelernten Route zwingend neu hinzugefuegt",
+      "Sie dienen nur dazu, die Tunnel-Preference fuer LDP und RSVP zu steuern"
+    ],
+    "options_en": [
+      "They are mainly used on reflected iBGP routes to detect and avoid loops in the RR environment",
+      "They always replace AS_PATH on reflected routes",
+      "They must be newly added on every eBGP-learned route",
+      "They are used only to control tunnel preference for LDP and RSVP"
+    ],
+    "correctIndex": 0,
+    "explanation": "ORIGINATOR_ID und CLUSTER_LIST sind die klassischen RR-Loop-Avoidance-Attribute aus RFC 4456.",
+    "explanation_en": "ORIGINATOR_ID and CLUSTER_LIST are the classic RR loop-avoidance attributes from RFC 4456.",
+    "extraInfo": "Bei eBGP-gelernten oder lokal erzeugten Routen werden sie in der Grundlogik gerade nicht neu hinzugefuegt.",
+    "extraInfo_en": "For eBGP-learned or locally originated routes, they are specifically not newly added in the basic logic.",
+    "tip": "RR-Loops erkennen = ORIGINATOR_ID und CLUSTER_LIST.",
+    "tip_en": "Recognize RR loops = ORIGINATOR_ID and CLUSTER_LIST.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "ORIGINATOR_ID",
+      "CLUSTER_LIST",
+      "Loop Prevention"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 2",
+    "section_en": "Section 2"
   }
 ]
