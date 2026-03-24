@@ -1,0 +1,155 @@
+﻿<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BGP Cheat Sheet</title>
+    <link rel="stylesheet" href="./styles.css?v=20260324-3" />
+    <style>
+      .cheat-layout { max-width: 1040px; margin: 0 auto; padding: 1rem; }
+      .cheat-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+      .cheat-tools { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+      .link-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+      .cheat-hero, .cheat-card { border: 1px solid var(--line); border-radius: 12px; background: #fffefb; box-shadow: 0 4px 12px rgba(20,20,20,0.06); }
+      .cheat-hero { padding: 1rem; margin: 1rem 0; }
+      .lang-switch button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+      .cheat-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0.9rem; }
+      .cheat-card { padding: 1rem; }
+      .cheat-card h2 { margin: 0 0 0.55rem; font-size: 1.05rem; }
+      .cheat-card ul, .cheat-card ol { margin: 0.4rem 0 0; padding-left: 1.15rem; }
+      .cheat-card li + li { margin-top: 0.22rem; }
+      .cheat-card p { margin: 0.5rem 0 0; line-height: 1.5; }
+      .pill-row { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.7rem; }
+      .pill { border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.55rem; background: #fff; font-size: 0.88rem; }
+      [data-lang="en"] { display: none; }
+      body.lang-en [data-lang="de"] { display: none; }
+      body.lang-en [data-lang="en"] { display: block; }
+      @media (max-width: 980px) { .cheat-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="cheat-layout cheat-top">
+        <div>
+          <h1 data-lang="de">BGP Cheat Sheet</h1>
+          <h1 data-lang="en">BGP Cheat Sheet</h1>
+          <p class="muted" data-lang="de">Kompakte Wiederholung fuer BGP, MP-BGP und Route Reflectors.</p>
+          <p class="muted" data-lang="en">Compact review for BGP, MP-BGP, and route reflectors.</p>
+        </div>
+        <div class="cheat-tools">
+          <div class="lang-switch">
+            <button id="langDeBtn" type="button" class="secondary active">Deutsch</button>
+            <button id="langEnBtn" type="button" class="secondary">English</button>
+          </div>
+          <a href="./index.html" class="secondary link-btn">Study Quiz</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="cheat-layout">
+      <section class="cheat-hero">
+        <strong data-lang="de">Kurzfassung</strong>
+        <strong data-lang="en">Short version</strong>
+        <p data-lang="de">BGP tauscht Routeninformationen aus, bewertet Pfade ueber Attribute und wird mit MP-BGP zum Steuerungsprotokoll fuer VPN-Dienste. Sobald iBGP zu gross wird, loesen Route Reflectors das Full-Mesh-Problem, brauchen aber eigene Loop-Protection ueber ORIGINATOR_ID und CLUSTER_LIST.</p>
+        <p data-lang="en">BGP exchanges route information, evaluates paths using attributes, and with MP-BGP becomes the control protocol for VPN services. Once iBGP grows too large, route reflectors solve the full-mesh problem, but they need dedicated loop protection via ORIGINATOR_ID and CLUSTER_LIST.</p>
+        <div class="pill-row" data-lang="de">
+          <span class="pill">LOCAL_PREF: hoeher besser</span><span class="pill">AS_PATH: kuerzer besser</span><span class="pill">MED: kleiner besser</span><span class="pill">RD = eindeutig</span><span class="pill">RT = Import/Export</span>
+        </div>
+        <div class="pill-row" data-lang="en">
+          <span class="pill">LOCAL_PREF: higher is better</span><span class="pill">AS_PATH: shorter is better</span><span class="pill">MED: lower is better</span><span class="pill">RD = uniqueness</span><span class="pill">RT = import/export</span>
+        </div>
+      </section>
+
+      <section class="cheat-grid">
+        <article class="cheat-card">
+          <h2 data-lang="de">Grundlagen</h2><h2 data-lang="en">Fundamentals</h2>
+          <ul data-lang="de"><li>`AS` = Router unter derselben Administration</li><li>`iBGP` = im AS, `eBGP` = zwischen AS</li><li>`IGP` liefert interne Reachability</li><li>BGP-Peers muessen explizit konfiguriert werden</li></ul>
+          <ul data-lang="en"><li>`AS` = routers under one administration</li><li>`iBGP` = inside an AS, `eBGP` = between ASes</li><li>`IGP` provides internal reachability</li><li>BGP peers must be configured explicitly</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">States</h2><h2 data-lang="en">States</h2>
+          <ol data-lang="de"><li>`Idle`</li><li>`Connect`</li><li>`Active`</li><li>`OpenSent`</li><li>`OpenConfirm`</li><li>`Established`</li></ol>
+          <ol data-lang="en"><li>`Idle`</li><li>`Connect`</li><li>`Active`</li><li>`OpenSent`</li><li>`OpenConfirm`</li><li>`Established`</li></ol>
+          <p data-lang="de">Typisch bei Problemen: Pendeln zwischen `Connect` und `Active`.</p>
+          <p data-lang="en">Typical during problems: bouncing between `Connect` and `Active`.</p>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Nachrichten</h2><h2 data-lang="en">Messages</h2>
+          <ul data-lang="de"><li>`OPEN`, `KEEPALIVE`, `UPDATE`, `NOTIFICATION`, `ROUTE-REFRESH`</li><li>TCP kommt immer vor der BGP-Session</li></ul>
+          <ul data-lang="en"><li>`OPEN`, `KEEPALIVE`, `UPDATE`, `NOTIFICATION`, `ROUTE-REFRESH`</li><li>TCP always comes before the BGP session</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Attribute</h2><h2 data-lang="en">Attributes</h2>
+          <ul data-lang="de"><li>`AS_PATH`: kuerzer besser</li><li>`NEXT_HOP`: wohin weiter</li><li>`ORIGIN`: `IGP` vor `EGP` vor `INCOMPLETE`</li><li>`LOCAL_PREF`: hoeher besser</li><li>`MED`: kleiner besser</li><li>`COMMUNITY`: Tag fuer Policies</li></ul>
+          <ul data-lang="en"><li>`AS_PATH`: shorter is better</li><li>`NEXT_HOP`: where to forward</li><li>`ORIGIN`: `IGP` before `EGP` before `INCOMPLETE`</li><li>`LOCAL_PREF`: higher is better</li><li>`MED`: lower is better</li><li>`COMMUNITY`: tag for policies</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Best Path</h2><h2 data-lang="en">Best path</h2>
+          <ol data-lang="de"><li>LOCAL_PREF</li><li>AS_PATH</li><li>ORIGIN</li><li>MED</li><li>eBGP vor iBGP</li></ol>
+          <ol data-lang="en"><li>LOCAL_PREF</li><li>AS_PATH</li><li>ORIGIN</li><li>MED</li><li>eBGP over iBGP</li></ol>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Route Processing</h2><h2 data-lang="en">Route processing</h2>
+          <ul data-lang="de"><li>`RIB-IN` -> Validierung -> Import Policy</li><li>beste Route ins lokale BGP-RIB</li><li>`RTM` entscheidet ueber `used`</li><li>`best` ist nicht automatisch `used`</li></ul>
+          <ul data-lang="en"><li>`RIB-IN` -> validation -> import policy</li><li>best route enters local BGP RIB</li><li>`RTM` decides about `used`</li><li>`best` is not automatically `used`</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Policies</h2><h2 data-lang="en">Policies</h2>
+          <ul data-lang="de"><li>`from` = Match</li><li>`action` = accept, reject, Attribute aendern</li><li>erster Match gewinnt</li><li>`next-entry` / `next-policy` pruefen weiter</li></ul>
+          <ul data-lang="en"><li>`from` = match</li><li>`action` = accept, reject, change attributes</li><li>first match wins</li><li>`next-entry` / `next-policy` continue evaluation</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">MP-BGP und VPN</h2><h2 data-lang="en">MP-BGP and VPN</h2>
+          <ul data-lang="de"><li>MP-BGP = mehrere Address Families</li><li>`VPWS`, `VPLS`, `VPRN` sind die Kernservices</li><li>Transport oft ueber `MPLS`, `GRE` oder `VXLAN`</li><li>`SDP` bindet Service und Transport</li></ul>
+          <ul data-lang="en"><li>MP-BGP = multiple address families</li><li>`VPWS`, `VPLS`, `VPRN` are the core services</li><li>Transport often uses `MPLS`, `GRE`, or `VXLAN`</li><li>`SDP` binds service and transport</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">RD, RT, Label</h2><h2 data-lang="en">RD, RT, label</h2>
+          <ul data-lang="de"><li>`RD` macht Kundennetze eindeutig</li><li>`RT` steuert Import/Export</li><li>`Label` wird in der Data Plane genutzt</li></ul>
+          <ul data-lang="en"><li>`RD` makes customer routes unique</li><li>`RT` controls import/export</li><li>`Label` is used in the data plane</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Inter-Region</h2><h2 data-lang="en">Inter-region</h2>
+          <ul data-lang="de"><li>Teil-Tunnel koennen gestitcht werden</li><li>oft: inneres BGP-Label + aeusseres `LDP` / `RSVP-TE` / `SR` Label</li></ul>
+          <ul data-lang="en"><li>Partial tunnels can be stitched together</li><li>often: inner BGP label + outer `LDP` / `RSVP-TE` / `SR` label</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Route Reflectors</h2><h2 data-lang="en">Route reflectors</h2>
+          <ul data-lang="de"><li>loesen das iBGP-Full-Mesh-Problem</li><li>Rollen: `RR`, `Client`, `Non-Client`</li><li>Cluster = RR + Clients</li><li>redundante RRs im selben Cluster teilen typischerweise dieselbe Cluster-ID</li></ul>
+          <ul data-lang="en"><li>solve the iBGP full-mesh problem</li><li>roles: `RR`, `Client`, `Non-Client`</li><li>cluster = RR + clients</li><li>redundant RRs in the same cluster typically share the same cluster ID</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">RR Update-Regeln</h2><h2 data-lang="en">RR update rules</h2>
+          <ul data-lang="de"><li>von Non-Client: zu Clients, nicht zu anderen Non-Clients</li><li>von Client: zu Clients und Non-Clients</li><li>von eBGP: zu Clients und Non-Clients</li><li>eBGP-Weitergabe bleibt policy-abhaengig</li></ul>
+          <ul data-lang="en"><li>from non-client: to clients, not to other non-clients</li><li>from client: to clients and non-clients</li><li>from eBGP: to clients and non-clients</li><li>eBGP propagation stays policy-dependent</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">RR Loop Protection</h2><h2 data-lang="en">RR loop protection</h2>
+          <ul data-lang="de"><li>`ORIGINATOR_ID` = urspruenglicher iBGP-Originator</li><li>`CLUSTER_LIST` = durchlaufene RR-Cluster</li><li>eigene ID wieder gesehen = Route verwerfen</li><li>`CLUSTER_LIST` ist intra-AS, kein Ersatz fuer `AS_PATH`</li></ul>
+          <ul data-lang="en"><li>`ORIGINATOR_ID` = original iBGP originator</li><li>`CLUSTER_LIST` = traversed RR clusters</li><li>seeing your own ID again = discard the route</li><li>`CLUSTER_LIST` is intra-AS, not a replacement for `AS_PATH`</li></ul>
+        </article>
+        <article class="cheat-card">
+          <h2 data-lang="de">Nokia 7750</h2><h2 data-lang="en">Nokia 7750</h2>
+          <ul data-lang="de"><li>`cluster` macht den Router zum RR</li><li>`disable-client-reflect` unterdrueckt Reflection gezielt</li><li>`split-horizon` oder Export-Policy begrenzen Rueckadvertising</li></ul>
+          <ul data-lang="en"><li>`cluster` makes the router an RR</li><li>`disable-client-reflect` suppresses reflection selectively</li><li>`split-horizon` or export policy limit re-advertisement</li></ul>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const body = document.body;
+      const deBtn = document.getElementById('langDeBtn');
+      const enBtn = document.getElementById('langEnBtn');
+      function setLang(lang) {
+        body.classList.toggle('lang-en', lang === 'en');
+        deBtn.classList.toggle('active', lang === 'de');
+        enBtn.classList.toggle('active', lang === 'en');
+        localStorage.setItem('bgpCheatSheetLang', lang);
+        document.documentElement.lang = lang;
+      }
+      deBtn.addEventListener('click', () => setLang('de'));
+      enBtn.addEventListener('click', () => setLang('en'));
+      setLang(localStorage.getItem('bgpCheatSheetLang') || 'de');
+    </script>
+  </body>
+</html>

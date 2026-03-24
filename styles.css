@@ -58,6 +58,21 @@ body {
   gap: 0.55rem;
 }
 
+.link-btn {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  text-decoration: none;
+}
+
+.link-btn.secondary {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
 .lang-picker select {
   min-width: 120px;
 }
