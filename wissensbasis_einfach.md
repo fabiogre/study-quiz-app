@@ -1997,3 +1997,85 @@ Merker:
 - wenn man das Verhalten nicht will:
   - Export-Policy nutzen
   - oder `split-horizon` konfigurieren
+
+## Kapitel Z - BGP Modul 3 Section 3: Loop Prevention in Route Reflection
+
+### Z1) Warum neue Schleifenschutz-Attribute noetig sind
+- Bei Route Reflection wird die klassische iBGP-Split-Horizon-Regel bewusst gelockert
+- Dadurch kann eine iBGP-gelernte Route weiter im AS herumgereicht werden
+- Das normale `AS_PATH` hilft hier nicht gut, weil es bei iBGP-Updates nicht veraendert wird
+
+Deshalb sind im RR-Umfeld wichtig:
+- `ORIGINATOR_ID`
+- `CLUSTER_LIST`
+
+### Z2) ORIGINATOR_ID
+- `ORIGINATOR_ID` ist ein optionales non-transitives Attribut
+- Der erste RR, der eine iBGP-Route reflektiert, setzt es auf die Router-ID des urspruenglichen iBGP-Speakers
+- Ist der Wert einmal gesetzt, bleibt er erhalten
+
+Merker:
+- sieht ein Router seine eigene Router-ID als `ORIGINATOR_ID`, verwirft er die Route
+
+### Z3) CLUSTER_LIST
+- `CLUSTER_LIST` ist ebenfalls optional non-transitiv
+- Sie enthaelt eine Folge von Cluster-IDs, durch die die Route bei der Reflection gelaufen ist
+- Ein RR fuegt beim Reflecten seine lokale Cluster-ID vorne an die Liste an
+
+Merker:
+- sieht ein RR seine eigene Cluster-ID bereits in der `CLUSTER_LIST`, verwirft er die Route
+
+### Z4) Wofuer CLUSTER_LIST nicht da ist
+- `CLUSTER_LIST` ist kein Ersatz fuer `AS_PATH`
+- sie dient nicht der Schleifenerkennung zwischen verschiedenen AS
+- sie ist fuer Route Reflection innerhalb eines AS gedacht
+
+Kurzvergleich:
+- `AS_PATH` = AS-Ebene
+- `CLUSTER_LIST` = RR-Cluster-Ebene
+
+## Kapitel AA - BGP Modul 3 Section 4: Route Reflector Redundancy
+
+### AA1) Warum ein einzelner RR problematisch sein kann
+- Haengen Clients nur an einem RR, ist dieser fuer sie ein zentraler Verteiler von iBGP-Updates
+- Faellt er aus, fehlen neue Routing-Informationen
+- Darum kann ein einzelner RR ein `Single Point of Failure` sein
+
+### AA2) Typischer Redundanz-Aufbau
+- Man setzt mehrere RRs im selben Cluster ein
+- Diese RRs sind untereinander per iBGP verbunden
+- Sie nutzen typischerweise dieselbe Cluster-ID, weil sie dasselbe Cluster repraesentieren
+
+Merker:
+- verschiedene Cluster innerhalb eines AS brauchen unterschiedliche Cluster-IDs
+
+### AA3) Was die Clients tun sollten
+- Clients sollten iBGP-Sessions zu allen RRs ihres Clusters haben
+- Nur dann bringt die RR-Redundanz bei einem Ausfall wirklich etwas
+
+### AA4) Mehrere Cluster in einem AS
+- Ein AS kann aus mehreren RR-Clustern bestehen
+- Das verbessert die Skalierung
+- Wichtig ist nur, dass die Cluster sauber getrennt und eindeutig bezeichnet sind
+
+## Kapitel AB - BGP Modul 3 Section 5: Route Reflector Configuration
+
+### AB1) Wann ein Nokia 7750 ein RR wird
+- Auf dem `Nokia 7750` reicht eine konfigurierte `Cluster-ID`, damit der Router als RR arbeitet
+- Das kann auf Gruppen- oder Neighbor-Ebene passieren
+- Ein zusaetzlicher Grundbefehl fuer die RR-Rolle ist nicht noetig
+
+### AB2) disable-client-reflect
+- Mit `disable-client-reflect` kann Reflection zu einem bestimmten Peer unterdrueckt werden
+- Das ist nuetzlich, wenn ein Client ohnehin schon gut anders vermascht ist
+- Die RR-Rolle des Routers bleibt dabei erhalten
+
+### AB3) Aufraeumen nach der RR-Einfuehrung
+- Nach Einfuehrung eines RR braucht man das volle Client-zu-Client-Full-Mesh oft nicht mehr
+- Solche Alt-Sessions kann man abbauen
+- Das sollte aber geplant und vorsichtig geschehen
+
+Wichtig:
+- zu viele entfernte Sessions koennen AS-interne Erreichbarkeit oder Transit stoeren
+- zu viele unnoetige Sessions verschlechtern die Skalierung
+- zusaetzliche Sessions bedeuten aber nicht automatisch, dass sofort Loops entstehen

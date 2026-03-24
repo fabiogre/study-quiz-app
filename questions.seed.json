@@ -13587,5 +13587,537 @@
     "module_en": "Module 3",
     "section": "Section 2",
     "section_en": "Section 2"
+  },
+  {
+    "id": "bgp-m3s3-q1",
+    "question": "Warum sind ORIGINATOR_ID und CLUSTER_LIST in einem RR-Umfeld wichtig?",
+    "question_en": "Why are ORIGINATOR_ID and CLUSTER_LIST important in an RR environment?",
+    "options": [
+      "Weil die normale iBGP Split-Horizon-Regel gelockert ist und AS_PATH bei iBGP-Updates nicht mitwaechst",
+      "Weil eBGP in einem RR-Umfeld grundsaetzlich deaktiviert wird",
+      "Weil sie die TCP-Session fuer BGP ersetzen",
+      "Weil sie NEXT_HOP automatisch aufloesen"
+    ],
+    "options_en": [
+      "Because the normal iBGP split-horizon rule is relaxed and AS_PATH does not grow on iBGP updates",
+      "Because eBGP is fundamentally disabled in an RR environment",
+      "Because they replace the TCP session for BGP",
+      "Because they automatically resolve NEXT_HOP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Bei Route Reflection wird die iBGP-Split-Horizon-Regel kontrolliert gelockert. Da AS_PATH bei iBGP-Weitergabe nicht veraendert wird, braucht man andere Marker fuer die Schleifenerkennung.",
+    "explanation_en": "Route reflection deliberately relaxes the iBGP split-horizon rule. Because AS_PATH is not changed on iBGP propagation, other markers are needed for loop detection.",
+    "extraInfo": "Genau dafuer wurden ORIGINATOR_ID und CLUSTER_LIST in RFC 4456 definiert.",
+    "extraInfo_en": "That is exactly why ORIGINATOR_ID and CLUSTER_LIST were defined in RFC 4456.",
+    "tip": "AS_PATH hilft bei normalen AS-Schleifen, aber nicht gut bei RR-internen iBGP-Reflections.",
+    "tip_en": "AS_PATH helps with normal AS loops, but not well with RR-internal iBGP reflections.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "ORIGINATOR_ID",
+      "CLUSTER_LIST",
+      "Loop Prevention"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m3s3-q2",
+    "question": "Welche Aussage zu ORIGINATOR_ID ist korrekt?",
+    "question_en": "Which statement about ORIGINATOR_ID is correct?",
+    "options": [
+      "Der erste RR, der eine iBGP-Route reflektiert, setzt ORIGINATOR_ID auf die Router-ID des urspruenglichen iBGP-Originators",
+      "Jeder RR ersetzt ORIGINATOR_ID bei jeder Reflection durch seine eigene Cluster-ID",
+      "ORIGINATOR_ID wird nur bei eBGP-Updates gesetzt",
+      "ORIGINATOR_ID ist ein transitive Attribut und geht immer ueber AS-Grenzen weiter"
+    ],
+    "options_en": [
+      "The first RR that reflects an iBGP route sets ORIGINATOR_ID to the router ID of the original iBGP originator",
+      "Every RR replaces ORIGINATOR_ID on each reflection with its own cluster ID",
+      "ORIGINATOR_ID is set only on eBGP updates",
+      "ORIGINATOR_ID is a transitive attribute and always continues across AS boundaries"
+    ],
+    "correctIndex": 0,
+    "explanation": "ORIGINATOR_ID markiert den urspruenglichen iBGP-Speaker, dessen Route reflektiert wurde. Ist der Wert einmal gesetzt, wird er nicht neu geschrieben.",
+    "explanation_en": "ORIGINATOR_ID marks the original iBGP speaker whose route was reflected. Once set, it is not rewritten.",
+    "extraInfo": "Damit kann ein Router spaeter erkennen, ob seine eigene Route zu ihm zurueckgekommen ist.",
+    "extraInfo_en": "This lets a router later detect whether its own route has come back to it.",
+    "tip": "ORIGINATOR_ID zeigt auf den Ursprung, nicht auf den letzten RR.",
+    "tip_en": "ORIGINATOR_ID points to the origin, not to the last RR.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "ORIGINATOR_ID"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m3s3-q3",
+    "question": "Wann ignoriert ein Router eine reflektierte Route wegen ORIGINATOR_ID?",
+    "question_en": "When does a router ignore a reflected route because of ORIGINATOR_ID?",
+    "options": [
+      "Wenn ORIGINATOR_ID der eigenen Router-ID entspricht",
+      "Wenn ORIGINATOR_ID kleiner als die lokale Cluster-ID ist",
+      "Wenn ORIGINATOR_ID aus einem anderen AS stammt",
+      "Wenn ORIGINATOR_ID nicht zusammen mit MED gesendet wurde"
+    ],
+    "options_en": [
+      "When ORIGINATOR_ID matches the local router ID",
+      "When ORIGINATOR_ID is smaller than the local cluster ID",
+      "When ORIGINATOR_ID came from another AS",
+      "When ORIGINATOR_ID was not sent together with MED"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sieht ein Router seine eigene Router-ID im ORIGINATOR_ID-Feld, erkennt er, dass die Route von ihm selbst stammt und verwirft sie.",
+    "explanation_en": "If a router sees its own router ID in ORIGINATOR_ID, it recognizes that the route originally came from itself and discards it.",
+    "extraInfo": "Das ist die direkte Schleifenerkennung ueber den Ursprungs-Router.",
+    "extraInfo_en": "This is direct loop detection via the original router identity.",
+    "tip": "Eigene ID im ORIGINATOR_ID = verwerfen.",
+    "tip_en": "Own ID in ORIGINATOR_ID = discard.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "ORIGINATOR_ID",
+      "Loop Prevention"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m3s3-q4",
+    "question": "Welche Aussage zur CLUSTER_LIST passt am besten?",
+    "question_en": "Which statement about CLUSTER_LIST fits best?",
+    "options": [
+      "Sie ist eine Sequenz von Cluster-IDs, und ein RR fuegt beim Reflecten seine lokale Cluster-ID vorne hinzu",
+      "Sie enthaelt nur AS-Nummern und wird wie AS_PATH behandelt",
+      "Sie wird ausschliesslich von Clients gesetzt",
+      "Sie ersetzt NEXT_HOP innerhalb eines Clusters"
+    ],
+    "options_en": [
+      "It is a sequence of cluster IDs, and an RR prepends its local cluster ID when reflecting",
+      "It contains only AS numbers and is handled like AS_PATH",
+      "It is set only by clients",
+      "It replaces NEXT_HOP inside a cluster"
+    ],
+    "correctIndex": 0,
+    "explanation": "CLUSTER_LIST beschreibt den Reflection-Pfad ueber RR-Cluster. Ein RR praefixt seine lokale Cluster-ID, damit nachfolgende RRs Schleifen erkennen koennen.",
+    "explanation_en": "CLUSTER_LIST describes the reflection path across RR clusters. An RR prepends its local cluster ID so downstream RRs can detect loops.",
+    "extraInfo": "Die Liste ist variabel lang, aber sie ist kein AS-Pfad und kein Cross-AS-Transportmechanismus.",
+    "extraInfo_en": "The list has variable length, but it is not an AS path and not a cross-AS transport mechanism.",
+    "tip": "Cluster-ID wird vorne angehaengt, nicht als Ersatz fuer AS_PATH genutzt.",
+    "tip_en": "The cluster ID is added at the front, not used as a replacement for AS_PATH.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "CLUSTER_LIST"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m3s3-q5",
+    "question": "Wann verwirft ein RR eine Route wegen CLUSTER_LIST?",
+    "question_en": "When does an RR discard a route because of CLUSTER_LIST?",
+    "options": [
+      "Wenn die lokale Cluster-ID bereits in der CLUSTER_LIST enthalten ist",
+      "Wenn die CLUSTER_LIST laenger als der AS_PATH ist",
+      "Wenn die CLUSTER_LIST fehlt",
+      "Wenn die CLUSTER_LIST mehr als einen Wert enthaelt"
+    ],
+    "options_en": [
+      "When the local cluster ID is already present in CLUSTER_LIST",
+      "When CLUSTER_LIST is longer than the AS_PATH",
+      "When CLUSTER_LIST is missing",
+      "When CLUSTER_LIST contains more than one value"
+    ],
+    "correctIndex": 0,
+    "explanation": "Taucht die eigene Cluster-ID bereits in der CLUSTER_LIST auf, hat die Route das lokale Cluster schon einmal passiert und wird verworfen.",
+    "explanation_en": "If the local cluster ID is already present in CLUSTER_LIST, the route has already passed through the local cluster and is discarded.",
+    "extraInfo": "Das ist die Schleifenerkennung ueber Clustergrenzen innerhalb desselben AS.",
+    "extraInfo_en": "This is loop detection across clusters within the same AS.",
+    "tip": "Eigene Cluster-ID in der Liste = Schleifenverdacht.",
+    "tip_en": "Own cluster ID in the list = loop suspicion.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "CLUSTER_LIST",
+      "Loop Prevention"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m3s3-q6",
+    "question": "Welche Aussage ist falsch?",
+    "question_en": "Which statement is false?",
+    "options": [
+      "CLUSTER_LIST wird fuer die Schleifenerkennung zwischen verschiedenen AS genutzt wie AS_PATH",
+      "ORIGINATOR_ID und CLUSTER_LIST sind optional non-transitive",
+      "AS_PATH wird bei iBGP-Updates nicht angepasst",
+      "ORIGINATOR_ID und CLUSTER_LIST sind nur im RR-Umfeld relevant"
+    ],
+    "options_en": [
+      "CLUSTER_LIST is used for loop detection between different ASes like AS_PATH",
+      "ORIGINATOR_ID and CLUSTER_LIST are optional non-transitive",
+      "AS_PATH is not changed on iBGP updates",
+      "ORIGINATOR_ID and CLUSTER_LIST are relevant only in an RR environment"
+    ],
+    "correctIndex": 0,
+    "explanation": "CLUSTER_LIST ist kein AS-uebergreifendes Attribut wie AS_PATH. Es dient der Schleifenerkennung im Route-Reflection-Design innerhalb eines AS.",
+    "explanation_en": "CLUSTER_LIST is not an inter-AS attribute like AS_PATH. It is used for loop detection in route reflection within a single AS.",
+    "extraInfo": "Das war in deinen Notizen der wichtigste fachliche Stolperpunkt.",
+    "extraInfo_en": "This was the main technical pitfall in your notes.",
+    "tip": "AS_PATH = AS-Ebene, CLUSTER_LIST = RR-Cluster-Ebene.",
+    "tip_en": "AS_PATH = AS level, CLUSTER_LIST = RR cluster level.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "CLUSTER_LIST",
+      "False Statement"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 3",
+    "section_en": "Section 3"
+  },
+  {
+    "id": "bgp-m3s4-q1",
+    "question": "Warum kann ein einzelner Route Reflector ein Single Point of Failure sein?",
+    "question_en": "Why can a single route reflector become a single point of failure?",
+    "options": [
+      "Weil reine RR-Clients ohne RR-Ausfall keine neuen iBGP-Updates mehr von dort erhalten",
+      "Weil ein RR nie mehr als einen Client gleichzeitig bedienen darf",
+      "Weil ein RR keine TCP-Sessions redundant halten kann",
+      "Weil eBGP auf einem RR technisch verboten ist"
+    ],
+    "options_en": [
+      "Because pure RR clients stop receiving new iBGP updates from that path when the RR fails",
+      "Because an RR may never serve more than one client at a time",
+      "Because an RR cannot keep TCP sessions redundantly",
+      "Because eBGP is technically forbidden on an RR"
+    ],
+    "correctIndex": 0,
+    "explanation": "Wenn Clients nur an einem RR haengen, verlieren sie bei dessen Ausfall ihren zentralen iBGP-Verteiler und damit neue Steuerungsinformationen.",
+    "explanation_en": "If clients rely on only one RR, they lose their central iBGP distributor and therefore new control-plane information when it fails.",
+    "extraInfo": "Darum werden RR oft redundant gebaut.",
+    "extraInfo_en": "That is why RRs are often deployed redundantly.",
+    "tip": "Nicht Datenebene, sondern Control-Plane-Verlust ist das Kernproblem.",
+    "tip_en": "The main issue is control-plane loss, not the data plane itself.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Redundancy",
+      "Single Point of Failure"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 4",
+    "section_en": "Section 4"
+  },
+  {
+    "id": "bgp-m3s4-q2",
+    "question": "Wie wird RR-Redundanz innerhalb eines Clusters typischerweise aufgebaut?",
+    "question_en": "How is RR redundancy typically built within a cluster?",
+    "options": [
+      "Mehrere RRs im selben Cluster, full-meshed untereinander und mit derselben Cluster-ID",
+      "Genau ein RR pro Cluster und alle Clients full-meshed untereinander",
+      "Mehrere RRs mit unterschiedlichen Cluster-IDs im selben Cluster",
+      "Ein RR und alle Clients nur per eBGP"
+    ],
+    "options_en": [
+      "Multiple RRs in the same cluster, full-meshed to each other and using the same cluster ID",
+      "Exactly one RR per cluster and all clients full-meshed to each other",
+      "Multiple RRs with different cluster IDs in the same cluster",
+      "One RR and all clients using only eBGP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Redundante RRs im selben Cluster teilen sich typischerweise dieselbe Cluster-ID und peeren untereinander per iBGP.",
+    "explanation_en": "Redundant RRs in the same cluster typically share the same cluster ID and peer with each other via iBGP.",
+    "extraInfo": "Verschiedene Cluster innerhalb eines AS brauchen dagegen unterschiedliche Cluster-IDs.",
+    "extraInfo_en": "Different clusters inside one AS, however, need different cluster IDs.",
+    "tip": "Gleiches Cluster = gleiche Cluster-ID.",
+    "tip_en": "Same cluster = same cluster ID.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Redundancy",
+      "Cluster ID"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 4",
+    "section_en": "Section 4"
+  },
+  {
+    "id": "bgp-m3s4-q3",
+    "question": "Welche Peering-Regel passt fuer Clients in einem redundanten RR-Cluster am besten?",
+    "question_en": "Which peering rule best fits clients in a redundant RR cluster?",
+    "options": [
+      "Clients sollten iBGP-Sessions zu allen RRs ihres Clusters haben",
+      "Clients sollten nur zu einem RR peeren, sonst verletzt man RFC 4456",
+      "Clients muessen untereinander full-meshed sein, RR sind optional",
+      "Clients duerfen nur eBGP-Sessions zu RRs haben"
+    ],
+    "options_en": [
+      "Clients should have iBGP sessions to all RRs in their cluster",
+      "Clients should peer with only one RR, otherwise RFC 4456 is violated",
+      "Clients must be full-meshed with each other and RRs are optional",
+      "Clients may have only eBGP sessions to RRs"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nur so bleibt die RR-Redundanz wirksam, wenn ein RR oder eine Session ausfaellt.",
+    "explanation_en": "Only then does RR redundancy remain effective if one RR or one session fails.",
+    "extraInfo": "Die Clients selbst muessen dafuer nicht untereinander full-meshed sein.",
+    "extraInfo_en": "The clients themselves do not need to be full-meshed for this.",
+    "tip": "Redundante RRs bringen nur etwas, wenn der Client beide auch wirklich peert.",
+    "tip_en": "Redundant RRs help only if the client actually peers with both.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Redundancy",
+      "Clients"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 4",
+    "section_en": "Section 4"
+  },
+  {
+    "id": "bgp-m3s4-q4",
+    "question": "Welche Aussage ist falsch?",
+    "question_en": "Which statement is false?",
+    "options": [
+      "Alle Cluster in einem AS muessen dieselbe Cluster-ID nutzen",
+      "Es koennen mehrere RR-Cluster in einem AS existieren",
+      "RR-Redundanz reduziert das Risiko eines Single Point of Failure",
+      "Non-Clients sind keine klassischen RR-Clients"
+    ],
+    "options_en": [
+      "All clusters in one AS must use the same cluster ID",
+      "Multiple RR clusters can exist in one AS",
+      "RR redundancy reduces the risk of a single point of failure",
+      "Non-clients are not classical RR clients"
+    ],
+    "correctIndex": 0,
+    "explanation": "Nur redundante RRs desselben Clusters nutzen typischerweise dieselbe Cluster-ID. Verschiedene Cluster innerhalb eines AS sollten unterschiedliche IDs haben.",
+    "explanation_en": "Only redundant RRs of the same cluster typically use the same cluster ID. Different clusters inside one AS should use different IDs.",
+    "extraInfo": "Sonst wird die Schleifenerkennung ueber CLUSTER_LIST unklar.",
+    "extraInfo_en": "Otherwise loop detection via CLUSTER_LIST becomes ambiguous.",
+    "tip": "Gleiche Cluster-ID nur fuer dasselbe Cluster.",
+    "tip_en": "Use the same cluster ID only for the same cluster.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Redundancy",
+      "False Statement"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 4",
+    "section_en": "Section 4"
+  },
+  {
+    "id": "bgp-m3s5-q1",
+    "question": "Wann nimmt ein Nokia 7750 die Rolle eines Route Reflectors an?",
+    "question_en": "When does a Nokia 7750 assume the role of a route reflector?",
+    "options": [
+      "Sobald fuer eine Gruppe oder einen Nachbarn eine Cluster-ID konfiguriert ist",
+      "Erst wenn zusaetzlich client-reflect true auf allen Nachbarn gesetzt wird",
+      "Nur wenn OSPF und BGP dieselbe Router-ID nutzen",
+      "Erst wenn alle Clients untereinander full-meshed sind"
+    ],
+    "options_en": [
+      "As soon as a cluster ID is configured for a group or a neighbor",
+      "Only when client-reflect true is additionally set on all neighbors",
+      "Only when OSPF and BGP use the same router ID",
+      "Only when all clients are full-meshed with each other"
+    ],
+    "correctIndex": 0,
+    "explanation": "Auf dem 7750 macht die Cluster-ID den Router bereits zum RR. Weitere Grundkommandos sind dafuer nicht noetig.",
+    "explanation_en": "On the 7750, the cluster ID already makes the router an RR. No additional base commands are required for that.",
+    "extraInfo": "Will man Reflection fuer einzelne Peers unterdruecken, kommt erst dann ein zusaetzlicher Befehl ins Spiel.",
+    "extraInfo_en": "Only if you want to suppress reflection for specific peers does an extra command come into play.",
+    "tip": "Cluster-ID ist der Schalter fuer die RR-Rolle.",
+    "tip_en": "The cluster ID is the switch that enables the RR role.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Nokia",
+      "Configuration"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 5",
+    "section_en": "Section 5"
+  },
+  {
+    "id": "bgp-m3s5-q2",
+    "question": "Wofuer dient auf einem Nokia 7750 der Parameter disable-client-reflect?",
+    "question_en": "What is the purpose of disable-client-reflect on a Nokia 7750?",
+    "options": [
+      "Er verhindert Reflection zu einem bestimmten Peer, etwa wenn ein Client ohnehin full-meshed ist",
+      "Er schaltet BGP komplett fuer den Peer ab",
+      "Er deaktiviert CLUSTER_LIST global",
+      "Er zwingt den Peer in eBGP statt iBGP"
+    ],
+    "options_en": [
+      "It prevents reflection to a specific peer, for example when a client is already full-meshed",
+      "It disables BGP entirely for the peer",
+      "It globally disables CLUSTER_LIST",
+      "It forces the peer to use eBGP instead of iBGP"
+    ],
+    "correctIndex": 0,
+    "explanation": "Damit kann man redundante Reflection fuer gezielte Peers abschalten, ohne die RR-Rolle des Routers komplett zu entfernen.",
+    "explanation_en": "It lets you disable redundant reflection for selected peers without removing the RR role from the router.",
+    "extraInfo": "Das ist vor allem bei bereits anderweitig gut vermaschten Clients sinnvoll.",
+    "extraInfo_en": "This is especially useful for clients that are already otherwise well meshed.",
+    "tip": "disable-client-reflect wirkt gezielt pro Peer, nicht global fuer ganz BGP.",
+    "tip_en": "disable-client-reflect works per peer, not globally for all of BGP.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Nokia",
+      "disable-client-reflect"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 5",
+    "section_en": "Section 5"
+  },
+  {
+    "id": "bgp-m3s5-q3",
+    "question": "Welche Aussage zur Aufraeumarbeit nach der RR-Einfuehrung ist am treffendsten?",
+    "question_en": "Which statement about cleanup after introducing an RR is the most accurate?",
+    "options": [
+      "Client-zu-Client-Full-Mesh ist nicht mehr noetig, aber Sessions sollten gezielt und vorsichtig entfernt werden",
+      "Nach der RR-Einfuehrung muessen alle iBGP-Sessions ausserhalb des RR sofort geloescht werden",
+      "Zusatzsessions zwischen Clients erzeugen automatisch Routing-Loops",
+      "RRs funktionieren nur, wenn keinerlei direkte iBGP-Sessions mehr existieren"
+    ],
+    "options_en": [
+      "Client-to-client full mesh is no longer required, but sessions should be removed selectively and carefully",
+      "After introducing an RR, all iBGP sessions outside the RR must be deleted immediately",
+      "Extra sessions between clients automatically create routing loops",
+      "RRs work only when absolutely no direct iBGP sessions remain"
+    ],
+    "correctIndex": 0,
+    "explanation": "Der Sinn von RR ist, unnoetige Full-Mesh-Sessions abzubauen. Das sollte aber geplant passieren, weil man sonst Transit- oder Reachability-Probleme erzeugen kann.",
+    "explanation_en": "The point of RRs is to remove unnecessary full-mesh sessions. But this should be done in a planned way, otherwise you can create transit or reachability problems.",
+    "extraInfo": "Zusatzsessions sind vor allem ein Skalierungs- und Betriebsproblem, nicht automatisch eine Loop-Garantie.",
+    "extraInfo_en": "Extra sessions are primarily a scaling and operational issue, not an automatic guarantee of loops.",
+    "tip": "Nicht blind alles loeschen und nicht jede alte Session fuer eine Loop halten.",
+    "tip_en": "Do not blindly delete everything and do not treat every old session as a loop by default.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Configuration",
+      "Cleanup"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 5",
+    "section_en": "Section 5"
+  },
+  {
+    "id": "bgp-m3s5-q4",
+    "question": "Welche Aussage ist falsch?",
+    "question_en": "Which statement is false?",
+    "options": [
+      "disable-client-reflect ist zwingend noetig, damit ein 7750 ueberhaupt als RR arbeitet",
+      "Mit einer Cluster-ID kann ein 7750 bereits RR sein",
+      "Zu aggressives Entfernen alter Sessions kann AS-internen Transit stoeren",
+      "Nicht jede zusaetzliche Client-Session bedeutet automatisch eine Schleife"
+    ],
+    "options_en": [
+      "disable-client-reflect is mandatory for a 7750 to work as an RR at all",
+      "With a cluster ID, a 7750 can already operate as an RR",
+      "Removing old sessions too aggressively can break intra-AS transit",
+      "Not every extra client session automatically means a loop"
+    ],
+    "correctIndex": 0,
+    "explanation": "disable-client-reflect ist nur eine zusaetzliche Feineinstellung. Die RR-Rolle selbst kommt bereits durch die konfigurierte Cluster-ID zustande.",
+    "explanation_en": "disable-client-reflect is only an extra fine-tuning setting. The RR role itself already comes from the configured cluster ID.",
+    "extraInfo": "Das ist genau der Unterschied zwischen Grundfunktion und optionaler Optimierung.",
+    "extraInfo_en": "That is exactly the difference between core function and optional optimization.",
+    "tip": "Cluster-ID macht den RR, disable-client-reflect nur die Detailsteuerung.",
+    "tip_en": "The cluster ID makes the RR; disable-client-reflect only controls the details.",
+    "tags": [
+      "BGP",
+      "Route Reflector",
+      "Configuration",
+      "False Statement",
+      "Nokia"
+    ],
+    "source": "BGP Grundlagen",
+    "source_en": "BGP fundamentals",
+    "topic": "BGP",
+    "topic_en": "BGP",
+    "module": "Modul 3",
+    "module_en": "Module 3",
+    "section": "Section 5",
+    "section_en": "Section 5"
   }
 ]
