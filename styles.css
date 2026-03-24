@@ -56,6 +56,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.55rem;
+  flex-wrap: wrap;
 }
 
 .link-btn {
@@ -180,7 +181,6 @@ textarea {
 }
 
 .kid-explain-card {
-  margin-top: 0.8rem;
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 1rem;
@@ -231,6 +231,42 @@ textarea {
 .kid-explain-copy p {
   margin: 0;
   line-height: 1.45;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 19, 20, 0.5);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(980px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  margin: 1rem auto;
+  z-index: 1;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.modal-close {
+  white-space: nowrap;
 }
 
 .kid-empty {
@@ -558,16 +594,28 @@ button.danger:not(.opt-btn) {
 .stats {
   list-style: none;
   padding: 0;
-  margin: 0.5rem 0 0;
+  margin: 0.75rem 0 0;
   display: grid;
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
 }
 
 .stats li {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 0.35rem;
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  background: #fffdf8;
+}
+
+.stats li span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.stats li strong {
+  font-size: 1.22rem;
 }
 
 .panel-side h3 {
@@ -585,20 +633,21 @@ button.danger:not(.opt-btn) {
 
 .area-stats li {
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 10px;
   background: #fffdf8;
-  padding: 0.45rem 0.55rem;
+  padding: 0.7rem 0.8rem;
 }
 
 .area-name {
   display: block;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.28rem;
 }
 
 .area-metrics {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--muted);
+  line-height: 1.4;
 }
 
 .status {
@@ -686,5 +735,19 @@ button.danger:not(.opt-btn) {
 
   .kid-explain-scene {
     min-height: 260px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-panel {
+    width: calc(100vw - 1rem);
+    margin: 0.5rem auto;
+    max-height: calc(100vh - 1rem);
+  }
+
+  .modal-head {
+    flex-direction: column;
   }
 }

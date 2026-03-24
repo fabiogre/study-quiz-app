@@ -21,6 +21,8 @@ let currentKidExplainer = "";
 const refs = {
   languageSelect: document.getElementById("languageSelect"),
   languageResetBtn: document.getElementById("languageResetBtn"),
+  bgpCheatSheetLink: document.getElementById("bgpCheatSheetLink"),
+  miniExplainerBtn: document.getElementById("miniExplainerBtn"),
   tabs: Array.from(document.querySelectorAll(".tab-btn")),
   tabPanels: {
     learn: document.getElementById("tab-learn"),
@@ -49,6 +51,9 @@ const refs = {
   scopeStats: document.getElementById("scopeStats"),
   scopeStatsTitle: document.getElementById("scopeStatsTitle"),
   scopeStatsBody: document.getElementById("scopeStatsBody"),
+  explainerModal: document.getElementById("explainerModal"),
+  explainerBackdrop: document.getElementById("explainerBackdrop"),
+  explainerCloseBtn: document.getElementById("explainerCloseBtn"),
   kidExplainTitle: document.getElementById("kidExplainTitle"),
   kidExplainIntro: document.getElementById("kidExplainIntro"),
   kidExplainRdBtn: document.getElementById("kidExplainRdBtn"),
@@ -82,6 +87,7 @@ const refs = {
   syncSeedBtn: document.getElementById("syncSeedBtn"),
   resetProgressBtn: document.getElementById("resetProgressBtn"),
   resetAllBtn: document.getElementById("resetAllBtn"),
+  overviewScope: document.getElementById("overviewScope"),
   areaStats: document.getElementById("areaStats"),
 
   factPopup: document.getElementById("factPopup"),
@@ -96,6 +102,7 @@ const UI_TEXTS = {
       subtitle: "Multiple-Choice Trainer fuer grosse Lerninhalte",
       langLabel: "Sprache",
       langReset: "Sprache zuruecksetzen",
+      miniExplainer: "Mini Explainer",
     },
     tabs: {
       learn: "Lernen",
@@ -122,6 +129,7 @@ const UI_TEXTS = {
     explainer: {
       title: "Mini-Erklaerung fuer RD und RT",
       intro: "Klicke auf einen Begriff und ich erklaere ihn wie fuer ein Kind.",
+      close: "Schliessen",
       rdBtn: "Route Distinguisher",
       rtBtn: "Route Target",
       bothBtn: "Warum beide?",
@@ -188,13 +196,15 @@ const UI_TEXTS = {
     },
     overview: {
       title: "Uebersicht",
-      total: "Fragen gesamt",
+      total: "Fragen in Auswahl",
       answered: "Beantwortet",
       correct: "Richtig",
       accuracy: "Trefferquote",
-      areaTitle: "Bereichsstatistik",
-      noAreas: "Noch keine Bereiche verfuegbar.",
-      areaMetrics: "Fragen: {questions} | Antworten: {answered} | Quote: {rate}%",
+      areaTitle: "Modulueberblick",
+      noAreas: "Keine Modulinfos verfuegbar.",
+      areaMetrics: "Fragen: {questions} | Beantwortet: {answered} | Offen: {open} | Quote: {rate}%",
+      scopeLabel: "Aktuelle Auswahl: {area}",
+      allModules: "Alle Module",
       scopeArea: "Aktive Auswahl: {area}",
       scopeMetrics:
         "Fragen: {questions} | Beantwortet: {answered} | Richtig: {correct} | Falsch: {wrong} | Offen: {open} | Quote: {rate}%",
@@ -243,6 +253,7 @@ const UI_TEXTS = {
       subtitle: "Multiple-choice trainer for large learning content",
       langLabel: "Language",
       langReset: "Reset language",
+      miniExplainer: "Mini Explainer",
     },
     tabs: {
       learn: "Learn",
@@ -269,6 +280,7 @@ const UI_TEXTS = {
     explainer: {
       title: "Mini explainer for RD and RT",
       intro: "Click one term and I explain it in a very simple way.",
+      close: "Close",
       rdBtn: "Route Distinguisher",
       rtBtn: "Route Target",
       bothBtn: "Why both?",
@@ -335,13 +347,15 @@ const UI_TEXTS = {
     },
     overview: {
       title: "Overview",
-      total: "Total questions",
+      total: "Questions in selection",
       answered: "Answered",
       correct: "Correct",
       accuracy: "Accuracy",
-      areaTitle: "Area statistics",
-      noAreas: "No areas available yet.",
-      areaMetrics: "Questions: {questions} | Answers: {answered} | Rate: {rate}%",
+      areaTitle: "Module overview",
+      noAreas: "No module information available yet.",
+      areaMetrics: "Questions: {questions} | Answered: {answered} | Open: {open} | Rate: {rate}%",
+      scopeLabel: "Current selection: {area}",
+      allModules: "All modules",
       scopeArea: "Active selection: {area}",
       scopeMetrics:
         "Questions: {questions} | Answered: {answered} | Correct: {correct} | Wrong: {wrong} | Open: {open} | Rate: {rate}%",
@@ -465,6 +479,7 @@ function applyI18n() {
   setText("appTitle", t("app.title"));
   setText("langLabel", t("app.langLabel"));
   setText("languageResetBtn", t("app.langReset"));
+  setText("miniExplainerBtn", t("app.miniExplainer"));
   setText("appSubtitle", t("app.subtitle"));
   setText("tabLearnBtn", t("tabs.learn"));
   setText("tabBuildBtn", t("tabs.build"));
@@ -484,6 +499,7 @@ function applyI18n() {
   setPlaceholder("tagFilterInput", t("learn.tagPlaceholder"));
   setText("kidExplainTitle", t("explainer.title"));
   setText("kidExplainIntro", t("explainer.intro"));
+  setText("explainerCloseBtn", t("explainer.close"));
   setText("kidExplainRdBtn", t("explainer.rdBtn"));
   setText("kidExplainRtBtn", t("explainer.rtBtn"));
   setText("kidExplainBothBtn", t("explainer.bothBtn"));
@@ -526,6 +542,7 @@ function applyI18n() {
   setText("statCorrectLabel", t("overview.correct"));
   setText("statAccuracyLabel", t("overview.accuracy"));
   setText("areaStatsTitle", t("overview.areaTitle"));
+  updateOverviewScopeLabel();
 
   if (!currentQuestion) {
     refs.questionTitle.textContent = t("question.readyTitle");
@@ -562,6 +579,20 @@ async function init() {
 }
 
 function setupExplainerActions() {
+  if (refs.miniExplainerBtn) {
+    refs.miniExplainerBtn.addEventListener("click", openExplainerModal);
+  }
+  if (refs.explainerCloseBtn) {
+    refs.explainerCloseBtn.addEventListener("click", closeExplainerModal);
+  }
+  if (refs.explainerBackdrop) {
+    refs.explainerBackdrop.addEventListener("click", closeExplainerModal);
+  }
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeExplainerModal();
+    }
+  });
   if (refs.kidExplainRdBtn) {
     refs.kidExplainRdBtn.addEventListener("click", () => {
       currentKidExplainer = currentKidExplainer === "rd" ? "" : "rd";
@@ -581,6 +612,20 @@ function setupExplainerActions() {
     });
   }
   renderKidExplainer("");
+}
+
+function openExplainerModal() {
+  if (!refs.explainerModal) return;
+  refs.explainerModal.classList.remove("hidden");
+  refs.explainerModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeExplainerModal() {
+  if (!refs.explainerModal) return;
+  refs.explainerModal.classList.add("hidden");
+  refs.explainerModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
 }
 
 function renderKidExplainer(mode = "") {
@@ -1437,17 +1482,55 @@ function escapeRegExp(text) {
 }
 
 function refreshStats() {
-  const total = questions.length;
-  const answered = questions.reduce((sum, q) => sum + getProgressSnapshot(q).answered, 0);
-  const correct = questions.reduce((sum, q) => sum + getProgressSnapshot(q).correct, 0);
+  const scopedQuestions = getOverviewScopeQuestions();
+  const total = scopedQuestions.length;
+  const answeredQuestions = scopedQuestions.filter((q) => getProgressSnapshot(q).answered > 0);
+  const correctQuestions = answeredQuestions.filter((q) => getProgressSnapshot(q).correct > 0);
+  const answered = answeredQuestions.length;
+  const correct = correctQuestions.length;
   const accuracy = answered > 0 ? (correct / answered) * 100 : 0;
 
   refs.statTotal.textContent = String(total);
   refs.statAnswered.textContent = String(answered);
   refs.statCorrect.textContent = String(correct);
   refs.statAccuracy.textContent = `${accuracy.toFixed(1)}%`;
+  updateOverviewScopeLabel();
   refreshScopedStats();
   refreshAreaStats();
+}
+
+function getOverviewScopeQuestions() {
+  const selectedTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
+  const selectedModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
+
+  return questions.filter((q) => {
+    const topic = sanitizeTopic(q.topic || DEFAULT_TOPIC);
+    const module = sanitizeModule(q.module || DEFAULT_MODULE);
+    if (selectedTopic && topic !== selectedTopic) return false;
+    if (selectedModule && module !== selectedModule) return false;
+    return true;
+  });
+}
+
+function getOverviewScopeLabel() {
+  const selectedTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
+  const selectedModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
+
+  if (selectedTopic && selectedModule) {
+    return `${localizeTopicName(selectedTopic)} / ${localizeModuleName(selectedModule)}`;
+  }
+  if (selectedTopic) {
+    return localizeTopicName(selectedTopic);
+  }
+  if (selectedModule) {
+    return localizeModuleName(selectedModule);
+  }
+  return t("overview.allModules");
+}
+
+function updateOverviewScopeLabel() {
+  if (!refs.overviewScope) return;
+  refs.overviewScope.textContent = t("overview.scopeLabel", { area: getOverviewScopeLabel() });
 }
 
 function refreshScopedStats() {
@@ -1504,26 +1587,32 @@ function refreshAreaStats() {
   questions.forEach((q) => {
     const topic = sanitizeTopic(q.topic || DEFAULT_TOPIC);
     const module = sanitizeModule(q.module || DEFAULT_MODULE);
-    const section = sanitizeSection(q.section || DEFAULT_SECTION);
-    const key = `${topic}||${module}||${section}`;
+    const key = `${topic}||${module}`;
     const p = getProgressSnapshot(q);
     if (!grouped.has(key)) {
-      grouped.set(key, { topic, module, section, questions: 0, answered: 0, correct: 0 });
+      grouped.set(key, { topic, module, questions: 0, answered: 0, correct: 0 });
     }
     const item = grouped.get(key);
     item.questions += 1;
-    item.answered += p.answered || 0;
-    item.correct += p.correct || 0;
+    if (p.answered > 0) item.answered += 1;
+    if (p.correct > 0) item.correct += 1;
   });
 
+  const selectedTopic = refs.topicSelect.value ? sanitizeTopic(refs.topicSelect.value) : "";
+  const selectedModule = refs.moduleSelect.value ? sanitizeModule(refs.moduleSelect.value) : "";
   refs.areaStats.innerHTML = "";
-  const areas = Array.from(grouped.values()).sort((a, b) => {
-    const byTopic = a.topic.localeCompare(b.topic, "de");
-    if (byTopic !== 0) return byTopic;
-    const byModule = a.module.localeCompare(b.module, "de");
-    if (byModule !== 0) return byModule;
-    return a.section.localeCompare(b.section, "de");
-  });
+
+  const areas = Array.from(grouped.values())
+    .filter((area) => {
+      if (selectedTopic && area.topic !== selectedTopic) return false;
+      if (selectedModule && area.module !== selectedModule) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      const byTopic = a.topic.localeCompare(b.topic, "de");
+      if (byTopic !== 0) return byTopic;
+      return a.module.localeCompare(b.module, "de");
+    });
 
   if (areas.length === 0) {
     const li = document.createElement("li");
@@ -1535,16 +1624,18 @@ function refreshAreaStats() {
   areas.forEach((area) => {
     const li = document.createElement("li");
     const hitRate = area.answered > 0 ? ((area.correct / area.answered) * 100).toFixed(1) : "0.0";
+    const open = Math.max(0, area.questions - area.answered);
 
     const name = document.createElement("span");
     name.className = "area-name";
-    name.textContent = `${localizeTopicName(area.topic)} / ${localizeModuleName(area.module)} / ${localizeSectionName(area.section)}`;
+    name.textContent = `${localizeTopicName(area.topic)} / ${localizeModuleName(area.module)}`;
 
     const metrics = document.createElement("span");
     metrics.className = "area-metrics";
     metrics.textContent = t("overview.areaMetrics", {
       questions: area.questions,
       answered: area.answered,
+      open,
       rate: hitRate,
     });
 
