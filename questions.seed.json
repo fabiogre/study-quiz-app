@@ -1097,7 +1097,7 @@
         "section":  "Section 2",
         "question_en":  "Which statement best describes the control word in the MPLS service context?",
         "explanation_en":  "The Control Word is optional and is used depending on the service type and implementation requirements.",
-        "extraInfo_en":  "Important: â€œATM/Frame Relay onlyâ€ is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
+        "extraInfo_en":  "Important: Ã¢â‚¬Å“ATM/Frame Relay onlyÃ¢â‚¬Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
         "tip_en":  "Always view Control Word in terms of service and design.",
         "source_en":  "Telecommunication basics",
         "module_en":  "Module 1",
@@ -1733,7 +1733,7 @@
                      "Payload"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What does â€œencapsulate customer payloadâ€ mean in the provider context?",
+        "question_en":  "What does Ã¢â‚¬Å“encapsulate customer payloadÃ¢â‚¬Â mean in the provider context?",
         "explanation_en":  "Encapsulation adds transport information without destroying the customer\u0027s payload functionality.",
         "extraInfo_en":  "The provider thereby creates a stable transport shell for forwarding, separation and control.",
         "tip_en":  "Payload content remains the same, headers are added.",
@@ -1895,7 +1895,7 @@
         "question_en":  "What does it mean: \"combine separate overlay networks onto one platform and still retain an overlay model\"?",
         "explanation_en":  "A common physical network is used while the logical service boundaries are maintained.",
         "extraInfo_en":  "Simply put: a common infrastructure under the hood, externally separate virtual networks for each service/customer with their own policy and administration.",
-        "tip_en":  "Separate in your mind â€œphysicalâ€ (joint) and â€œlogicalâ€ (separate).",
+        "tip_en":  "Separate in your mind Ã¢â‚¬Å“physicalÃ¢â‚¬Â (joint) and Ã¢â‚¬Å“logicalÃ¢â‚¬Â (separate).",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "All customers share the same configuration without separation",
@@ -2079,7 +2079,7 @@
                      "VPN"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What best describes a â€œserviceâ€ in the provider environment?",
+        "question_en":  "What best describes a Ã¢â‚¬Å“serviceÃ¢â‚¬Â in the provider environment?",
         "explanation_en":  "A service is a logically clearly described unit for connectivity and operation.",
         "extraInfo_en":  "This typically includes end-to-end configuration, management and a clear cost/billing model.",
         "tip_en":  "Service = logical unit, not just hardware.",
@@ -2363,10 +2363,10 @@
                      "Customer Sicht"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What is the typical advantage of VPWS from the customerâ€™s perspective?",
+        "question_en":  "What is the typical advantage of VPWS from the customerÃ¢â‚¬â„¢s perspective?",
         "explanation_en":  "VPWS provides the customer with the behavior of a dedicated point-to-point line.",
         "extraInfo_en":  "The provider transport structure for the customer user data path remains largely transparent.",
-        "tip_en":  "Note: â€œlike a cable between two locationsâ€.",
+        "tip_en":  "Note: Ã¢â‚¬Å“like a cable between two locationsÃ¢â‚¬Â.",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "It acts like a direct connection between two locations",
@@ -8742,7 +8742,7 @@
                            "Only synchronize keepalive timers"
                        ],
         "correctIndex":  0,
-        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃ¶sen.",
+        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÂ¶sen.",
         "explanation_en":  "Route refresh helps trigger policy re-evaluation of received routes without hard-resetting the session.",
         "extraInfo":  "Kursnah fuer Nokia 7750: in deinem Kontext besonders bei BGP-Informationen fuer VPRN relevant.",
         "extraInfo_en":  "Course-style for Nokia 7750: in your context especially relevant with BGP information used for VPRN.",
@@ -8825,7 +8825,7 @@
         "explanation_en":  "The classic BGP FSM consists of exactly these six states.",
         "extraInfo":  "Fuer Troubleshooting sind vor allem Idle, Active und Established sehr praxisrelevant.",
         "extraInfo_en":  "For troubleshooting, Idle, Active, and Established are especially relevant in practice.",
-        "tip":  "Die 6 StandardzustÃ¤nde der BGP FSM auswendig koennen.",
+        "tip":  "Die 6 StandardzustÃƒÂ¤nde der BGP FSM auswendig koennen.",
         "tip_en":  "Know the 6 standard BGP FSM states by heart.",
         "tags":  [
                      "BGP",
@@ -11648,7 +11648,7 @@
         "correctIndex":  0,
         "explanation":  "Wie bei iBGP allgemein skaliert ein Full Mesh schlecht. Route Reflectors sind die uebliche Antwort auf dieses Problem.",
         "explanation_en":  "As with iBGP in general, a full mesh scales poorly. Route reflectors are the usual answer to that problem.",
-        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃ¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
+        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÂ¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
         "extraInfo_en":  "That is exactly why route reflectors become so important in larger MP-BGP VPN environments.",
         "tip":  "PE-VPN-Routing folgt den normalen iBGP-Skalierungsregeln.",
         "tip_en":  "PE VPN routing follows the normal iBGP scaling rules.",
@@ -14421,6 +14421,85 @@
                      "MP-BGP",
                      "Intermediate Router",
                      "Scalability"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 2",
+        "module_en":  "Module 2",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "bgp-m2s3-q20",
+        "question":  "Warum sieht man innerhalb einer Region oft einen Zwei-Label-Stack, obwohl die MP-BGP Peers nicht direkt benachbart sind?",
+        "question_en":  "Why do you often see a two-label stack inside one region even though the MP-BGP peers are not directly adjacent?",
+        "options":  [
+                        "Weil das innere BGP-Label den stitched Weiterweg repraesentiert und der BGP Next Hop intra-regional ueber ein aeusseres LDP-, RSVP- oder SR-Label aufgeloest wird",
+                        "Weil ein MP-BGP Router immer zwei Service-Labels pro VPN-Prefix senden muss",
+                        "Weil der Route Distinguisher als zweites Data-Plane-Label transportiert wird",
+                        "Weil Route Targets im Transport-Stack als aeusseres Label erscheinen"
+                    ],
+        "options_en":  [
+                           "Because the inner BGP label represents the stitched onward path and the BGP next hop is resolved intra-region via an outer LDP, RSVP, or SR label",
+                           "Because an MP-BGP router must always send two service labels per VPN prefix",
+                           "Because the route distinguisher is transported as a second data-plane label",
+                           "Because route targets appear in the transport stack as an outer label"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Der innere Labelwert kommt aus dem BGP-labeled Transportkontext. Das aeussere Label bringt das Paket innerhalb der Region ueber LDP, RSVP oder SR bis zum passenden Border Router oder naechsten Transitknoten.",
+        "explanation_en":  "The inner label comes from the BGP-labeled transport context. The outer label carries the packet inside the region via LDP, RSVP, or SR to the proper border router or next transit node.",
+        "extraInfo":  "Genau diese Trennung erlaubt es, dass MP-BGP Peers logisch verbunden sind, obwohl der konkrete Transport in der Region separat aufgeloest wird.",
+        "extraInfo_en":  "That separation is exactly what allows MP-BGP peers to be logically connected while the actual transport inside the region is resolved separately.",
+        "tip":  "Inner = stitched BGP-Kontext, outer = regionaler Transport.",
+        "tip_en":  "Inner = stitched BGP context, outer = regional transport.",
+        "tags":  [
+                     "BGP",
+                     "Data Plane",
+                     "Label Stack",
+                     "LDP",
+                     "RSVP",
+                     "SR"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 2",
+        "module_en":  "Module 2",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "bgp-m2s3-q21",
+        "question":  "Welche Aussage zum Pop des aeusseren Labels am Region Border Router ist am treffendsten?",
+        "question_en":  "Which statement about popping the outer label at the region border router is the most accurate?",
+        "options":  [
+                        "Nach dem Pop des aeusseren intra-region Labels wird das sichtbare BGP-Label relevant, weil es den naechsten partiellen Tunnel beziehungsweise den naechsten BGP-Schritt identifiziert",
+                        "Nach dem Pop des aeusseren Labels ist kein MPLS-Kontext mehr vorhanden und der Rest laeuft rein auf ARP",
+                        "Das innere BGP-Label wird am Border Router immer sofort durch einen Route Distinguisher ersetzt",
+                        "Sobald das aeussere Label entfernt wird, wird das Paket stets direkt nativ zum CE ausgesendet"
+                    ],
+        "options_en":  [
+                           "After the outer intra-region label is popped, the visible BGP label becomes relevant because it identifies the next partial tunnel or next BGP step",
+                           "After the outer label is popped, no MPLS context remains and the rest runs purely on ARP",
+                           "The inner BGP label is always immediately replaced by a route distinguisher at the border router",
+                           "As soon as the outer label is removed, the packet is always sent natively to the CE"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Das aeussere Label war nur fuer den regionalen Transport noetig. Nach dessen Entfernung bleibt der BGP-labeled Kontext sichtbar und kann fuer den naechsten gestitchten Abschnitt genutzt oder geswappt werden.",
+        "explanation_en":  "The outer label was needed only for regional transport. Once it is removed, the BGP-labeled context remains visible and can be used or swapped for the next stitched segment.",
+        "extraInfo":  "Gerade dieser Moment am Border Router macht das Stitching im Data Plane nachvollziehbar: regionales Transportlabel weg, BGP-Label bleibt als Hinweis auf den naechsten Abschnitt.",
+        "extraInfo_en":  "That exact moment at the border router makes stitching in the data plane easy to understand: the regional transport label disappears, while the BGP label stays as the clue for the next segment.",
+        "tip":  "Outer faellt, inner zeigt den weiteren Weg.",
+        "tip_en":  "The outer one disappears, the inner one shows the onward path.",
+        "tags":  [
+                     "BGP",
+                     "Data Plane",
+                     "Region Border Router",
+                     "Label Pop",
+                     "Stitching"
                  ],
         "source":  "BGP Grundlagen",
         "source_en":  "BGP fundamentals",

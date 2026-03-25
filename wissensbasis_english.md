@@ -2093,3 +2093,5 @@ Important:
 - An alternative is BGP Labeled Unicast (label-ipv4 or label-ipv6). In that model, an IP prefix is advertised together with an MPLS label.
 - PEs typically advertise their loopback prefixes as tunnel endpoints.
 - Intermediate MP-BGP routers can propagate those labeled prefixes without needing VPN-specific service endpoint knowledge.
+- If MP-BGP peers inside one region are not directly adjacent, the BGP next hop is resolved intra-region via LDP, RSVP, or SR. That is why you often see a stack of an inner BGP label and an outer transport label.
+- At the region border router, the outer label for regional transport is removed. The visible BGP label then shows which next partial tunnel or BGP step follows.
