@@ -2079,3 +2079,17 @@ Important:
 - removing too many sessions can break intra-AS reachability or transit
 - leaving too many unnecessary sessions hurts scalability
 - extra sessions do not automatically mean loops by themselves
+
+## BGP Module 1 Section 3: Reading Connect and Active correctly
+- Connect mainly means the BGP FSM is waiting for the TCP connection to complete.
+- Active mainly means the router is still in session establishment or retry mode.
+- The common heuristic Connect = more likely remote, Active = more likely local can help troubleshooting, but it is not hard proof.
+- Routing, reachability, ACLs, TTL, or multihop can also be the real cause.
+
+## BGP Module 2 Section 3: Multi-region VPN and BGP-LU
+- In multi-region environments, an end-to-end transport tunnel between PE routers is often the most scalable baseline design.
+- The benefit is that intermediate routers do not need per-VPN state or per-VPN configuration.
+- If LDP, RSVP, or SR signaling is not allowed across region borders, partial tunnels are built inside each region and stitched together at the borders.
+- An alternative is BGP Labeled Unicast (label-ipv4 or label-ipv6). In that model, an IP prefix is advertised together with an MPLS label.
+- PEs typically advertise their loopback prefixes as tunnel endpoints.
+- Intermediate MP-BGP routers can propagate those labeled prefixes without needing VPN-specific service endpoint knowledge.

@@ -2079,3 +2079,17 @@ Wichtig:
 - zu viele entfernte Sessions koennen AS-interne Erreichbarkeit oder Transit stoeren
 - zu viele unnoetige Sessions verschlechtern die Skalierung
 - zusaetzliche Sessions bedeuten aber nicht automatisch, dass sofort Loops entstehen
+
+## BGP Modul 1 Section 3: Connect und Active sauber lesen
+- Connect bedeutet im Kern: Der BGP-FSM wartet auf den Abschluss der TCP-Verbindung.
+- Active bedeutet im Kern: Der Router befindet sich weiter im Verbindungsaufbau bzw. im erneuten Versuch.
+- Die oft genutzte Heuristik Connect = eher remote, Active = eher lokal kann fuer die Fehlersuche nuetzlich sein, ist aber nicht beweissicher.
+- Auch Routing, Reachability, ACLs, TTL oder Multihop koennen die eigentliche Ursache sein.
+
+## BGP Modul 2 Section 3: Multi-Region VPN und BGP-LU
+- In Multi-Region-Umgebungen ist ein End-to-End-Transport-Tunnel zwischen PE-Routern oft die skalierbarste Grundidee.
+- Der Vorteil: Intermediate Router brauchen keinen per-VPN-State und keine per-VPN-Konfiguration.
+- Wenn LDP, RSVP oder SR nicht ueber Regionsgrenzen signalisiert werden duerfen, werden partielle Tunnel innerhalb der Regionen gebaut und an den Grenzen gestitcht.
+- Eine Alternative ist BGP Labeled Unicast (label-ipv4 oder label-ipv6). Dabei wird ein IP-Prefix zusammen mit einem MPLS-Label advertised.
+- PEs advertisen dabei typischerweise ihre Loopback-Prefixe als Tunnel-Endpunkte.
+- Intermediate MP-BGP Router koennen die gelabelten Prefixe weiterreichen, ohne selbst VPN-spezifische Service-Endpunkte kennen zu muessen.
