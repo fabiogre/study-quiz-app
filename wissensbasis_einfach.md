@@ -1,4 +1,4 @@
-# Wissensbasis (einfach erklaert)
+﻿# Wissensbasis (einfach erklaert)
 
 Dieses File sammelt alles Wissen, das du mir gibst.
 Ziel:
@@ -2111,5 +2111,6 @@ Wichtig:
 - Eine BGP-Route besteht logisch aus NLRI plus Path Attributes.
 - NLRI ist der Prefix mit seiner Laenge.
 - Optional non-transitive Attribute duerfen innerhalb des lokalen AS relevant bleiben, sollen aber nicht ueber weitere AS-Grenzen hinaus exportiert werden.
-- Beim NEXT_HOP ist wichtig, ob ein Prefix lokal redistribuiert wurde oder extern gelernt ist und ob 
-ext-hop-self greift.
+- Beim NEXT_HOP ist wichtig, ob ein Prefix lokal redistribuiert wurde oder extern gelernt ist und ob `next-hop-self` greift.
+
+

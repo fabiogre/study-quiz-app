@@ -2111,5 +2111,6 @@ Important:
 - A BGP route logically consists of NLRI plus path attributes.
 - NLRI is the prefix together with its length.
 - Optional non-transitive attributes may remain relevant inside the local AS, but should not be exported beyond further AS boundaries.
-- For NEXT_HOP, it matters whether a prefix was redistributed locally or learned externally and whether 
-ext-hop-self is applied.
+- For NEXT_HOP, it matters whether a prefix was redistributed locally or learned externally and whether `next-hop-self` is applied.
+
+
