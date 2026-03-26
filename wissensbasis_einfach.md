@@ -2095,3 +2095,21 @@ Wichtig:
 - Intermediate MP-BGP Router koennen die gelabelten Prefixe weiterreichen, ohne selbst VPN-spezifische Service-Endpunkte kennen zu muessen.
 - Wenn MP-BGP Peers innerhalb einer Region nicht direkt benachbart sind, wird der BGP-Next-Hop intra-regional ueber LDP, RSVP oder SR aufgeloest. Dadurch sieht man oft einen Stack aus innerem BGP-Label und aeusserem Transportlabel.
 - Am Region Border Router faellt das aeussere Label fuer den regionalen Transport weg. Das sichtbare BGP-Label zeigt dann, welcher naechste partielle Tunnel oder BGP-Schritt folgt.
+
+## BGP Modul 1 Section 2: Nachrichten und OPEN sauber trennen
+- Die klassische OPEN Message bringt BGP-Sitzungsparameter wie Version, AS, Hold Time, BGP Identifier und optionale Parameter.
+- Die Source-IP ist kein eigenes OPEN-Feld, sondern kommt aus der bereits bestehenden TCP-Verbindung.
+- Route Refresh ist eine zusaetzliche Message, mit der ein Router nach Policy-Aenderungen eine frische Sicht auf die RIB-Out seines Nachbarn anfordern kann.
+
+## BGP Modul 1 Section 3: Sessions, Adjazenz und Multihop
+- Nach erfolgreichem TCP-Aufbau folgt die FSM grob: OPEN senden -> OpenSent, OPEN empfangen und KEEPALIVE senden -> OpenConfirm, KEEPALIVE empfangen -> Established.
+- iBGP Peers muessen nicht direkt benachbart sein.
+- eBGP ist oft direkt benachbart; fuer nicht-adjacent eBGP braucht man typischerweise Multihop wegen der TTL.
+- iBGP nutzt oft System- oder Loopback-IPs, eBGP typischerweise Interface-IPs.
+
+## BGP Modul 1 Section 4: NLRI und Attributlogik
+- Eine BGP-Route besteht logisch aus NLRI plus Path Attributes.
+- NLRI ist der Prefix mit seiner Laenge.
+- Optional non-transitive Attribute duerfen innerhalb des lokalen AS relevant bleiben, sollen aber nicht ueber weitere AS-Grenzen hinaus exportiert werden.
+- Beim NEXT_HOP ist wichtig, ob ein Prefix lokal redistribuiert wurde oder extern gelernt ist und ob 
+ext-hop-self greift.

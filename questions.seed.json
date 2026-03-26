@@ -1097,7 +1097,7 @@
         "section":  "Section 2",
         "question_en":  "Which statement best describes the control word in the MPLS service context?",
         "explanation_en":  "The Control Word is optional and is used depending on the service type and implementation requirements.",
-        "extraInfo_en":  "Important: Ã¢â‚¬Å“ATM/Frame Relay onlyÃ¢â‚¬Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
+        "extraInfo_en":  "Important: ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œATM/Frame Relay onlyÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
         "tip_en":  "Always view Control Word in terms of service and design.",
         "source_en":  "Telecommunication basics",
         "module_en":  "Module 1",
@@ -1733,7 +1733,7 @@
                      "Payload"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What does Ã¢â‚¬Å“encapsulate customer payloadÃ¢â‚¬Â mean in the provider context?",
+        "question_en":  "What does ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œencapsulate customer payloadÃƒÂ¢Ã¢â€šÂ¬Ã‚Â mean in the provider context?",
         "explanation_en":  "Encapsulation adds transport information without destroying the customer\u0027s payload functionality.",
         "extraInfo_en":  "The provider thereby creates a stable transport shell for forwarding, separation and control.",
         "tip_en":  "Payload content remains the same, headers are added.",
@@ -1895,7 +1895,7 @@
         "question_en":  "What does it mean: \"combine separate overlay networks onto one platform and still retain an overlay model\"?",
         "explanation_en":  "A common physical network is used while the logical service boundaries are maintained.",
         "extraInfo_en":  "Simply put: a common infrastructure under the hood, externally separate virtual networks for each service/customer with their own policy and administration.",
-        "tip_en":  "Separate in your mind Ã¢â‚¬Å“physicalÃ¢â‚¬Â (joint) and Ã¢â‚¬Å“logicalÃ¢â‚¬Â (separate).",
+        "tip_en":  "Separate in your mind ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œphysicalÃƒÂ¢Ã¢â€šÂ¬Ã‚Â (joint) and ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œlogicalÃƒÂ¢Ã¢â€šÂ¬Ã‚Â (separate).",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "All customers share the same configuration without separation",
@@ -2079,7 +2079,7 @@
                      "VPN"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What best describes a Ã¢â‚¬Å“serviceÃ¢â‚¬Â in the provider environment?",
+        "question_en":  "What best describes a ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œserviceÃƒÂ¢Ã¢â€šÂ¬Ã‚Â in the provider environment?",
         "explanation_en":  "A service is a logically clearly described unit for connectivity and operation.",
         "extraInfo_en":  "This typically includes end-to-end configuration, management and a clear cost/billing model.",
         "tip_en":  "Service = logical unit, not just hardware.",
@@ -2363,10 +2363,10 @@
                      "Customer Sicht"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What is the typical advantage of VPWS from the customerÃ¢â‚¬â„¢s perspective?",
+        "question_en":  "What is the typical advantage of VPWS from the customerÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s perspective?",
         "explanation_en":  "VPWS provides the customer with the behavior of a dedicated point-to-point line.",
         "extraInfo_en":  "The provider transport structure for the customer user data path remains largely transparent.",
-        "tip_en":  "Note: Ã¢â‚¬Å“like a cable between two locationsÃ¢â‚¬Â.",
+        "tip_en":  "Note: ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œlike a cable between two locationsÃƒÂ¢Ã¢â€šÂ¬Ã‚Â.",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "It acts like a direct connection between two locations",
@@ -8742,7 +8742,7 @@
                            "Only synchronize keepalive timers"
                        ],
         "correctIndex":  0,
-        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÂ¶sen.",
+        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÆ’Ã‚Â¶sen.",
         "explanation_en":  "Route refresh helps trigger policy re-evaluation of received routes without hard-resetting the session.",
         "extraInfo":  "Kursnah fuer Nokia 7750: in deinem Kontext besonders bei BGP-Informationen fuer VPRN relevant.",
         "extraInfo_en":  "Course-style for Nokia 7750: in your context especially relevant with BGP information used for VPRN.",
@@ -8825,7 +8825,7 @@
         "explanation_en":  "The classic BGP FSM consists of exactly these six states.",
         "extraInfo":  "Fuer Troubleshooting sind vor allem Idle, Active und Established sehr praxisrelevant.",
         "extraInfo_en":  "For troubleshooting, Idle, Active, and Established are especially relevant in practice.",
-        "tip":  "Die 6 StandardzustÃƒÂ¤nde der BGP FSM auswendig koennen.",
+        "tip":  "Die 6 StandardzustÃƒÆ’Ã‚Â¤nde der BGP FSM auswendig koennen.",
         "tip_en":  "Know the 6 standard BGP FSM states by heart.",
         "tags":  [
                      "BGP",
@@ -11648,7 +11648,7 @@
         "correctIndex":  0,
         "explanation":  "Wie bei iBGP allgemein skaliert ein Full Mesh schlecht. Route Reflectors sind die uebliche Antwort auf dieses Problem.",
         "explanation_en":  "As with iBGP in general, a full mesh scales poorly. Route reflectors are the usual answer to that problem.",
-        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÂ¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
+        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÆ’Ã‚Â¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
         "extraInfo_en":  "That is exactly why route reflectors become so important in larger MP-BGP VPN environments.",
         "tip":  "PE-VPN-Routing folgt den normalen iBGP-Skalierungsregeln.",
         "tip_en":  "PE VPN routing follows the normal iBGP scaling rules.",
@@ -14509,5 +14509,352 @@
         "module_en":  "Module 2",
         "section":  "Section 3",
         "section_en":  "Section 3"
+    },
+    {
+        "id":  "bgp-m1s2-q24",
+        "question":  "Welche Aussage zur BGP OPEN Message ist falsch?",
+        "question_en":  "Which statement about the BGP OPEN message is false?",
+        "options":  [
+                        "Sie enthaelt Version, AS, Hold Time, BGP Identifier und optionale Parameter bzw. Capabilities",
+                        "Sie dient dazu, grundlegende Sitzungsparameter zwischen Nachbarn abzugleichen",
+                        "Sie enthaelt ein eigenes Feld fuer die Source-IP des Senders",
+                        "Wenn die ausgehandelten Parameter nicht zusammenpassen, kann die Session scheitern"
+                    ],
+        "options_en":  [
+                           "It contains version, AS, hold time, BGP identifier, and optional parameters or capabilities",
+                           "It is used to align basic session parameters between neighbors",
+                           "It contains a dedicated field for the sender source IP",
+                           "If the negotiated parameters do not match, the session can fail"
+                       ],
+        "correctIndex":  2,
+        "explanation":  "Die Source-IP ist kein eigenes OPEN-Feld. Sie ergibt sich aus der bereits bestehenden TCP-Verbindung. In der OPEN Message stehen stattdessen unter anderem Version, AS, Hold Time, BGP Identifier und optionale Parameter.",
+        "explanation_en":  "The source IP is not a dedicated OPEN field. It comes from the already established TCP connection. The OPEN message instead contains items such as version, AS, hold time, BGP identifier, and optional parameters.",
+        "extraInfo":  "Genau dieser Punkt ist eine typische Stolperfalle: TCP bringt die Adressen, OPEN bringt die BGP-Sitzungsparameter.",
+        "extraInfo_en":  "That point is a common trap: TCP carries the addresses, OPEN carries the BGP session parameters.",
+        "tip":  "OPEN = BGP-Parameter. Die IP-Adressen kommen vom TCP-Unterbau.",
+        "tip_en":  "OPEN = BGP parameters. The IP addresses come from the TCP underlay.",
+        "tags":  [
+                     "BGP",
+                     "OPEN",
+                     "Messages",
+                     "False Statement"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "bgp-m1s2-q25",
+        "question":  "Welche zusaetzliche BGP Message wird genutzt, wenn ein Router nach einer Import-Policy-Aenderung eine neue Kopie der RIB-Out seines Nachbarn anfordert?",
+        "question_en":  "Which additional BGP message is used when a router asks a neighbor for a fresh copy of its RIB-Out after an import policy change?",
+        "options":  [
+                        "Route Refresh",
+                        "Notification",
+                        "MED Update",
+                        "Open Retry"
+                    ],
+        "options_en":  [
+                           "Route Refresh",
+                           "Notification",
+                           "MED Update",
+                           "Open Retry"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Dafuer ist die Route-Refresh-Message da. Im SR OS Kurskontext wird sie speziell beim Austausch von VPRN-Routing-Informationen ueber BGP hervorgehoben.",
+        "explanation_en":  "That is the purpose of the Route Refresh message. In the SR OS course context, it is specifically highlighted for BGP exchange of VPRN routing information.",
+        "extraInfo":  "Statt den Nachbarn komplett neu aufzubauen, fordert man damit die relevanten Routen noch einmal zur erneuten Policy-Auswertung an.",
+        "extraInfo_en":  "Instead of rebuilding the neighbor from scratch, it requests the relevant routes again for renewed policy evaluation.",
+        "tip":  "Policy aendert sich, RIB-Out nochmal sehen wollen = Route Refresh.",
+        "tip_en":  "Policy changes and you want to see RIB-Out again = Route Refresh.",
+        "tags":  [
+                     "BGP",
+                     "Route Refresh",
+                     "Import Policy",
+                     "VPRN"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "bgp-m1s2-q26",
+        "question":  "Welche Liste enthaelt nur die klassischen Haupt-Messages einer BGP-Session?",
+        "question_en":  "Which list contains only the classic main messages of a BGP session?",
+        "options":  [
+                        "OPEN, KEEPALIVE, UPDATE, NOTIFICATION",
+                        "OPEN, ROUTE REFRESH, MED, KEEPALIVE",
+                        "UPDATE, OSPF HELLO, KEEPALIVE, NOTIFICATION",
+                        "OPEN, ICMP, UPDATE, NOTIFICATION"
+                    ],
+        "options_en":  [
+                           "OPEN, KEEPALIVE, UPDATE, NOTIFICATION",
+                           "OPEN, ROUTE REFRESH, MED, KEEPALIVE",
+                           "UPDATE, OSPF HELLO, KEEPALIVE, NOTIFICATION",
+                           "OPEN, ICMP, UPDATE, NOTIFICATION"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Das sind die vier klassischen Kern-Messages. Route Refresh ist eine zusaetzliche Message, aber nicht Teil dieser klassischen Viererliste.",
+        "explanation_en":  "Those are the four classic core messages. Route Refresh is an additional message, but it is not part of that classic list of four.",
+        "extraInfo":  "Gerade in Pruefungsfragen wird Route Refresh gern mit in die Hauptliste gemischt, obwohl es sauberer als Zusatzmessage gesehen wird.",
+        "extraInfo_en":  "Especially in exam questions, Route Refresh is often mixed into the main list even though it is cleaner to treat it as an additional message.",
+        "tip":  "Die klassische Vierergruppe auswendig koennen.",
+        "tip_en":  "Know the classic group of four by heart.",
+        "tags":  [
+                     "BGP",
+                     "Messages",
+                     "OPEN",
+                     "KEEPALIVE",
+                     "UPDATE",
+                     "NOTIFICATION"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "bgp-m1s3-q20",
+        "question":  "Welche Reihenfolge beschreibt den erfolgreichen Sitzungsaufbau am treffendsten?",
+        "question_en":  "Which sequence best describes a successful session establishment?",
+        "options":  [
+                        "TCP steht, OPEN wird gesendet, Zustand OpenSent; OPEN empfangen, KEEPALIVE senden, Zustand OpenConfirm; KEEPALIVE empfangen, Zustand Established",
+                        "TCP steht, UPDATE wird gesendet, Zustand Active; NOTIFICATION empfangen, Zustand Established",
+                        "OPEN wird vor TCP gesendet; danach geht es direkt in Established",
+                        "Nach Connect folgt immer sofort Established, wenn die AS-Nummern korrekt sind"
+                    ],
+        "options_en":  [
+                           "TCP is up, OPEN is sent, state OpenSent; OPEN is received, KEEPALIVE is sent, state OpenConfirm; KEEPALIVE is received, state Established",
+                           "TCP is up, UPDATE is sent, state Active; NOTIFICATION is received, state Established",
+                           "OPEN is sent before TCP; then it goes directly to Established",
+                           "After Connect, it always goes straight to Established if the AS numbers are correct"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Genau so laeuft die FSM nach erfolgreichem TCP-Aufbau weiter: OPEN senden -\u003e OpenSent, OPEN empfangen und KEEPALIVE senden -\u003e OpenConfirm, KEEPALIVE empfangen -\u003e Established.",
+        "explanation_en":  "That is exactly how the FSM continues after successful TCP establishment: send OPEN -\u003e OpenSent, receive OPEN and send KEEPALIVE -\u003e OpenConfirm, receive KEEPALIVE -\u003e Established.",
+        "extraInfo":  "Das ist eine gute Pruefungsfrage, weil gern UPDATE oder NOTIFICATION an die falsche Stelle gemischt werden.",
+        "extraInfo_en":  "That is a good exam question because UPDATE or NOTIFICATION are often mixed into the wrong place.",
+        "tip":  "Erst TCP, dann OPEN, dann KEEPALIVE, dann Established.",
+        "tip_en":  "First TCP, then OPEN, then KEEPALIVE, then Established.",
+        "tags":  [
+                     "BGP",
+                     "FSM",
+                     "OpenSent",
+                     "OpenConfirm",
+                     "Established"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "bgp-m1s3-q21",
+        "question":  "Welche Aussage zu iBGP, eBGP und Multihop ist falsch?",
+        "question_en":  "Which statement about iBGP, eBGP, and multihop is false?",
+        "options":  [
+                        "iBGP Peers muessen immer direkt benachbart sein",
+                        "eBGP Peers sind oft direkt benachbart, muessen es mit Multihop aber nicht zwingend sein",
+                        "Ohne Multihop kann eine nicht-adjacent eBGP-Session standardmaessig an der TTL scheitern",
+                        "Multihop-Werte koennen je nach Plattform und Hierarchie geerbt werden"
+                    ],
+        "options_en":  [
+                           "iBGP peers must always be directly adjacent",
+                           "eBGP peers are often directly adjacent, but with multihop they do not have to be",
+                           "Without multihop, a non-adjacent eBGP session can fail because of the TTL by default",
+                           "Multihop values can be inherited depending on platform and hierarchy"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "iBGP Peers muessen nicht direkt benachbart sein. Entscheidend ist, dass sie sich IP-seitig erreichen koennen, typischerweise ueber das IGP desselben AS.",
+        "explanation_en":  "iBGP peers do not have to be directly adjacent. What matters is IP reachability, typically provided by the IGP of the same AS.",
+        "extraInfo":  "Bei eBGP ist direkte Nachbarschaft typisch, aber nicht zwingend, wenn der TTL-Wert per Multihop passend erhoeht wird.",
+        "extraInfo_en":  "For eBGP, direct adjacency is typical, but not mandatory if the TTL is increased appropriately with multihop.",
+        "tip":  "Adjacent ist typisch fuer eBGP, Pflicht ist es erst ohne passenden Multihop.",
+        "tip_en":  "Adjacent is typical for eBGP; it becomes a requirement only without proper multihop.",
+        "tags":  [
+                     "BGP",
+                     "iBGP",
+                     "eBGP",
+                     "Multihop",
+                     "False Statement"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "bgp-m1s3-q22",
+        "question":  "Welche Aussage zur Adresswahl fuer BGP Sessions ist am treffendsten?",
+        "question_en":  "Which statement about address selection for BGP sessions is the most accurate?",
+        "options":  [
+                        "iBGP nutzt oft System- oder Loopback-IPs, waehrend eBGP typischerweise Interface-IPs nutzt",
+                        "eBGP nutzt grundsaetzlich nur Loopback-IPs und iBGP nur MAC-Adressen",
+                        "iBGP und eBGP nutzen immer dieselben Access-VLAN-IPs",
+                        "Die IP-Wahl ist bei BGP irrelevant, solange die AS-Nummer stimmt"
+                    ],
+        "options_en":  [
+                           "iBGP often uses system or loopback IPs, while eBGP typically uses interface IPs",
+                           "eBGP always uses only loopback IPs and iBGP only MAC addresses",
+                           "iBGP and eBGP always use the same access VLAN IPs",
+                           "The IP choice is irrelevant in BGP as long as the AS number is correct"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "iBGP baut Sessions oft ueber stabile System- oder Loopback-IPs auf, die ueber das IGP bekannt sind. eBGP nutzt typischerweise direkt die Interface-IPs zum Nachbarn.",
+        "explanation_en":  "iBGP often builds sessions over stable system or loopback IPs known via the IGP. eBGP typically uses the interface IPs directly toward the neighbor.",
+        "extraInfo":  "Das passt gut zur typischen Topologie: iBGP im selben AS ueber mehr Hops, eBGP haeufig direkt am Rand.",
+        "extraInfo_en":  "That fits the typical topology: iBGP inside the same AS across more hops, eBGP often directly at the edge.",
+        "tip":  "iBGP eher System-IP, eBGP eher Interface-IP.",
+        "tip_en":  "iBGP more often system IP, eBGP more often interface IP.",
+        "tags":  [
+                     "BGP",
+                     "iBGP",
+                     "eBGP",
+                     "System IP",
+                     "Interface IP"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "bgp-m1s4-q25",
+        "question":  "Was ist im BGP-Kontext am saubersten als Route beschrieben?",
+        "question_en":  "What is the cleanest description of a route in the BGP context?",
+        "options":  [
+                        "NLRI plus Path Attributes",
+                        "Nur der IP-Prefix ohne weitere Information",
+                        "Ausschliesslich das NEXT_HOP Attribut",
+                        "Nur Community und LOCAL_PREFERENCE"
+                    ],
+        "options_en":  [
+                           "NLRI plus path attributes",
+                           "Only the IP prefix without any further information",
+                           "Only the NEXT_HOP attribute",
+                           "Only community and LOCAL_PREFERENCE"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Eine BGP-Route besteht logisch aus der Network Layer Reachability Information und den zugehoerigen Path Attributes.",
+        "explanation_en":  "A BGP route logically consists of the Network Layer Reachability Information and the associated path attributes.",
+        "extraInfo":  "Die NLRI ist der Prefix-Teil; die Attribute steuern Herkunft, Weitergabe und Best-Path-Entscheidung.",
+        "extraInfo_en":  "The NLRI is the prefix part; the attributes control origin, propagation, and best-path decisions.",
+        "tip":  "Prefix allein ist noch nicht die ganze BGP-Route.",
+        "tip_en":  "The prefix alone is not the whole BGP route.",
+        "tags":  [
+                     "BGP",
+                     "NLRI",
+                     "Path Attributes",
+                     "Route Update"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 4",
+        "section_en":  "Section 4"
+    },
+    {
+        "id":  "bgp-m1s4-q26",
+        "question":  "Welche Aussage zu optional non-transitiven Attributen ist am treffendsten?",
+        "question_en":  "Which statement about optional non-transitive attributes is the most accurate?",
+        "options":  [
+                        "Sie duerfen innerhalb des lokalen AS weitergegeben werden, aber nicht ueber dieses AS hinaus an weitere eBGP-Nachbarn",
+                        "Sie muessen auch bei unbekanntem Format immer ueber jedes AS hinaus propagiert werden",
+                        "Sie sind identisch mit well-known mandatory Attributen",
+                        "Sie duerfen weder innerhalb noch ausserhalb des lokalen AS weitergegeben werden"
+                    ],
+        "options_en":  [
+                           "They may be propagated inside the local AS, but not beyond that AS to further eBGP neighbors",
+                           "They must always be propagated across every AS even if their format is unknown",
+                           "They are identical to well-known mandatory attributes",
+                           "They may be propagated neither inside nor outside the local AS"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Optional non-transitive Attribute duerfen den lokalen AS-Kontext ueber iBGP durchlaufen, sollen aber nicht ueber weitere AS-Grenzen hinaus exportiert werden.",
+        "explanation_en":  "Optional non-transitive attributes may travel through the local AS via iBGP, but they should not be exported beyond additional AS boundaries.",
+        "extraInfo":  "Genau deshalb ist die Formulierung wichtig: nicht ueber das lokale AS hinaus, aber innerhalb des AS kann die Information relevant bleiben.",
+        "extraInfo_en":  "That is exactly why the wording matters: not beyond the local AS, but the information may still remain relevant within the AS.",
+        "tip":  "Non-transitive heisst nicht unsichtbar im eigenen AS, sondern nicht ueber weitere AS-Grenzen hinaus.",
+        "tip_en":  "Non-transitive does not mean invisible inside the AS, it means not beyond further AS boundaries.",
+        "tags":  [
+                     "BGP",
+                     "Path Attributes",
+                     "Optional",
+                     "Non-Transitive"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 4",
+        "section_en":  "Section 4"
+    },
+    {
+        "id":  "bgp-m1s4-q27",
+        "question":  "Welche Aussage zum NEXT_HOP Attribut ist am treffendsten?",
+        "question_en":  "Which statement about the NEXT_HOP attribute is the most accurate?",
+        "options":  [
+                        "Bei Redistribution identifiziert NEXT_HOP typischerweise den redistribuierenden Router selbst; bei extern gelernten Routen kann next-hop-self den lokalen Werber als neuen NEXT_HOP setzen",
+                        "NEXT_HOP ist immer identisch mit dem ORIGIN Attribut",
+                        "NEXT_HOP wird nur innerhalb von Route Reflector Clustern benutzt",
+                        "NEXT_HOP ist immer die Customer-ID des werbenden VPN-Service"
+                    ],
+        "options_en":  [
+                           "With redistribution, NEXT_HOP typically identifies the redistributing router itself; for externally learned routes, next-hop-self can set the local advertiser as the new NEXT_HOP",
+                           "NEXT_HOP is always identical to the ORIGIN attribute",
+                           "NEXT_HOP is used only inside route reflector clusters",
+                           "NEXT_HOP is always the customer ID of the advertising VPN service"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Genau diese Unterscheidung ist wichtig: Bei lokal redistribuierten Prefixen zeigt NEXT_HOP oft direkt auf den einbringenden Router. Bei extern gelernten Routen kann das Verhalten ueber next-hop-self geaendert werden.",
+        "explanation_en":  "That distinction is important: for locally redistributed prefixes, NEXT_HOP often points directly to the introducing router. For externally learned routes, the behavior can be changed with next-hop-self.",
+        "extraInfo":  "Gerade in Pruefungen wird gern vermischt, ob NEXT_HOP den originalen externen Werber oder den lokalen Weitergeber zeigt.",
+        "extraInfo_en":  "Especially in exams, it is often mixed up whether NEXT_HOP points to the original external advertiser or the local re-advertiser.",
+        "tip":  "Redistribute lokal -\u003e oft lokaler Router. Extern gelernt -\u003e next-hop-self kann umschreiben.",
+        "tip_en":  "Locally redistributed -\u003e often local router. Learned externally -\u003e next-hop-self can rewrite it.",
+        "tags":  [
+                     "BGP",
+                     "NEXT_HOP",
+                     "next-hop-self",
+                     "Path Attributes"
+                 ],
+        "source":  "BGP Grundlagen",
+        "source_en":  "BGP fundamentals",
+        "topic":  "BGP",
+        "topic_en":  "BGP",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 4",
+        "section_en":  "Section 4"
     }
 ]
