@@ -2114,3 +2114,14 @@ Wichtig:
 - Beim NEXT_HOP ist wichtig, ob ein Prefix lokal redistribuiert wurde oder extern gelernt ist und ob `next-hop-self` greift.
 
 
+
+## IS-IS Modul 1 Section 2: TCP/IP und OSI
+- Das TCP/IP-Modell arbeitet grob mit den Schichten: Application, Transport, Internet, Link.
+- Das OSI-Modell arbeitet mit sieben Schichten: Application, Presentation, Session, Transport, Network, Data Link, Physical.
+- In der Praxis ist TCP/IP das bekannteste Modell, aber OSI-Namen und Layer-Nummern werden weiterhin sehr haeufig referenziert.
+- Typische Grobzuordnung:
+  - TCP/IP Application entspricht grob OSI 5 bis 7
+  - TCP/IP Transport entspricht grob OSI 4
+  - TCP/IP Internet entspricht grob OSI 3
+  - TCP/IP Link entspricht grob OSI 1 bis 2
+- Presentation und Session sind im TCP/IP-Modell normalerweise nicht als eigene Schichten getrennt sichtbar.

@@ -2114,3 +2114,14 @@ Important:
 - For NEXT_HOP, it matters whether a prefix was redistributed locally or learned externally and whether `next-hop-self` is applied.
 
 
+
+## IS-IS Module 1 Section 2: TCP/IP and OSI
+- The TCP/IP model broadly works with the layers: Application, Transport, Internet, Link.
+- The OSI model works with seven layers: Application, Presentation, Session, Transport, Network, Data Link, Physical.
+- In practice, TCP/IP is the most widely used model, but OSI names and layer numbers are still referenced very frequently.
+- Typical rough mapping:
+  - TCP/IP Application roughly matches OSI 5 to 7
+  - TCP/IP Transport roughly matches OSI 4
+  - TCP/IP Internet roughly matches OSI 3
+  - TCP/IP Link roughly matches OSI 1 to 2
+- Presentation and Session are normally not visible as separate layers in the TCP/IP model.

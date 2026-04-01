@@ -1097,7 +1097,7 @@ window.STUDY_QUIZ_SEED = [
         "section":  "Section 2",
         "question_en":  "Which statement best describes the control word in the MPLS service context?",
         "explanation_en":  "The Control Word is optional and is used depending on the service type and implementation requirements.",
-        "extraInfo_en":  "Important: ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œATM/Frame Relay onlyÃƒÂ¢Ã¢â€šÂ¬Ã‚Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
+        "extraInfo_en":  "Important: ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ATM/Frame Relay onlyÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
         "tip_en":  "Always view Control Word in terms of service and design.",
         "source_en":  "Telecommunication basics",
         "module_en":  "Module 1",
@@ -1733,7 +1733,7 @@ window.STUDY_QUIZ_SEED = [
                      "Payload"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What does ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œencapsulate customer payloadÃƒÂ¢Ã¢â€šÂ¬Ã‚Â mean in the provider context?",
+        "question_en":  "What does ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“encapsulate customer payloadÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â mean in the provider context?",
         "explanation_en":  "Encapsulation adds transport information without destroying the customer\u0027s payload functionality.",
         "extraInfo_en":  "The provider thereby creates a stable transport shell for forwarding, separation and control.",
         "tip_en":  "Payload content remains the same, headers are added.",
@@ -1895,7 +1895,7 @@ window.STUDY_QUIZ_SEED = [
         "question_en":  "What does it mean: \"combine separate overlay networks onto one platform and still retain an overlay model\"?",
         "explanation_en":  "A common physical network is used while the logical service boundaries are maintained.",
         "extraInfo_en":  "Simply put: a common infrastructure under the hood, externally separate virtual networks for each service/customer with their own policy and administration.",
-        "tip_en":  "Separate in your mind ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œphysicalÃƒÂ¢Ã¢â€šÂ¬Ã‚Â (joint) and ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œlogicalÃƒÂ¢Ã¢â€šÂ¬Ã‚Â (separate).",
+        "tip_en":  "Separate in your mind ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“physicalÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â (joint) and ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“logicalÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â (separate).",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "All customers share the same configuration without separation",
@@ -2079,7 +2079,7 @@ window.STUDY_QUIZ_SEED = [
                      "VPN"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What best describes a ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œserviceÃƒÂ¢Ã¢â€šÂ¬Ã‚Â in the provider environment?",
+        "question_en":  "What best describes a ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“serviceÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â in the provider environment?",
         "explanation_en":  "A service is a logically clearly described unit for connectivity and operation.",
         "extraInfo_en":  "This typically includes end-to-end configuration, management and a clear cost/billing model.",
         "tip_en":  "Service = logical unit, not just hardware.",
@@ -2363,10 +2363,10 @@ window.STUDY_QUIZ_SEED = [
                      "Customer Sicht"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What is the typical advantage of VPWS from the customerÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s perspective?",
+        "question_en":  "What is the typical advantage of VPWS from the customerÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢s perspective?",
         "explanation_en":  "VPWS provides the customer with the behavior of a dedicated point-to-point line.",
         "extraInfo_en":  "The provider transport structure for the customer user data path remains largely transparent.",
-        "tip_en":  "Note: ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œlike a cable between two locationsÃƒÂ¢Ã¢â€šÂ¬Ã‚Â.",
+        "tip_en":  "Note: ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“like a cable between two locationsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â.",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "It acts like a direct connection between two locations",
@@ -8742,7 +8742,7 @@ window.STUDY_QUIZ_SEED = [
                            "Only synchronize keepalive timers"
                        ],
         "correctIndex":  0,
-        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÆ’Ã‚Â¶sen.",
+        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶sen.",
         "explanation_en":  "Route refresh helps trigger policy re-evaluation of received routes without hard-resetting the session.",
         "extraInfo":  "Kursnah fuer Nokia 7750: in deinem Kontext besonders bei BGP-Informationen fuer VPRN relevant.",
         "extraInfo_en":  "Course-style for Nokia 7750: in your context especially relevant with BGP information used for VPRN.",
@@ -8825,7 +8825,7 @@ window.STUDY_QUIZ_SEED = [
         "explanation_en":  "The classic BGP FSM consists of exactly these six states.",
         "extraInfo":  "Fuer Troubleshooting sind vor allem Idle, Active und Established sehr praxisrelevant.",
         "extraInfo_en":  "For troubleshooting, Idle, Active, and Established are especially relevant in practice.",
-        "tip":  "Die 6 StandardzustÃƒÆ’Ã‚Â¤nde der BGP FSM auswendig koennen.",
+        "tip":  "Die 6 StandardzustÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¤nde der BGP FSM auswendig koennen.",
         "tip_en":  "Know the 6 standard BGP FSM states by heart.",
         "tags":  [
                      "BGP",
@@ -11648,7 +11648,7 @@ window.STUDY_QUIZ_SEED = [
         "correctIndex":  0,
         "explanation":  "Wie bei iBGP allgemein skaliert ein Full Mesh schlecht. Route Reflectors sind die uebliche Antwort auf dieses Problem.",
         "explanation_en":  "As with iBGP in general, a full mesh scales poorly. Route reflectors are the usual answer to that problem.",
-        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÆ’Ã‚Â¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
+        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
         "extraInfo_en":  "That is exactly why route reflectors become so important in larger MP-BGP VPN environments.",
         "tip":  "PE-VPN-Routing folgt den normalen iBGP-Skalierungsregeln.",
         "tip_en":  "PE VPN routing follows the normal iBGP scaling rules.",
@@ -14856,5 +14856,201 @@ window.STUDY_QUIZ_SEED = [
         "module_en":  "Module 1",
         "section":  "Section 4",
         "section_en":  "Section 4"
+    },
+    {
+        "id":  "isis-m1s2-q1",
+        "question":  "Welche Reihenfolge der OSI-Schichten von oben nach unten ist korrekt?",
+        "question_en":  "Which order of the OSI layers from top to bottom is correct?",
+        "options":  [
+                        "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+                        "Application, Session, Presentation, Transport, Network, Physical, Data Link",
+                        "Transport, Session, Presentation, Application, Network, Data Link, Physical",
+                        "Application, Transport, Internet, Link, Physical, Data Link, Session"
+                    ],
+        "options_en":  [
+                           "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+                           "Application, Session, Presentation, Transport, Network, Physical, Data Link",
+                           "Transport, Session, Presentation, Application, Network, Data Link, Physical",
+                           "Application, Transport, Internet, Link, Physical, Data Link, Session"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Das klassische OSI-Modell hat sieben Schichten und genau in dieser Reihenfolge: 7 bis 1 = Application, Presentation, Session, Transport, Network, Data Link, Physical.",
+        "explanation_en":  "The classical OSI model has seven layers and exactly this order: 7 to 1 = Application, Presentation, Session, Transport, Network, Data Link, Physical.",
+        "extraInfo":  "Gerade Presentation und Session werden oft vergessen oder vertauscht, weil sie im TCP/IP-Modell nicht als eigene Schichten auftauchen.",
+        "extraInfo_en":  "Presentation and Session are often forgotten or swapped because they do not appear as separate layers in the TCP/IP model.",
+        "tip":  "OSI immer als 7-6-5-4-3-2-1 im Kopf behalten.",
+        "tip_en":  "Keep OSI in mind as 7-6-5-4-3-2-1.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "OSI",
+                     "TCP/IP",
+                     "Layers"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s2-q2",
+        "question":  "Welche Aussage zum TCP/IP- und OSI-Modell ist am treffendsten?",
+        "question_en":  "Which statement about the TCP/IP and OSI models is the most accurate?",
+        "options":  [
+                        "TCP/IP ist das bekannteste Praxis-Modell, aber in der Netzwerktechnik werden OSI-Namen und Layer-Nummern trotzdem staendig referenziert",
+                        "Das OSI-Modell hat TCP/IP vollstaendig ersetzt und wird heute praktisch nicht mehr genutzt",
+                        "TCP/IP und OSI haben exakt dieselben Layer-Namen und exakt dieselbe Anzahl von Schichten",
+                        "Nur das OSI-Modell benutzt eine Transport-Schicht; TCP/IP nicht"
+                    ],
+        "options_en":  [
+                           "TCP/IP is the most widely used practical model, but OSI names and layer numbers are still constantly referenced in networking",
+                           "The OSI model completely replaced TCP/IP and is hardly used anymore",
+                           "TCP/IP and OSI have exactly the same layer names and exactly the same number of layers",
+                           "Only the OSI model uses a transport layer; TCP/IP does not"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "In der Praxis denkt fast jeder in TCP/IP, aber Begriffe wie Layer 2, Layer 3 oder Layer 4 kommen direkt aus der OSI-Welt und bleiben allgegenwaertig.",
+        "explanation_en":  "In practice, almost everyone thinks in TCP/IP, but terms such as Layer 2, Layer 3, or Layer 4 come directly from the OSI world and remain everywhere.",
+        "extraInfo":  "Deshalb muss man beide Modelle lesen koennen, selbst wenn die reale Implementierung meistens ueber TCP/IP erklaert wird.",
+        "extraInfo_en":  "That is why you need to read both models even if the real implementation is usually explained through TCP/IP.",
+        "tip":  "TCP/IP fuer die Praxis, OSI fuer Sprache und Einordnung.",
+        "tip_en":  "TCP/IP for practice, OSI for language and classification.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "TCP/IP",
+                     "OSI",
+                     "Models"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s2-q3",
+        "question":  "Welche OSI-Schichten sind im TCP/IP-Modell typischerweise nicht als eigene Schichten getrennt sichtbar?",
+        "question_en":  "Which OSI layers are typically not visible as separate layers in the TCP/IP model?",
+        "options":  [
+                        "Presentation und Session",
+                        "Transport und Network",
+                        "Data Link und Physical",
+                        "Application und Transport"
+                    ],
+        "options_en":  [
+                           "Presentation and Session",
+                           "Transport and Network",
+                           "Data Link and Physical",
+                           "Application and Transport"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Im groben TCP/IP-Modell werden die oberen OSI-Schichten Presentation und Session nicht separat gefuehrt, sondern meist in der Application Layer mitgedacht.",
+        "explanation_en":  "In the common TCP/IP model, the upper OSI layers Presentation and Session are not treated separately but are usually considered part of the Application layer.",
+        "extraInfo":  "Genau deshalb werden diese beiden OSI-Schichten im Alltag oft vergessen, obwohl sie im Referenzmodell existieren.",
+        "extraInfo_en":  "That is exactly why those two OSI layers are often forgotten in day-to-day work even though they exist in the reference model.",
+        "tip":  "Die mittleren Drei im OSI sind 5-4-3; im TCP/IP faellt 5 und 6 meist in Application.",
+        "tip_en":  "The OSI middle layers are 5-4-3; in TCP/IP, 5 and 6 are usually folded into Application.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "OSI",
+                     "TCP/IP",
+                     "Presentation",
+                     "Session"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s2-q4",
+        "question":  "Welche Zuordnung zwischen TCP/IP und OSI ist am saubersten?",
+        "question_en":  "Which mapping between TCP/IP and OSI is the cleanest?",
+        "options":  [
+                        "Internet entspricht grob OSI Layer 3, Link deckt grob Layer 1 und 2 ab",
+                        "Transport entspricht grob OSI Layer 1 und 2, Link entspricht grob Layer 4",
+                        "Application entspricht nur OSI Layer 7 und niemals 5 oder 6",
+                        "Internet ist identisch mit OSI Layer 4"
+                    ],
+        "options_en":  [
+                           "Internet roughly matches OSI Layer 3, and Link roughly covers Layers 1 and 2",
+                           "Transport roughly matches OSI Layers 1 and 2, and Link roughly matches Layer 4",
+                           "Application matches only OSI Layer 7 and never 5 or 6",
+                           "Internet is identical to OSI Layer 4"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Die gaengige Grobzuordnung ist: TCP/IP Application etwa OSI 5-7, Transport etwa OSI 4, Internet etwa OSI 3 und Link etwa OSI 1-2.",
+        "explanation_en":  "The usual rough mapping is: TCP/IP Application roughly OSI 5-7, Transport roughly OSI 4, Internet roughly OSI 3, and Link roughly OSI 1-2.",
+        "extraInfo":  "Es ist eine praktische Zuordnung, keine perfekte Eins-zu-eins-Abbildung.",
+        "extraInfo_en":  "It is a practical mapping, not a perfect one-to-one equivalence.",
+        "tip":  "Internet = Layer 3 ist die wichtigste Merkhilfe.",
+        "tip_en":  "Internet = Layer 3 is the key memory aid.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "OSI",
+                     "TCP/IP",
+                     "Layer Mapping"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s2-q5",
+        "question":  "Welche Aussage ist falsch?",
+        "question_en":  "Which statement is false?",
+        "options":  [
+                        "OSI Layer 3 ist die Data Link Layer",
+                        "OSI Layer 4 ist die Transport Layer",
+                        "OSI Layer 2 ist die Data Link Layer",
+                        "OSI Layer 1 ist die Physical Layer"
+                    ],
+        "options_en":  [
+                           "OSI Layer 3 is the Data Link layer",
+                           "OSI Layer 4 is the Transport layer",
+                           "OSI Layer 2 is the Data Link layer",
+                           "OSI Layer 1 is the Physical layer"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "OSI Layer 3 ist die Network Layer. Data Link ist Layer 2.",
+        "explanation_en":  "OSI Layer 3 is the Network layer. Data Link is Layer 2.",
+        "extraInfo":  "Das ist ein klassischer Fehler, wenn Layer 2 und Layer 3 beim Routing-Grundwissen unsauber getrennt werden.",
+        "extraInfo_en":  "That is a classic mistake when Layer 2 and Layer 3 are not cleanly separated in routing basics.",
+        "tip":  "L2 = Data Link, L3 = Network.",
+        "tip_en":  "L2 = Data Link, L3 = Network.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "OSI",
+                     "False Statement",
+                     "Layers"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     }
 ];
