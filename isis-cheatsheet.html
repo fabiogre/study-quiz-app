@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IS-IS Cheat Sheet</title>
+    <link rel="stylesheet" href="./styles.css?v=20260324-7" />
+    <style>
+      .cheat-layout { max-width: 1040px; margin: 0 auto; padding: 1rem; }
+      .cheat-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+      .cheat-tools { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+      .link-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+      .cheat-hero, .cheat-card { border: 1px solid var(--line); border-radius: 12px; background: #fffefb; box-shadow: 0 4px 12px rgba(20,20,20,0.06); }
+      .cheat-hero { padding: 1rem; margin: 1rem 0; }
+      .lang-switch button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+      .cheat-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0.9rem; }
+      .cheat-card { padding: 1rem; }
+      .cheat-card h2 { margin: 0 0 0.55rem; font-size: 1.05rem; }
+      .cheat-card ul, .cheat-card ol { margin: 0.4rem 0 0; padding-left: 1.15rem; }
+      .cheat-card li + li { margin-top: 0.22rem; }
+      .cheat-card p { margin: 0.5rem 0 0; line-height: 1.5; }
+      .pill-row { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.7rem; }
+      .pill { border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.55rem; background: #fff; font-size: 0.88rem; }
+      [data-lang="en"] { display: none; }
+      body.lang-en [data-lang="de"] { display: none; }
+      body.lang-en [data-lang="en"] { display: block; }
+      @media (max-width: 980px) { .cheat-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="cheat-layout cheat-top">
+        <div>
+          <h1 data-lang="de">IS-IS Cheat Sheet</h1>
+          <h1 data-lang="en">IS-IS Cheat Sheet</h1>
+          <p class="muted" data-lang="de">Arbeitsblatt fuer dein neues IS-IS-Thema. Wird fortlaufend mit deinen Notizen erweitert.</p>
+          <p class="muted" data-lang="en">Working sheet for your new IS-IS topic. It will be extended continuously with your notes.</p>
+        </div>
+        <div class="cheat-tools">
+          <div class="lang-switch">
+            <button id="langDeBtn" type="button" class="secondary active">Deutsch</button>
+            <button id="langEnBtn" type="button" class="secondary">English</button>
+          </div>
+          <a href="./index.html" class="secondary link-btn">Study Quiz</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="cheat-layout">
+      <section class="cheat-hero">
+        <strong data-lang="de">Status</strong>
+        <strong data-lang="en">Status</strong>
+        <p data-lang="de">Die IS-IS-Struktur ist vorbereitet. Inhalte werden ergänzt, sobald du mir die Notes für die einzelnen Sections gibst.</p>
+        <p data-lang="en">The IS-IS structure is prepared. Content will be added as soon as you provide notes for the individual sections.</p>
+        <div class="pill-row" data-lang="de">
+          <span class="pill">Modul 1: IP Routing Review</span>
+          <span class="pill">Modul 2: Static Routes</span>
+          <span class="pill">Modul 3: Interior Gateway Protocols</span>
+          <span class="pill">Modul 4: IS-IS Routing Protocol</span>
+        </div>
+        <div class="pill-row" data-lang="en">
+          <span class="pill">Module 1: IP Routing Review</span>
+          <span class="pill">Module 2: Static Routes</span>
+          <span class="pill">Module 3: Interior Gateway Protocols</span>
+          <span class="pill">Module 4: IS-IS Routing Protocol</span>
+        </div>
+      </section>
+
+      <section class="cheat-grid">
+        <article class="cheat-card">
+          <h2 data-lang="de">Geplante Module</h2>
+          <h2 data-lang="en">Planned Modules</h2>
+          <ol data-lang="de">
+            <li>IP Routing Review</li>
+            <li>Static Routes</li>
+            <li>Interior Gateway Protocols</li>
+            <li>Intermediate System to Intermediate System Routing Protocol</li>
+          </ol>
+          <ol data-lang="en">
+            <li>IP Routing Review</li>
+            <li>Static Routes</li>
+            <li>Interior Gateway Protocols</li>
+            <li>Intermediate System to Intermediate System Routing Protocol</li>
+          </ol>
+        </article>
+
+        <article class="cheat-card">
+          <h2 data-lang="de">Arbeitsweise</h2>
+          <h2 data-lang="en">Workflow</h2>
+          <ul data-lang="de">
+            <li>Du gibst Notes pro Section.</li>
+            <li>Ich formuliere daraus schwere Wissensfragen.</li>
+            <li>Ich ergänze parallel die geordnete Wissensbasis.</li>
+            <li>Mehrdeutige oder fachlich riskante Aussagen prüfe ich gegen Primärquellen.</li>
+          </ul>
+          <ul data-lang="en">
+            <li>You provide notes per section.</li>
+            <li>I turn them into hard knowledge questions.</li>
+            <li>In parallel, I extend the structured knowledge base.</li>
+            <li>Ambiguous or risky technical statements are checked against primary sources.</li>
+          </ul>
+        </article>
+
+        <article class="cheat-card">
+          <h2 data-lang="de">Nächster Schritt</h2>
+          <h2 data-lang="en">Next Step</h2>
+          <p data-lang="de">Schick als Nächstes deine Notes für <strong>IS-IS / Modul 1 / Section 1</strong>. Dann baue ich direkt die ersten Fragen und den ersten Wissensblock ein.</p>
+          <p data-lang="en">Next, send your notes for <strong>IS-IS / Module 1 / Section 1</strong>. I will then add the first questions and the first knowledge block right away.</p>
+        </article>
+
+        <article class="cheat-card">
+          <h2 data-lang="de">Merker</h2>
+          <h2 data-lang="en">Reminder</h2>
+          <p data-lang="de">IS-IS läuft in der App als eigenes Thema <strong>IS-IS</strong> neben <strong>Hauptquiz</strong> und <strong>BGP</strong>.</p>
+          <p data-lang="en">IS-IS runs in the app as its own topic <strong>IS-IS</strong> next to <strong>Main Quiz</strong> and <strong>BGP</strong>.</p>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const langDeBtn = document.getElementById("langDeBtn");
+      const langEnBtn = document.getElementById("langEnBtn");
+      function setLang(lang) {
+        document.body.classList.toggle("lang-en", lang === "en");
+        langDeBtn.classList.toggle("active", lang === "de");
+        langEnBtn.classList.toggle("active", lang === "en");
+      }
+      langDeBtn.addEventListener("click", () => setLang("de"));
+      langEnBtn.addEventListener("click", () => setLang("en"));
+    </script>
+  </body>
+</html>

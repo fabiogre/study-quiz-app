@@ -240,7 +240,7 @@ const UI_TEXTS = {
       explanationPlaceholder: "Kurz warum die Antwort stimmt",
       tagsPlaceholder: "z.B. Kapitel 1, Definition",
       sourcePlaceholder: "z.B. Folie 42",
-      topicPlaceholder: "z.B. BGP",
+      topicPlaceholder: "z.B. BGP oder IS-IS",
       modulePlaceholder: "z.B. Modul 1",
       sectionPlaceholder: "z.B. Section 2",
     },
@@ -433,7 +433,7 @@ const UI_TEXTS = {
       explanationPlaceholder: "Short why this answer is correct",
       tagsPlaceholder: "e.g. Chapter 1, Definition",
       sourcePlaceholder: "e.g. Slide 42",
-      topicPlaceholder: "e.g. BGP",
+      topicPlaceholder: "e.g. BGP or IS-IS",
       modulePlaceholder: "e.g. Module 1",
       sectionPlaceholder: "e.g. Section 2",
     },
@@ -1783,6 +1783,14 @@ function sanitizeTopic(value) {
   if (normalized === "bgp" || normalized.startsWith("bgp ")) {
     return "BGP";
   }
+  if (
+    normalized === "isis" ||
+    normalized === "is-is" ||
+    normalized === "is is" ||
+    normalized.includes("intermediate system to intermediate system")
+  ) {
+    return "IS-IS";
+  }
   return text;
 }
 
@@ -1816,6 +1824,14 @@ function toGermanTopicName(value) {
   const normalized = text.toLowerCase();
   if (normalized === "main quiz" || normalized === "main questions") return DEFAULT_TOPIC;
   if (normalized === "bgp") return "BGP";
+  if (
+    normalized === "isis" ||
+    normalized === "is-is" ||
+    normalized === "is is" ||
+    normalized.includes("intermediate system to intermediate system")
+  ) {
+    return "IS-IS";
+  }
   return text;
 }
 
@@ -1824,6 +1840,7 @@ function toEnglishTopicName(value) {
   if (!text) return "";
   if (text === DEFAULT_TOPIC) return "Main Quiz";
   if (text.toLowerCase() === "bgp") return "BGP";
+  if (text.toLowerCase() === "is-is") return "IS-IS";
   return text;
 }
 
@@ -1841,9 +1858,21 @@ function inferTopic(raw, tags, source) {
   const normalizedTags = tags.map((tag) => String(tag || "").trim().toLowerCase());
   const questionText = String(raw.question || "").toLowerCase();
   if (idText.startsWith("bgp-")) return "BGP";
+  if (idText.startsWith("isis-") || idText.startsWith("is-is-")) return "IS-IS";
   if (normalizedSource.includes("bgp grundlagen") || normalizedSource.includes("bgp fundamentals")) return "BGP";
+  if (
+    normalizedSource.includes("is-is") ||
+    normalizedSource.includes("isis") ||
+    normalizedSource.includes("intermediate system to intermediate system")
+  ) {
+    return "IS-IS";
+  }
   if (normalizedTags.includes("bgp")) return "BGP";
+  if (normalizedTags.includes("is-is") || normalizedTags.includes("isis")) return "IS-IS";
   if (questionText.includes("border gateway protocol")) return "BGP";
+  if (questionText.includes("intermediate system to intermediate system") || questionText.includes("is-is")) {
+    return "IS-IS";
+  }
   return DEFAULT_TOPIC;
 }
 
