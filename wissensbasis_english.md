@@ -2126,7 +2126,7 @@ Important:
   - TCP/IP Link roughly matches OSI 1 to 2
 - Presentation and Session are normally not visible as separate layers in the TCP/IP model.
 
-## IS-IS Module 1 Section 3: Movement of data through the network
+## IS-IS Module 1 Section 2: Movement of data through the network
 - Two address types are important for moving data from source to destination:
   - IP for logical end-to-end addressing
   - MAC for local hop-by-hop forwarding on the current link
@@ -2140,3 +2140,14 @@ Important:
 - Key memory aid:
   - IP remains logically relevant for source and destination
   - Layer 2 is rebuilt at every hop
+
+
+## IS-IS Module 1 Section 2: Routing tables and FIB
+- Routers maintain a routing table or operational forwarding view to make forwarding decisions.
+- An entry describes a destination prefix and its length.
+- For directly connected networks, the entry typically points to a local interface.
+- For destinations that are not directly reachable, the entry typically points to a next hop.
+- Overlapping entries with different prefix lengths can exist.
+- If multiple entries match, the longest matching prefix always wins (longest prefix match, most specific match).
+- For a match, as many leading bits of the destination IP must match the prefix as the prefix length requires.
+- If only a next hop is known, the router can recursively look up that next-hop IP to find the concrete outgoing interface.

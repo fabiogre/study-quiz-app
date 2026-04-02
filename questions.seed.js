@@ -15089,8 +15089,8 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     },
     {
         "id":  "isis-m1s3-q2",
@@ -15128,8 +15128,8 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     },
     {
         "id":  "isis-m1s3-q3",
@@ -15167,8 +15167,8 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     },
     {
         "id":  "isis-m1s3-q4",
@@ -15207,8 +15207,8 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     },
     {
         "id":  "isis-m1s3-q5",
@@ -15246,8 +15246,8 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     },
     {
         "id":  "isis-m1s3-q6",
@@ -15285,8 +15285,8 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     },
     {
         "id":  "isis-m1s3-q7",
@@ -15324,7 +15324,281 @@ window.STUDY_QUIZ_SEED = [
         "topic_en":  "IS-IS",
         "module":  "Modul 1",
         "module_en":  "Module 1",
-        "section":  "Section 3",
-        "section_en":  "Section 3"
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q1",
+        "question":  "Wofuer haelt ein Router eine Routing-Tabelle bzw. FIB vor?",
+        "question_en":  "Why does a router maintain a routing table or FIB?",
+        "options":  [
+                        "Um Forwarding-Entscheidungen fuer empfangene Pakete zu treffen",
+                        "Um nur MAC-Adressen lokaler Hosts dauerhaft zu speichern",
+                        "Um die TCP-Sitzungen aller Hosts im Netz zu terminieren",
+                        "Um die Payload aller Pakete vor der Weiterleitung zu veraendern"
+                    ],
+        "options_en":  [
+                           "To make forwarding decisions for received packets",
+                           "To permanently store only the MAC addresses of local hosts",
+                           "To terminate the TCP sessions of all hosts in the network",
+                           "To modify the payload of all packets before forwarding"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Der Router braucht eine strukturierte Sicht auf erreichbare Zielpraefixe, damit er fuer ein Ziel entscheiden kann, wohin das Paket als naechstes gehen soll.",
+        "explanation_en":  "The router needs a structured view of reachable destination prefixes so it can decide where a packet should go next.",
+        "extraInfo":  "Im Kurskontext wird FIB oft vereinfacht als die operative Forwarding-Sicht bzw. Routing-Tabelle fuer die Weiterleitung betrachtet.",
+        "extraInfo_en":  "In the course context, the FIB is often treated in a simplified way as the operational forwarding view or routing table used for forwarding.",
+        "tip":  "Routing-Tabelle/FIB = Entscheidungsbasis fuer den naechsten Schritt.",
+        "tip_en":  "Routing table or FIB = decision base for the next step.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Routing Table",
+                     "FIB",
+                     "Forwarding"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q2",
+        "question":  "Welche Information enthaelt ein Routing-Eintrag fuer ein direkt verbundenes Netz typischerweise?",
+        "question_en":  "Which information does a routing entry for a directly connected network typically contain?",
+        "options":  [
+                        "Das zu verwendende Ausgangsinterface fuer dieses Zielpraefix",
+                        "Immer zwingend die IP eines naechsten Routers in einem anderen Netz",
+                        "Nur die Ziel-MAC aller Endgeraete in diesem Subnetz",
+                        "Nur die TTL fuer alle Pakete in diesem Netz"
+                    ],
+        "options_en":  [
+                           "The outgoing interface to use for that destination prefix",
+                           "Always the IP of a next router in another network",
+                           "Only the destination MACs of all end devices in that subnet",
+                           "Only the TTL for all packets in that network"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Wenn ein Praefix direkt verbunden ist, kennt der Router das passende lokale Interface. Ein externer Next Hop ist dann fuer diesen Eintrag nicht der Kernpunkt.",
+        "explanation_en":  "If a prefix is directly connected, the router knows the proper local interface. An external next hop is then not the key point of that entry.",
+        "extraInfo":  "Die konkrete Ziel-MAC des Endhosts wird trotzdem nicht aus der Routing-Tabelle geholt, sondern typischerweise lokal per ARP oder Neighbor Discovery aufgeloest.",
+        "extraInfo_en":  "The concrete destination MAC of the end host is still not taken from the routing table but is typically resolved locally via ARP or Neighbor Discovery.",
+        "tip":  "Direkt verbunden = lokales Interface ist der entscheidende Verweis.",
+        "tip_en":  "Directly connected = the local interface is the key reference.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Routing Table",
+                     "Connected Routes",
+                     "Interface"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q3",
+        "question":  "Welche Information enthaelt ein Routing-Eintrag typischerweise, wenn das Zielpraefix nicht direkt erreichbar ist?",
+        "question_en":  "Which information does a routing entry typically contain when the destination prefix is not directly reachable?",
+        "options":  [
+                        "Die IP-Adresse eines Next Hops, ueber den das Ziel erreichbar ist",
+                        "Die MAC-Adresse des finalen Zielhosts ueber alle Router hinweg",
+                        "Ausschliesslich die Transport-Portnummer der Anwendung",
+                        "Den kompletten Pfad aller Zwischenrouter als MAC-Liste"
+                    ],
+        "options_en":  [
+                           "The IP address of a next hop through which the destination is reachable",
+                           "The MAC address of the final destination host across all routers",
+                           "Only the transport port number of the application",
+                           "The full path of all intermediate routers as a MAC list"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Ist ein Netz nicht direkt angeschlossen, zeigt der Eintrag typischerweise auf einen Next Hop. Darueber kann der Router das Paket an den naechsten passenden Router weitergeben.",
+        "explanation_en":  "If a network is not directly attached, the entry typically points to a next hop. That allows the router to hand the packet to the next suitable router.",
+        "extraInfo":  "Genau daraus entsteht das klassische Weiterreichen von Router zu Router ueber mehrere Hops.",
+        "extraInfo_en":  "That is exactly how the classic router-to-router forwarding across multiple hops is built.",
+        "tip":  "Nicht direkt dran = Next-Hop-IP ist der wichtige Hinweis.",
+        "tip_en":  "Not directly attached = next-hop IP is the key hint.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Routing Table",
+                     "Next Hop",
+                     "Forwarding"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q4",
+        "question":  "Was bedeutet Longest Prefix Match bzw. Most Specific Match?",
+        "question_en":  "What does longest prefix match or most specific match mean?",
+        "options":  [
+                        "Wenn mehrere Eintraege passen, wird der mit der groessten Praefixlaenge verwendet",
+                        "Wenn mehrere Eintraege passen, gewinnt immer der mit der kleinsten Praefixlaenge",
+                        "Wenn mehrere Eintraege passen, gewinnt immer der zuerst konfigurierte Eintrag",
+                        "Wenn mehrere Eintraege passen, wird zufaellig einer ausgewaehlt"
+                    ],
+        "options_en":  [
+                           "If multiple entries match, the one with the largest prefix length is used",
+                           "If multiple entries match, the one with the smallest prefix length always wins",
+                           "If multiple entries match, the first configured entry always wins",
+                           "If multiple entries match, one is chosen at random"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Die spezifischere Route gewinnt. Ein engeres Praefix beschreibt das Ziel genauer und wird deshalb gegenueber allgemeineren Eintraegen bevorzugt.",
+        "explanation_en":  "The more specific route wins. A narrower prefix describes the destination more precisely and is therefore preferred over more general entries.",
+        "extraInfo":  "Das ist eine Kernregel des IP-Forwardings und wichtig fuer nahezu jedes Routing-Protokoll spaeter im Kurs.",
+        "extraInfo_en":  "This is a core rule of IP forwarding and becomes important for nearly every routing protocol later in the course.",
+        "tip":  "Laengeres Praefix = genauer = gewinnt.",
+        "tip_en":  "Longer prefix = more specific = wins.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Longest Prefix Match",
+                     "FIB",
+                     "Routing"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q5",
+        "question":  "Welche Aussage beschreibt den eigentlichen Matching-Vorgang am treffendsten?",
+        "question_en":  "Which statement best describes the actual matching process?",
+        "options":  [
+                        "Die Ziel-IP wird bitweise mit dem Praefix verglichen, und es muessen so viele Bits passen, wie die Praefixlaenge vorgibt",
+                        "Es reicht, wenn die erste Dezimalzahl der IP-Adresse zum Praefix passt",
+                        "Ein Match besteht nur dann, wenn Ziel-IP und Praefix exakt dieselbe Laenge haben",
+                        "Der Router vergleicht ausschliesslich die Ziel-MAC mit dem IP-Praefix"
+                    ],
+        "options_en":  [
+                           "The destination IP is compared bit by bit with the prefix, and as many bits must match as the prefix length requires",
+                           "It is enough if the first decimal value of the IP address matches the prefix",
+                           "A match exists only if the destination IP and the prefix have exactly the same length",
+                           "The router compares only the destination MAC against the IP prefix"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Praefixe sind letztlich Bitmaskenlogik. Deshalb ist die Praefixlaenge entscheidend dafuer, wie viele fuehrende Bits uebereinstimmen muessen.",
+        "explanation_en":  "Prefixes are ultimately bitmask logic. That is why the prefix length decides how many leading bits must match.",
+        "extraInfo":  "Genau deshalb ist ein /24 allgemeiner als ein /30 und ein /30 spezifischer als ein /24.",
+        "extraInfo_en":  "That is exactly why a /24 is more general than a /30 and a /30 is more specific than a /24.",
+        "tip":  "Praefixlaenge sagt, wie viele Anfangsbits zaehlen.",
+        "tip_en":  "Prefix length tells you how many leading bits count.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Prefix Length",
+                     "Matching",
+                     "FIB"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q6",
+        "question":  "Was beschreibt rekursive Next-Hop-Aufloesung am besten?",
+        "question_en":  "What best describes recursive next-hop resolution?",
+        "options":  [
+                        "Wenn ein Eintrag nur einen Next Hop nennt, kann der Router auf diese Next-Hop-IP nochmals einen Lookup machen, um das passende Ausgangsinterface zu finden",
+                        "Der Router ersetzt die Ziel-IP rekursiv durch immer neue Ziel-IPs, bis keine mehr uebrig ist",
+                        "Der Router fragt jeden Zwischenrouter einzeln per ARP nach seiner Routing-Tabelle",
+                        "Rekursive Aufloesung bedeutet, dass jedes Paket mehrfach an denselben Router geschickt wird"
+                    ],
+        "options_en":  [
+                           "If an entry only gives a next hop, the router can perform another lookup on that next-hop IP to find the proper outgoing interface",
+                           "The router recursively replaces the destination IP with new destination IPs until none are left",
+                           "The router asks every intermediate router via ARP for its routing table",
+                           "Recursive resolution means that every packet is sent multiple times to the same router"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Ein Next Hop allein reicht fuer das Senden noch nicht immer aus. Der Router muss oft erst herausfinden, ueber welches eigene Interface dieser Next Hop erreichbar ist.",
+        "explanation_en":  "A next hop alone is not always enough for sending. The router often first has to determine through which of its own interfaces that next hop is reachable.",
+        "extraInfo":  "Gerade diese rekursive Aufloesung verbindet die logische Route mit der konkreten lokalen Weiterleitung.",
+        "extraInfo_en":  "That recursive resolution is exactly what connects the logical route with the concrete local forwarding step.",
+        "tip":  "Next-Hop-IP finden ist erst der Anfang, das Interface muss danach noch aufgeloest werden.",
+        "tip_en":  "Finding the next-hop IP is only the beginning; the interface still has to be resolved afterward.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Recursive Lookup",
+                     "Next Hop",
+                     "Forwarding"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s4-q7",
+        "question":  "Welche Aussage ist falsch?",
+        "question_en":  "Which statement is false?",
+        "options":  [
+                        "Wenn mehrere Eintraege passen, gewinnt immer die kuerzeste Route im Sinn der kleinsten Praefixlaenge",
+                        "Ein Router kann ueberlappende Eintraege mit verschiedenen Praefixlaengen in seiner FIB haben",
+                        "Ein nicht direkt erreichbares Ziel kann ueber einen Next Hop beschrieben sein",
+                        "Ein direkt verbundenes Netz kann ueber ein lokales Ausgangsinterface beschrieben sein"
+                    ],
+        "options_en":  [
+                           "If multiple entries match, the shortest route in the sense of the smallest prefix length always wins",
+                           "A router can have overlapping entries with different prefix lengths in its FIB",
+                           "A destination that is not directly reachable can be described via a next hop",
+                           "A directly connected network can be described via a local outgoing interface"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Es gewinnt nicht das kuerzeste, sondern das laengste passende Praefix. Das ist genau die Longest-Prefix-Match-Regel.",
+        "explanation_en":  "It is not the shortest but the longest matching prefix that wins. That is exactly the longest-prefix-match rule.",
+        "extraInfo":  "Die Formulierung ist absichtlich gemein, weil kuerzeste Route und laengstes Praefix im Kopf leicht gegeneinander verrutschen.",
+        "extraInfo_en":  "The wording is deliberately tricky because shortest route and longest prefix are easy to mix up mentally.",
+        "tip":  "Bei Praefixen gewinnt das spezifischste Match, nicht das allgemeinste.",
+        "tip_en":  "With prefixes, the most specific match wins, not the most general one.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "False Statement",
+                     "Longest Prefix Match",
+                     "FIB"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 2",
+        "section_en":  "Section 2"
     }
-];
+]
+;

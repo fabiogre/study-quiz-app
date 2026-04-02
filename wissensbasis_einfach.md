@@ -2126,7 +2126,7 @@ Wichtig:
   - TCP/IP Link entspricht grob OSI 1 bis 2
 - Presentation und Session sind im TCP/IP-Modell normalerweise nicht als eigene Schichten getrennt sichtbar.
 
-## IS-IS Modul 1 Section 3: Bewegung von Daten durch das Netz
+## IS-IS Modul 1 Section 2: Bewegung von Daten durch das Netz
 - Fuer die Uebertragung von Daten von der Quelle zum Ziel sind zwei Adressarten wichtig:
   - IP fuer die logische End-to-End-Adressierung
   - MAC fuer das lokale Hop-by-Hop-Forwarding auf dem jeweiligen Link
@@ -2140,3 +2140,14 @@ Wichtig:
 - Wichtige Merkhilfe:
   - IP bleibt logisch fuer Quelle und Ziel relevant
   - Layer 2 wird auf jedem Hop neu aufgebaut
+
+
+## IS-IS Modul 1 Section 2: Routing Tables und FIB
+- Router halten eine Routing-Tabelle bzw. operative Forwarding-Sicht vor, um Weiterleitungsentscheidungen zu treffen.
+- Ein Eintrag beschreibt ein Zielpraefix und dessen Laenge.
+- Bei direkt verbundenen Netzen zeigt der Eintrag typischerweise auf ein lokales Interface.
+- Bei nicht direkt erreichbaren Netzen zeigt der Eintrag typischerweise auf einen Next Hop.
+- Es koennen ueberlappende Eintraege mit verschiedenen Praefixlaengen existieren.
+- Wenn mehrere Eintraege passen, gewinnt immer das laengste passende Praefix (longest prefix match, most specific match).
+- Fuer ein Match muessen so viele fuehrende Bits der Ziel-IP mit dem Praefix uebereinstimmen, wie die Praefixlaenge vorgibt.
+- Wenn nur ein Next Hop bekannt ist, kann der Router rekursiv auf diese Next-Hop-IP schauen, um das konkrete Ausgangsinterface zu finden.
