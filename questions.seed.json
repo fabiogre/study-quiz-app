@@ -1097,7 +1097,7 @@
         "section":  "Section 2",
         "question_en":  "Which statement best describes the control word in the MPLS service context?",
         "explanation_en":  "The Control Word is optional and is used depending on the service type and implementation requirements.",
-        "extraInfo_en":  "Important: ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ATM/Frame Relay onlyÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
+        "extraInfo_en":  "Important: ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œATM/Frame Relay onlyÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â is worded too narrowly. Depending on the pseudowire/service profile, it may also be relevant in other contexts.",
         "tip_en":  "Always view Control Word in terms of service and design.",
         "source_en":  "Telecommunication basics",
         "module_en":  "Module 1",
@@ -1733,7 +1733,7 @@
                      "Payload"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What does ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“encapsulate customer payloadÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â mean in the provider context?",
+        "question_en":  "What does ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œencapsulate customer payloadÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â mean in the provider context?",
         "explanation_en":  "Encapsulation adds transport information without destroying the customer\u0027s payload functionality.",
         "extraInfo_en":  "The provider thereby creates a stable transport shell for forwarding, separation and control.",
         "tip_en":  "Payload content remains the same, headers are added.",
@@ -1895,7 +1895,7 @@
         "question_en":  "What does it mean: \"combine separate overlay networks onto one platform and still retain an overlay model\"?",
         "explanation_en":  "A common physical network is used while the logical service boundaries are maintained.",
         "extraInfo_en":  "Simply put: a common infrastructure under the hood, externally separate virtual networks for each service/customer with their own policy and administration.",
-        "tip_en":  "Separate in your mind ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“physicalÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â (joint) and ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“logicalÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â (separate).",
+        "tip_en":  "Separate in your mind ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œphysicalÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â (joint) and ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œlogicalÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â (separate).",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "All customers share the same configuration without separation",
@@ -2079,7 +2079,7 @@
                      "VPN"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What best describes a ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“serviceÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â in the provider environment?",
+        "question_en":  "What best describes a ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œserviceÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â in the provider environment?",
         "explanation_en":  "A service is a logically clearly described unit for connectivity and operation.",
         "extraInfo_en":  "This typically includes end-to-end configuration, management and a clear cost/billing model.",
         "tip_en":  "Service = logical unit, not just hardware.",
@@ -2363,10 +2363,10 @@
                      "Customer Sicht"
                  ],
         "source":  "Telecommunication Grundlagen",
-        "question_en":  "What is the typical advantage of VPWS from the customerÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢s perspective?",
+        "question_en":  "What is the typical advantage of VPWS from the customerÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢s perspective?",
         "explanation_en":  "VPWS provides the customer with the behavior of a dedicated point-to-point line.",
         "extraInfo_en":  "The provider transport structure for the customer user data path remains largely transparent.",
-        "tip_en":  "Note: ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“like a cable between two locationsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â.",
+        "tip_en":  "Note: ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œlike a cable between two locationsÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â.",
         "source_en":  "Telecommunication basics",
         "options_en":  [
                            "It acts like a direct connection between two locations",
@@ -8742,7 +8742,7 @@
                            "Only synchronize keepalive timers"
                        ],
         "correctIndex":  0,
-        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶sen.",
+        "explanation":  "Route Refresh hilft, ohne Hard-Reset der Session eine erneute Policy-Anwendung auf empfangene Routen auszulÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶sen.",
         "explanation_en":  "Route refresh helps trigger policy re-evaluation of received routes without hard-resetting the session.",
         "extraInfo":  "Kursnah fuer Nokia 7750: in deinem Kontext besonders bei BGP-Informationen fuer VPRN relevant.",
         "extraInfo_en":  "Course-style for Nokia 7750: in your context especially relevant with BGP information used for VPRN.",
@@ -8825,7 +8825,7 @@
         "explanation_en":  "The classic BGP FSM consists of exactly these six states.",
         "extraInfo":  "Fuer Troubleshooting sind vor allem Idle, Active und Established sehr praxisrelevant.",
         "extraInfo_en":  "For troubleshooting, Idle, Active, and Established are especially relevant in practice.",
-        "tip":  "Die 6 StandardzustÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¤nde der BGP FSM auswendig koennen.",
+        "tip":  "Die 6 StandardzustÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¤nde der BGP FSM auswendig koennen.",
         "tip_en":  "Know the 6 standard BGP FSM states by heart.",
         "tags":  [
                      "BGP",
@@ -11648,7 +11648,7 @@
         "correctIndex":  0,
         "explanation":  "Wie bei iBGP allgemein skaliert ein Full Mesh schlecht. Route Reflectors sind die uebliche Antwort auf dieses Problem.",
         "explanation_en":  "As with iBGP in general, a full mesh scales poorly. Route reflectors are the usual answer to that problem.",
-        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
+        "extraInfo":  "Das ist genau der Grund, warum Route Reflectors in grÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶sseren MP-BGP-VPN-Umgebungen so wichtig werden.",
         "extraInfo_en":  "That is exactly why route reflectors become so important in larger MP-BGP VPN environments.",
         "tip":  "PE-VPN-Routing folgt den normalen iBGP-Skalierungsregeln.",
         "tip_en":  "PE VPN routing follows the normal iBGP scaling rules.",
@@ -15052,5 +15052,279 @@
         "module_en":  "Module 1",
         "section":  "Section 2",
         "section_en":  "Section 2"
+    },
+    {
+        "id":  "isis-m1s3-q1",
+        "question":  "Welche Aussage beschreibt den Unterschied zwischen IP- und MAC-Adressen am besten?",
+        "question_en":  "Which statement best describes the difference between IP and MAC addresses?",
+        "options":  [
+                        "IP dient der End-to-End-Adressierung, MAC dem Hop-by-Hop-Forwarding auf dem lokalen Link",
+                        "IP ist nur fuer einen einzelnen Link gueltig, MAC fuer die gesamte End-to-End-Strecke",
+                        "IP und MAC sind austauschbar, solange das Zielsubnetz bekannt ist",
+                        "MAC wird nur in Routing-Tabellen verwendet, IP nur in Ethernet-Frames"
+                    ],
+        "options_en":  [
+                           "IP is used for end-to-end addressing, while MAC is used for hop-by-hop forwarding on the local link",
+                           "IP is valid only for a single link, while MAC is valid for the full end-to-end path",
+                           "IP and MAC are interchangeable as long as the destination subnet is known",
+                           "MAC is used only in routing tables, while IP is used only in Ethernet frames"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Die IP-Adresse bleibt fuer die logische Quelle und das logische Ziel relevant. Die MAC-Adresse ist nur fuer den naechsten lokalen Hop im aktuellen Layer-2-Segment wichtig.",
+        "explanation_en":  "The IP address remains relevant for the logical source and logical destination. The MAC address is important only for the next local hop in the current Layer-2 segment.",
+        "extraInfo":  "Genau diese Trennung ist die Grundlage dafuer, dass Router auf jedem Hop das Layer-2-Frame neu bauen koennen, waehrend das IP-Ziel gleich bleibt.",
+        "extraInfo_en":  "This exact separation is what allows routers to rebuild the Layer-2 frame at every hop while the IP destination remains the same.",
+        "tip":  "IP = Ende zu Ende, MAC = nur der naechste Link.",
+        "tip_en":  "IP = end to end, MAC = only the next link.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "IP",
+                     "MAC",
+                     "Encapsulation"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "isis-m1s3-q2",
+        "question":  "Warum muss ein IP-Paket fuer die Uebertragung ueber ein Ethernet-Netz in einen Layer-2-Header eingekapselt werden?",
+        "question_en":  "Why must an IP packet be encapsulated in a Layer 2 header for transmission across an Ethernet network?",
+        "options":  [
+                        "Weil das lokale Medium ein eigenes Forwarding-Schema nutzt und Ethernet dafuer MAC-Adressen verwendet",
+                        "Weil Router nur reine Ethernet-Frames weiterleiten und niemals IP-Pakete verarbeiten",
+                        "Weil die IP-Adresse erst durch den Ethernet-Header erzeugt wird",
+                        "Weil ARP nur mit bereits gekapselten IP-Paketen funktioniert"
+                    ],
+        "options_en":  [
+                           "Because the local medium uses its own forwarding scheme and Ethernet uses MAC addresses for that",
+                           "Because routers forward only pure Ethernet frames and never process IP packets",
+                           "Because the IP address is created only by the Ethernet header",
+                           "Because ARP works only with already encapsulated IP packets"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Das IP-Paket loest das logische Routingproblem. Fuer den konkreten Transport auf einem Link braucht es aber ein Layer-2-Frame mit dem jeweils passenden lokalen Adressschema, bei Ethernet also MAC-Adressen.",
+        "explanation_en":  "The IP packet solves the logical routing problem. But for actual transport on a link, it needs a Layer 2 frame with the matching local addressing scheme, which in Ethernet means MAC addresses.",
+        "extraInfo":  "Der Link-Layer ist also nicht nur Verpackung, sondern die konkrete Transportform fuer den naechsten Hop.",
+        "extraInfo_en":  "So the link layer is not just packaging, but the actual transport form for the next hop.",
+        "tip":  "Routing entscheidet wohin, Layer 2 entscheidet wie ueber den naechsten Link.",
+        "tip_en":  "Routing decides where, Layer 2 decides how across the next link.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Ethernet",
+                     "Layer 2",
+                     "Encapsulation"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "isis-m1s3-q3",
+        "question":  "Was macht ein Host typischerweise, wenn das Ziel in einem anderen Subnetz liegt?",
+        "question_en":  "What does a host typically do when the destination is in a different subnet?",
+        "options":  [
+                        "Er sendet das Paket an sein Default Gateway und braucht dafuer die MAC-Adresse dieses Routers",
+                        "Er versucht immer direkt die MAC-Adresse des entfernten Zielhosts ueber alle Router hinweg per ARP zu lernen",
+                        "Er ersetzt die Ziel-IP durch die MAC-Adresse des Zielhosts",
+                        "Er schickt das Paket zuerst an alle Hosts im lokalen Netz und wartet auf eine Antwort"
+                    ],
+        "options_en":  [
+                           "It sends the packet to its default gateway and therefore needs the MAC address of that router",
+                           "It always tries to learn the MAC address of the remote destination host directly across all routers using ARP",
+                           "It replaces the destination IP with the MAC address of the destination host",
+                           "It first sends the packet to all hosts in the local network and waits for a reply"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Fuer fremde Subnetze wird nicht die MAC des Endhosts gebraucht, sondern die MAC des naechsten Routers auf dem lokalen Link, also typischerweise des Default Gateways.",
+        "explanation_en":  "For remote subnets, the required MAC is not the end host MAC but the MAC of the next router on the local link, typically the default gateway.",
+        "extraInfo":  "ARP hilft dem Host also zunaechst nur auf dem lokalen Segment, nicht bis zum finalen Ziel ueber mehrere Router hinweg.",
+        "extraInfo_en":  "ARP therefore helps the host only on the local segment first, not all the way to the final destination across multiple routers.",
+        "tip":  "Anderes Subnetz = Default Gateway, nicht direkte Ziel-MAC.",
+        "tip_en":  "Different subnet = default gateway, not the direct destination MAC.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Default Gateway",
+                     "ARP",
+                     "Subnets"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "isis-m1s3-q4",
+        "question":  "Welche Aussage beschreibt die Arbeit eines Routers beim Weiterleiten am treffendsten?",
+        "question_en":  "Which statement best describes what a router does when forwarding traffic?",
+        "options":  [
+                        "Er prueft das ankommende Layer-2-Frame, entfernt den alten L2-Header, trifft eine Entscheidung anhand der Ziel-IP und kapselt fuer den naechsten Hop neu ein",
+                        "Er liest nur die Ziel-MAC und laesst IP komplett unberuehrt und uninteressant",
+                        "Er aendert die Ziel-IP auf die Adresse des naechsten Routers bei jedem Hop",
+                        "Er sendet das urspruengliche Ethernet-Frame unveraendert durch alle Netze bis zum Zielhost weiter"
+                    ],
+        "options_en":  [
+                           "It checks the incoming Layer 2 frame, removes the old L2 header, makes a decision based on the destination IP, and encapsulates again for the next hop",
+                           "It reads only the destination MAC and treats IP as untouched and irrelevant",
+                           "It changes the destination IP to the next router address at every hop",
+                           "It forwards the original Ethernet frame unchanged through all networks until the destination host"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Router arbeiten auf Layer 3 fuer die Pfadentscheidung, aber auf jedem Link muss das Paket erneut in ein passendes Layer-2-Frame fuer den naechsten Hop eingekapselt werden.",
+        "explanation_en":  "Routers operate on Layer 3 for path selection, but on every link the packet must be re-encapsulated into a suitable Layer 2 frame for the next hop.",
+        "extraInfo":  "Das ist der Kern von hop-by-hop auf Layer 2 bei gleichzeitig end-to-end auf Layer 3.",
+        "extraInfo_en":  "That is the core of hop by hop at Layer 2 while remaining end to end at Layer 3.",
+        "tip":  "Router ersetzt das Frame, nicht die gesamte End-to-End-Identitaet des Pakets.",
+        "tip_en":  "A router replaces the frame, not the entire end-to-end identity of the packet.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Routers",
+                     "Forwarding",
+                     "Layer 2",
+                     "Layer 3"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "isis-m1s3-q5",
+        "question":  "Welche Aussage ist falsch?",
+        "question_en":  "Which statement is false?",
+        "options":  [
+                        "Der letzte Router findet die MAC-Adresse des Zielhosts direkt in seiner Routing-Tabelle",
+                        "Jedes Router-Interface kann in einem anderen Subnetz liegen und besitzt seine eigene MAC-Adresse",
+                        "Der letzte Router braucht eine Route zum Zielsubnetz und anschliessend typischerweise ARP, um die Ziel-MAC auf dem direkt angeschlossenen Netz zu lernen",
+                        "Hosts senden Verkehr zu fremden Subnetzen normalerweise ueber ihr Default Gateway"
+                    ],
+        "options_en":  [
+                           "The last router finds the destination host MAC address directly in its routing table",
+                           "Each router interface can belong to a different subnet and has its own MAC address",
+                           "The last router needs a route to the destination subnet and then typically ARP to learn the destination MAC on the directly attached network",
+                           "Hosts normally send traffic for remote subnets through their default gateway"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Die Routing-Tabelle kennt Zielpraefixe und naechste Hops, nicht die Ziel-MAC eines Endhosts. Die Ziel-MAC auf dem direkt angeschlossenen Netz wird typischerweise per ARP oder Neighbor-Discovery gelernt.",
+        "explanation_en":  "The routing table knows destination prefixes and next hops, not the destination host MAC. The destination MAC on the directly attached network is typically learned via ARP or Neighbor Discovery.",
+        "extraInfo":  "Das ist ein wichtiger Unterschied zwischen Routing-Information und Layer-2-Nachbarauflosung.",
+        "extraInfo_en":  "That is an important distinction between routing information and Layer 2 neighbor resolution.",
+        "tip":  "Routing-Tabelle = IP-Pfade, ARP-Cache = lokale MAC-Zuordnung.",
+        "tip_en":  "Routing table = IP paths, ARP cache = local MAC mapping.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Routing Table",
+                     "ARP",
+                     "False Statement"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "isis-m1s3-q6",
+        "question":  "Welche Aussage zum Default Gateway eines Hosts ist am treffendsten?",
+        "question_en":  "Which statement about a host default gateway is the most accurate?",
+        "options":  [
+                        "Ein Host hat typischerweise einen Standardrouter fuer Verkehr zu Zielen ausserhalb des eigenen Subnetzes",
+                        "Ein Host braucht fuer jedes entfernte Ziel immer einen eigenen Default Router",
+                        "Ein Default Gateway ersetzt die Ziel-IP des Pakets durch seine eigene IP",
+                        "Ein Default Gateway ist nur bei Layer-2-Switches relevant, nicht bei Hosts"
+                    ],
+        "options_en":  [
+                           "A host typically has one standard router for traffic to destinations outside its own subnet",
+                           "A host needs a separate default router for every remote destination",
+                           "A default gateway replaces the packet destination IP with its own IP",
+                           "A default gateway matters only for Layer 2 switches, not for hosts"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Der Host muss nicht fuer jedes fremde Ziel den kompletten Pfad kennen. Er uebergibt solchen Verkehr an seinen Standardrouter, der das weitere Routing uebernimmt.",
+        "explanation_en":  "The host does not need to know the full path for every remote destination. It hands such traffic to its default router, which takes over the further routing.",
+        "extraInfo":  "Gerade dieses Prinzip vereinfacht die Host-Konfiguration massiv.",
+        "extraInfo_en":  "This principle greatly simplifies host configuration.",
+        "tip":  "Host kennt oft nur lokal und den Weg zum Standardrouter.",
+        "tip_en":  "The host often knows only local reachability and the path to the default router.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Default Gateway",
+                     "Hosts",
+                     "Routing"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
+    },
+    {
+        "id":  "isis-m1s3-q7",
+        "question":  "Welche Beschreibung des gesamten Weges von Host A zu Host B in einem anderen Subnetz ist am besten?",
+        "question_en":  "Which description of the full path from host A to host B in another subnet is the best one?",
+        "options":  [
+                        "Host A kapselt zum Default Gateway ein, Router fuer Router wird der Layer-2-Header jeweils neu gebaut, bis ein Router das Zielsubnetz direkt erreicht und den finalen Host lokal aufloesen kann",
+                        "Host A schickt ein einziges unveraendertes Ethernet-Frame durch alle Router bis zu Host B",
+                        "Jeder Router behaelt dieselben Source- und Destination-MAC-Adressen vom ersten Link bis zum letzten Link bei",
+                        "Die Ziel-IP wird auf jedem Hop auf die IP des naechsten Routers umgeschrieben"
+                    ],
+        "options_en":  [
+                           "Host A encapsulates toward the default gateway, and router by router the Layer 2 header is rebuilt until one router directly reaches the destination subnet and can resolve the final host locally",
+                           "Host A sends one unchanged Ethernet frame through all routers to host B",
+                           "Each router keeps the same source and destination MAC addresses from the first link to the last link",
+                           "The destination IP is rewritten at every hop to the next router IP"
+                       ],
+        "correctIndex":  0,
+        "explanation":  "Genau so bewegt sich das Paket praktisch: Die IP-Zielidee bleibt erhalten, waehrend auf jedem Link das passende lokale Layer-2-Frame fuer den naechsten Hop erzeugt wird.",
+        "explanation_en":  "That is how the packet actually moves: the IP destination concept remains, while on each link the correct local Layer 2 frame is created for the next hop.",
+        "extraInfo":  "Dieser Ablauf ist grundlegendes Routing-Verstaendnis und spaeter wichtig fuer IGPs wie IS-IS.",
+        "extraInfo_en":  "This flow is core routing understanding and becomes important later for IGPs such as IS-IS.",
+        "tip":  "IP bleibt logisch gleich, Layer 2 wird pro Hop neu gebaut.",
+        "tip_en":  "IP stays logically the same, Layer 2 is rebuilt per hop.",
+        "tags":  [
+                     "IS-IS",
+                     "IP Routing Review",
+                     "Packet Forwarding",
+                     "Routers",
+                     "Subnets"
+                 ],
+        "source":  "IS-IS Grundlagen",
+        "source_en":  "IS-IS fundamentals",
+        "topic":  "IS-IS",
+        "topic_en":  "IS-IS",
+        "module":  "Modul 1",
+        "module_en":  "Module 1",
+        "section":  "Section 3",
+        "section_en":  "Section 3"
     }
 ]

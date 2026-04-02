@@ -2125,3 +2125,18 @@ Important:
   - TCP/IP Internet roughly matches OSI 3
   - TCP/IP Link roughly matches OSI 1 to 2
 - Presentation and Session are normally not visible as separate layers in the TCP/IP model.
+
+## IS-IS Module 1 Section 3: Movement of data through the network
+- Two address types are important for moving data from source to destination:
+  - IP for logical end-to-end addressing
+  - MAC for local hop-by-hop forwarding on the current link
+- An IP packet is encapsulated into a Layer 2 header for transport across a link.
+- With Ethernet, that means the frame uses MAC addresses for the next local hop.
+- If the destination is in another subnet, the host typically sends the packet to its default gateway.
+- For that, the host must know the MAC address of the default gateway, typically via ARP.
+- Routers remove the old Layer 2 header, inspect the IP destination, choose the next hop, and encapsulate again for the next link.
+- The routing table contains destination prefixes and next hops, but not the destination host MAC.
+- The destination MAC on a directly attached network is typically learned via ARP or Neighbor Discovery.
+- Key memory aid:
+  - IP remains logically relevant for source and destination
+  - Layer 2 is rebuilt at every hop

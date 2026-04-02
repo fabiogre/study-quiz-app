@@ -2125,3 +2125,18 @@ Wichtig:
   - TCP/IP Internet entspricht grob OSI 3
   - TCP/IP Link entspricht grob OSI 1 bis 2
 - Presentation und Session sind im TCP/IP-Modell normalerweise nicht als eigene Schichten getrennt sichtbar.
+
+## IS-IS Modul 1 Section 3: Bewegung von Daten durch das Netz
+- Fuer die Uebertragung von Daten von der Quelle zum Ziel sind zwei Adressarten wichtig:
+  - IP fuer die logische End-to-End-Adressierung
+  - MAC fuer das lokale Hop-by-Hop-Forwarding auf dem jeweiligen Link
+- Ein IP-Paket wird fuer den Transport ueber einen Link in einen Layer-2-Header eingekapselt.
+- Bei Ethernet bedeutet das: Das Frame nutzt MAC-Adressen fuer den naechsten lokalen Hop.
+- Liegt das Ziel in einem anderen Subnetz, sendet der Host das Paket typischerweise an sein Default Gateway.
+- Dafuer muss der Host die MAC-Adresse des Default Gateways kennen, typischerweise per ARP.
+- Router entfernen den alten Layer-2-Header, pruefen das IP-Ziel, waehlen den naechsten Hop und kapseln fuer den naechsten Link neu ein.
+- Die Routing-Tabelle enthaelt Zielpraefixe und naechste Hops, aber nicht die Ziel-MAC eines Endhosts.
+- Die Ziel-MAC auf einem direkt angeschlossenen Netz wird typischerweise ueber ARP bzw. Neighbor Discovery gelernt.
+- Wichtige Merkhilfe:
+  - IP bleibt logisch fuer Quelle und Ziel relevant
+  - Layer 2 wird auf jedem Hop neu aufgebaut
