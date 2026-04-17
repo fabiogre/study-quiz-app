@@ -16328,5 +16328,316 @@
         "module_en": "Module 1",
         "section": "Section 3",
         "section_en": "Section 3"
+    },
+    {
+        "id": "isis-ecmp-q1",
+        "question": "Was passiert, wenn ein Router mehrere Routen fuer denselben Prefix vom selben Protokoll mit unterschiedlichen Costs lernt?",
+        "question_en": "What happens when a router learns multiple routes for the same prefix from the same protocol with different costs?",
+        "options": [
+            "Nur die Route mit dem niedrigsten Cost-Wert wird dem RTM als Kandidat uebergeben",
+            "Alle Routen werden gleichzeitig dem RTM uebergeben und dort verglichen",
+            "Die Route mit dem hoechsten Cost-Wert wird bevorzugt, da sie mehr Pfade beschreibt",
+            "Der Router waehlt zufaellig eine der Routen aus"
+        ],
+        "options_en": [
+            "Only the route with the lowest cost value is passed to the RTM as a candidate",
+            "All routes are passed to the RTM simultaneously and compared there",
+            "The route with the highest cost value is preferred because it describes more paths",
+            "The router selects one of the routes at random"
+        ],
+        "correctIndex": 0,
+        "explanation": "Das Protokoll (hier IS-IS) fuehrt zuerst selbst eine Best-Path-Selektion durch. Nur die Route(n) mit dem niedrigsten Cost gehen als Kandidaten ans RTM weiter. Routen mit hoeherem Cost werden gar nicht erst eingereicht.",
+        "explanation_en": "The protocol (IS-IS here) performs its own best-path selection first. Only the route(s) with the lowest cost are forwarded to the RTM as candidates. Routes with a higher cost are never submitted.",
+        "extraInfo": "Diese Selektion findet innerhalb des Protokolls statt, bevor das RTM ueberhaupt involviert wird. Das RTM entscheidet dann via Preference zwischen verschiedenen Protokollen.",
+        "extraInfo_en": "This selection happens within the protocol before the RTM is even involved. The RTM then decides between different protocols using preference values.",
+        "tip": "Protokoll selektiert erst nach Cost, dann uebernimmt RTM die Preference-Entscheidung.",
+        "tip_en": "Protocol selects by cost first, then RTM handles the preference decision.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "RTM",
+            "Cost",
+            "Route Selection"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q2",
+        "question": "Was ist der Default-Wert des ECMP-Parameters auf Nokia SR OS, und was bedeutet das praktisch?",
+        "question_en": "What is the default value of the ECMP parameter on Nokia SR OS, and what does that mean in practice?",
+        "options": [
+            "Default ist 1 -- der Router installiert nur eine einzige Route pro Prefix in die FIB",
+            "Default ist 4 -- der Router nutzt automatisch bis zu 4 Pfade ohne Konfiguration",
+            "Default ist 64 -- der Router nutzt immer alle verfuegbaren Equal-Cost-Pfade",
+            "Default ist 0 -- ECMP muss explizit aktiviert werden, bevor ueberhaupt Routen installiert werden"
+        ],
+        "options_en": [
+            "Default is 1 -- the router installs only a single route per prefix into the FIB",
+            "Default is 4 -- the router automatically uses up to 4 paths without configuration",
+            "Default is 64 -- the router always uses all available equal-cost paths",
+            "Default is 0 -- ECMP must be explicitly activated before any routes are installed"
+        ],
+        "correctIndex": 0,
+        "explanation": "ECMP ist per Default auf 1 gesetzt, was effektiv bedeutet: kein Load Balancing. Nur ein einziger Pfad wird in die FIB installiert, auch wenn mehrere Equal-Cost-Pfade vorhanden sind.",
+        "explanation_en": "ECMP defaults to 1, which effectively means no load balancing. Only a single path is installed in the FIB even if multiple equal-cost paths exist.",
+        "extraInfo": "ecmp 1 und no ecmp sind aequivalent. Erst ab ecmp 2 beginnt der Router, mehrere Pfade zu nutzen.",
+        "extraInfo_en": "ecmp 1 and no ecmp are equivalent. Only from ecmp 2 onwards does the router start using multiple paths.",
+        "tip": "Default ECMP = 1 = kein Load Balancing trotz mehrerer gleich-teurer Pfade.",
+        "tip_en": "Default ECMP = 1 = no load balancing despite multiple equal-cost paths.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Default",
+            "FIB",
+            "Nokia SR OS"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q3",
+        "question": "Wie viele Equal-Cost-Routen koennen maximal ueber den ECMP-Parameter fuer denselben Prefix konfiguriert werden?",
+        "question_en": "What is the maximum number of equal-cost routes that can be configured via the ECMP parameter for the same prefix?",
+        "options": [
+            "64",
+            "8",
+            "16",
+            "32"
+        ],
+        "options_en": [
+            "64",
+            "8",
+            "16",
+            "32"
+        ],
+        "correctIndex": 0,
+        "explanation": "Nokia SR OS erlaubt bis zu 64 Equal-Cost-Routen fuer denselben Prefix. Der ECMP-Parameter wird global im config>router Kontext gesetzt und gilt systemweit.",
+        "explanation_en": "Nokia SR OS allows up to 64 equal-cost routes for the same prefix. The ECMP parameter is set globally in the config>router context and applies system-wide.",
+        "extraInfo": "Praktisch werden selten mehr als 8-16 Pfade genutzt, da der Nutzen weiterer Pfade abnimmt und die Komplexitaet steigt.",
+        "extraInfo_en": "In practice, more than 8-16 paths are rarely used, as the benefit of additional paths diminishes and complexity increases.",
+        "tip": "ECMP-Maximum: 64 Pfade auf Nokia SR OS.",
+        "tip_en": "ECMP maximum: 64 paths on Nokia SR OS.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Maximum Paths",
+            "Nokia SR OS"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q4",
+        "question": "Wie verteilt Nokia SR OS den Traffic ueber ECMP-Pfade?",
+        "question_en": "How does Nokia SR OS distribute traffic across ECMP paths?",
+        "options": [
+            "Per Flow via einem internen Hashing-Algorithmus -- alle Pakete desselben Flows gehen immer ueber denselben Pfad",
+            "Per Paket Round-Robin -- jedes einzelne Paket wird auf den naechsten verfuegbaren Pfad verteilt",
+            "Zufaellig -- jedes Paket bekommt einen zufaellig ausgewaehlten Pfad",
+            "Nach Paketgroesse -- grosse Pakete gehen ueber Pfade mit hoeherer Bandbreite"
+        ],
+        "options_en": [
+            "Per flow via an internal hashing algorithm -- all packets of the same flow always take the same path",
+            "Per packet round-robin -- each individual packet is distributed to the next available path",
+            "Randomly -- each packet gets a randomly selected path",
+            "By packet size -- large packets go over paths with higher bandwidth"
+        ],
+        "correctIndex": 0,
+        "explanation": "SR OS verwendet einen 5-Tuple-Hash (Source-IP, Dest-IP, Source-Port, Dest-Port, Protokoll). Alle Pakete eines Flows landen auf demselben Pfad -- das verhindert Paket-Reordering innerhalb eines TCP-Streams.",
+        "explanation_en": "SR OS uses a 5-tuple hash (source IP, dest IP, source port, dest port, protocol). All packets of a flow land on the same path -- this prevents packet reordering within a TCP stream.",
+        "extraInfo": "Per-Paket-Verteilung wuerde zwar theoretisch eine bessere Auslastung ergeben, aber TCP-Reordering kann den Throughput massiv reduzieren. Deshalb ist Flow-Hashing der Standard.",
+        "extraInfo_en": "Per-packet distribution would theoretically yield better utilization, but TCP reordering can massively reduce throughput. That is why flow hashing is the standard.",
+        "tip": "ECMP = Flow-basiertes Hashing, nicht Paket-basiertes Round-Robin.",
+        "tip_en": "ECMP = flow-based hashing, not packet-based round-robin.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Hashing",
+            "Load Balancing",
+            "5-Tuple"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q5",
+        "question": "Es existieren 6 Equal-Cost-Pfade fuer einen Prefix, aber ECMP ist auf 4 konfiguriert. Welche 4 Pfade werden installiert?",
+        "question_en": "There are 6 equal-cost paths for a prefix, but ECMP is configured to 4. Which 4 paths are installed?",
+        "options": [
+            "Die 4 Pfade mit den niedrigsten Next-Hop-IP-Adressen",
+            "Die 4 Pfade werden zufaellig aus den 6 ausgewaehlt",
+            "Die 4 zuerst gelernten Pfade werden bevorzugt",
+            "Die 4 Pfade mit der hoechsten Next-Hop-IP-Adresse"
+        ],
+        "options_en": [
+            "The 4 paths with the lowest next-hop IP addresses",
+            "The 4 paths are randomly selected from the 6",
+            "The 4 paths learned first are preferred",
+            "The 4 paths with the highest next-hop IP address"
+        ],
+        "correctIndex": 0,
+        "explanation": "Wenn mehr Equal-Cost-Pfade vorhanden sind als das ECMP-Limit erlaubt, waehlt Nokia SR OS deterministisch die Pfade mit den numerisch niedrigsten Next-Hop-IP-Adressen aus.",
+        "explanation_en": "When more equal-cost paths exist than the ECMP limit allows, Nokia SR OS deterministically selects the paths with the numerically lowest next-hop IP addresses.",
+        "extraInfo": "Dieses deterministische Verhalten ist wichtig fuer die Netzwerkplanung -- man kann vorhersagen, welche Pfade aktiv sein werden, ohne Protokoll-Logs lesen zu muessen.",
+        "extraInfo_en": "This deterministic behavior is important for network planning -- you can predict which paths will be active without reading protocol logs.",
+        "tip": "Mehr Pfade als ECMP-Limit -> niedrigste Next-Hop-IPs gewinnen.",
+        "tip_en": "More paths than ECMP limit -> lowest next-hop IPs win.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Next-Hop Selection",
+            "Tiebreaker",
+            "Nokia SR OS"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q6",
+        "question": "Welche Bedingungen muessen zwei Routen erfuellen, um als ECMP-Kandidaten zu gelten?",
+        "question_en": "Which conditions must two routes meet to qualify as ECMP candidates?",
+        "options": [
+            "Gleiches Protokoll, gleiche Preference und gleicher Cost-Wert fuer denselben Prefix",
+            "Gleicher Cost-Wert reicht -- das Protokoll spielt keine Rolle",
+            "Gleiche Preference reicht -- Cost-Unterschiede werden automatisch ausgeglichen",
+            "Gleiche Anzahl an Hops und gleicher Egress-Interface-Typ"
+        ],
+        "options_en": [
+            "Same protocol, same preference, and same cost value for the same prefix",
+            "Same cost value is sufficient -- the protocol does not matter",
+            "Same preference is sufficient -- cost differences are automatically balanced",
+            "Same number of hops and same egress interface type"
+        ],
+        "correctIndex": 0,
+        "explanation": "Alle drei Kriterien muessen uebereinstimmen: gleiches Protokoll (z.B. IS-IS), gleiche Preference und gleicher Metric-Wert. Nur dann gelten Routen als Equal-Cost und kommen fuer ECMP in Frage.",
+        "explanation_en": "All three criteria must match: same protocol (e.g. IS-IS), same preference, and same metric value. Only then are routes considered equal-cost and eligible for ECMP.",
+        "extraInfo": "Ein haeufiger Fehler ist, Routen aus verschiedenen Protokollen (z.B. IS-IS und OSPF) als ECMP-Kandidaten zu betrachten -- das ist falsch, selbst wenn die Metric zufaellig gleich ist.",
+        "extraInfo_en": "A common mistake is treating routes from different protocols (e.g. IS-IS and OSPF) as ECMP candidates -- this is incorrect even if the metric happens to be the same.",
+        "tip": "ECMP-Kandidaten: gleiches Protokoll + gleiche Preference + gleicher Cost.",
+        "tip_en": "ECMP candidates: same protocol + same preference + same cost.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Route Selection",
+            "Preference",
+            "Cost"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q7",
+        "question": "Ein Netzwerker behauptet: ECMP verteilt jedes einzelne Paket gleichmaessig auf alle Pfade, daher bekommt jeder Pfad exakt gleich viel Traffic. Was ist daran falsch?",
+        "question_en": "A network engineer claims: ECMP distributes every single packet evenly across all paths, so each path gets exactly the same amount of traffic. What is wrong with this claim?",
+        "options": [
+            "ECMP verteilt Flows, nicht einzelne Pakete -- ungleich grosse Flows fuehren zu ungleicher Auslastung der Pfade",
+            "Die Aussage ist korrekt -- ECMP garantiert immer eine perfekt gleichmaessige Lastverteilung",
+            "ECMP verteilt zwar Pakete, aber nur bei UDP -- bei TCP wird nur ein Pfad genutzt",
+            "ECMP verteilt Pakete nur dann gleichmaessig, wenn alle Pfade dieselbe MTU haben"
+        ],
+        "options_en": [
+            "ECMP distributes flows, not individual packets -- flows of unequal size lead to unequal path utilization",
+            "The statement is correct -- ECMP always guarantees perfectly even load distribution",
+            "ECMP distributes packets but only for UDP -- for TCP only one path is used",
+            "ECMP distributes packets evenly only when all paths have the same MTU"
+        ],
+        "correctIndex": 0,
+        "explanation": "ECMP-Hashing arbeitet auf Flow-Ebene. Ein grosser Elephant-Flow (z.B. ein Backup-Transfer) belegt einen Pfad komplett, waehrend andere Pfade nur kleine Flows tragen. Perfekte Gleichverteilung ist in der Praxis nicht garantiert.",
+        "explanation_en": "ECMP hashing works at the flow level. A large elephant flow (e.g. a backup transfer) can occupy one path entirely while other paths carry only small flows. Perfect equal distribution is not guaranteed in practice.",
+        "extraInfo": "Dieses Problem wird als Elephant Flow Problem bezeichnet. Loesungsansaetze sind z.B. Flowlet-basiertes Load Balancing oder Segment Routing Traffic Engineering.",
+        "extraInfo_en": "This problem is known as the Elephant Flow Problem. Solutions include flowlet-based load balancing or Segment Routing Traffic Engineering.",
+        "tip": "ECMP = Flow-Hashing = keine Garantie fuer gleichmaessige Auslastung bei ungleichen Flows.",
+        "tip_en": "ECMP = flow hashing = no guarantee of even utilization with unequal flows.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Load Balancing",
+            "Elephant Flow",
+            "Hashing"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q8",
+        "question": "In welchem Konfigurationskontext wird der ECMP-Parameter auf Nokia SR OS gesetzt?",
+        "question_en": "In which configuration context is the ECMP parameter set on Nokia SR OS?",
+        "options": [
+            "config>router -- global fuer die gesamte Routing-Instanz",
+            "config>router>isis -- spezifisch nur fuer IS-IS",
+            "config>router>interface -- pro Interface einzeln",
+            "config>service>vprn -- nur innerhalb von VPN-Instanzen"
+        ],
+        "options_en": [
+            "config>router -- globally for the entire routing instance",
+            "config>router>isis -- specifically for IS-IS only",
+            "config>router>interface -- per interface individually",
+            "config>service>vprn -- only within VPN instances"
+        ],
+        "correctIndex": 0,
+        "explanation": "ECMP wird global im config>router Kontext konfiguriert und gilt damit fuer alle Protokolle in der jeweiligen Router-Instanz. Es ist keine protokollspezifische Einstellung.",
+        "explanation_en": "ECMP is configured globally in the config>router context and therefore applies to all protocols in the respective router instance. It is not a protocol-specific setting.",
+        "extraInfo": "Bei VPRN-Instanzen wird ECMP entsprechend im config>service>vprn Kontext gesetzt, da jede VPRN-Instanz eine eigene Routing-Tabelle hat.",
+        "extraInfo_en": "For VPRN instances, ECMP is set in the config>service>vprn context accordingly, since each VPRN instance has its own routing table.",
+        "tip": "ECMP global in config>router, nicht im Protokoll-Kontext.",
+        "tip_en": "ECMP global in config>router, not in the protocol context.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Nokia SR OS",
+            "Configuration",
+            "RTM"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
     }
 ]
