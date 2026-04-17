@@ -16987,5 +16987,462 @@
         "module_en": "Module 1",
         "section": "Verstaendnisfragen",
         "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s5-q1",
+        "question": "Was ist Redistribution im Kontext von Routing-Protokollen?",
+        "question_en": "What is redistribution in the context of routing protocols?",
+        "options": [
+            "Der Prozess, bei dem Routing-Informationen von einer Routing-Domain an eine andere weitergegeben werden",
+            "Das automatische Aufteilen einer Routing-Tabelle auf mehrere Router",
+            "Das Verfahren, bei dem IS-IS-Routen innerhalb derselben Area synchronisiert werden",
+            "Die Methode, mit der ein Router seine eigene Loopback-Adresse anderen Protokollen bekanntgibt"
+        ],
+        "options_en": [
+            "The process by which routing information is passed from one routing domain to another",
+            "The automatic splitting of a routing table across multiple routers",
+            "The procedure by which IS-IS routes are synchronized within the same area",
+            "The method by which a router announces its own loopback address to other protocols"
+        ],
+        "correctIndex": 0,
+        "explanation": "Redistribution bezeichnet den Prozess, bei dem ein Router Routing-Informationen, die er von einem Protokoll (z.B. OSPF) gelernt hat, in ein anderes Protokoll (z.B. IS-IS) einspeist und so zwischen Routing-Domains weitergibt.",
+        "explanation_en": "Redistribution refers to the process by which a router injects routing information learned from one protocol (e.g. OSPF) into another protocol (e.g. IS-IS), passing it between routing domains.",
+        "extraInfo": "Redistribution ist notwendig, wenn ein Netzwerk aus mehreren verschiedenen Routing-Domains besteht, die miteinander kommunizieren sollen.",
+        "extraInfo_en": "Redistribution is necessary when a network consists of multiple different routing domains that need to communicate with each other.",
+        "tip": "Redistribution = Routing-Infos von Domain A nach Domain B weitergeben.",
+        "tip_en": "Redistribution = passing routing info from domain A to domain B.",
+        "tags": [
+            "IS-IS",
+            "Redistribution",
+            "Route Filtering",
+            "Routing Domains"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q2",
+        "question": "Welche Router fuehren Redistribution durch?",
+        "question_en": "Which routers perform redistribution?",
+        "options": [
+            "Border Router -- Router, die entweder zwei verschiedene Routing-Protokolle oder zwei Instanzen desselben Protokolls betreiben",
+            "Nur Designated Router (DR) innerhalb einer IS-IS-Area",
+            "Alle Router im Netzwerk gleichzeitig, gesteuert durch das RTM",
+            "Ausschliesslich Route-Reflektoren in BGP-Umgebungen"
+        ],
+        "options_en": [
+            "Border routers -- routers running either two different routing protocols or two instances of the same protocol",
+            "Only Designated Routers (DR) within an IS-IS area",
+            "All routers in the network simultaneously, controlled by the RTM",
+            "Only route reflectors in BGP environments"
+        ],
+        "correctIndex": 0,
+        "explanation": "Redistribution wird von Border Routern durchgefuehrt. Ein Border Router laeuft entweder zwei verschiedene Routing-Protokolle (z.B. IS-IS und OSPF) oder zwei Instanzen desselben Protokolls und sitzt damit an der Grenze zwischen zwei Routing-Domains.",
+        "explanation_en": "Redistribution is performed by border routers. A border router runs either two different routing protocols (e.g. IS-IS and OSPF) or two instances of the same protocol, sitting at the boundary between two routing domains.",
+        "extraInfo": "Ein typisches Beispiel ist ein Router, der sowohl IS-IS als auch BGP betreibt und BGP-Praefixe in IS-IS redistributet.",
+        "extraInfo_en": "A typical example is a router running both IS-IS and BGP, redistributing BGP prefixes into IS-IS.",
+        "tip": "Border Router = Grenzrouter zwischen zwei Routing-Domains.",
+        "tip_en": "Border router = boundary router between two routing domains.",
+        "tags": [
+            "IS-IS",
+            "Redistribution",
+            "Border Router"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q3",
+        "question": "Welche Arten von Redistribution gibt es?",
+        "question_en": "What types of redistribution exist?",
+        "options": [
+            "One-Way und Two-Way Redistribution",
+            "Active und Passive Redistribution",
+            "Internal und External Redistribution",
+            "Level-1 und Level-2 Redistribution"
+        ],
+        "options_en": [
+            "One-way and two-way redistribution",
+            "Active and passive redistribution",
+            "Internal and external redistribution",
+            "Level-1 and Level-2 redistribution"
+        ],
+        "correctIndex": 0,
+        "explanation": "Redistribution kann one-way (nur in eine Richtung) oder two-way (in beide Richtungen) konfiguriert werden. Bei two-way redistribution tauschen beide Protokolle gegenseitig Routen aus.",
+        "explanation_en": "Redistribution can be configured one-way (in one direction only) or two-way (in both directions). With two-way redistribution, both protocols exchange routes with each other.",
+        "extraInfo": "Two-way Redistribution birgt das Risiko von Routing-Loops, da Routen, die urspruenglich aus Protokoll A kamen, nach Redistribution in Protokoll B wieder zurueck in Protokoll A redistributet werden koennten.",
+        "extraInfo_en": "Two-way redistribution carries the risk of routing loops, as routes originally from protocol A could be redistributed back into protocol A after redistribution into protocol B.",
+        "tip": "One-way = eine Richtung, Two-way = beide Richtungen.",
+        "tip_en": "One-way = one direction, two-way = both directions.",
+        "tags": [
+            "IS-IS",
+            "Redistribution",
+            "One-Way",
+            "Two-Way"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q4",
+        "question": "Werden IP-Praefixe, die von einem anderen Routing-Protokoll gelernt wurden, automatisch an IS-IS-Peers weitergegeben?",
+        "question_en": "Are IP prefixes learned from another routing protocol automatically advertised to IS-IS peers?",
+        "options": [
+            "Nein -- nur wenn explizit eine Export-Routing-Policy konfiguriert wird",
+            "Ja -- IS-IS redistributet automatisch alle Routen anderer Protokolle",
+            "Ja -- aber nur fuer direkt verbundene Subnetze",
+            "Nein -- Redistribution ist in IS-IS grundsaetzlich nicht moeglich"
+        ],
+        "options_en": [
+            "No -- only when an explicit export routing policy is configured",
+            "Yes -- IS-IS automatically redistributes all routes from other protocols",
+            "Yes -- but only for directly connected subnets",
+            "No -- redistribution is fundamentally not possible in IS-IS"
+        ],
+        "correctIndex": 0,
+        "explanation": "IS-IS (und andere IGPs wie OSPF) haben per Default eine ablehnende Export-Policy: Routen von anderen Protokollen werden nicht automatisch in IS-IS eingespeist. Dafuer muss explizit eine Export-Routing-Policy erstellt und angewendet werden.",
+        "explanation_en": "IS-IS (and other IGPs like OSPF) have a default reject export policy: routes from other protocols are not automatically injected into IS-IS. An explicit export routing policy must be created and applied for this to happen.",
+        "extraInfo": "Das ist ein wichtiges Sicherheitsmerkmal -- ohne explizite Konfiguration bleibt die Routing-Domain isoliert.",
+        "extraInfo_en": "This is an important safety feature -- without explicit configuration, the routing domain remains isolated.",
+        "tip": "Redistribution in IS-IS = immer explizite Export-Policy notwendig.",
+        "tip_en": "Redistribution into IS-IS = explicit export policy always required.",
+        "tags": [
+            "IS-IS",
+            "Redistribution",
+            "Export Policy",
+            "Default Behavior"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q5",
+        "question": "Was muss konfiguriert werden, damit Redistribution in IS-IS funktioniert?",
+        "question_en": "What must be configured for redistribution into IS-IS to work?",
+        "options": [
+            "Explizite Export-Routing-Policies",
+            "Eine statische Route als Fallback",
+            "Ein separates VRF fuer die Quell-Domain",
+            "Eine hoeherePreference fuer die zu redistribuierenden Routen"
+        ],
+        "options_en": [
+            "Explicit export routing policies",
+            "A static route as fallback",
+            "A separate VRF for the source domain",
+            "A higher preference for the routes to be redistributed"
+        ],
+        "correctIndex": 0,
+        "explanation": "Fuer Redistribution in IS-IS muessen explizite Export-Routing-Policies erstellt werden. Diese definieren, welche Routen aus welchem Quell-Protokoll in IS-IS eingespeist werden duerfen.",
+        "explanation_en": "For redistribution into IS-IS, explicit export routing policies must be created. These define which routes from which source protocol are allowed to be injected into IS-IS.",
+        "extraInfo": "Die Policy wird dann im IS-IS-Kontext als Export-Policy referenziert und aktiviert.",
+        "extraInfo_en": "The policy is then referenced and activated in the IS-IS context as an export policy.",
+        "tip": "Kein Redistribution ohne explizite Export-Policy.",
+        "tip_en": "No redistribution without an explicit export policy.",
+        "tags": [
+            "IS-IS",
+            "Redistribution",
+            "Export Policy",
+            "Configuration"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q6",
+        "question": "Was ist der Zweck von Route Filtering?",
+        "question_en": "What is the purpose of route filtering?",
+        "options": [
+            "Zu kontrollieren, welche Routen von Peers empfangen werden duerfen und welche weitergegeben werden sollen",
+            "Die Routing-Tabelle automatisch von doppelten Eintraegen zu bereinigen",
+            "Routen mit hoeheren Costs zu bevorzugen, um Schleifen zu vermeiden",
+            "Den Speicherbedarf der FIB durch Entfernen alter Eintraege zu reduzieren"
+        ],
+        "options_en": [
+            "To control which routes may be received from peers and which should be forwarded",
+            "To automatically clean the routing table of duplicate entries",
+            "To prefer routes with higher costs to avoid loops",
+            "To reduce FIB memory usage by removing old entries"
+        ],
+        "correctIndex": 0,
+        "explanation": "Route Filtering kontrolliert den Fluss von Routing-Informationen: Welche Routen werden von Nachbarn akzeptiert (Import) und welche lokal bekannten Routen werden an Nachbarn gesendet (Export).",
+        "explanation_en": "Route filtering controls the flow of routing information: which routes are accepted from neighbors (import) and which locally known routes are sent to neighbors (export).",
+        "extraInfo": "Route Filtering ist ein zentrales Werkzeug fuer Netzwerksicherheit und Traffic-Engineering.",
+        "extraInfo_en": "Route filtering is a central tool for network security and traffic engineering.",
+        "tip": "Route Filtering = Kontrolle ueber Empfang und Weitergabe von Routen.",
+        "tip_en": "Route filtering = control over receiving and forwarding routes.",
+        "tags": [
+            "IS-IS",
+            "Route Filtering",
+            "Import",
+            "Export"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q7",
+        "question": "Was beschreibt eine Import-Policy in Route Filtering?",
+        "question_en": "What does an import policy describe in route filtering?",
+        "options": [
+            "Akzeptieren oder Ablehnen von Routen, die von Nachbarn empfangen werden",
+            "Welche lokal bekannten Routen an Nachbarn gesendet werden",
+            "Die Reihenfolge, in der Routing-Protokolle gestartet werden",
+            "Welche Interfaces fuer den Empfang von Routing-Updates gesperrt sind"
+        ],
+        "options_en": [
+            "Accepting or rejecting routes received from neighbors",
+            "Which locally known routes are sent to neighbors",
+            "The order in which routing protocols are started",
+            "Which interfaces are blocked from receiving routing updates"
+        ],
+        "correctIndex": 0,
+        "explanation": "Eine Import-Policy bestimmt, ob empfangene Routen von einem Nachbarn in die lokale Routing-Tabelle aufgenommen (accept) oder verworfen (reject) werden.",
+        "explanation_en": "An import policy determines whether routes received from a neighbor are added to the local routing table (accept) or discarded (reject).",
+        "extraInfo": "Import-Policies erlauben eine feingranulare Kontrolle, welche externen Praefixe in die eigene Routing-Tabelle aufgenommen werden.",
+        "extraInfo_en": "Import policies allow fine-grained control over which external prefixes are added to one's own routing table.",
+        "tip": "Import = was kommt rein (accept/reject von Nachbarn).",
+        "tip_en": "Import = what comes in (accept/reject from neighbors).",
+        "tags": [
+            "IS-IS",
+            "Route Filtering",
+            "Import Policy"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q8",
+        "question": "Was beschreibt eine Export-Policy in Route Filtering?",
+        "question_en": "What does an export policy describe in route filtering?",
+        "options": [
+            "Welche lokal bekannten Routen an Nachbarn gesendet oder verweigert werden",
+            "Akzeptieren oder Ablehnen von Routen, die von Nachbarn empfangen werden",
+            "Die maximale Anzahl an Routen, die ein Interface weiterleiten darf",
+            "Welche Routing-Protokolle auf einem Interface aktiviert sind"
+        ],
+        "options_en": [
+            "Which locally known routes are sent to or withheld from neighbors",
+            "Accepting or rejecting routes received from neighbors",
+            "The maximum number of routes an interface may forward",
+            "Which routing protocols are active on an interface"
+        ],
+        "correctIndex": 0,
+        "explanation": "Eine Export-Policy bestimmt, welche der lokal bekannten Routen an Nachbarn weitergegeben (advertised) oder zurueckgehalten werden. Sie kontrolliert also den ausgehenden Routing-Informationsfluss.",
+        "explanation_en": "An export policy determines which locally known routes are advertised to neighbors or withheld. It controls the outgoing flow of routing information.",
+        "extraInfo": "Export-Policies sind auch das Mittel fuer Redistribution: Routen aus einem anderen Protokoll werden als lokal bekannte Routen behandelt und koennen per Export-Policy in IS-IS eingespeist werden.",
+        "extraInfo_en": "Export policies are also the means for redistribution: routes from another protocol are treated as locally known routes and can be injected into IS-IS via an export policy.",
+        "tip": "Export = was geht raus (welche lokalen Routen werden gesendet).",
+        "tip_en": "Export = what goes out (which local routes are sent).",
+        "tags": [
+            "IS-IS",
+            "Route Filtering",
+            "Export Policy"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q9",
+        "question": "Ist eine Import-Policy fuer Routen moeglich, die von einem IS-IS-Peer empfangen werden?",
+        "question_en": "Is an import policy possible for routes received from an IS-IS peer?",
+        "options": [
+            "Nein -- alle Routen von IS-IS-Peers werden akzeptiert und koennen nicht per Route-Policy gefiltert werden",
+            "Ja -- Import-Policies koennen frei konfiguriert werden, um IS-IS-Routen zu filtern",
+            "Ja -- aber nur fuer Level-2-Routen, Level-1-Routen sind immer akzeptiert",
+            "Nein -- IS-IS verwendet stattdessen Prefix-Listen fuer den Import-Filter"
+        ],
+        "options_en": [
+            "No -- all routes from IS-IS peers are accepted and cannot be filtered via route policy",
+            "Yes -- import policies can be freely configured to filter IS-IS routes",
+            "Yes -- but only for Level-2 routes; Level-1 routes are always accepted",
+            "No -- IS-IS uses prefix lists instead for import filtering"
+        ],
+        "correctIndex": 0,
+        "explanation": "Bei IS-IS ist eine Import-Policy nicht erlaubt. Alle Routen, die von IS-IS-Peers empfangen werden, werden akzeptiert und koennen nicht ueber Route-Policies gefiltert werden.",
+        "explanation_en": "With IS-IS, an import policy is not allowed. All routes received from IS-IS peers are accepted and cannot be filtered via route policies.",
+        "extraInfo": "Der Grund liegt in der Natur von IS-IS als Link-State-Protokoll: Alle Router in einer Area muessen eine identische Link-State-Datenbank (LSDB) haben. Selektives Filtern wuerde die LSDB inkonsistent machen.",
+        "extraInfo_en": "The reason lies in the nature of IS-IS as a link-state protocol: all routers in an area must have an identical link-state database (LSDB). Selective filtering would make the LSDB inconsistent.",
+        "tip": "IS-IS Import-Policy: nicht erlaubt -- alle Peers-Routen werden akzeptiert.",
+        "tip_en": "IS-IS import policy: not allowed -- all peer routes are accepted.",
+        "tags": [
+            "IS-IS",
+            "Route Filtering",
+            "Import Policy",
+            "LSDB"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-q10",
+        "question": "Was kann eine IS-IS Export-Policy bewirken, und was ist das Default-Verhalten bezueglich Level-2 zu Level-1 Route Leaking?",
+        "question_en": "What can an IS-IS export policy do, and what is the default behavior regarding Level-2 to Level-1 route leaking?",
+        "options": [
+            "Export-Policy kann Level-2-Routen in Level-1-Areas leaken; per Default werden Level-2-Routen NICHT nach Level-1 geteilt",
+            "Export-Policy kann Level-1-Routen in Level-2-Areas leaken; per Default werden alle Routen automatisch geteilt",
+            "Export-Policy steuert nur Redistribution von externen Protokollen; Level-Leaking ist immer automatisch aktiv",
+            "Export-Policy blockiert Level-2-Routen standardmaessig und muss deaktiviert werden, um Leaking zu erlauben"
+        ],
+        "options_en": [
+            "Export policy can leak Level-2 routes into Level-1 areas; by default Level-2 routes are NOT shared to Level-1",
+            "Export policy can leak Level-1 routes into Level-2 areas; by default all routes are automatically shared",
+            "Export policy only controls redistribution from external protocols; level leaking is always automatic",
+            "Export policy blocks Level-2 routes by default and must be disabled to allow leaking"
+        ],
+        "correctIndex": 0,
+        "explanation": "IS-IS Export-Policies erlauben es, Level-2-Routing-Informationen in Level-1-Areas zu leaken (weiterzugeben). Per Default werden Level-2-Routen NICHT automatisch an Level-1-Peers weitergegeben -- das muss explizit konfiguriert werden.",
+        "explanation_en": "IS-IS export policies allow Level-2 routing information to be leaked into Level-1 areas. By default, Level-2 routes are NOT automatically shared with Level-1 peers -- this must be explicitly configured.",
+        "extraInfo": "Dieses Verhalten ist in RFC 2966 beschrieben. L2-zu-L1-Leaking ist nuetzlich, wenn L1-Router spezifische L2-Routen benoetigen, anstatt nur eine Default-Route zu haben.",
+        "extraInfo_en": "This behavior is described in RFC 2966. L2-to-L1 leaking is useful when L1 routers need specific L2 routes instead of only having a default route.",
+        "tip": "L2-zu-L1 Leaking: explizite Export-Policy noetig, Default = nicht geteilt.",
+        "tip_en": "L2-to-L1 leaking: explicit export policy required, default = not shared.",
+        "tags": [
+            "IS-IS",
+            "Route Filtering",
+            "Export Policy",
+            "Level-1",
+            "Level-2",
+            "Route Leaking"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 5",
+        "section_en": "Section 5"
+    },
+    {
+        "id": "isis-s5-v1",
+        "question": "Warum ist eine Import-Policy fuer IS-IS-Peer-Routen nicht erlaubt?",
+        "question_en": "Why is an import policy for IS-IS peer routes not allowed?",
+        "options": [
+            "IS-IS ist ein Link-State-Protokoll -- alle Router in einer Area muessen eine identische LSDB haben; Filtering wuerde die LSDB inkonsistent machen",
+            "IS-IS verwendet keine Routing-Updates, daher gibt es keinen Punkt, an dem eine Import-Policy greifen koennte",
+            "Import-Policies wuerden zu viel CPU-Last erzeugen und IS-IS-Konvergenz verlangsamen",
+            "IS-IS-Routen haben eine feste Preference, die nicht durch Policies veraendert werden darf"
+        ],
+        "options_en": [
+            "IS-IS is a link-state protocol -- all routers in an area must have an identical LSDB; filtering would make the LSDB inconsistent",
+            "IS-IS does not use routing updates, so there is no point where an import policy could take effect",
+            "Import policies would generate too much CPU load and slow down IS-IS convergence",
+            "IS-IS routes have a fixed preference that cannot be changed by policies"
+        ],
+        "correctIndex": 0,
+        "explanation": "In Link-State-Protokollen wie IS-IS fluten alle Router ihre LSPs (Link-State PDUs) durch die gesamte Area. Das Ergebnis ist eine identische LSDB auf allen Routern. Wuerde ein Router selektiv IS-IS-Routen filtern, haette er eine andere Sicht auf die Topologie als seine Nachbarn -- das fuehrt zu Inkonsistenzen und potenziellen Routing-Loops.",
+        "explanation_en": "In link-state protocols like IS-IS, all routers flood their LSPs (Link-State PDUs) throughout the entire area. The result is an identical LSDB on all routers. If a router were to selectively filter IS-IS routes, it would have a different view of the topology than its neighbors -- this leads to inconsistencies and potential routing loops.",
+        "extraInfo": "Distance-Vector-Protokolle wie RIP oder BGP koennen Import-Policies anwenden, weil jeder Router nur die beste Route aus der Perspektive des sendenden Routers erhaelt -- keine vollstaendige Topologie-Datenbank.",
+        "extraInfo_en": "Distance-vector protocols like RIP or BGP can apply import policies because each router only receives the best route from the sending router's perspective -- no complete topology database.",
+        "tip": "Link-State = alle haben gleiche LSDB = kein selektives Import-Filtering moeglich.",
+        "tip_en": "Link-state = all have same LSDB = no selective import filtering possible.",
+        "tags": [
+            "IS-IS",
+            "Route Filtering",
+            "Import Policy",
+            "LSDB",
+            "Link-State"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s5-v2",
+        "question": "Welches Risiko birgt Two-Way Redistribution gegenueber One-Way Redistribution?",
+        "question_en": "What risk does two-way redistribution pose compared to one-way redistribution?",
+        "options": [
+            "Routing-Loops -- Routen aus Protokoll A koennen nach Redistribution in Protokoll B wieder zurueck in Protokoll A gelangen",
+            "Hoehere CPU-Last auf dem Border Router durch doppelte Berechnung",
+            "Das RTM kann nicht mehr zwischen internen und externen Routen unterscheiden",
+            "Alle IS-IS-Peers muessen neu gestartet werden, wenn Two-Way aktiviert wird"
+        ],
+        "options_en": [
+            "Routing loops -- routes from protocol A can re-enter protocol A after redistribution into protocol B",
+            "Higher CPU load on the border router due to double calculation",
+            "The RTM can no longer distinguish between internal and external routes",
+            "All IS-IS peers must be restarted when two-way is activated"
+        ],
+        "correctIndex": 0,
+        "explanation": "Bei Two-Way Redistribution koennte eine Route, die urspruenglich aus IS-IS kommt, in OSPF redistributet werden und von dort wieder zurueck in IS-IS -- mit veraenderten Metriken. Das kann zu suboptimalen Pfaden oder Routing-Loops fuehren.",
+        "explanation_en": "With two-way redistribution, a route originally from IS-IS could be redistributed into OSPF and then back into IS-IS -- with modified metrics. This can lead to suboptimal paths or routing loops.",
+        "extraInfo": "Um Routing-Loops bei Two-Way Redistribution zu vermeiden, werden Techniken wie Route-Tagging eingesetzt: Routen erhalten beim ersten Redistributieren ein Tag, das den Border-Router anweist, sie nicht erneut zu redistributen.",
+        "extraInfo_en": "To avoid routing loops in two-way redistribution, techniques like route tagging are used: routes receive a tag at first redistribution that instructs the border router not to redistribute them again.",
+        "tip": "Two-Way Redistribution = Routing-Loop-Risiko. Route-Tagging als Gegenmassnahme.",
+        "tip_en": "Two-way redistribution = routing loop risk. Route tagging as countermeasure.",
+        "tags": [
+            "IS-IS",
+            "Redistribution",
+            "Two-Way",
+            "Routing Loop",
+            "Route Tagging"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     }
 ]
