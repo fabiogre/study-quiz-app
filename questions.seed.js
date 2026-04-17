@@ -16481,8 +16481,8 @@ const SEED_QUESTIONS = [
         "topic_en": "IS-IS",
         "module": "Modul 1",
         "module_en": "Module 1",
-        "section": "Section 4",
-        "section_en": "Section 4"
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     },
     {
         "id": "isis-ecmp-q5",
@@ -16559,8 +16559,8 @@ const SEED_QUESTIONS = [
         "topic_en": "IS-IS",
         "module": "Modul 1",
         "module_en": "Module 1",
-        "section": "Section 4",
-        "section_en": "Section 4"
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     },
     {
         "id": "isis-ecmp-q7",
@@ -16598,8 +16598,8 @@ const SEED_QUESTIONS = [
         "topic_en": "IS-IS",
         "module": "Modul 1",
         "module_en": "Module 1",
-        "section": "Section 4",
-        "section_en": "Section 4"
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     },
     {
         "id": "isis-ecmp-q8",
@@ -16639,5 +16639,236 @@ const SEED_QUESTIONS = [
         "module_en": "Module 1",
         "section": "Section 4",
         "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q9",
+        "question": "Wann wird der ECMP-Parameter relevant?",
+        "question_en": "When does the ECMP parameter become relevant?",
+        "options": [
+            "Wenn mehrere Routen fuer denselben Prefix den gleichen niedrigsten Cost haben",
+            "Wenn eine Route einen hoeheren Cost als alle anderen hat",
+            "Wenn zwei Routen unterschiedliche Protokolle verwenden",
+            "Wenn die Routing-Tabelle mehr als 1000 Eintraege hat"
+        ],
+        "options_en": [
+            "When multiple routes for the same prefix share the same lowest cost",
+            "When one route has a higher cost than all others",
+            "When two routes use different protocols",
+            "When the routing table has more than 1000 entries"
+        ],
+        "correctIndex": 0,
+        "explanation": "Erst wenn mehrere Routen fuer denselben Prefix mit demselben niedrigsten Cost-Wert existieren, entscheidet die ECMP-Konfiguration, wie viele dieser Pfade genutzt werden.",
+        "explanation_en": "Only when multiple routes for the same prefix share the same lowest cost value does the ECMP configuration decide how many of these paths are used.",
+        "extraInfo": "Wenn nur eine Route den niedrigsten Cost hat, landet diese direkt im RTM -- ECMP ist nicht beteiligt.",
+        "extraInfo_en": "If only one route has the lowest cost, it goes directly to the RTM -- ECMP is not involved.",
+        "tip": "ECMP greift nur bei mehreren Routen mit gleichem niedrigstem Cost.",
+        "tip_en": "ECMP only kicks in when multiple routes share the same lowest cost.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Cost",
+            "Route Selection"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q10",
+        "question": "Was erlaubt der ECMP-Parameter dem Router konkret?",
+        "question_en": "What does the ECMP parameter specifically allow the router to do?",
+        "options": [
+            "Mehrere Pfade mit gleicher Cost gleichzeitig fuer das Forwarding zu nutzen",
+            "Routen aus verschiedenen Protokollen zusammenzufassen",
+            "Die Metric von IS-IS-Routen automatisch anzupassen",
+            "Die Preference von Routen dynamisch zu aendern"
+        ],
+        "options_en": [
+            "Use multiple paths with equal cost simultaneously for forwarding",
+            "Merge routes from different protocols",
+            "Automatically adjust the metric of IS-IS routes",
+            "Dynamically change the preference of routes"
+        ],
+        "correctIndex": 0,
+        "explanation": "ECMP erlaubt es dem Router, bis zur konfigurierten Anzahl an Equal-Cost-Pfaden gleichzeitig in der FIB zu installieren und fuer das Packet Forwarding zu nutzen.",
+        "explanation_en": "ECMP allows the router to install up to the configured number of equal-cost paths simultaneously in the FIB and use them for packet forwarding.",
+        "extraInfo": "Ohne ECMP wird immer nur ein Pfad installiert, selbst wenn mehrere gleich guenstige Pfade bekannt sind.",
+        "extraInfo_en": "Without ECMP, only one path is ever installed, even if multiple equally favorable paths are known.",
+        "tip": "ECMP = mehrere Equal-Cost-Pfade gleichzeitig aktiv im Forwarding.",
+        "tip_en": "ECMP = multiple equal-cost paths simultaneously active in forwarding.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Forwarding",
+            "FIB"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q11",
+        "question": "Was verteilt der interne Hashing-Algorithmus bei ECMP?",
+        "question_en": "What does the internal hashing algorithm distribute in ECMP?",
+        "options": [
+            "Traffic Flows ueber die verfuegbaren Pfade",
+            "Einzelne Pakete in strenger Reihenfolge",
+            "Die Routing-Tabelle auf mehrere CPUs",
+            "IS-IS LSPs auf die benachbarten Router"
+        ],
+        "options_en": [
+            "Traffic flows across the available paths",
+            "Individual packets in strict sequence",
+            "The routing table across multiple CPUs",
+            "IS-IS LSPs to neighboring routers"
+        ],
+        "correctIndex": 0,
+        "explanation": "Der Hashing-Algorithmus verteilt Traffic Flows -- nicht einzelne Pakete -- ueber die verfuegbaren ECMP-Pfade. Jeder Flow bleibt konsistent auf einem Pfad.",
+        "explanation_en": "The hashing algorithm distributes traffic flows -- not individual packets -- across the available ECMP paths. Each flow remains consistently on one path.",
+        "extraInfo": "Diese Flow-basierte Verteilung ist zentral fuer ECMP und unterscheidet es von einfachem Round-Robin.",
+        "extraInfo_en": "This flow-based distribution is central to ECMP and distinguishes it from simple round-robin.",
+        "tip": "Hashing-Algorithmus verteilt Flows, nicht Pakete.",
+        "tip_en": "Hashing algorithm distributes flows, not packets.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Hashing",
+            "Traffic Flows"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-v1",
+        "question": "Warum verteilt ECMP Traffic per Flow und nicht per Paket?",
+        "question_en": "Why does ECMP distribute traffic per flow and not per packet?",
+        "options": [
+            "Per-Paket-Verteilung wuerde Paket-Reordering verursachen und TCP-Performance verschlechtern",
+            "Per-Paket-Verteilung ist technisch nicht moeglich, da Router keine einzelnen Pakete sehen",
+            "Per-Paket-Verteilung wuerde den Hashing-Algorithmus deaktivieren",
+            "Per-Paket-Verteilung ist nur in Layer-2-Netzen erlaubt"
+        ],
+        "options_en": [
+            "Per-packet distribution would cause packet reordering and degrade TCP performance",
+            "Per-packet distribution is technically impossible since routers do not see individual packets",
+            "Per-packet distribution would disable the hashing algorithm",
+            "Per-packet distribution is only allowed in Layer 2 networks"
+        ],
+        "correctIndex": 0,
+        "explanation": "Wenn Pakete desselben TCP-Flows ueber verschiedene Pfade laufen, kommen sie moeglicherweise in falscher Reihenfolge an. TCP interpretiert Reordering als Congestion und reduziert den Throughput drastisch.",
+        "explanation_en": "If packets of the same TCP flow travel over different paths, they may arrive out of order. TCP interprets reordering as congestion and drastically reduces throughput.",
+        "extraInfo": "Flow-basiertes Hashing ist ein Kompromiss: weniger optimale Lastverteilung als Round-Robin, aber stabile und vorhersagbare Performance fuer jeden einzelnen Flow.",
+        "extraInfo_en": "Flow-based hashing is a trade-off: less optimal load distribution than round-robin, but stable and predictable performance for each individual flow.",
+        "tip": "Per-Paket = Reordering = TCP-Einbruch. Deshalb: Flow-Hashing.",
+        "tip_en": "Per-packet = reordering = TCP collapse. Hence: flow hashing.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Hashing",
+            "TCP",
+            "Reordering"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-ecmp-v2",
+        "question": "Welche drei Eigenschaften muessen zwei IS-IS-Routen gemeinsam haben, damit sie als ECMP-Kandidaten gelten?",
+        "question_en": "Which three properties must two IS-IS routes share to be considered ECMP candidates?",
+        "options": [
+            "Gleiches Protokoll, gleiche Preference, gleicher Cost -- fuer denselben Prefix",
+            "Gleiche MTU, gleiche Bandbreite und gleiche Anzahl Hops",
+            "Gleicher Next-Hop-Router, gleiche Cost und gleiche AS-Nummer",
+            "Gleiche Preference, gleicher Egress-Port und gleiche VLAN-ID"
+        ],
+        "options_en": [
+            "Same protocol, same preference, same cost -- for the same prefix",
+            "Same MTU, same bandwidth and same number of hops",
+            "Same next-hop router, same cost and same AS number",
+            "Same preference, same egress port and same VLAN ID"
+        ],
+        "correctIndex": 0,
+        "explanation": "ECMP-Kandidaten muessen dasselbe Protokoll (z.B. IS-IS), dieselbe Preference und denselben Cost-Wert fuer denselben Zielprafix aufweisen. Fehlt eine dieser Bedingungen, konkurrieren die Routen nicht als Equal-Cost-Pfade.",
+        "explanation_en": "ECMP candidates must share the same protocol (e.g. IS-IS), the same preference, and the same cost value for the same destination prefix. If any of these conditions is missing, the routes do not compete as equal-cost paths.",
+        "extraInfo": "Zwei Routen aus verschiedenen Protokollen koennen nicht ECMP-Kandidaten sein -- selbst wenn Preference und Cost zunaechst gleich erscheinen, sind protokolluebergreifende Routen grundsaetzlich ausgeschlossen.",
+        "extraInfo_en": "Two routes from different protocols cannot be ECMP candidates -- even if preference and cost appear equal, cross-protocol routes are fundamentally excluded.",
+        "tip": "Protokoll + Preference + Cost muessen uebereinstimmen -- alle drei, nicht nur Cost.",
+        "tip_en": "Protocol + preference + cost must match -- all three, not just cost.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Preference",
+            "Cost",
+            "Route Selection"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-ecmp-v3",
+        "question": "Ein Netzwerker behauptet: ECMP verteilt jedes einzelne Paket gleichmaessig auf alle Pfade, daher bekommt jeder Pfad exakt gleich viel Traffic. Was ist daran falsch?",
+        "question_en": "A network engineer claims: ECMP distributes every single packet evenly across all paths, so each path gets exactly the same traffic load. What is wrong with this claim?",
+        "options": [
+            "ECMP verteilt Flows, nicht Pakete -- grosse Flows koennen einzelne Pfade stark auslasten",
+            "Die Aussage ist korrekt -- ECMP garantiert stets eine perfekte Gleichverteilung",
+            "ECMP verteilt Pakete nur bei UDP, bei TCP wird immer nur ein Pfad genutzt",
+            "ECMP verteilt nur dann gleichmaessig, wenn alle Pfade identische Bandbreite haben"
+        ],
+        "options_en": [
+            "ECMP distributes flows, not packets -- large flows can heavily load individual paths",
+            "The claim is correct -- ECMP always guarantees perfect load distribution",
+            "ECMP only distributes packets for UDP -- for TCP only one path is used",
+            "ECMP distributes evenly only when all paths have identical bandwidth"
+        ],
+        "correctIndex": 0,
+        "explanation": "ECMP-Hashing arbeitet auf Flow-Ebene. Ein einziger grosser Flow belegt einen Pfad vollstaendig, waehrend andere Pfade leicht bleiben. Perfekte Gleichverteilung ist nur bei vielen kleinen, aehnlich grossen Flows annaehernd erreichbar.",
+        "explanation_en": "ECMP hashing works at the flow level. A single large flow occupies one path completely while other paths remain lightly loaded. Perfect equal distribution is only approximately achievable with many small, similarly sized flows.",
+        "extraInfo": "Das sogenannte Elephant-Flow-Problem ist ein bekanntes Praxisproblem bei ECMP. Loesungen wie SRTE (Segment Routing Traffic Engineering) adressieren es durch explizite Pfadsteuerung.",
+        "extraInfo_en": "The so-called Elephant Flow Problem is a well-known practical issue with ECMP. Solutions like SRTE (Segment Routing Traffic Engineering) address it through explicit path control.",
+        "tip": "Flow-Hashing != gleichmaessige Auslastung. Grosse Flows dominieren ihren Pfad.",
+        "tip_en": "Flow hashing != even utilization. Large flows dominate their path.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Elephant Flow",
+            "Load Balancing",
+            "Hashing"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     }
 ];
