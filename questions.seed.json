@@ -16870,5 +16870,122 @@
         "module_en": "Module 1",
         "section": "Verstaendnisfragen",
         "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-ecmp-q12",
+        "question": "ECMP ist auf dem Default-Wert 1 konfiguriert. Es existieren zwei Routen zum selben Prefix mit gleichem Cost und gleichem Protokoll. Welcher Pfad wird auf der Data Plane aktiv genutzt?",
+        "question_en": "ECMP is set to its default value of 1. Two routes to the same prefix exist with equal cost and the same protocol. Which path is used as the active path on the data plane?",
+        "options": [
+            "Die Route mit der niedrigsten Next-Hop-Interface-IP-Adresse",
+            "Die Route, die zuerst gelernt wurde",
+            "Die Route mit der hoechsten Next-Hop-Interface-IP-Adresse",
+            "Der Router waehlt zufaellig einen der beiden Pfade"
+        ],
+        "options_en": [
+            "The route with the lowest next-hop interface IP address",
+            "The route that was learned first",
+            "The route with the highest next-hop interface IP address",
+            "The router randomly selects one of the two paths"
+        ],
+        "correctIndex": 0,
+        "explanation": "Bei ECMP=1 wird nur ein einziger Pfad in die FIB installiert. Existieren mehrere gleichwertige Kandidaten (gleiches Protokoll, gleiche Preference, gleicher Cost), greift die Tiebreaker-Regel: die Route mit der niedrigsten Next-Hop-Interface-IP-Adresse wird als aktiver Pfad auf der Data Plane genutzt.",
+        "explanation_en": "With ECMP=1, only a single path is installed in the FIB. If multiple equal candidates exist (same protocol, same preference, same cost), the tiebreaker rule applies: the route with the lowest next-hop interface IP address is used as the active path on the data plane.",
+        "extraInfo": "Diese Regel gilt nicht nur beim Default von 1, sondern immer dann, wenn mehr Equal-Cost-Pfade verfuegbar sind als der ECMP-Wert erlaubt.",
+        "extraInfo_en": "This rule applies not only at the default of 1, but whenever more equal-cost paths are available than the ECMP value allows.",
+        "tip": "Tiebreaker bei ECMP=1: niedrigste Next-Hop-Interface-IP gewinnt.",
+        "tip_en": "Tiebreaker with ECMP=1: lowest next-hop interface IP wins.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Tiebreaker",
+            "Next-Hop",
+            "Data Plane"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-q13",
+        "question": "Was ist die Tiebreaker-Regel, wenn mehrere Equal-Cost-Routen des gleichen Protokolls existieren, aber ECMP nicht alle aufnehmen kann?",
+        "question_en": "What is the tiebreaker rule when multiple equal-cost routes of the same protocol exist but ECMP cannot accommodate all of them?",
+        "options": [
+            "Die Route(n) mit den niedrigsten Next-Hop-Interface-IP-Adressen werden gewaehlt",
+            "Die Route(n) mit der laengsten Uptime des naechsten Hops werden gewaehlt",
+            "Die Route(n) mit dem kuerzesten AS-Path werden gewaehlt",
+            "Die Route(n) mit der hoechsten Bandbreite des Ausgangs-Interface werden gewaehlt"
+        ],
+        "options_en": [
+            "The route(s) with the lowest next-hop interface IP addresses are selected",
+            "The route(s) with the longest next-hop uptime are selected",
+            "The route(s) with the shortest AS path are selected",
+            "The route(s) with the highest egress interface bandwidth are selected"
+        ],
+        "correctIndex": 0,
+        "explanation": "Der Tiebreaker ist die numerisch niedrigste Next-Hop-Interface-IP-Adresse. Dieses Kriterium ist deterministisch und unabhaengig von der Reihenfolge, in der Routen gelernt wurden.",
+        "explanation_en": "The tiebreaker is the numerically lowest next-hop interface IP address. This criterion is deterministic and independent of the order in which routes were learned.",
+        "extraInfo": "Der Tiebreaker gilt sowohl bei ECMP=1 (einzelner Pfad) als auch bei hoeheren ECMP-Werten, wenn mehr Pfade vorhanden sind als konfiguriert.",
+        "extraInfo_en": "The tiebreaker applies both at ECMP=1 (single path) and at higher ECMP values when more paths exist than configured.",
+        "tip": "Tiebreaker = niedrigste Next-Hop-Interface-IP. Immer deterministisch.",
+        "tip_en": "Tiebreaker = lowest next-hop interface IP. Always deterministic.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Tiebreaker",
+            "Next-Hop",
+            "Route Selection"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 4",
+        "section_en": "Section 4"
+    },
+    {
+        "id": "isis-ecmp-v4",
+        "question": "Warum ist der Tiebreaker bei ECMP (niedrigste Next-Hop-IP) deterministisch und nicht zufaellig?",
+        "question_en": "Why is the ECMP tiebreaker (lowest next-hop IP) deterministic rather than random?",
+        "options": [
+            "Ein deterministischer Tiebreaker macht den aktiven Pfad vorhersagbar und vereinfacht Troubleshooting und Netzwerkplanung",
+            "Zufaellige Auswahl wuerde zu Routing-Loops fuehren",
+            "Zufaellige Auswahl ist technisch nicht implementierbar, da Router keine Zufallsgeneratoren haben",
+            "Ein deterministischer Tiebreaker erhoeh die verfuegbare Bandbreite automatisch"
+        ],
+        "options_en": [
+            "A deterministic tiebreaker makes the active path predictable and simplifies troubleshooting and network planning",
+            "Random selection would cause routing loops",
+            "Random selection is technically not implementable because routers have no random number generators",
+            "A deterministic tiebreaker automatically increases available bandwidth"
+        ],
+        "correctIndex": 0,
+        "explanation": "Determinismus bedeutet: gegeben dieselbe Konfiguration und dieselben Routen, waehlt jeder Router immer denselben Pfad. Das macht Fehlersuche und Traffic-Engineering vorhersagbar -- man weiss ohne Log-Analyse, welcher Pfad aktiv ist.",
+        "explanation_en": "Determinism means: given the same configuration and the same routes, every router always selects the same path. This makes troubleshooting and traffic engineering predictable -- you know which path is active without log analysis.",
+        "extraInfo": "Zufaellige Tiebreaker existieren in manchen Implementierungen, sind aber operationell unpraktisch: nach einem Reboot koennte ein anderer Pfad aktiv werden, was Monitoring-Alarme ausloest.",
+        "extraInfo_en": "Random tiebreakers exist in some implementations, but are operationally impractical: after a reboot a different path might become active, triggering monitoring alerts.",
+        "tip": "Deterministisch = vorhersagbar = besser fuer Operations und Troubleshooting.",
+        "tip_en": "Deterministic = predictable = better for operations and troubleshooting.",
+        "tags": [
+            "IS-IS",
+            "ECMP",
+            "Tiebreaker",
+            "Deterministic",
+            "Troubleshooting"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     }
 ]
