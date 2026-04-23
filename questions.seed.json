@@ -17444,5 +17444,393 @@
         "module_en": "Module 1",
         "section": "Verstaendnisfragen",
         "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-q1",
+        "question": "Welche zwei funktionellen Komponenten hat ein typischer Router?",
+        "question_en": "Which two functional components does a typical router have?",
+        "options": [
+            "Control Plane und Data Plane",
+            "Management Plane und Forwarding Plane",
+            "Routing Plane und Switching Plane",
+            "North Plane und South Plane"
+        ],
+        "options_en": [
+            "Control plane and data plane",
+            "Management plane and forwarding plane",
+            "Routing plane and switching plane",
+            "North plane and south plane"
+        ],
+        "correctIndex": 0,
+        "explanation": "Typische Router haben genau zwei funktionelle Komponenten: die Control Plane (Steuerungsebene) und die Data Plane (Datenebene). Beide haben klar getrennte Aufgaben.",
+        "explanation_en": "Typical routers have exactly two functional components: the control plane and the data plane. Both have clearly separated responsibilities.",
+        "extraInfo": "In modernen Router-Architekturen sind Control Plane und Data Plane auch physisch getrennt -- auf verschiedenen Hardware-Karten.",
+        "extraInfo_en": "In modern router architectures, control plane and data plane are also physically separated -- on different hardware cards.",
+        "tip": "Router = Control Plane + Data Plane.",
+        "tip_en": "Router = control plane + data plane.",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "Data Plane",
+            "Router Architecture"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q2",
+        "question": "Welche Aufgaben hat die Control Plane?",
+        "question_en": "What are the responsibilities of the control plane?",
+        "options": [
+            "Betrieb und Management des Routers, Unterstuetzung dynamischer Routing-Protokolle, Aufbau der FIB und Verteilung an die Data Plane",
+            "Verarbeitung und Weiterleitung jedes eingehenden Pakets auf physischen Interfaces",
+            "Ausschliesslich das Forwarding von Paketen anhand der FIB",
+            "Verwaltung von physischen Ports und Durchfuehrung von Checksummen-Berechnungen"
+        ],
+        "options_en": [
+            "Router operations and management, support of dynamic routing protocols, building the FIB and distributing it to the data plane",
+            "Processing and forwarding every incoming packet on physical interfaces",
+            "Exclusively forwarding packets based on the FIB",
+            "Managing physical ports and performing checksum calculations"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Control Plane hat drei Kernaufgaben: (1) Betrieb und Management des Routers, (2) Unterstuetzung dynamischer Routing-Protokolle fuer die Kommunikation mit anderen Routern, und (3) Aufbau der FIB und Verteilung von Kopien davon an die Data Plane.",
+        "explanation_en": "The control plane has three core tasks: (1) router operations and management, (2) support of dynamic routing protocols for communication with other routers, and (3) building the FIB and distributing copies of it to the data plane.",
+        "extraInfo": "Die Control Plane ist also 'das Gehirn' des Routers -- sie trifft alle Entscheidungen, fuehrt sie aber nicht direkt aus.",
+        "extraInfo_en": "The control plane is the 'brain' of the router -- it makes all decisions but does not execute them directly.",
+        "tip": "Control Plane: Management + Routing-Protokolle + FIB aufbauen.",
+        "tip_en": "Control plane: management + routing protocols + build FIB.",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "FIB",
+            "Routing Protocols"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q3",
+        "question": "Welche Aufgabe hat die Data Plane?",
+        "question_en": "What is the responsibility of the data plane?",
+        "options": [
+            "Jedes eingehende Paket verarbeiten und anhand der FIB eine Forwarding-Entscheidung treffen und es auf dem richtigen physischen Interface weiterleiten",
+            "Die FIB aufbauen und Kopien davon an den CPM verteilen",
+            "Dynamische Routing-Protokolle ausfuehren und Routing-Updates senden",
+            "Das Management und die Konfiguration aller Router-Interfaces verwalten"
+        ],
+        "options_en": [
+            "Process every incoming packet and make a forwarding decision based on the FIB, then forward it on the correct physical interface",
+            "Build the FIB and distribute copies of it to the CPM",
+            "Run dynamic routing protocols and send routing updates",
+            "Manage the configuration of all router interfaces"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Data Plane verarbeitet jedes eingehende Paket und trifft anhand der FIB die passende Forwarding-Entscheidung. Die tatsaechliche Weiterleitung findet auf den physischen Interfaces statt.",
+        "explanation_en": "The data plane processes every incoming packet and makes the appropriate forwarding decision based on the FIB. The actual forwarding takes place on the physical interfaces.",
+        "extraInfo": "Die Data Plane arbeitet mit extrem hoher Geschwindigkeit im Hardware-Pfad (line-rate) -- deshalb muss die FIB auf die Data Plane verteilt werden statt jede Entscheidung an die Control Plane zu schicken.",
+        "extraInfo_en": "The data plane operates at extremely high speed in the hardware path (line-rate) -- which is why the FIB must be distributed to the data plane instead of sending every decision to the control plane.",
+        "tip": "Data Plane: FIB nutzen + Pakete weiterleiten auf physischen Interfaces.",
+        "tip_en": "Data plane: use FIB + forward packets on physical interfaces.",
+        "tags": [
+            "IS-IS",
+            "Data Plane",
+            "FIB",
+            "Forwarding",
+            "Packet Processing"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q4",
+        "question": "Welche Hardware-Karte ist auf Nokia SR OS fuer die Control Plane zustaendig?",
+        "question_en": "Which hardware card is responsible for the control plane on Nokia SR OS?",
+        "options": [
+            "CPM -- Control Processor Module",
+            "IOM -- Input/Output Module",
+            "MDA -- Media Dependent Adapter",
+            "SFM -- Switch Fabric Module"
+        ],
+        "options_en": [
+            "CPM -- Control Processor Module",
+            "IOM -- Input/Output Module",
+            "MDA -- Media Dependent Adapter",
+            "SFM -- Switch Fabric Module"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Control Plane laeuft auf dem CPM (Control Processor Module). Das CPM fuehrt alle Control-Plane-Funktionen aus: Routing-Protokolle, Management, FIB-Berechnung und Verteilung.",
+        "explanation_en": "The control plane runs on the CPM (Control Processor Module). The CPM executes all control plane functions: routing protocols, management, FIB calculation and distribution.",
+        "extraInfo": "Nokia SR OS Router haben typischerweise redundante CPMs fuer High Availability -- faellt eine aus, uebernimmt die andere ohne Traffic-Unterbrechung auf der Data Plane.",
+        "extraInfo_en": "Nokia SR OS routers typically have redundant CPMs for high availability -- if one fails, the other takes over without traffic interruption on the data plane.",
+        "tip": "Control Plane = CPM (Control Processor Module).",
+        "tip_en": "Control plane = CPM (Control Processor Module).",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "CPM",
+            "Nokia SR OS",
+            "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q5",
+        "question": "Welche Hardware-Karte erledigt auf Nokia SR OS die Data Plane Funktionen?",
+        "question_en": "Which hardware card handles data plane functions on Nokia SR OS?",
+        "options": [
+            "I/O Karten (Input/Output Modules)",
+            "CPM -- Control Processor Module",
+            "RSM -- Route Switch Module",
+            "BMC -- Backplane Management Card"
+        ],
+        "options_en": [
+            "I/O cards (Input/Output Modules)",
+            "CPM -- Control Processor Module",
+            "RSM -- Route Switch Module",
+            "BMC -- Backplane Management Card"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Data Plane Funktionen werden von den I/O Karten (Input/Output Modules) ausgefuehrt. Diese Karten verarbeiten den Datenverkehr direkt in Hardware mit Line-Rate-Geschwindigkeit.",
+        "explanation_en": "Data plane functions are performed by I/O cards (Input/Output Modules). These cards process traffic directly in hardware at line-rate speed.",
+        "extraInfo": "Die physische Trennung von CPM (Control Plane) und I/O Karten (Data Plane) ist entscheidend: Hohe Traffic-Last auf der Data Plane beeintraechtig die Control Plane nicht.",
+        "extraInfo_en": "The physical separation of CPM (control plane) and I/O cards (data plane) is crucial: high traffic load on the data plane does not affect the control plane.",
+        "tip": "Data Plane = I/O Karten.",
+        "tip_en": "Data plane = I/O cards.",
+        "tags": [
+            "IS-IS",
+            "Data Plane",
+            "I/O Cards",
+            "Nokia SR OS",
+            "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q6",
+        "question": "Welche Rolle spielt die Control Plane beim Forwarding von Datenpaketen?",
+        "question_en": "What role does the control plane play in the forwarding of data packets?",
+        "options": [
+            "Die Control Plane bereitet nur die FIB vor und nimmt ansonsten nicht am Forwarding teil",
+            "Die Control Plane forwarded alle Pakete direkt ueber den CPM",
+            "Die Control Plane und Data Plane forwarden Pakete gemeinsam im Round-Robin-Verfahren",
+            "Die Control Plane uebernimmt das Forwarding nur bei Ausfall der I/O Karten"
+        ],
+        "options_en": [
+            "The control plane only prepares the FIB and otherwise does not participate in forwarding",
+            "The control plane forwards all packets directly via the CPM",
+            "The control plane and data plane jointly forward packets in a round-robin manner",
+            "The control plane takes over forwarding only when I/O cards fail"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Control Plane bereitet die FIB vor und verteilt Kopien davon an die Data Plane -- damit ist ihre Rolle beim Forwarding abgeschlossen. Das eigentliche Forwarding jedes Pakets uebernimmt ausschliesslich die Data Plane.",
+        "explanation_en": "The control plane prepares the FIB and distributes copies to the data plane -- that is where its role in forwarding ends. The actual forwarding of every packet is handled exclusively by the data plane.",
+        "extraInfo": "Wuerde die Control Plane am Forwarding teilnehmen, waere sie schnell ueberlastet -- moderne Router forwarden Millionen von Paketen pro Sekunde, was CPUs nicht in Echtzeit bewaltigen koennen.",
+        "extraInfo_en": "If the control plane participated in forwarding, it would quickly be overwhelmed -- modern routers forward millions of packets per second, which CPUs cannot handle in real time.",
+        "tip": "Control Plane = FIB vorbereiten, NICHT forwarden.",
+        "tip_en": "Control plane = prepare FIB, NOT forward.",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "Data Plane",
+            "FIB",
+            "Forwarding"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q7",
+        "question": "Was verwaltet die Control Plane ausser Routing-Protokollen noch?",
+        "question_en": "What else does the control plane manage besides routing protocols?",
+        "options": [
+            "Alle Arten des Router-Managements -- Interfaces, Konfiguration von Management-Tools und Router-Betrieb",
+            "Ausschliesslich die Berechnung der kuerzesten Pfade fuer IGPs",
+            "Nur die Synchronisation der FIB zwischen Control und Data Plane",
+            "Einzig die Verwaltung von BGP-Sessions zu externen Peers"
+        ],
+        "options_en": [
+            "All types of router management -- interfaces, configuration of management tools, and router operations",
+            "Exclusively the calculation of shortest paths for IGPs",
+            "Only the synchronization of the FIB between control and data plane",
+            "Solely the management of BGP sessions to external peers"
+        ],
+        "correctIndex": 0,
+        "explanation": "In der Control Plane werden alle Arten des Managements fuer den Router durchgefuehrt: Interface-Konfiguration, Management-Tools (SSH, SNMP, Syslog), Routing-Protokolle und der gesamte Router-Betrieb.",
+        "explanation_en": "All types of management for the router are handled in the control plane: interface configuration, management tools (SSH, SNMP, Syslog), routing protocols, and overall router operations.",
+        "extraInfo": "Auch Control Plane Protokolle wie OSPF Hello-Pakete oder IS-IS LSPs werden ueber die Control Plane verarbeitet -- nicht ueber die Data Plane.",
+        "extraInfo_en": "Control plane protocols like OSPF hello packets or IS-IS LSPs are also processed via the control plane -- not via the data plane.",
+        "tip": "Control Plane = alles ausser das Forwarden von Datenpaketen.",
+        "tip_en": "Control plane = everything except forwarding data packets.",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "Management",
+            "Router Operations"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q8",
+        "question": "Wie gelangt die FIB von der Control Plane zur Data Plane?",
+        "question_en": "How does the FIB get from the control plane to the data plane?",
+        "options": [
+            "Die Control Plane baut die FIB auf und verteilt Kopien davon an die Data Plane",
+            "Die Data Plane baut ihre eigene FIB unabhaengig von der Control Plane auf",
+            "Die FIB wird direkt vom RTM auf die physischen Interfaces geladen ohne Zwischenschicht",
+            "Jede I/O Karte berechnet ihre eigene FIB basierend auf den empfangenen Routing-Updates"
+        ],
+        "options_en": [
+            "The control plane builds the FIB and distributes copies of it to the data plane",
+            "The data plane builds its own FIB independently from the control plane",
+            "The FIB is loaded directly from the RTM onto physical interfaces without an intermediate layer",
+            "Each I/O card calculates its own FIB based on received routing updates"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Control Plane (CPM) baut die FIB auf -- basierend auf den Routing-Protokollen und dem RTM -- und verteilt dann Kopien dieser FIB an die I/O Karten der Data Plane. Die Data Plane nutzt diese FIB dann fuer das Forwarding.",
+        "explanation_en": "The control plane (CPM) builds the FIB -- based on routing protocols and the RTM -- and then distributes copies of this FIB to the I/O cards of the data plane. The data plane then uses this FIB for forwarding.",
+        "extraInfo": "Diese Verteilung der FIB auf alle I/O Karten ist entscheidend fuer Line-Rate-Forwarding: Jede Karte kann Pakete sofort weiterleiten, ohne bei jeder Entscheidung den CPM zu befragen.",
+        "extraInfo_en": "This distribution of the FIB to all I/O cards is crucial for line-rate forwarding: each card can immediately forward packets without querying the CPM for every decision.",
+        "tip": "FIB: Control Plane baut sie, Data Plane bekommt Kopien und nutzt sie.",
+        "tip_en": "FIB: control plane builds it, data plane receives copies and uses them.",
+        "tags": [
+            "IS-IS",
+            "FIB",
+            "Control Plane",
+            "Data Plane",
+            "CPM"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-v1",
+        "question": "Warum ist die physische Trennung von Control Plane (CPM) und Data Plane (I/O Karten) wichtig?",
+        "question_en": "Why is the physical separation of control plane (CPM) and data plane (I/O cards) important?",
+        "options": [
+            "Hohe Traffic-Last auf der Data Plane beeintraechigt die Control Plane nicht -- Routing-Protokolle und Management bleiben stabil",
+            "Damit der Router bei Ausfall einer I/O Karte automatisch neu startet",
+            "Weil IS-IS LSPs nur ueber dedizierte Hardware-Karten versendet werden duerfen",
+            "Um sicherzustellen, dass jede I/O Karte ihre eigene unabhaengige Routing-Tabelle hat"
+        ],
+        "options_en": [
+            "High traffic load on the data plane does not affect the control plane -- routing protocols and management remain stable",
+            "So the router automatically restarts when an I/O card fails",
+            "Because IS-IS LSPs may only be sent via dedicated hardware cards",
+            "To ensure each I/O card has its own independent routing table"
+        ],
+        "correctIndex": 0,
+        "explanation": "Wenn Control Plane und Data Plane physisch getrennt sind, kann ein DDoS-Angriff oder extremer Traffic-Burst auf der Data Plane den CPM nicht ueberlasten. Routing-Protokolle konvergieren weiterhin normal und das Management bleibt erreichbar.",
+        "explanation_en": "When control plane and data plane are physically separated, a DDoS attack or extreme traffic burst on the data plane cannot overload the CPM. Routing protocols continue to converge normally and management remains reachable.",
+        "extraInfo": "Dieses Konzept ist auch als 'Control Plane Protection' bekannt und ist ein grundlegendes Sicherheitsmerkmal in Service-Provider-Routern.",
+        "extraInfo_en": "This concept is also known as 'Control Plane Protection' and is a fundamental security feature in service provider routers.",
+        "tip": "Physische Trennung = Data Plane Traffic kann CPM nicht ueberlasten.",
+        "tip_en": "Physical separation = data plane traffic cannot overload the CPM.",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "Data Plane",
+            "CPM",
+            "High Availability"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v2",
+        "question": "Was passiert mit dem Daten-Forwarding, wenn der CPM (Control Plane) ausfaellt, die I/O Karten (Data Plane) aber noch laufen?",
+        "question_en": "What happens to data forwarding if the CPM (control plane) fails but the I/O cards (data plane) are still running?",
+        "options": [
+            "Das Forwarding laeuft weiter -- die I/O Karten nutzen ihre lokal gespeicherte FIB-Kopie; nur neue Routing-Aenderungen koennen nicht mehr verarbeitet werden",
+            "Das Forwarding stoppt sofort, da jedes Paket eine Entscheidung vom CPM benoetigt",
+            "Die Data Plane wechselt automatisch auf statische Routen als Fallback",
+            "Die I/O Karten senden alle Pakete an den naechsten Router ohne Forwarding-Entscheidung"
+        ],
+        "options_en": [
+            "Forwarding continues -- the I/O cards use their locally stored FIB copy; only new routing changes can no longer be processed",
+            "Forwarding stops immediately because every packet requires a decision from the CPM",
+            "The data plane automatically switches to static routes as a fallback",
+            "The I/O cards send all packets to the next router without a forwarding decision"
+        ],
+        "correctIndex": 0,
+        "explanation": "Da jede I/O Karte eine lokale Kopie der FIB hat, kann das Forwarding ohne den CPM weiterlaufen. Allerdings koennen keine Routing-Updates mehr verarbeitet werden -- die FIB veraltet. Nokia SR OS unterstuetzt Non-Stop Routing (NSR) genau fuer diesen Fall.",
+        "explanation_en": "Since each I/O card has a local copy of the FIB, forwarding can continue without the CPM. However, no routing updates can be processed anymore -- the FIB becomes stale. Nokia SR OS supports Non-Stop Routing (NSR) precisely for this case.",
+        "extraInfo": "Dieses Verhalten ist der Hauptgrund, warum die FIB auf die I/O Karten verteilt wird -- es entkoppelt das Forwarding von der Verfuegbarkeit der Control Plane.",
+        "extraInfo_en": "This behavior is the main reason why the FIB is distributed to I/O cards -- it decouples forwarding from the availability of the control plane.",
+        "tip": "CPM-Ausfall = Forwarding weiter (alte FIB), aber keine Routing-Updates mehr.",
+        "tip_en": "CPM failure = forwarding continues (old FIB), but no more routing updates.",
+        "tags": [
+            "IS-IS",
+            "Control Plane",
+            "Data Plane",
+            "FIB",
+            "High Availability",
+            "NSR"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
     }
 ]
