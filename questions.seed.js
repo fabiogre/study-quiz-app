@@ -17755,6 +17755,201 @@ const SEED_QUESTIONS = [
         "section_en": "Section 6"
     },
     {
+        "id": "isis-s6-q9",
+        "question": "Welche Aufgabe hat die Switch Fabric in einem modularen Service Router?",
+        "question_en": "What is the role of the switch fabric in a modular service router?",
+        "options": [
+            "Sie verbindet CPM und I/O Karten als internen Pfad fuer Pakete zwischen Karten",
+            "Sie berechnet Routing-Tabellen und waehlt die beste Route pro Prefix aus",
+            "Sie ersetzt ARP und loest IP-Adressen direkt in MAC-Adressen auf",
+            "Sie verwaltet nur Management-Zugriffe wie SSH, SNMP und Syslog"
+        ],
+        "options_en": [
+            "It connects CPM and I/O cards as an internal path for packets between cards",
+            "It calculates routing tables and selects the best route for each prefix",
+            "It replaces ARP and resolves IP addresses directly into MAC addresses",
+            "It only manages access methods such as SSH, SNMP, and Syslog"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Switch Fabric ist der interne Verbindungsweg zwischen den Karten eines modularen Routers. Sie ermoeglicht, dass Pakete von einer Karte zu einer anderen Karte gelangen.",
+        "explanation_en": "The switch fabric is the internal interconnect between cards in a modular router. It allows packets to move from one card to another card.",
+        "extraInfo": "Bei Nokia SR Plattformen kann diese Funktion je nach Chassis als dediziertes Switch Fabric Module oder kombiniert mit dem CPM realisiert sein.",
+        "extraInfo_en": "On Nokia SR platforms, this function can be implemented as a dedicated switch fabric module or combined with the CPM, depending on the chassis.",
+        "tip": "Switch Fabric = interner Karten-zu-Karten-Pfad.",
+        "tip_en": "Switch fabric = internal card-to-card path.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "CPM",
+            "I/O Cards",
+            "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q10",
+        "question": "Warum braucht ein Paket die Switch Fabric, wenn es ueber eine andere I/O Karte ausgeleitet wird?",
+        "question_en": "Why does a packet need the switch fabric when it exits through a different I/O card?",
+        "options": [
+            "Die Fabric transportiert das Paket intern von der Eingangs- zur Ausgangskarte",
+            "Die Fabric entscheidet das Routing neu und ersetzt damit die lokale FIB",
+            "Die Fabric sendet das Paket zuerst immer vollstaendig an den CPM",
+            "Die Fabric wandelt Layer-3-Pakete dauerhaft in Control-Pakete um"
+        ],
+        "options_en": [
+            "The fabric transports the packet internally from the ingress to the egress card",
+            "The fabric recalculates routing and thereby replaces the local FIB",
+            "The fabric always sends the whole packet to the CPM first",
+            "The fabric permanently converts Layer 3 packets into control packets"
+        ],
+        "correctIndex": 0,
+        "explanation": "Wenn ein Paket auf einer I/O Karte empfangen wird und ueber eine andere I/O Karte den Router verlassen muss, braucht es einen internen Transportweg. Diese Aufgabe uebernimmt die Switch Fabric.",
+        "explanation_en": "When a packet is received on one I/O card and must leave through another I/O card, it needs an internal transport path. The switch fabric provides that function.",
+        "extraInfo": "Die Forwarding-Entscheidung basiert weiterhin auf der FIB der Data Plane. Die Switch Fabric ist der interne Transportmechanismus zwischen den Karten.",
+        "extraInfo_en": "The forwarding decision is still based on the FIB in the data plane. The switch fabric is the internal transport mechanism between cards.",
+        "tip": "Andere Ausgangskarte = interner Transport ueber die Switch Fabric.",
+        "tip_en": "Different egress card = internal transport through the switch fabric.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "Data Plane",
+            "Forwarding",
+            "I/O Cards"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q11",
+        "question": "Welche Aussage zu Control-Paketen und Switch Fabric ist korrekt?",
+        "question_en": "Which statement about control packets and switch fabric is correct?",
+        "options": [
+            "Ein lokal erzeugtes Control-Paket kann ueber die Fabric zur I/O Karte gelangen",
+            "Ein lokal erzeugtes Control-Paket wird immer direkt vom CPM-Port gesendet",
+            "Ein lokal erzeugtes Control-Paket umgeht die I/O Karten vollstaendig",
+            "Ein lokal erzeugtes Control-Paket wird nie ueber Router-Ports gesendet"
+        ],
+        "options_en": [
+            "A locally generated control packet can reach the I/O card through the fabric",
+            "A locally generated control packet is always sent directly from a CPM port",
+            "A locally generated control packet bypasses the I/O cards completely",
+            "A locally generated control packet is never sent through router ports"
+        ],
+        "correctIndex": 0,
+        "explanation": "Control-Pakete koennen auf dem CPM erzeugt werden, muessen aber ueber eine physische Router-Schnittstelle gesendet werden. Dafuer gelangen sie intern zur passenden I/O Karte.",
+        "explanation_en": "Control packets can be generated on the CPM, but they must be transmitted through a physical router interface. For that, they reach the appropriate I/O card internally.",
+        "extraInfo": "Beispiele sind Protokollpakete wie IS-IS oder OSPF, die lokal erzeugt und anschliessend ueber ein reales Interface gesendet werden.",
+        "extraInfo_en": "Examples include protocol packets such as IS-IS or OSPF that are generated locally and then transmitted through a real interface.",
+        "tip": "CPM erzeugt, I/O Karte sendet physisch.",
+        "tip_en": "CPM generates, I/O card transmits physically.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "Control Plane",
+            "CPM",
+            "I/O Cards"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q12",
+        "question": "Welche Funktion gehoert nicht zur Aufgabe der Switch Fabric?",
+        "question_en": "Which function is not a task of the switch fabric?",
+        "options": [
+            "Sie berechnet nicht die beste Route und baut nicht die FIB des Routers",
+            "Sie verbindet Karten fuer internen Pakettransport innerhalb des Chassis",
+            "Sie kann Datenverkehr zwischen unterschiedlichen I/O Karten tragen",
+            "Sie kann Control-Traffic zwischen CPM und I/O Karten transportieren"
+        ],
+        "options_en": [
+            "It does not calculate the best route or build the router FIB",
+            "It connects cards for internal packet transport inside the chassis",
+            "It can carry traffic between different I/O cards",
+            "It can transport control traffic between CPM and I/O cards"
+        ],
+        "correctIndex": 0,
+        "explanation": "Routing-Entscheidungen, RTM und FIB-Aufbau gehoeren zur Control Plane auf dem CPM. Die Switch Fabric stellt den internen Transportweg zwischen den Karten bereit.",
+        "explanation_en": "Routing decisions, RTM processing, and FIB construction belong to the control plane on the CPM. The switch fabric provides the internal transport path between cards.",
+        "extraInfo": "Diese Trennung ist wichtig: Der CPM entscheidet und verteilt Forwarding-Informationen, waehrend I/O Karten und Switch Fabric den Datenpfad bereitstellen.",
+        "extraInfo_en": "This separation is important: the CPM decides and distributes forwarding information, while I/O cards and switch fabric provide the data path.",
+        "tip": "Fabric transportiert intern, CPM berechnet Control-Plane-Logik.",
+        "tip_en": "Fabric transports internally, CPM calculates control-plane logic.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "Control Plane",
+            "FIB",
+            "CPM"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q13",
+        "question": "Wie kann die Switch-Fabric-Funktion bei modularen Nokia SR Routern umgesetzt sein?",
+        "question_en": "How can the switch fabric function be implemented in modular Nokia SR routers?",
+        "options": [
+            "Je nach Plattform als eigenes SFM oder als kombinierte SF/CPM-Funktion",
+            "Immer als reine Softwarefunktion innerhalb jedes einzelnen Interfaces",
+            "Nur als Routing-Prozess innerhalb des IS-IS-Protokoll-Stacks",
+            "Ausschliesslich als ARP-Cache auf jeder physischen I/O Karte"
+        ],
+        "options_en": [
+            "Depending on the platform, as a dedicated SFM or combined SF/CPM function",
+            "Always as a pure software function inside each individual interface",
+            "Only as a routing process inside the IS-IS protocol stack",
+            "Exclusively as an ARP cache on every physical I/O card"
+        ],
+        "correctIndex": 0,
+        "explanation": "Bei modularen Nokia SR Routern ist die Switch-Fabric-Funktion plattformabhaengig implementiert. Sie kann als dediziertes Switch Fabric Module oder als kombinierte SF/CPM-Funktion auftreten.",
+        "explanation_en": "In modular Nokia SR routers, the switch fabric function is platform-dependent. It can appear as a dedicated switch fabric module or as a combined SF/CPM function.",
+        "extraInfo": "Wichtig fuer das Verstaendnis ist nicht die konkrete Kartenbezeichnung, sondern die Rolle: interne Verbindung zwischen Control-Plane- und I/O-Hardware.",
+        "extraInfo_en": "For understanding, the exact card name is less important than the role: internal connectivity between control-plane and I/O hardware.",
+        "tip": "Nokia: SFM oder SF/CPM, je nach Plattform.",
+        "tip_en": "Nokia: SFM or SF/CPM, depending on platform.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "SFM",
+            "SF/CPM",
+            "Nokia SR OS"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
         "id": "isis-s6-v1",
         "question": "Warum ist die physische Trennung von Control Plane (CPM) und Data Plane (I/O Karten) wichtig?",
         "question_en": "Why is the physical separation of control plane (CPM) and data plane (I/O cards) important?",
@@ -17823,6 +18018,123 @@ const SEED_QUESTIONS = [
             "FIB",
             "High Availability",
             "NSR"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v3",
+        "question": "Ein Paket kommt auf I/O Karte A an und muss ueber I/O Karte B wieder heraus. Warum reicht der CPM alleine dafuer nicht aus?",
+        "question_en": "A packet enters on I/O card A and must leave through I/O card B. Why is the CPM alone not sufficient for this?",
+        "options": [
+            "Der CPM liefert Control-Plane-Logik, aber der interne Datenpfad zwischen Karten wird von der Switch Fabric bereitgestellt",
+            "Der CPM verarbeitet nur Ethernet-Header, waehrend IP-Header immer direkt von der Management-Plane weitergeleitet werden",
+            "Der CPM sendet nur ARP-Requests, waehrend alle Nutzdaten immer ueber dedizierte IS-IS-Nachbarn laufen muessen",
+            "Der CPM ersetzt die I/O Karten nur bei Fehlern und uebernimmt im Normalbetrieb keine Beziehung zur Paketweiterleitung"
+        ],
+        "options_en": [
+            "The CPM provides control-plane logic, but the internal data path between cards is provided by the switch fabric",
+            "The CPM processes only Ethernet headers, while IP headers are always forwarded directly by the management plane",
+            "The CPM sends only ARP requests, while all payload traffic must always pass through dedicated IS-IS neighbors",
+            "The CPM replaces I/O cards only during failures and has no relation to packet forwarding during normal operation"
+        ],
+        "correctIndex": 0,
+        "explanation": "Der CPM ist fuer Control-Plane-Aufgaben zustaendig, zum Beispiel Routing-Protokolle und FIB-Verteilung. Das Paket selbst muss jedoch intern zwischen den I/O Karten transportiert werden; dafuer ist die Switch Fabric da.",
+        "explanation_en": "The CPM is responsible for control-plane tasks such as routing protocols and FIB distribution. The packet itself must still be transported internally between I/O cards; that is the role of the switch fabric.",
+        "extraInfo": "Ein Service Router skaliert nur, wenn Pakettransport und Routing-Logik getrennt bleiben. Sonst wuerde jedes cross-card Paket den CPM unnoetig belasten.",
+        "extraInfo_en": "A service router scales only when packet transport and routing logic remain separate. Otherwise every cross-card packet would unnecessarily burden the CPM.",
+        "tip": "CPM entscheidet nicht jedes Paket live; die Fabric verbindet die Karten.",
+        "tip_en": "The CPM does not live-decide every packet; the fabric connects the cards.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "CPM",
+            "Data Plane",
+            "Forwarding"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v4",
+        "question": "Warum muss ein vom CPM erzeugtes Control-Paket trotzdem zur passenden I/O Karte gelangen?",
+        "question_en": "Why must a control packet generated by the CPM still reach the appropriate I/O card?",
+        "options": [
+            "Weil der CPM das Paket erzeugt, aber die physische Uebertragung ueber den Port einer I/O Karte erfolgt",
+            "Weil der CPM keine Protokollpakete erzeugen darf und die I/O Karte den Inhalt erst neu berechnen muss",
+            "Weil Control-Pakete grundsaetzlich keine Routing-Tabelle nutzen und immer per Flooding gesendet werden",
+            "Weil I/O Karten jedes Control-Paket in ein Datenpaket umwandeln, bevor es den Router verlassen darf"
+        ],
+        "options_en": [
+            "Because the CPM generates the packet, but physical transmission uses the port of an I/O card",
+            "Because the CPM may not generate protocol packets and the I/O card must recalculate the content first",
+            "Because control packets generally do not use a routing table and are always sent by flooding",
+            "Because I/O cards convert every control packet into a data packet before it may leave the router"
+        ],
+        "correctIndex": 0,
+        "explanation": "Der CPM kann ein Control-Plane-Paket erzeugen, besitzt aber nicht die eigentliche Ausgangsschnittstelle fuer den normalen Router-Port. Deshalb muss das Paket intern zur I/O Karte gelangen, die den Port bereitstellt.",
+        "explanation_en": "The CPM can generate a control-plane packet, but it does not provide the actual egress interface for the normal router port. Therefore the packet must reach the I/O card that provides the port.",
+        "extraInfo": "Das ist der umgekehrte Blick auf dieselbe Architektur: Control Plane erzeugt oder verarbeitet Protokollinformationen, die Data Plane stellt die physischen Ports bereit.",
+        "extraInfo_en": "This is the reverse view of the same architecture: the control plane generates or processes protocol information, while the data plane provides the physical ports.",
+        "tip": "Erzeugen und physisch senden sind zwei verschiedene Aufgaben.",
+        "tip_en": "Generating and physically transmitting are two different tasks.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "Control Plane",
+            "CPM",
+            "I/O Cards"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v5",
+        "question": "Welche Auswirkung haette ein Problem in der Switch Fabric auf Pakete, die zwischen verschiedenen I/O Karten weitergeleitet werden muessen?",
+        "question_en": "What effect would a switch fabric problem have on packets that must be forwarded between different I/O cards?",
+        "options": [
+            "Cross-card Forwarding kann gestoert sein, auch wenn Routing-Informationen und lokale FIB-Eintraege vorhanden sind",
+            "Nur IS-IS-Nachbarschaften waeren betroffen, waehrend Nutzdaten zwischen I/O Karten normal weiterlaufen",
+            "Der CPM wuerde automatisch alle Nutzdaten per Software weiterleiten und damit Line-Rate dauerhaft erhalten",
+            "ARP wuerde alle fehlenden internen Pfade ersetzen und die Pakete ueber das lokale Subnetz umleiten"
+        ],
+        "options_en": [
+            "Cross-card forwarding can be disrupted even if routing information and local FIB entries exist",
+            "Only IS-IS adjacencies would be affected, while payload traffic between I/O cards continues normally",
+            "The CPM would automatically software-forward all payload traffic and permanently preserve line rate",
+            "ARP would replace all missing internal paths and reroute the packets through the local subnet"
+        ],
+        "correctIndex": 0,
+        "explanation": "FIB-Eintraege sagen, wohin ein Paket weitergeleitet werden soll. Die Switch Fabric stellt aber den internen Weg bereit, wenn Eingangs- und Ausgangskarte verschieden sind. Ohne diesen Pfad kann das Forwarding trotz korrekter Route fehlschlagen.",
+        "explanation_en": "FIB entries say where a packet should be forwarded. The switch fabric provides the internal path when ingress and egress cards differ. Without that path, forwarding can fail despite a correct route.",
+        "extraInfo": "Das ist eine wichtige Unterscheidung zwischen Control-Plane-Korrektheit und Data-Plane-Erreichbarkeit: Eine korrekte Route garantiert noch keinen funktionierenden Hardwarepfad.",
+        "extraInfo_en": "This is an important distinction between control-plane correctness and data-plane reachability: a correct route does not by itself guarantee a working hardware path.",
+        "tip": "Route vorhanden heisst nicht automatisch: interner Hardwarepfad gesund.",
+        "tip_en": "Route present does not automatically mean the internal hardware path is healthy.",
+        "tags": [
+            "IS-IS",
+            "Switch Fabric",
+            "Data Plane",
+            "Forwarding",
+            "Hardware"
         ],
         "source": "IS-IS Grundlagen",
         "source_en": "IS-IS fundamentals",
