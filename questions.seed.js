@@ -17950,6 +17950,201 @@ const SEED_QUESTIONS = [
         "section_en": "Section 6"
     },
     {
+        "id": "isis-s6-q14",
+        "question": "Welche Aussage beschreibt SF/CPM-Karten in vielen modularen Service Routern am besten?",
+        "question_en": "Which statement best describes SF/CPM cards in many modular service routers?",
+        "options": [
+            "Switch-Fabric- und CPM-Funktionen koennen gemeinsam auf einer SF/CPM-Karte liegen",
+            "Switch-Fabric- und CPM-Funktionen muessen immer auf getrennten Karten liegen",
+            "Switch-Fabric-Karten ersetzen alle I/O Karten und enthalten alle Router-Ports",
+            "CPM-Karten sind nur fuer Nutzdaten gedacht und verarbeiten keine Protokolle"
+        ],
+        "options_en": [
+            "Switch fabric and CPM functions can reside together on an SF/CPM card",
+            "Switch fabric and CPM functions must always reside on separate cards",
+            "Switch fabric cards replace all I/O cards and contain all router ports",
+            "CPM cards are only for payload traffic and do not process protocols"
+        ],
+        "correctIndex": 0,
+        "explanation": "In vielen 7750-SR-Plattformen treten Switch Fabric und Control Processor Module als kombinierte SF/CPM-Karte auf. Andere Plattformen koennen getrennte Fabric- und Control-Module verwenden.",
+        "explanation_en": "In many 7750 SR platforms, switch fabric and Control Processor Module functions appear as a combined SF/CPM card. Other platforms can use separate fabric and control modules.",
+        "extraInfo": "Wichtig ist die Funktionsrolle: CPM steht fuer Control Plane, Switch Fabric fuer den internen Karten-zu-Karten-Transport.",
+        "extraInfo_en": "The important point is the functional role: CPM is for the control plane, switch fabric is for internal card-to-card transport.",
+        "tip": "SF/CPM = haeufig kombiniert, aber funktional getrennt denken.",
+        "tip_en": "SF/CPM = often combined, but think of the functions separately.",
+        "tags": [
+            "IS-IS",
+            "SF/CPM",
+            "Switch Fabric",
+            "CPM",
+            "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q15",
+        "question": "Was bedeutet Redundanz bei SF/CPM oder CPM-Karten in einem passenden Router-Chassis?",
+        "question_en": "What does redundancy mean for SF/CPM or CPM cards in a suitable router chassis?",
+        "options": [
+            "Eine aktive Karte arbeitet, waehrend eine zweite Karte als Standby synchronisiert wird",
+            "Alle Karten forwarden dieselben Pakete gleichzeitig ueber dieselben physischen Ports",
+            "Eine I/O Karte uebernimmt automatisch alle Routing-Protokolle vom CPM",
+            "Die Switch Fabric wird durch ARP und lokale MAC-Tabellen vollstaendig ersetzt"
+        ],
+        "options_en": [
+            "One active card operates while a second card is synchronized as standby",
+            "All cards forward the same packets simultaneously through the same physical ports",
+            "An I/O card automatically takes over all routing protocols from the CPM",
+            "The switch fabric is completely replaced by ARP and local MAC tables"
+        ],
+        "correctIndex": 0,
+        "explanation": "Router mit CPM-Redundanz verwenden typischerweise ein Active/Standby-Modell. Die Standby-Karte wird synchronisiert, damit sie bei einem Ausfall uebernehmen kann.",
+        "explanation_en": "Routers with CPM redundancy typically use an active/standby model. The standby card is synchronized so it can take over during a failure.",
+        "extraInfo": "Das schuetzt die Control Plane. Es bedeutet aber nicht, dass I/O Karten dadurch selbst zu CPMs werden.",
+        "extraInfo_en": "This protects the control plane. It does not mean that I/O cards become CPMs themselves.",
+        "tip": "Redundanz = Active/Standby, nicht doppelte Paketkopien.",
+        "tip_en": "Redundancy = active/standby, not duplicate packet copies.",
+        "tags": [
+            "IS-IS",
+            "CPM",
+            "SF/CPM",
+            "Redundancy",
+            "High Availability"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q16",
+        "question": "Welche Rolle haben MDAs in klassischen 7750-SR-I/O-Architekturen?",
+        "question_en": "What role do MDAs have in classic 7750 SR I/O architectures?",
+        "options": [
+            "MDAs stellen physische Interface-Konnektivitaet bereit und werden in IOMs gesteckt",
+            "MDAs berechnen die Routing-Tabelle und verteilen die FIB an alle CPMs",
+            "MDAs bilden immer die Switch Fabric zwischen CPM und allen I/O Karten",
+            "MDAs ersetzen Control-Plane-Protokolle wie IS-IS, OSPF und BGP"
+        ],
+        "options_en": [
+            "MDAs provide physical interface connectivity and are plugged into IOMs",
+            "MDAs calculate the routing table and distribute the FIB to all CPMs",
+            "MDAs always form the switch fabric between CPM and all I/O cards",
+            "MDAs replace control-plane protocols such as IS-IS, OSPF, and BGP"
+        ],
+        "correctIndex": 0,
+        "explanation": "Media Dependent Adapters stellen die physische Port- und Medien-Konnektivitaet bereit. In klassischen modularen Plattformen werden sie in IOMs provisioniert oder eingesteckt.",
+        "explanation_en": "Media Dependent Adapters provide physical port and media connectivity. In classic modular platforms, they are provisioned or inserted into IOMs.",
+        "extraInfo": "SR OS verlangt typischerweise, dass zuerst Slot und IOM/IMM-Kartentyp provisioniert sind, bevor ein MDA provisioniert wird.",
+        "extraInfo_en": "SR OS typically requires the slot and IOM/IMM card type to be provisioned before an MDA is provisioned.",
+        "tip": "MDA = physische Port-/Medienseite.",
+        "tip_en": "MDA = physical port/media side.",
+        "tags": [
+            "IS-IS",
+            "MDA",
+            "IOM",
+            "I/O Cards",
+            "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q17",
+        "question": "Wie laesst sich ein IMM gegenueber einer Kombination aus IOM und MDA einordnen?",
+        "question_en": "How can an IMM be classified compared with a combination of IOM and MDA?",
+        "options": [
+            "Ein IMM integriert I/O-Funktion und feste Medienkarten in einer Einheit",
+            "Ein IMM ist nur ein externer Transceiver ohne eigene Router-Funktion",
+            "Ein IMM ist ausschliesslich ein Control-Plane-Modul fuer Routing-Protokolle",
+            "Ein IMM ist immer eine separate Switch-Fabric-Karte ohne Ports"
+        ],
+        "options_en": [
+            "An IMM integrates I/O function and fixed media cards in one unit",
+            "An IMM is only an external transceiver without router function",
+            "An IMM is exclusively a control-plane module for routing protocols",
+            "An IMM is always a separate switch fabric card without ports"
+        ],
+        "correctIndex": 0,
+        "explanation": "Integrated Media Modules kombinieren die I/O-Funktion mit integrierten Medienkarten. Konzeptuell entsprechen sie einer staerker integrierten IOM/MDA-Loesung.",
+        "explanation_en": "Integrated Media Modules combine the I/O function with integrated media cards. Conceptually, they correspond to a more integrated IOM/MDA solution.",
+        "extraInfo": "Je nach Generation muessen IMMs trotzdem passend provisioniert werden. Sie sind nicht mit CPM oder Switch Fabric gleichzusetzen.",
+        "extraInfo_en": "Depending on the generation, IMMs still need suitable provisioning. They are not equivalent to CPM or switch fabric.",
+        "tip": "IMM = integrierte I/O- und Medienfunktion.",
+        "tip_en": "IMM = integrated I/O and media function.",
+        "tags": [
+            "IS-IS",
+            "IMM",
+            "IOM",
+            "MDA",
+            "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
+        "id": "isis-s6-q18",
+        "question": "Welche Aussage beschreibt XMA- und XCM-Architektur korrekt?",
+        "question_en": "Which statement correctly describes XMA and XCM architecture?",
+        "options": [
+            "XMAs stecken in XCMs und werden in SR OS teilweise generisch wie MDAs modelliert",
+            "XMAs stecken immer direkt in CPM-Slots und ersetzen dort die Standby-CPM",
+            "XCMs sind reine Softwareprozesse, die keine physische Karte benoetigen",
+            "XMAs sind ARP-Erweiterungen fuer IPv4 und gehoeren nicht zur Hardware"
+        ],
+        "options_en": [
+            "XMAs plug into XCMs and are partly modeled generically like MDAs in SR OS",
+            "XMAs always plug directly into CPM slots and replace the standby CPM there",
+            "XCMs are pure software processes that do not require a physical card",
+            "XMAs are ARP extensions for IPv4 and are not part of the hardware"
+        ],
+        "correctIndex": 0,
+        "explanation": "eXpandable Media Adapters werden auf passenden Plattformen in XMA Controller Modules eingesetzt. SR OS verwendet in einigen Dokumenten MDA als generischen Modellbegriff fuer MDA und XMA.",
+        "explanation_en": "eXpandable Media Adapters are installed into XMA Controller Modules on suitable platforms. In some documents, SR OS uses MDA as a generic modeling term for MDA and XMA.",
+        "extraInfo": "Das ist fuer CLI-Verstaendnis wichtig: Physisch heisst die Karte XMA, im Modell kann sie unter MDA-artiger Hierarchie erscheinen.",
+        "extraInfo_en": "This matters for CLI understanding: physically the card is an XMA, while in the model it can appear under an MDA-like hierarchy.",
+        "tip": "XMA in XCM; CLI-Modell kann MDA-generisch sein.",
+        "tip_en": "XMA in XCM; CLI model can be MDA-generic.",
+        "tags": [
+            "IS-IS",
+            "XMA",
+            "XCM",
+            "MDA",
+            "Nokia SR OS"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 6",
+        "section_en": "Section 6"
+    },
+    {
         "id": "isis-s6-v1",
         "question": "Warum ist die physische Trennung von Control Plane (CPM) und Data Plane (I/O Karten) wichtig?",
         "question_en": "Why is the physical separation of control plane (CPM) and data plane (I/O cards) important?",
@@ -18135,6 +18330,123 @@ const SEED_QUESTIONS = [
             "Data Plane",
             "Forwarding",
             "Hardware"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v6",
+        "question": "Warum ist es gefaehrlich, SF/CPM als eine einzige ungetrennte Funktion zu verstehen, nur weil sie oft auf derselben Karte sitzt?",
+        "question_en": "Why is it dangerous to understand SF/CPM as one inseparable function just because it often resides on the same card?",
+        "options": [
+            "Weil Control-Plane-Aufgaben und interner Fabric-Transport logisch verschiedene Rollen mit verschiedenen Fehlerbildern sind",
+            "Weil jede SF/CPM-Karte ausschliesslich Nutzdaten verarbeitet und niemals Routing-Protokolle terminieren kann",
+            "Weil die Switch Fabric alle Routing-Protokolle berechnet und der CPM nur physische Ports bereitstellt",
+            "Weil I/O Karten ohne SF/CPM immer automatisch alle Control-Plane-Funktionen uebernehmen muessen"
+        ],
+        "options_en": [
+            "Because control-plane tasks and internal fabric transport are logically different roles with different failure modes",
+            "Because every SF/CPM card only processes payload traffic and can never terminate routing protocols",
+            "Because the switch fabric calculates all routing protocols and the CPM only provides physical ports",
+            "Because I/O cards must always automatically take over all control-plane functions without SF/CPM"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die physische Integration auf einer Karte bedeutet nicht, dass CPM und Switch Fabric dieselbe Aufgabe haben. Der CPM steuert und berechnet, die Fabric transportiert intern zwischen Karten.",
+        "explanation_en": "Physical integration on one card does not mean CPM and switch fabric have the same task. The CPM controls and calculates, while the fabric transports internally between cards.",
+        "extraInfo": "Diese Trennung hilft beim Troubleshooting: Ein Control-Plane-Problem und ein Fabric-Kapazitaets- oder Fabric-Ausfallproblem koennen sich unterschiedlich zeigen.",
+        "extraInfo_en": "This separation helps troubleshooting: a control-plane issue and a fabric capacity or fabric failure issue can appear differently.",
+        "tip": "Gleiche Karte ist nicht gleiche Funktion.",
+        "tip_en": "Same card does not mean same function.",
+        "tags": [
+            "IS-IS",
+            "SF/CPM",
+            "Switch Fabric",
+            "Control Plane",
+            "Troubleshooting"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v7",
+        "question": "Ein Router hat korrekte Routen, aber Traffic ueber bestimmte Ports faellt aus. Warum sollte man neben Routing auch MDA/IOM/IMM/XMA-Struktur pruefen?",
+        "question_en": "A router has correct routes, but traffic over specific ports fails. Why should MDA/IOM/IMM/XMA structure be checked in addition to routing?",
+        "options": [
+            "Weil korrekte Control-Plane-Informationen den physischen Port- und Forwarding-Pfad nicht automatisch gesund machen",
+            "Weil Routing-Protokolle physische Ports immer deaktivieren, sobald ein Prefix in der FIB installiert wurde",
+            "Weil MDAs grundsaetzlich nur fuer Management-Traffic genutzt werden und keine Nutzdaten tragen koennen",
+            "Weil XMAs nur virtuelle Interfaces erzeugen und daher niemals echten Leitungstraffic transportieren"
+        ],
+        "options_en": [
+            "Because correct control-plane information does not automatically make the physical port and forwarding path healthy",
+            "Because routing protocols always disable physical ports as soon as a prefix is installed in the FIB",
+            "Because MDAs are generally used only for management traffic and cannot carry payload traffic",
+            "Because XMAs only create virtual interfaces and therefore never transport real line traffic"
+        ],
+        "correctIndex": 0,
+        "explanation": "Routing und Hardwarepfad sind unterschiedliche Ebenen. Eine Route kann korrekt sein, waehrend der betroffene Port, MDA, IOM, IMM, XMA oder interne Forwarding-Komplex gestoert ist.",
+        "explanation_en": "Routing and the hardware path are different layers. A route can be correct while the affected port, MDA, IOM, IMM, XMA, or internal forwarding complex is impaired.",
+        "extraInfo": "Gerade bei modularen Routern ist Troubleshooting ohne Hardware-Hierarchie unvollstaendig: Slot, Karte, Adapter, Port und Fabric koennen jeweils relevant sein.",
+        "extraInfo_en": "Especially on modular routers, troubleshooting is incomplete without the hardware hierarchy: slot, card, adapter, port, and fabric can each be relevant.",
+        "tip": "Route korrekt bedeutet nicht automatisch Portpfad korrekt.",
+        "tip_en": "Correct route does not automatically mean correct port path.",
+        "tags": [
+            "IS-IS",
+            "I/O Cards",
+            "MDA",
+            "XMA",
+            "Troubleshooting"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Verstaendnisfragen",
+        "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s6-v8",
+        "question": "Warum ist der FFPC fuer das Forwarding wichtiger als der CPM, sobald die FIB bereits auf die I/O-Seite verteilt wurde?",
+        "question_en": "Why is the FFPC more important for forwarding than the CPM once the FIB has already been distributed to the I/O side?",
+        "options": [
+            "Weil der schnelle Forwarding-Komplex Pakete im Datenpfad verarbeitet, waehrend der CPM die Control Plane betreibt",
+            "Weil der CPM alle Pakete nach der FIB-Verteilung loescht und der FFPC neue Routen per IS-IS berechnet",
+            "Weil der FFPC nur Management-Sessions beendet und der CPM danach keine Bedeutung mehr im Router hat",
+            "Weil die FIB nach der Verteilung in ARP umgewandelt wird und der CPM dadurch Layer 2 wird"
+        ],
+        "options_en": [
+            "Because the fast forwarding complex processes packets in the data path while the CPM runs the control plane",
+            "Because the CPM deletes all packets after FIB distribution and the FFPC calculates new routes with IS-IS",
+            "Because the FFPC only terminates management sessions and the CPM then has no further role in the router",
+            "Because the FIB is converted into ARP after distribution and the CPM thereby becomes Layer 2"
+        ],
+        "correctIndex": 0,
+        "explanation": "Nach der FIB-Verteilung muss jedes Paket mit hoher Geschwindigkeit im Datenpfad verarbeitet werden. Diese Aufgabe liegt bei den Forwarding-Komplexen der I/O-Hardware, nicht beim CPM.",
+        "explanation_en": "After FIB distribution, every packet must be processed at high speed in the data path. That task belongs to the forwarding complexes of the I/O hardware, not to the CPM.",
+        "extraInfo": "Der CPM bleibt wichtig fuer neue Routing-Informationen, Management und Protokolle. Fuer Line-Rate-Forwarding ist aber die Data-Plane-Hardware entscheidend.",
+        "extraInfo_en": "The CPM remains important for new routing information, management, and protocols. For line-rate forwarding, however, data-plane hardware is decisive.",
+        "tip": "CPM bereitet vor, FFPC/Data Plane verarbeitet schnell.",
+        "tip_en": "CPM prepares, FFPC/data plane processes fast.",
+        "tags": [
+            "IS-IS",
+            "FFPC",
+            "Data Plane",
+            "CPM",
+            "Forwarding"
         ],
         "source": "IS-IS Grundlagen",
         "source_en": "IS-IS fundamentals",
