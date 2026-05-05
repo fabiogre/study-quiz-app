@@ -1,4 +1,4 @@
-﻿# Knowledge Base (EN draft)\n\nThis file is an English draft derived from wissensbasis_einfach.md.\nUse it as quick reference; the German source stays authoritative for exact wording.\n\n# Knowledge Base (simple explanation)
+# Knowledge Base (EN draft)\n\nThis file is an English draft derived from wissensbasis_einfach.md.\nUse it as quick reference; the German source stays authoritative for exact wording.\n\n# Knowledge Base (simple explanation)
 
 Dieses File sammelt alles Wissen, das du mir gibst.
 Ziel:
@@ -2151,3 +2151,24 @@ Important:
 - If multiple entries match, the longest matching prefix always wins (longest prefix match, most specific match).
 - For a match, as many leading bits of the destination IP must match the prefix as the prefix length requires.
 - If only a next hop is known, the router can recursively look up that next-hop IP to find the concrete outgoing interface.
+
+## IS-IS Module 1 Section 7: IPv4 Header Format
+- Bytes 0-3 (first 32-bit word):
+  - Version: bits 0-3
+  - Header Length (IHL): bits 4-7
+  - Type of Service: bits 8-15
+  - Total Length: bits 16-31
+- Bytes 4-7 (second 32-bit word):
+  - Identification: bits 0-15
+  - Flags: bits 16-18
+  - Fragment Offset: bits 19-31
+- Bytes 8-11 (third 32-bit word):
+  - Time to Live (TTL): bits 0-7
+  - Protocol: bits 8-15
+  - Header Checksum: bits 16-31
+- Bytes 12-15:
+  - Source Address: bits 0-31
+- Bytes 16-19:
+  - Destination Address: bits 0-31
+- Memory aid:
+  - Bit positions are defined within each 32-bit word, not as one continuous bit range across the entire header.

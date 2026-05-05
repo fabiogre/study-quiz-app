@@ -1600,22 +1600,27 @@ async function loadData(forceSeed = false) {
   const savedNotes = !forceSeed ? await loadJson(NOTES_KEY) : null;
 
   questions = Array.isArray(savedQuestions) ? savedQuestions : [];
+  const normalizedBundledSeed = normalizeQuestions(getBundledSeedQuestions());
+  const normalizedFileSeed = await loadSeedQuestionsFromFile();
 
   if (!Array.isArray(questions) || questions.length === 0) {
-    const bundledSeed = getBundledSeedQuestions();
-    if (bundledSeed.length > 0) {
-      questions = bundledSeed;
+    if (normalizedBundledSeed.length > 0) {
+      questions = normalizedBundledSeed;
+    }
+    if (normalizedFileSeed.length > 0) {
+      questions = normalizedFileSeed;
     } else {
-      const resp = await fetch("./questions.seed.json");
-      if (!resp.ok) {
+      if (questions.length === 0) {
         throw new Error("Seed-Datei konnte nicht geladen werden.");
       }
-      questions = await resp.json();
     }
   }
-  const normalizedBundledSeed = normalizeQuestions(getBundledSeedQuestions());
+
   if (normalizedBundledSeed.length > 0 && questions.length > 0) {
     questions = mergeSeedQuestions(questions, normalizedBundledSeed);
+  }
+  if (normalizedFileSeed.length > 0 && questions.length > 0) {
+    questions = mergeSeedQuestions(questions, normalizedFileSeed);
   }
   questions = normalizeQuestions(questions);
   saveQuestions();
@@ -1628,6 +1633,17 @@ function getBundledSeedQuestions() {
   const seed = globalThis.STUDY_QUIZ_SEED;
   if (!Array.isArray(seed)) return [];
   return seed.map((q) => ({ ...q }));
+}
+
+async function loadSeedQuestionsFromFile() {
+  try {
+    const resp = await fetch("./questions.seed.json", { cache: "no-store" });
+    if (!resp.ok) return [];
+    const loaded = await resp.json();
+    return normalizeQuestions(loaded);
+  } catch {
+    return [];
+  }
 }
 
 function mergeMissingLocalizedFields(existingQuestions, seedQuestions) {
@@ -2517,15 +2533,7 @@ function importJson(replace) {
 
 async function syncSeedKeepProgress() {
   try {
-    let seedQuestions = [];
-    try {
-      const resp = await fetch("./questions.seed.json", { cache: "no-store" });
-      if (resp.ok) {
-        seedQuestions = normalizeQuestions(await resp.json());
-      }
-    } catch {
-      seedQuestions = [];
-    }
+    let seedQuestions = await loadSeedQuestionsFromFile();
     if (seedQuestions.length === 0) {
       seedQuestions = normalizeQuestions(getBundledSeedQuestions());
     }

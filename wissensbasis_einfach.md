@@ -1,4 +1,4 @@
-﻿# Wissensbasis (einfach erklaert)
+# Wissensbasis (einfach erklaert)
 
 Dieses File sammelt alles Wissen, das du mir gibst.
 Ziel:
@@ -2151,3 +2151,24 @@ Wichtig:
 - Wenn mehrere Eintraege passen, gewinnt immer das laengste passende Praefix (longest prefix match, most specific match).
 - Fuer ein Match muessen so viele fuehrende Bits der Ziel-IP mit dem Praefix uebereinstimmen, wie die Praefixlaenge vorgibt.
 - Wenn nur ein Next Hop bekannt ist, kann der Router rekursiv auf diese Next-Hop-IP schauen, um das konkrete Ausgangsinterface zu finden.
+
+## IS-IS Modul 1 Section 7: IPv4 Header Format
+- Byte 0-3 (erstes 32-Bit-Wort):
+  - Version: Bit 0-3
+  - Header Length (IHL): Bit 4-7
+  - Type of Service: Bit 8-15
+  - Total Length: Bit 16-31
+- Byte 4-7 (zweites 32-Bit-Wort):
+  - Identification: Bit 0-15
+  - Flags: Bit 16-18
+  - Fragment Offset: Bit 19-31
+- Byte 8-11 (drittes 32-Bit-Wort):
+  - Time to Live (TTL): Bit 0-7
+  - Protocol: Bit 8-15
+  - Header Checksum: Bit 16-31
+- Byte 12-15:
+  - Source Address: Bit 0-31
+- Byte 16-19:
+  - Destination Address: Bit 0-31
+- Merkhilfe:
+  - Die Bitpositionen beziehen sich jeweils auf das aktuelle 32-Bit-Wort, nicht auf den gesamten Header als eine einzige durchgehende Bitreihe.

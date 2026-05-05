@@ -18456,5 +18456,311 @@ const SEED_QUESTIONS = [
         "module_en": "Module 1",
         "section": "Verstaendnisfragen",
         "section_en": "Comprehension Questions"
+    },
+    {
+        "id": "isis-s7-q1",
+        "question": "Welche Felder liegen im IPv4-Header in den ersten 32 Bit (Bytes 0-3)?",
+        "question_en": "Which fields are located in the first 32 bits (bytes 0-3) of the IPv4 header?",
+        "options": [
+            "Version, Header Length (IHL), Type of Service und Total Length",
+            "Identification, Flags, Fragment Offset und TTL",
+            "TTL, Protocol, Header Checksum und Source Address",
+            "Source Address und Destination Address"
+        ],
+        "options_en": [
+            "Version, Header Length (IHL), Type of Service, and Total Length",
+            "Identification, Flags, Fragment Offset, and TTL",
+            "TTL, Protocol, Header Checksum, and Source Address",
+            "Source Address and Destination Address"
+        ],
+        "correctIndex": 0,
+        "explanation": "Im ersten 32-Bit-Wort des IPv4-Headers stehen genau diese vier Felder in dieser Reihenfolge: Version (0-3), IHL (4-7), Type of Service (8-15) und Total Length (16-31).",
+        "explanation_en": "The first 32-bit word of the IPv4 header contains exactly these four fields in this order: Version (0-3), IHL (4-7), Type of Service (8-15), and Total Length (16-31).",
+        "extraInfo": "Type of Service wird in moderner Terminologie oft als DS field (DSCP/ECN) betrachtet.",
+        "extraInfo_en": "In modern terminology, Type of Service is often treated as the DS field (DSCP/ECN).",
+        "tip": "Merke fuer Bytes 0-3: V, IHL, ToS, Total Length.",
+        "tip_en": "For bytes 0-3 remember: V, IHL, ToS, Total Length.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "Section 7"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q2",
+        "question": "Welcher Bitbereich gehoert im ersten 32-Bit-Wort zur Header Length (IHL)?",
+        "question_en": "Which bit range in the first 32-bit word belongs to Header Length (IHL)?",
+        "options": [
+            "Bit 4-7",
+            "Bit 0-3",
+            "Bit 8-15",
+            "Bit 16-31"
+        ],
+        "options_en": [
+            "Bits 4-7",
+            "Bits 0-3",
+            "Bits 8-15",
+            "Bits 16-31"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Header Length (IHL) folgt direkt auf die Version und belegt im ersten Wort Bit 4 bis 7.",
+        "explanation_en": "Header Length (IHL) follows the version directly and occupies bits 4 through 7 in the first word.",
+        "extraInfo": "Die Version liegt davor auf Bit 0-3 und ist bei IPv4 typischerweise der Wert 4.",
+        "extraInfo_en": "The version is before it at bits 0-3 and is typically value 4 for IPv4.",
+        "tip": "Version zuerst, dann IHL.",
+        "tip_en": "Version first, then IHL.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "IHL"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q3",
+        "question": "Welche Aussage zu Bytes 4-7 des IPv4-Headers ist korrekt?",
+        "question_en": "Which statement about bytes 4-7 of the IPv4 header is correct?",
+        "options": [
+            "Identification liegt auf Bit 0-15, Flags auf 16-18 und Fragment Offset auf 19-31",
+            "Identification liegt auf Bit 0-7, Flags auf 8-15 und Fragment Offset auf 16-31",
+            "Identification liegt auf Bit 16-31, Flags auf 0-2 und Fragment Offset auf 3-15",
+            "Bytes 4-7 enthalten nur TTL und Protocol"
+        ],
+        "options_en": [
+            "Identification is at bits 0-15, Flags at 16-18, and Fragment Offset at 19-31",
+            "Identification is at bits 0-7, Flags at 8-15, and Fragment Offset at 16-31",
+            "Identification is at bits 16-31, Flags at 0-2, and Fragment Offset at 3-15",
+            "Bytes 4-7 contain only TTL and Protocol"
+        ],
+        "correctIndex": 0,
+        "explanation": "Im zweiten 32-Bit-Wort stehen zuerst Identification (16 Bit), dann Flags (3 Bit), dann Fragment Offset (13 Bit).",
+        "explanation_en": "In the second 32-bit word, Identification comes first (16 bits), then Flags (3 bits), then Fragment Offset (13 bits).",
+        "extraInfo": "Das Fragment-Offset-Feld beginnt direkt nach den drei Flag-Bits.",
+        "extraInfo_en": "The fragment offset field starts immediately after the three flag bits.",
+        "tip": "16 + 3 + 13 = 32 Bit.",
+        "tip_en": "16 + 3 + 13 = 32 bits.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "Fragmentation"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q4",
+        "question": "Welcher Bitbereich beschreibt den Fragment Offset im Wort Bytes 4-7?",
+        "question_en": "Which bit range describes the Fragment Offset in the bytes 4-7 word?",
+        "options": [
+            "Bit 19-31",
+            "Bit 16-31",
+            "Bit 8-20",
+            "Bit 0-12"
+        ],
+        "options_en": [
+            "Bits 19-31",
+            "Bits 16-31",
+            "Bits 8-20",
+            "Bits 0-12"
+        ],
+        "correctIndex": 0,
+        "explanation": "Nach Identification (0-15) und Flags (16-18) bleibt fuer Fragment Offset der Bereich 19-31 uebrig.",
+        "explanation_en": "After Identification (0-15) and Flags (16-18), the remaining range for Fragment Offset is bits 19-31.",
+        "extraInfo": "Das sind genau 13 Bit fuer die Position eines Fragments im urspruenglichen Datagramm.",
+        "extraInfo_en": "That is exactly 13 bits for a fragment position in the original datagram.",
+        "tip": "Fragment Offset startet direkt nach den 3 Flag-Bits.",
+        "tip_en": "Fragment Offset starts right after the 3 flag bits.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "Fragment Offset"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q5",
+        "question": "Welche Feldzuordnung zu Bytes 8-11 ist richtig?",
+        "question_en": "Which field mapping for bytes 8-11 is correct?",
+        "options": [
+            "TTL (0-7), Protocol (8-15), Header Checksum (16-31)",
+            "TTL (0-15), Protocol (16-23), Header Checksum (24-31)",
+            "Header Checksum (0-15), TTL (16-23), Protocol (24-31)",
+            "Nur TTL und Protocol, keine Checksum"
+        ],
+        "options_en": [
+            "TTL (0-7), Protocol (8-15), Header Checksum (16-31)",
+            "TTL (0-15), Protocol (16-23), Header Checksum (24-31)",
+            "Header Checksum (0-15), TTL (16-23), Protocol (24-31)",
+            "Only TTL and Protocol, no checksum"
+        ],
+        "correctIndex": 0,
+        "explanation": "Im dritten 32-Bit-Wort folgen auf TTL und Protocol die 16 Bit der Header Checksum.",
+        "explanation_en": "In the third 32-bit word, TTL and Protocol are followed by the 16-bit header checksum.",
+        "extraInfo": "TTL und Protocol sind jeweils 8 Bit breit, die Header Checksum ist 16 Bit breit.",
+        "extraInfo_en": "TTL and Protocol are each 8 bits wide, while Header Checksum is 16 bits wide.",
+        "tip": "8 Bit + 8 Bit + 16 Bit.",
+        "tip_en": "8 bits + 8 bits + 16 bits.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "TTL",
+            "Protocol"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q6",
+        "question": "Wo liegt die Source Address im IPv4-Header laut deinem Bit-/Byte-Schema?",
+        "question_en": "Where is the Source Address in the IPv4 header according to your bit/byte scheme?",
+        "options": [
+            "Bytes 12-15, Bit 0-31 dieses Wortes",
+            "Bytes 8-11, Bit 16-31",
+            "Bytes 16-19, Bit 0-15",
+            "Bytes 0-3, Bit 16-31"
+        ],
+        "options_en": [
+            "Bytes 12-15, bits 0-31 of that word",
+            "Bytes 8-11, bits 16-31",
+            "Bytes 16-19, bits 0-15",
+            "Bytes 0-3, bits 16-31"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Source Address belegt das komplette vierte Wort: Bytes 12-15 bzw. Bit 0-31 innerhalb dieses Wortes.",
+        "explanation_en": "Source Address occupies the complete fourth word: bytes 12-15, i.e., bits 0-31 within that word.",
+        "extraInfo": "Unmittelbar danach kommt als naechstes 32-Bit-Wort die Destination Address.",
+        "extraInfo_en": "Immediately after that comes Destination Address as the next 32-bit word.",
+        "tip": "Source zuerst, dann Destination.",
+        "tip_en": "Source first, then Destination.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "Source Address"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q7",
+        "question": "Wo liegt die Destination Address im IPv4-Header laut deinem Bit-/Byte-Schema?",
+        "question_en": "Where is the Destination Address in the IPv4 header according to your bit/byte scheme?",
+        "options": [
+            "Bytes 16-19, Bit 0-31 dieses Wortes",
+            "Bytes 12-15, Bit 0-31 dieses Wortes",
+            "Bytes 8-11, Bit 0-15",
+            "Bytes 0-3, Bit 0-15"
+        ],
+        "options_en": [
+            "Bytes 16-19, bits 0-31 of that word",
+            "Bytes 12-15, bits 0-31 of that word",
+            "Bytes 8-11, bits 0-15",
+            "Bytes 0-3, bits 0-15"
+        ],
+        "correctIndex": 0,
+        "explanation": "Die Destination Address ist das naechste volle 32-Bit-Feld nach der Source Address und liegt auf Bytes 16-19.",
+        "explanation_en": "Destination Address is the next full 32-bit field after Source Address and is located at bytes 16-19.",
+        "extraInfo": "Source und Destination sind beide jeweils 32-Bit-Felder.",
+        "extraInfo_en": "Source and Destination are both 32-bit fields.",
+        "tip": "Im Header-Wortzaehlen: 4. Wort = Source, 5. Wort = Destination.",
+        "tip_en": "Counting header words: 4th word = Source, 5th word = Destination.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "Destination Address"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
+    },
+    {
+        "id": "isis-s7-q8",
+        "question": "Welche Aussage zur Reihenfolge der ersten drei 32-Bit-Woerter im IPv4-Header ist korrekt?",
+        "question_en": "Which statement about the order of the first three 32-bit words in the IPv4 header is correct?",
+        "options": [
+            "Wort 1: Version/IHL/ToS/Total Length; Wort 2: Identification/Flags/Fragment Offset; Wort 3: TTL/Protocol/Header Checksum",
+            "Wort 1: TTL/Protocol/Checksum; Wort 2: Version/IHL/ToS/Total Length; Wort 3: Identification/Flags/Fragment Offset",
+            "Wort 1: Source Address; Wort 2: Destination Address; Wort 3: Version/IHL/ToS/Total Length",
+            "Wort 1: Identification; Wort 2: Source Address; Wort 3: Destination Address"
+        ],
+        "options_en": [
+            "Word 1: Version/IHL/ToS/Total Length; Word 2: Identification/Flags/Fragment Offset; Word 3: TTL/Protocol/Header Checksum",
+            "Word 1: TTL/Protocol/Checksum; Word 2: Version/IHL/ToS/Total Length; Word 3: Identification/Flags/Fragment Offset",
+            "Word 1: Source Address; Word 2: Destination Address; Word 3: Version/IHL/ToS/Total Length",
+            "Word 1: Identification; Word 2: Source Address; Word 3: Destination Address"
+        ],
+        "correctIndex": 0,
+        "explanation": "Dein Schema beschreibt genau diese Reihenfolge fuer die ersten drei 32-Bit-Woerter des IPv4-Headers.",
+        "explanation_en": "Your scheme describes exactly this order for the first three 32-bit words of the IPv4 header.",
+        "extraInfo": "Danach folgen Source Address (Wort 4) und Destination Address (Wort 5).",
+        "extraInfo_en": "After that come Source Address (word 4) and Destination Address (word 5).",
+        "tip": "Header in 32-Bit-Woertern denken, nicht nur in Bytes.",
+        "tip_en": "Think in 32-bit header words, not only in bytes.",
+        "tags": [
+            "IS-IS",
+            "IPv4",
+            "IP Header",
+            "Header Layout"
+        ],
+        "source": "IS-IS Grundlagen",
+        "source_en": "IS-IS fundamentals",
+        "topic": "IS-IS",
+        "topic_en": "IS-IS",
+        "module": "Modul 1",
+        "module_en": "Module 1",
+        "section": "Section 7",
+        "section_en": "Section 7"
     }
 ];
+globalThis.STUDY_QUIZ_SEED = SEED_QUESTIONS;
