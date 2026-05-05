@@ -6,6 +6,8 @@ const VIEW_STATE_KEY = "studyQuizViewStateV1";
 const DEFAULT_TOPIC = "Hauptquiz";
 const DEFAULT_MODULE = "Modul 1";
 const DEFAULT_SECTION = "Section 1";
+const SEED_VERSION = "20260505-1";
+const SEED_JSON_URL = `./questions.seed.json?v=${SEED_VERSION}`;
 const DB_NAME = "studyQuizDB";
 const DB_VERSION = 1;
 const DB_STORE = "kv";
@@ -1637,7 +1639,7 @@ function getBundledSeedQuestions() {
 
 async function loadSeedQuestionsFromFile() {
   try {
-    const resp = await fetch("./questions.seed.json", { cache: "no-store" });
+    const resp = await fetch(SEED_JSON_URL, { cache: "no-store" });
     if (!resp.ok) return [];
     const loaded = await resp.json();
     return normalizeQuestions(loaded);
